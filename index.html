@@ -735,9 +735,52 @@
   </div>
 </footer>
 
+<!-- AI Chatbot · floating widget -->
+<div id="chatbot" class="chatbot is-closed" aria-hidden="true">
+  <button class="chatbot-toggle" type="button" aria-label="Chat öffnen" aria-expanded="false">
+    <svg class="chatbot-toggle-icon chatbot-icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg class="chatbot-toggle-icon chatbot-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <div class="chatbot-panel" role="dialog" aria-label="Flow State KI-Berater">
+    <header class="chatbot-head">
+      <div class="chatbot-head-avatar" aria-hidden="true">
+        <span class="chatbot-pulse"></span>
+        <img src="assets/logo.webp" alt="" />
+      </div>
+      <div class="chatbot-head-meta">
+        <strong>Flow State Assistent</strong>
+        <span><span class="chatbot-status-dot" aria-hidden="true"></span> Online · antwortet sofort</span>
+      </div>
+      <button class="chatbot-close" type="button" aria-label="Chat schließen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+
+    <div class="chatbot-log" role="log" aria-live="polite"></div>
+
+    <div class="chatbot-suggestions" role="list">
+      <button type="button" class="chatbot-suggestion" data-q="Was kostet eine Website?">Was kostet eine Website?</button>
+      <button type="button" class="chatbot-suggestion" data-q="Wie funktioniert das Risiko­freie-Modell?">Risikofrei-Modell?</button>
+      <button type="button" class="chatbot-suggestion" data-q="Macht ihr auch AI-Berater für Kunden?">AI-Berater?</button>
+      <button type="button" class="chatbot-suggestion" data-q="Wie lange dauert ein Projekt?">Projektdauer?</button>
+    </div>
+
+    <form class="chatbot-input">
+      <textarea rows="1" placeholder="Frage stellen…" aria-label="Nachricht" maxlength="1500" required></textarea>
+      <button type="submit" aria-label="Senden">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </form>
+
+    <p class="chatbot-foot">Antworten generiert · keine Rechtsberatung</p>
+  </div>
+</div>
+
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>
 <script src="script.js"></script>
 <script src="logo-3d.js" defer></script>
 <script type="module" src="line-waves.js"></script>
+<script src="chatbot.js" defer></script>
 </body>
 </html>
