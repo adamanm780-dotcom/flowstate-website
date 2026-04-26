@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="de" class="is-loading">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#05070d" />
+<title>Flow State — Webseiten & AI-Lösungen für Unternehmen</title>
+<meta name="description" content="Flow State entwickelt moderne Webseiten und intelligente AI-Berater, die Image und Kommunikation Ihres Unternehmens transformieren." />
+
+<link rel="icon" type="image/webp" href="assets/logo.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Preloader · shown until window load + min-display time -->
+<div class="preloader" aria-hidden="true">
+  <div class="preloader-inner">
+    <div class="preloader-logo">
+      <img src="assets/logo.webp" alt="" />
+      <span>Flow<em>State</em></span>
+    </div>
+    <div class="preloader-bar" role="progressbar" aria-label="Seite wird geladen">
+      <div class="preloader-fill"></div>
+    </div>
+    <div class="preloader-status">Wird geladen…</div>
+  </div>
+</div>
+
+<!-- Ambient background light -->
+<div class="ambient" aria-hidden="true">
+  <span class="orb orb-cyan"></span>
+  <span class="orb orb-violet"></span>
+  <span class="grid"></span>
+</div>
+
+<!-- Cursor follow glow -->
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<!-- Navigation -->
+<header class="nav">
+  <a href="#top" class="nav-logo" aria-label="Flow State Startseite">
+    <img src="assets/logo.webp" alt="Flow State Logo" />
+    <span>Flow<em>State</em></span>
+  </a>
+  <nav class="nav-links" aria-label="Hauptnavigation">
+    <a href="#leistungen">Leistungen</a>
+    <a href="#team">Team</a>
+    <a href="#about">Über uns</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+  <a href="#kontakt" class="nav-cta">Kostenlose Beratung</a>
+  <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="top">
+
+  <!-- HERO v3 · centered editorial with aurora + marquee -->
+  <section class="hero hero--v3" id="hero">
+
+    <!-- Animated aurora background -->
+    <div class="hero-aurora" aria-hidden="true">
+      <span class="aurora-blob aurora-blob--1"></span>
+      <span class="aurora-blob aurora-blob--2"></span>
+      <span class="aurora-blob aurora-blob--3"></span>
+    </div>
+
+    <!-- Dot grid overlay -->
+    <div class="hero-dotgrid" aria-hidden="true"></div>
+
+    <!-- Cursor-reactive light streak -->
+    <div class="hero-cursor-light" aria-hidden="true"></div>
+
+    <!-- Main content stack — centered -->
+    <div class="hero-stack">
+
+      <div class="hero-pill">
+        <span class="hero-pill-dot" aria-hidden="true"></span>
+        <span>Risikofreies Premium-Webdesign aus Deutschland</span>
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="hl-line hl-line--xl">
+          <span class="hl-word hl-word--cyan">Erst überzeugen.</span>
+        </span>
+        <span class="hl-line hl-line--xl">
+          <span class="hl-word hl-word--violet">Dann bezahlen.</span>
+        </span>
+      </h1>
+
+      <p class="hero-lede">
+        Wir bauen Ihre komplette Website im Voraus — Design, Code, Inhalte.
+        <strong>Kostenlos.</strong>
+        Sie zahlen nur, wenn das Ergebnis Sie begeistert.
+      </p>
+
+      <div class="hero-cta-row">
+        <a href="#kontakt" class="btn btn-primary">
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+          <span>Kostenfreies Erstgespräch</span>
+        </a>
+        <a href="#leistungen" class="btn btn-secondary">
+          <span>So arbeiten wir</span>
+        </a>
+      </div>
+
+      <!-- Mini stats inline -->
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <strong>12+</strong>
+          <span>Live-Projekte</span>
+        </div>
+        <div class="hero-meta-divider" aria-hidden="true"></div>
+        <div class="hero-meta-item">
+          <strong>0€</strong>
+          <span>Vorkasse</span>
+        </div>
+        <div class="hero-meta-divider" aria-hidden="true"></div>
+        <div class="hero-meta-item">
+          <strong>21 Tage</strong>
+          <span>bis Live</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Trust marquee — continuous horizontal scroll -->
+    <div class="hero-marquee" aria-hidden="true">
+      <div class="hero-marquee-track">
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Risikofrei — Sie zahlen erst, wenn es passt
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Lighthouse-Score 95+ auf jedem Build
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          DSGVO &amp; TLS standardmäßig
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          AI-Berater inklusive auf Wunsch
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Antwort innerhalb 24 Stunden
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Made in Germany — Hosted in EU
+        </span>
+        <!-- duplicate for seamless loop -->
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Risikofrei — Sie zahlen erst, wenn es passt
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Lighthouse-Score 95+ auf jedem Build
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          DSGVO &amp; TLS standardmäßig
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          AI-Berater inklusive auf Wunsch
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Antwort innerhalb 24 Stunden
+        </span>
+        <span class="hero-marquee-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Made in Germany — Hosted in EU
+        </span>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>SCROLL</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <section class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Webentwicklung</span><span>•</span>
+      <span>AI-Berater</span><span>•</span>
+      <span>Telefonische AI-Assistenten</span><span>•</span>
+      <span>Automatisierter Kundenservice</span><span>•</span>
+      <span>Image-Optimierung</span><span>•</span>
+      <span>Webentwicklung</span><span>•</span>
+      <span>AI-Berater</span><span>•</span>
+      <span>Telefonische AI-Assistenten</span><span>•</span>
+      <span>Automatisierter Kundenservice</span><span>•</span>
+      <span>Image-Optimierung</span><span>•</span>
+    </div>
+  </section>
+
+  <!-- USPs -->
+  <section class="stats reveal">
+    <div class="stat">
+      <div class="stat-num"><span data-count="50">0</span>+</div>
+      <div class="stat-label">Projekte realisiert</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span data-count="3">0</span></div>
+      <div class="stat-label">Experten im Team</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span data-count="24">0</span>/7</div>
+      <div class="stat-label">KI-Support</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num"><span data-count="100">0</span>%</div>
+      <div class="stat-label">Persönliche Betreuung</div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- MORPH · sticky-pinned word-swap on scroll (Superconscious-style) -->
+  <section id="morph" class="morph" aria-label="Was wir bauen">
+    <div class="morph-pin">
+      <span class="morph-eyebrow">
+        <span class="morph-eyebrow-dot" aria-hidden="true"></span>
+        <span>Was wir bauen</span>
+      </span>
+
+      <h2 class="morph-title">
+        <span class="morph-static">Wir bauen</span>
+        <span class="morph-rotate">
+          <span class="morph-word is-active">
+            <span class="morph-glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </span>
+            Webseiten
+          </span>
+          <span class="morph-word">
+            <span class="morph-glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </span>
+            AI&#8209;Systeme
+          </span>
+          <span class="morph-word">
+            <span class="morph-glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.5 2.7"/><polyline points="21 3 21 9 15 9"/></svg>
+            </span>
+            Automatisierungen
+          </span>
+          <span class="morph-word">
+            <span class="morph-glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12c5 0 5 9 9 9 4 0 4-9 9-9"/><path d="M3 12c5 0 5-9 9-9 4 0 4 9 9 9"/></svg>
+            </span>
+            Brand&#8209;Auftritte
+          </span>
+        </span>
+        <span class="morph-static">die <em class="grad">wirklich funktionieren</em>.</span>
+      </h2>
+
+      <div class="morph-progress" aria-hidden="true">
+        <span class="morph-progress-fill"></span>
+      </div>
+
+      <div class="morph-scenery" aria-hidden="true">
+        <span class="morph-blob morph-blob--1"></span>
+        <span class="morph-blob morph-blob--2"></span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- RISK-FREE PROMISE · sticky-pinned 3-step USP -->
+  <section id="risk-free" class="risk-free" aria-labelledby="risk-free-heading">
+    <div class="risk-free-stage">
+      <div class="risk-free-pin">
+        <div class="risk-free-glow" aria-hidden="true"></div>
+
+        <div class="risk-free-eyebrow">
+          <span class="risk-free-shield" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2 L4 5 V11 C4 16 7 20 12 22 C17 20 20 16 20 11 V5 Z"/>
+              <path d="M9 12 L11 14 L15 10"/>
+            </svg>
+          </span>
+          <span>Unser Versprechen</span>
+        </div>
+
+        <h2 id="risk-free-heading" class="risk-free-headline">
+          <span class="rf-line">Sie zahlen erst,</span>
+          <span class="rf-line accent">wenn es Ihnen gefällt.</span>
+        </h2>
+
+        <p class="risk-free-sub">
+          Wir bauen Ihre komplette Website im Voraus — Design, Entwicklung, Inhalte. <strong>Kostenlos und ohne Verpflichtung.</strong>
+          Erst wenn das fertige Ergebnis Sie überzeugt, kommen Kosten in Bewegung. Kein Risiko. Keine versteckten Klauseln.
+        </p>
+
+        <ol class="rf-steps">
+          <li class="rf-step" data-step="1">
+            <span class="rf-step-num">01</span>
+            <h3>Brief</h3>
+            <p>30-Min-Gespräch. Ihre Branche, Ziele, Stilvorlieben.</p>
+          </li>
+          <li class="rf-step rf-step--accent" data-step="2">
+            <span class="rf-step-num">02</span>
+            <h3>Wir bauen</h3>
+            <p>Komplette Website. Design, Code, Texte. Auf unsere Kosten.</p>
+          </li>
+          <li class="rf-step" data-step="3">
+            <span class="rf-step-num">03</span>
+            <h3>Sie entscheiden</h3>
+            <p>Gefällt es? Sie zahlen. Gefällt es nicht? Sie schulden uns nichts.</p>
+          </li>
+        </ol>
+
+        <div class="rf-foot">
+          <a href="#kontakt" class="btn btn-primary mini" data-bg="assets/btn1.png">
+            <span>Risikofreies Erstgespräch</span>
+          </a>
+          <span class="rf-foot-tag">Antwort innerhalb 24 Stunden.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen" class="services">
+    <div class="services-head reveal">
+      <span class="eyebrow">Unsere Leistungen</span>
+      <h2>Webseiten, die <span class="grad">wirken</span>.<br />AI, die für Sie <span class="grad">arbeitet</span>.</h2>
+      <p>Wir verbinden präzises Webdesign mit intelligenten AI-Systemen — alles aus einer Hand, damit Ihr Unternehmen digital sichtbar, schneller und produktiver wird.</p>
+    </div>
+
+    <div class="services-stage"
+         data-frames="assets/card-frames/frame-{n}.webp?v=2"
+         data-frame-count="43"
+         data-frame-pad="3">
+      <div class="services-stage-pin" aria-hidden="true">
+        <div class="services-stage-glow"></div>
+        <canvas class="services-canvas"></canvas>
+        <div class="services-stage-hint"><span></span> WEITER SCROLLEN</div>
+      </div>
+    </div>
+
+    <div class="services-grid-wrap">
+
+      <div class="services-grid">
+
+        <article class="card reveal">
+          <div class="card-glow"></div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>
+          </div>
+          <h3>Webentwicklung</h3>
+          <p>Wir entwickeln moderne Webseiten, die nicht nur gut aussehen — sie performen. Schnell, präzise und exakt auf Ihre Zielgruppe zugeschnitten.</p>
+          <ul class="card-list">
+            <li>Premium UI &amp; UX Design</li>
+            <li>Performance &amp; SEO</li>
+            <li>Mobile First &amp; barrierearm</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-glow"></div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
+          </div>
+          <h3>AI-Berater</h3>
+          <p>Intelligente Chat- und Sprachassistenten, die Ihre Kunden beraten, Termine vereinbaren und Anfragen automatisch qualifizieren — rund um die Uhr.</p>
+          <ul class="card-list">
+            <li>Custom Chatbots</li>
+            <li>Wissensbasierte Antworten</li>
+            <li>Nahtlose Website-Integration</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-glow"></div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
+          </div>
+          <h3>Telefonische AI-Assistenten</h3>
+          <p>Ihre Telefonzentrale — komplett automatisiert. Unsere Voice-Agents nehmen Anrufe an, klären Anliegen und übergeben relevante Calls an Ihr Team.</p>
+          <ul class="card-list">
+            <li>24/7 Erreichbarkeit</li>
+            <li>Natürliche Stimme</li>
+            <li>CRM-Anbindung</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-glow"></div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v6H4z"/><path d="M4 14h16v6H4z"/><circle cx="8" cy="7" r="1.2"/><circle cx="8" cy="17" r="1.2"/></svg>
+          </div>
+          <h3>Automatisierter Kundenservice</h3>
+          <p>End-to-End Workflows, die Tickets klassifizieren, beantworten und bei Bedarf eskalieren. Weniger Aufwand, mehr Zufriedenheit.</p>
+          <ul class="card-list">
+            <li>E-Mail &amp; Ticket-Routing</li>
+            <li>Wissensdatenbank</li>
+            <li>Reporting &amp; Analytics</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="card-glow"></div>
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l4-4 4 4 4-4 6 6"/><path d="M21 21H3V3"/></svg>
+          </div>
+          <h3>Image-Optimierung</h3>
+          <p>Wir schärfen Ihre Marke digital — von Logo &amp; Wording bis hin zu konsistenten Touchpoints, die Vertrauen und Wiedererkennung schaffen.</p>
+          <ul class="card-list">
+            <li>Markenstrategie</li>
+            <li>Visuelle Identität</li>
+            <li>Content &amp; Tonalität</li>
+          </ul>
+        </article>
+
+        <article class="card card-cta reveal">
+          <div class="card-glow"></div>
+          <h3>Ihr Projekt?</h3>
+          <p>Sprechen wir über Ihr Vorhaben — kostenlos &amp; unverbindlich. In 30 Minuten skizzieren wir die beste Lösung für Sie.</p>
+          <a href="#kontakt" class="btn btn-secondary mini" data-bg="assets/btn2.png"><span>Erstgespräch sichern</span></a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- SHOWCASE · tilted laptop with real customer build -->
+  <section id="showcase" class="showcase" aria-label="Showcase">
+    <div class="showcase-grid">
+      <div class="showcase-content">
+        <span class="eyebrow">
+          <span class="eyebrow-glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 20h20"/></svg>
+          </span>
+          <span>So sehen unsere Builds aus</span>
+        </span>
+        <h2>
+          Mehr als <span class="grad">nur eine Website</span> &mdash;<br/>
+          ein Verkaufsargument.
+        </h2>
+        <p>
+          Jeder Build wird wie ein eigenes Produkt behandelt. Premium-UI,
+          messbare Ladezeiten, SEO-optimiert. Das Ergebnis: Ihre Besucher bleiben,
+          klicken, kaufen.
+        </p>
+        <ul class="showcase-bullets">
+          <li>
+            <span class="showcase-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <strong>Pixel-perfekt</strong> auf jedem Device, von 320px bis 4K
+          </li>
+          <li>
+            <span class="showcase-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <strong>Lighthouse-Scores 95+</strong> für Speed, SEO, A11y
+          </li>
+          <li>
+            <span class="showcase-check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <strong>Conversion-orientiert</strong> &mdash; jede Sektion hat einen Job
+          </li>
+        </ul>
+      </div>
+
+      <div class="showcase-stage" aria-hidden="true">
+        <div class="showcase-laptop">
+          <div class="showcase-laptop-screen">
+            <img src="assets/showcase-laptop.jpg" alt="Beispiel-Build von Flow State" loading="lazy" />
+          </div>
+          <div class="showcase-laptop-base"></div>
+        </div>
+        <div class="showcase-glow"></div>
+        <div class="showcase-orbit">
+          <span class="showcase-orbit-tag tag-1">Performance · 98</span>
+          <span class="showcase-orbit-tag tag-2">SEO-optimiert</span>
+          <span class="showcase-orbit-tag tag-3">Mobile-first</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- METRICS · visual bento with mixed cards -->
+  <section id="metrics" class="metrics" aria-label="Metriken">
+    <div class="services-head reveal">
+      <span class="eyebrow">
+        <span class="eyebrow-glyph" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </span>
+        <span>Was Sie bekommen</span>
+      </span>
+      <h2>Eine Plattform, <span class="grad">die Resultate liefert</span>.</h2>
+      <p>Jeder Klick gemessen. Jede Sekunde optimiert. Jedes Element justifiziert.</p>
+    </div>
+
+    <div class="metrics-bento">
+
+      <article class="metric-card metric-card--lg">
+        <div class="metric-tag">PERFORMANCE · LIVE</div>
+        <div class="metric-bignum">
+          <span class="metric-num">98</span><span class="metric-unit">/100</span>
+        </div>
+        <div class="metric-bars" aria-hidden="true">
+          <div class="metric-bar"><span style="--p:96%"></span><label>FCP</label></div>
+          <div class="metric-bar"><span style="--p:99%"></span><label>LCP</label></div>
+          <div class="metric-bar"><span style="--p:97%"></span><label>CLS</label></div>
+          <div class="metric-bar"><span style="--p:100%"></span><label>SEO</label></div>
+        </div>
+        <p class="metric-cap">Lighthouse-Scores auf jedem Build &mdash; nicht verhandelbar.</p>
+      </article>
+
+      <article class="metric-card metric-card--ai">
+        <div class="metric-ai-badge"><span class="ai-pulse"></span>AI · Aktiv</div>
+        <h3>AI-Berater nimmt Anrufe an, während Sie schlafen.</h3>
+        <div class="metric-ai-chat" aria-hidden="true">
+          <div class="msg msg-bot"><span>Guten Abend, hier ist Ihr Flow-State-Assistent. Wie kann ich helfen?</span></div>
+          <div class="msg msg-user"><span>Brauche einen Termin morgen Vormittag</span></div>
+          <div class="msg msg-bot"><span>Ich habe 9:00 oder 10:30 frei. Welche passt besser?</span></div>
+        </div>
+      </article>
+
+      <article class="metric-card metric-card--small metric-card--chart">
+        <div class="metric-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <div class="metric-card-title">Auffindbarkeit klettert.</div>
+        <svg class="mini-chart" viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="miniLine" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="#22e9ff"/>
+              <stop offset="100%" stop-color="#c062ff"/>
+            </linearGradient>
+            <linearGradient id="miniFill" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%"  stop-color="rgba(122,107,255,.35)"/>
+              <stop offset="100%" stop-color="rgba(34,233,255,0)"/>
+            </linearGradient>
+            <!-- Clip path that grows from left → right over time, revealing the line organically -->
+            <clipPath id="miniClip">
+              <rect class="mini-chart-clip" x="0" y="0" width="0" height="80"/>
+            </clipPath>
+          </defs>
+
+          <!-- subtle baseline grid -->
+          <g stroke="rgba(255,255,255,.04)" stroke-width="1">
+            <line x1="0" y1="20" x2="200" y2="20"/>
+            <line x1="0" y1="40" x2="200" y2="40"/>
+            <line x1="0" y1="60" x2="200" y2="60"/>
+          </g>
+
+          <!-- area fill (trading-chart shape: organic ups + downs trending up) -->
+          <path class="mini-chart-fill"
+                clip-path="url(#miniClip)"
+                d="M 6 70 L 12 71 L 18 67 L 24 69 L 30 64 L 36 65 L 42 61 L 48 58 L 54 60 L 60 55 L 66 56 L 72 50 L 78 53 L 84 47 L 90 49 L 96 44 L 102 46 L 108 40 L 114 42 L 120 36 L 126 38 L 132 32 L 138 34 L 144 28 L 150 30 L 156 24 L 162 26 L 168 20 L 174 17 L 180 19 L 186 14 L 192 12 L 196 9 L 196 78 L 6 78 Z"
+                fill="url(#miniFill)"/>
+
+          <!-- main line (trading-chart shape) -->
+          <path class="mini-chart-line"
+                clip-path="url(#miniClip)"
+                d="M 6 70 L 12 71 L 18 67 L 24 69 L 30 64 L 36 65 L 42 61 L 48 58 L 54 60 L 60 55 L 66 56 L 72 50 L 78 53 L 84 47 L 90 49 L 96 44 L 102 46 L 108 40 L 114 42 L 120 36 L 126 38 L 132 32 L 138 34 L 144 28 L 150 30 L 156 24 L 162 26 L 168 20 L 174 17 L 180 19 L 186 14 L 192 12 L 196 9"
+                fill="none"
+                stroke="url(#miniLine)"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+
+          <!-- end dot pulses at the peak -->
+          <circle class="mini-chart-dot" cx="196" cy="9" r="4" fill="#c062ff"/>
+        </svg>
+        <p class="metric-cap">Bessere SEO-Rankings über Zeit &mdash; Sichtbarkeit auf Google steigt mit jedem Monat.</p>
+      </article>
+
+      <article class="metric-card metric-card--small">
+        <div class="metric-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="metric-num metric-num-md">21<span class="metric-unit">Tage</span></div>
+        <p class="metric-cap">Average Time-to-Launch &mdash; vom Brief bis Live.</p>
+      </article>
+
+      <article class="metric-card metric-card--small">
+        <div class="metric-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9 12 2z"/></svg>
+        </div>
+        <div class="metric-num metric-num-md">4.9<span class="metric-unit">/ 5</span></div>
+        <p class="metric-cap">Durchschnittliche Kundenbewertung &mdash; basierend auf Hosted-Reviews.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- PROCESS · sticky-pinned 3D phase walk -->
+  <section id="prozess" class="process" aria-labelledby="process-heading">
+    <div class="process-head reveal">
+      <span class="eyebrow">Wie wir arbeiten</span>
+      <h2 id="process-heading">Vier Schritte. <span class="grad">Ein klarer Weg.</span></h2>
+      <p>Vom ersten Gespräch bis zum Live-Gang — Sie wissen jederzeit, wo Ihr Projekt steht.</p>
+    </div>
+
+    <div class="process-stage" data-phase-count="4">
+      <div class="process-pin">
+        <div class="process-rail" aria-hidden="true">
+          <div class="process-rail-fill"></div>
+          <div class="process-rail-dots">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <ol class="phases">
+          <li class="phase" data-phase="0">
+            <span class="phase-num">01</span>
+            <h3>Brief</h3>
+            <p>Erstgespräch. Wir lernen Ihren Betrieb, Ihre Ziele, Ihre Zielgruppe — kostenlos und unverbindlich.</p>
+          </li>
+          <li class="phase" data-phase="1">
+            <span class="phase-num">02</span>
+            <h3>Design</h3>
+            <p>Mockups in mehreren Designrichtungen. Sie wählen die DNA, wir polieren bis es sitzt.</p>
+          </li>
+          <li class="phase" data-phase="2">
+            <span class="phase-num">03</span>
+            <h3>Build</h3>
+            <p>Entwicklung mit modernem Stack. Mobile-first, performant, sauber. Iteratives Polish bis Premium-Niveau.</p>
+          </li>
+          <li class="phase" data-phase="3">
+            <span class="phase-num">04</span>
+            <h3>Launch &amp; Care</h3>
+            <p>Deploy auf Ihre Domain, SSL, SEO, Schema.org. 60 Tage Support nach Live-Gang inklusive.</p>
+          </li>
+        </ol>
+
+        <div class="process-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <span class="eyebrow">Über uns</span>
+        <h2>Zwei Köpfe.<br /><span class="grad">Eine Mission.</span><br />Maximale Wirkung.</h2>
+        <p>Jedes Unternehmen braucht einen starken digitalen Auftritt. Wir kombinieren erstklassiges Design, moderne Webentwicklung und KI-Automatisierung — pragmatisch umgesetzt, ohne Buzzwords, immer mit messbarem Ergebnis.</p>
+        <div class="about-points">
+          <div><strong>50+ Projekte</strong><span>realisiert &amp; live</span></div>
+          <div><strong>24/7 Support</strong><span>via KI &amp; Team</span></div>
+          <div><strong>Klein &amp; agil</strong><span>persönliche Betreuung</span></div>
+        </div>
+      </div>
+      <div class="about-frame reveal">
+        <div class="about-orb"></div>
+        <img src="assets/logo.webp" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- PHONE SHOWCASE · tilted phone mockup with mobile-first pitch -->
+  <section id="phone-showcase" class="phone-showcase" aria-label="Mobile First">
+    <div class="phone-grid">
+
+      <div class="phone-stage" aria-hidden="true">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span>9:41</span>
+              <span class="phone-icons">⌁ ●</span>
+            </div>
+            <div class="phone-hero">
+              <div class="phone-pill">
+                <span class="phone-pill-dot"></span>
+                <span>Mobile First</span>
+              </div>
+              <h4>Schnell.<br/>Schön.<br/><span class="grad">Einfach.</span></h4>
+              <button class="phone-cta">Jetzt entdecken</button>
+            </div>
+            <div class="phone-stats">
+              <div><strong>1.2s</strong><span>LCP</span></div>
+              <div><strong>96</strong><span>Score</span></div>
+              <div><strong>0</strong><span>CLS</span></div>
+            </div>
+          </div>
+          <div class="phone-notch"></div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+
+      <div class="phone-content">
+        <span class="eyebrow">
+          <span class="eyebrow-glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+          </span>
+          <span>Mobile First</span>
+        </span>
+        <h2>
+          Wir bauen <span class="grad">mobile-first</span> &mdash;<br/>
+          weil 70% Ihrer Kunden so kommen.
+        </h2>
+        <p>
+          Jede Interaktion wird zuerst auf dem Smartphone designt und entwickelt.
+          Was am Handy nicht funktioniert, kommt nicht in den Build &mdash; egal wie schick es am Desktop aussieht.
+        </p>
+        <div class="phone-stats-row">
+          <div class="phone-stat">
+            <strong>70%</strong>
+            <span>der Visits kommen mobile</span>
+          </div>
+          <div class="phone-stat">
+            <strong>1.4s</strong>
+            <span>durchschnittl. Ladezeit auf 3G</span>
+          </div>
+          <div class="phone-stat">
+            <strong>0px</strong>
+            <span>Layout-Shift bei Scroll</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- TEAM -->
+  <section id="team" class="team">
+    <div class="services-head reveal">
+      <span class="eyebrow">Unser Team</span>
+      <h2>Die Gründer hinter <span class="grad">Flow State</span>.</h2>
+    </div>
+    <div class="team-grid team-grid--two">
+      <article class="member reveal">
+        <div class="member-avatar"><span>BT</span></div>
+        <h4>Bennet Tilinski</h4>
+        <p>Founder &amp; Owner</p>
+      </article>
+      <article class="member reveal">
+        <div class="member-avatar"><span>AP</span></div>
+        <h4>Adrian Pötzinger</h4>
+        <p>Founder &amp; Owner</p>
+      </article>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- KONTAKT -->
+  <section id="kontakt" class="contact">
+    <div class="contact-card reveal">
+      <span class="eyebrow">Kontakt</span>
+      <h2>Bereit für Ihr <span class="grad">nächstes Level</span>?</h2>
+      <p>Lassen Sie uns über Ihr Projekt sprechen. Innerhalb von 24&nbsp;Stunden hören Sie von uns.</p>
+
+      <div class="contact-info">
+        <a href="mailto:flow-state@gmx.de" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <div><span>E-Mail</span><strong>flow-state@gmx.de</strong></div>
+        </a>
+        <a href="tel:+491781868874" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
+          <div><span>Telefon</span><strong>+49 178 1868874</strong></div>
+        </a>
+      </div>
+
+      <div class="contact-cta-row">
+        <a href="mailto:flow-state@gmx.de?subject=Projektanfrage" class="btn btn-primary" data-bg="assets/btn1.png"><span>Projekt anfragen</span></a>
+        <a href="tel:+491781868874" class="btn btn-secondary" data-bg="assets/btn2.png"><span>Jetzt anrufen</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-top">
+    <a href="#top" class="nav-logo">
+      <img src="assets/logo.webp" alt="" />
+      <span>Flow<em>State</em></span>
+    </a>
+    <nav aria-label="Footer">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#team">Team</a>
+      <a href="#about">Über uns</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <small>© 2026 Flow State. Alle Rechte vorbehalten.</small>
+    <div>
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

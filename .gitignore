@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local dev artifacts
+.qa-serve.js
+.playwright-mcp/
+
+# Node (falls in Zukunft)
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Logs / temp
+*.log
+*.tmp
