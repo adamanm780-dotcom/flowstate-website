@@ -195,16 +195,25 @@
     });
   }
 
-  // Services
+  // Services — lazy-init when stage approaches viewport so the 43 frame
+  // WebPs don't fight with the hero paint on initial load.
   const servicesStage = document.querySelector('.services-stage[data-frames]');
   if (servicesStage) {
-    makeScrollSequence({
+    const startServices = () => makeScrollSequence({
       host: servicesStage,
       canvas: servicesStage.querySelector('.services-canvas'),
       framePattern: servicesStage.dataset.frames,
       frameCount: parseInt(servicesStage.dataset.frameCount, 10),
       framePad: parseInt(servicesStage.dataset.framePad, 10) || 3,
     });
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some(e => e.isIntersecting)) { io.disconnect(); startServices(); }
+      }, { rootMargin: '600px 0px' });
+      io.observe(servicesStage);
+    } else {
+      startServices();
+    }
   }
 
   /* =================================================================

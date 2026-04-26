@@ -156,7 +156,7 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
   position:relative;
   min-height:100dvh;
   display:grid;
-  grid-template-rows:auto auto 1fr auto;
+  grid-template-rows:1fr auto;
   place-items:center;
   padding:140px var(--pad-x) 80px;
   isolation:isolate;
@@ -175,20 +175,6 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
 .hero-aurora canvas{
   position:absolute;inset:0;
   width:100% !important;height:100% !important;
-  display:block;
-}
-
-/* 3D extruded logo — brand mark sitting above the title */
-.hero-logo3d{
-  position:relative;z-index:2;
-  width:clamp(140px, 16vw, 200px);
-  height:clamp(140px, 16vw, 200px);
-  cursor:grab;
-  filter:drop-shadow(0 18px 40px rgba(34,233,255,.18)) drop-shadow(0 8px 30px rgba(160,107,255,.16));
-}
-.hero-logo3d:active{cursor:grabbing}
-.hero-logo3d .logo-3d-canvas{
-  width:100%!important;height:100%!important;
   display:block;
 }
 
@@ -239,7 +225,6 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
 @media (max-width:640px){
   .hero-sticky{padding:120px 18px 70px}
   .hero-title{font-size:clamp(2.6rem,14vw,5rem)}
-  .hero-logo3d{width:clamp(120px, 30vw, 180px); height:clamp(120px, 30vw, 180px)}
 }
 
 /* ===== Hero Stage · 3D F-logo showcase ===== */
