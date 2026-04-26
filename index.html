@@ -59,136 +59,50 @@
 
 <main id="top">
 
-  <!-- HERO v3 · centered editorial with aurora + marquee -->
-  <section class="hero hero--v3" id="hero">
+  <!-- HERO · LineWaves WebGL background + 3D logo brand mark -->
+  <section class="hero" id="hero">
+    <div class="hero-sticky">
 
-    <!-- Animated aurora background -->
-    <div class="hero-aurora" aria-hidden="true">
-      <span class="aurora-blob aurora-blob--1"></span>
-      <span class="aurora-blob aurora-blob--2"></span>
-      <span class="aurora-blob aurora-blob--3"></span>
-    </div>
+      <!-- WebGL line-waves backdrop -->
+      <div class="hero-aurora line-waves-container"
+           data-line-waves
+           data-speed="0.3"
+           data-inner-line-count="32"
+           data-outer-line-count="40"
+           data-warp-intensity="1.1"
+           data-rotation="-40"
+           data-edge-fade-width="0.25"
+           data-color-cycle-speed="0.1"
+           data-brightness="0.2"
+           data-color1="#3982eb"
+           data-color2="#2ecfdd"
+           data-color3="#a455e6"
+           data-enable-mouse-interaction="true"
+           data-mouse-influence="2.0"
+           aria-hidden="true"></div>
 
-    <!-- Dot grid overlay -->
-    <div class="hero-dotgrid" aria-hidden="true"></div>
+      <!-- 3D extruded logo as brand mark above the title -->
+      <div class="hero-logo3d"
+           data-logo3d
+           data-src="assets/logo-source.png"
+           data-slices="56"
+           data-depth="0.5"
+           data-zoom="9"
+           aria-hidden="true"></div>
 
-    <!-- Cursor-reactive light streak -->
-    <div class="hero-cursor-light" aria-hidden="true"></div>
-
-    <!-- Main content stack — centered -->
-    <div class="hero-stack">
-
-      <div class="hero-pill">
-        <span class="hero-pill-dot" aria-hidden="true"></span>
-        <span>Risikofreies Premium-Webdesign aus Deutschland</span>
-      </div>
-
-      <h1 class="hero-headline">
-        <span class="hl-line hl-line--xl">
-          <span class="hl-word hl-word--cyan">Erst überzeugen.</span>
-        </span>
-        <span class="hl-line hl-line--xl">
-          <span class="hl-word hl-word--violet">Dann bezahlen.</span>
-        </span>
+      <h1 class="hero-title" aria-label="Boost Your Company Image">
+        <span class="line"><span>BOOST&nbsp;YOUR</span></span>
+        <span class="line"><span>COMPANY</span></span>
+        <span class="line accent"><span>IMAGE.</span></span>
       </h1>
 
-      <p class="hero-lede">
-        Wir bauen Ihre komplette Website im Voraus — Design, Code, Inhalte.
-        <strong>Kostenlos.</strong>
-        Sie zahlen nur, wenn das Ergebnis Sie begeistert.
-      </p>
-
-      <div class="hero-cta-row">
-        <a href="#kontakt" class="btn btn-primary">
-          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="12 5 19 12 12 19"/>
-          </svg>
-          <span>Kostenfreies Erstgespräch</span>
-        </a>
-        <a href="#leistungen" class="btn btn-secondary">
-          <span>So arbeiten wir</span>
-        </a>
-      </div>
-
-      <!-- Mini stats inline -->
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <strong>12+</strong>
-          <span>Live-Projekte</span>
-        </div>
-        <div class="hero-meta-divider" aria-hidden="true"></div>
-        <div class="hero-meta-item">
-          <strong>0€</strong>
-          <span>Vorkasse</span>
-        </div>
-        <div class="hero-meta-divider" aria-hidden="true"></div>
-        <div class="hero-meta-item">
-          <strong>21 Tage</strong>
-          <span>bis Live</span>
+      <div class="hero-foot">
+        <p class="hero-tag">Moderne Webseiten &amp; AI-Lösungen für Unternehmen.</p>
+        <div class="hero-cta-row">
+          <a href="#kontakt" class="btn btn-primary"><span>Projekt anfragen</span></a>
+          <a href="#leistungen" class="btn btn-secondary"><span>Leistungen ansehen</span></a>
         </div>
       </div>
-
-    </div>
-
-    <!-- Trust marquee — continuous horizontal scroll -->
-    <div class="hero-marquee" aria-hidden="true">
-      <div class="hero-marquee-track">
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Risikofrei — Sie zahlen erst, wenn es passt
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Lighthouse-Score 95+ auf jedem Build
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          DSGVO &amp; TLS standardmäßig
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          AI-Berater inklusive auf Wunsch
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Antwort innerhalb 24 Stunden
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Made in Germany — Hosted in EU
-        </span>
-        <!-- duplicate for seamless loop -->
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Risikofrei — Sie zahlen erst, wenn es passt
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Lighthouse-Score 95+ auf jedem Build
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          DSGVO &amp; TLS standardmäßig
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          AI-Berater inklusive auf Wunsch
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Antwort innerhalb 24 Stunden
-        </span>
-        <span class="hero-marquee-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          Made in Germany — Hosted in EU
-        </span>
-      </div>
-    </div>
-
-    <div class="hero-scroll" aria-hidden="true">
-      <span>SCROLL</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </section>
 
@@ -821,6 +735,9 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>
 <script src="script.js"></script>
+<script src="logo-3d.js" defer></script>
+<script type="module" src="line-waves.js"></script>
 </body>
 </html>
