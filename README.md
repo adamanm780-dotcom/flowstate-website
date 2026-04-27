@@ -63,7 +63,7 @@ flowstate-zeta/
 6. **Metrics-Bento** — 5 Cards: Performance, AI-Chat, Auffindbarkeit-Chart, Time-to-Launch, Reviews
 7. **Process** — Sticky-pinned 360vh 4-Phasen 3D-Phase-Walk
 8. **Phone-Showcase** — Tilted iPhone-Mockup mit scroll-tied straighten + Mobile-First-Pitch
-9. **Team** — 2 Founder & Owner Cards (Bennet + Adrian)
+9. **Team** — 2 Founder & Owner Cards (Benet + Adrian)
 10. **Kontakt** — Contact-Card mit gradient Border-Pulse + Email/Tel-Items + Mailto-CTA
 11. **Footer** — Logo + Nav + Legal
 
@@ -103,7 +103,7 @@ Einfach den ganzen Ordner auf einen statischen Host hochladen. Keine Build-Befeh
 ## Branding
 
 - **Brand-Name:** Flow State
-- **Founder & Owner:** Bennet Tilinski + Adrian Pötzinger
+- **Founder & Owner:** Benet Tilinski + Adrian Pötzinger
 - **Lead Developer:** Damian Braun
 - **Email:** flow-state@gmx.de
 - **Telefon:** +49 178 1868874
