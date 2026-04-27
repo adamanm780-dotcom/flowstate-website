@@ -561,21 +561,8 @@
       });
     }
 
-    /* 2) Phone-Frame straighten — heavy tilt → near-flat */
-    const phone = $('.phone-frame');
-    if (phone) {
-      scroll3DTargets.push({
-        el: phone,
-        anchor: $('.phone-showcase'),
-        apply(p){
-          const t = clamp((p - 0.1) / 0.6, 0, 1);
-          const rx =  12 + (3 - 12) * t;           // 12deg → 3deg
-          const ry = -22 + (-6 - (-22)) * t;       // -22deg → -6deg
-          this.el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
-          this.el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
-        }
-      });
-    }
+    /* 2) Phone-Frame: now a static 2D mockup with CSS-only hover-lift —
+       no scroll-tied rotation (would risk showing the backside). */
 
     /* 3) Metric-Cards 3D entrance — staggered rotateX from depth */
     const metricCards = $$('.metric-card');
@@ -836,6 +823,132 @@
         });
       }, { threshold: 0.18 });
       obs.observe(c);
+    });
+  })();
+
+  /* ---- Booking Modal (Termin-/Anfrage-Popup) ---- */
+  (() => {
+    const modal = $('#booking-modal');
+    if (!modal) return;
+    const dialog = $('.booking-dialog', modal);
+    const form = $('.booking-form', modal);
+    const topicInput = form.querySelector('input[name="topic"]');
+    const statusEl = $('.booking-status', form);
+    const submitBtn = $('.booking-submit', form);
+    let lastFocus = null;
+
+    function open(topic){
+      lastFocus = document.activeElement;
+      if (topic) topicInput.value = topic;
+      // reset to a fresh form whenever opened
+      form.classList.remove('is-success');
+      statusEl.textContent = '';
+      statusEl.className = 'booking-status';
+      submitBtn.disabled = false;
+      $$('.has-error', form).forEach(el => el.classList.remove('has-error'));
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('booking-open');
+      setTimeout(() => {
+        const firstField = form.querySelector('input[name="name"]');
+        if (firstField) firstField.focus();
+      }, 60);
+    }
+
+    function close(){
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('booking-open');
+      if (lastFocus && typeof lastFocus.focus === 'function') {
+        try { lastFocus.focus(); } catch {}
+      }
+    }
+
+    // Open triggers — any element with [data-booking-open]
+    document.addEventListener('click', (e) => {
+      const opener = e.target.closest('[data-booking-open]');
+      if (opener) {
+        e.preventDefault();
+        open(opener.getAttribute('data-booking-topic') || 'Anfrage');
+        return;
+      }
+      const closer = e.target.closest('[data-booking-close]');
+      if (closer && modal.contains(closer)) {
+        e.preventDefault();
+        close();
+      }
+    });
+
+    // ESC to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+    });
+
+    function isValidEmail(v){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || '').trim());
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      $$('.has-error', form).forEach(el => el.classList.remove('has-error'));
+      statusEl.textContent = '';
+      statusEl.className = 'booking-status';
+
+      const data = {
+        topic:   (topicInput.value || 'Anfrage').slice(0, 120),
+        name:    form.name.value.trim().slice(0, 120),
+        email:   form.email.value.trim().slice(0, 160),
+        company: form.company.value.trim().slice(0, 120),
+        phone:   form.phone.value.trim().slice(0, 40),
+        message: form.message.value.trim().slice(0, 2000)
+      };
+
+      // Required: name + valid email
+      let firstErr = null;
+      if (!data.name) {
+        form.name.closest('.booking-field').classList.add('has-error');
+        firstErr = firstErr || form.name;
+      }
+      if (!isValidEmail(data.email)) {
+        form.email.closest('.booking-field').classList.add('has-error');
+        firstErr = firstErr || form.email;
+      }
+      if (firstErr) {
+        statusEl.textContent = !data.email
+          ? 'Bitte hinterlegen Sie Ihre E-Mail-Adresse — sonst können wir Ihnen nicht antworten.'
+          : 'Bitte füllen Sie die markierten Pflichtfelder aus.';
+        statusEl.classList.add('is-error');
+        firstErr.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Wird gesendet…';
+
+      try {
+        const res = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        let payload = null;
+        try { payload = await res.json(); } catch {}
+        if (!res.ok) {
+          throw new Error((payload && payload.error) || `Server-Fehler (${res.status})`);
+        }
+        form.classList.add('is-success');
+        statusEl.className = 'booking-status is-success';
+        statusEl.textContent = 'Vielen Dank — Ihre Anfrage ist bei uns eingegangen. Wir melden uns innerhalb 24 Stunden.';
+      } catch (err) {
+        submitBtn.disabled = false;
+        statusEl.className = 'booking-status is-error';
+        const fallbackMail = `mailto:flow-state@gmx.de?subject=${encodeURIComponent('Anfrage: ' + data.topic)}&body=${encodeURIComponent(
+          `Name: ${data.name}\nE-Mail: ${data.email}\nFirma: ${data.company}\nTelefon: ${data.phone}\n\n${data.message}`
+        )}`;
+        statusEl.innerHTML =
+          'Senden hat nicht geklappt. Bitte schreiben Sie uns direkt an ' +
+          `<a href="${fallbackMail}" style="color:var(--cyan);text-decoration:underline">flow-state@gmx.de</a>.`;
+      }
     });
   })();
 

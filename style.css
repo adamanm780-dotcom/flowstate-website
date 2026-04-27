@@ -31,7 +31,13 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{
+  scroll-behavior:smooth;-webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+  width:100%;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:pan-y;            /* Pinch-Zoom & horizontales Pannen unterbinden */
+}
 body{
   font-family:var(--font-sans);
   background:var(--bg);
@@ -39,6 +45,8 @@ body{
   line-height:1.6;
   font-size:16px;
   overflow-x:hidden;
+  width:100%;
+  max-width:100vw;
   min-height:100dvh;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
@@ -1634,46 +1642,89 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
   line-height:1.3;
 }
 
-/* Phone stage with rendered phone mockup (no image — pure CSS) */
+/* Phone stage — 2D mockup, never rotates to show the back. Cool hover-lift. */
 .phone-stage{
   position:relative;
   aspect-ratio:.7 / 1;
   max-width:380px;
   margin:0 auto;
-  perspective:1200px;
   display:grid; place-items:center;
 }
 .phone-glow{
-  position:absolute; inset:-10%;
+  position:absolute; inset:-12%;
   background:
-    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,233,255,.2), transparent 70%),
-    radial-gradient(ellipse 50% 60% at 50% 70%, rgba(160,107,255,.25), transparent 70%);
-  filter:blur(40px);
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,233,255,.22), transparent 70%),
+    radial-gradient(ellipse 50% 60% at 50% 70%, rgba(160,107,255,.28), transparent 70%);
+  filter:blur(50px);
   z-index:0;
+  transition:filter .6s cubic-bezier(.22,1,.36,1), opacity .6s ease;
+}
+.phone-stage:hover .phone-glow{
+  filter:blur(60px) saturate(1.3);
+  opacity:1.15;
 }
 .phone-frame{
   position:relative;
   width:100%; height:100%;
-  border-radius:42px;
-  background:linear-gradient(180deg, #1a1a2e, #0a0a18);
-  border:2px solid rgba(255,255,255,.12);
-  padding:14px;
-  --rx:6deg; --ry:-14deg;
-  transform:rotateY(var(--ry)) rotateX(var(--rx));
-  transform-style:preserve-3d;
-  box-shadow:
-    0 0 0 1px rgba(34,233,255,.18),
-    0 50px 80px -20px rgba(0,0,0,.7),
-    0 0 80px rgba(122,107,255,.3);
+  border-radius:46px;
+  /* Outer bezel — brushed aluminum effect */
+  background:
+    linear-gradient(135deg, #2a2c3e 0%, #14151f 40%, #0a0b14 60%, #1c1d2a 100%);
+  border:1px solid rgba(255,255,255,.08);
+  padding:10px;
   z-index:2;
+  /* Subtle constant lift via shadow stack */
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.06) inset,
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 0 0 1px rgba(34,233,255,.15),
+    0 30px 60px -15px rgba(0,0,0,.65),
+    0 60px 100px -20px rgba(122,107,255,.25),
+    0 0 60px rgba(34,233,255,.18);
+  transform:translateY(0);
+  transition:
+    transform .6s cubic-bezier(.22,1,.36,1),
+    box-shadow .6s cubic-bezier(.22,1,.36,1);
   will-change:transform;
 }
+.phone-stage:hover .phone-frame{
+  transform:translateY(-10px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08) inset,
+    0 1px 0 rgba(255,255,255,.10) inset,
+    0 0 0 1px rgba(34,233,255,.30),
+    0 50px 80px -15px rgba(0,0,0,.75),
+    0 80px 120px -20px rgba(122,107,255,.45),
+    0 0 100px rgba(34,233,255,.30);
+}
+/* Side rim highlight — gives the phone a metallic edge */
+.phone-frame::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:46px;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,.10) 0%,
+    transparent 8%,
+    transparent 92%,
+    rgba(255,255,255,.10) 100%);
+  pointer-events:none;
+  z-index:4;
+}
+/* Dynamic Island — replaces the legacy notch */
 .phone-notch{
-  position:absolute; top:14px; left:50%; transform:translateX(-50%);
-  width:120px; height:24px;
+  position:absolute; top:18px; left:50%; transform:translateX(-50%);
+  width:96px; height:26px;
   background:#000;
-  border-radius:0 0 18px 18px;
-  z-index:3;
+  border-radius:14px;
+  z-index:5;
+  box-shadow:0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.phone-notch::after{
+  content:"";
+  position:absolute; right:8px; top:50%; transform:translateY(-50%);
+  width:7px; height:7px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #1a3340 0%, #0a1418 80%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.05) inset;
 }
 .phone-screen{
   position:relative;
@@ -2665,4 +2716,187 @@ html.is-loading .hero-streaks{ opacity:0; }
     --cb-h: calc(100dvh - 110px);
     right:0; bottom:80px;
   }
+}
+
+/* ============================================================
+   Booking Modal — opens via [data-booking-open]
+   ============================================================ */
+.booking-modal{
+  position:fixed; inset:0; z-index:9999;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  opacity:0; visibility:hidden;
+  transition:opacity .35s ease, visibility .35s ease;
+}
+.booking-modal.is-open{ opacity:1; visibility:visible }
+.booking-backdrop{
+  position:absolute; inset:0;
+  background:rgba(3,5,12,.94);
+  backdrop-filter:blur(22px) saturate(120%);
+  -webkit-backdrop-filter:blur(22px) saturate(120%);
+}
+/* Hintergrund-Effekte komplett still, damit nichts durchscheint */
+body.booking-open .divider,
+body.booking-open .ambient,
+body.booking-open .cursor-glow{ visibility:hidden }
+.booking-dialog{
+  position:relative;
+  width:min(560px, 100%);
+  max-height:calc(100dvh - 48px);
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:clamp(28px,4vw,44px);
+  border-radius:var(--radius-l);
+  background:#0a0f1c;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+  transform:translateY(18px) scale(.98);
+  transition:transform .4s cubic-bezier(.22,.61,.36,1);
+  /* Scrollbar visuell unsichtbar — Inhalt bleibt scrollbar */
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.booking-dialog::-webkit-scrollbar{ width:0; height:0; display:none }
+/* (Dialog-Gradient-Ring entfernt — verursachte auf manchen Browsern eine Linie quer über die Form) */
+.booking-modal.is-open .booking-dialog{ transform:translateY(0) scale(1) }
+
+.booking-close{
+  position:absolute; top:14px; right:14px;
+  width:38px; height:38px; display:grid; place-items:center;
+  border-radius:50%; color:var(--text-mute);
+  background:rgba(255,255,255,.04); border:1px solid var(--border);
+  transition:color .25s, background .25s, border-color .25s, transform .25s;
+}
+.booking-close:hover{ color:#fff; background:rgba(255,255,255,.08); border-color:rgba(34,233,255,.4); transform:rotate(90deg) }
+
+.booking-head{ text-align:center; margin-bottom:24px }
+.booking-eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:.78rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--cyan); font-weight:600; margin-bottom:14px;
+}
+.booking-dot{
+  width:8px; height:8px; border-radius:50%;
+  background:var(--cyan); box-shadow:0 0 12px var(--cyan);
+  animation:bookingPulse 1.8s ease-in-out infinite;
+}
+@keyframes bookingPulse{ 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+.booking-head h2{ font-size:clamp(1.5rem, 3vw, 2rem); margin-bottom:10px }
+.booking-head p{ font-size:.95rem; max-width:420px; margin:0 auto }
+
+.booking-form{ display:flex; flex-direction:column; gap:16px }
+.booking-field{ display:flex; flex-direction:column; gap:6px }
+.booking-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px }
+@media (max-width:480px){ .booking-row{ grid-template-columns:1fr } }
+.booking-label{
+  font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--text-mute); font-weight:600;
+}
+.booking-label em{ color:var(--cyan); font-style:normal; margin-left:2px }
+.booking-field input,
+.booking-field textarea{
+  width:100%; padding:13px 16px;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border); border-radius:14px;
+  font-family:inherit; font-size:.95rem; color:var(--text);
+  transition:border-color .25s, background .25s, box-shadow .25s;
+  resize:vertical;
+  /* Browser-Defaults killen — keine Autofill-Streifen, keine Inner-Linien, kein Focus-Outline-Strich */
+  -webkit-appearance:none; appearance:none;
+  outline:none;
+  text-decoration:none;
+  background-image:none;
+  caret-color:var(--cyan);
+  box-shadow:none;
+}
+.booking-field textarea{
+  resize:none;
+  overflow:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.booking-field textarea::-webkit-scrollbar{ width:0; height:0; display:none }
+.booking-field textarea::-webkit-resizer{ display:none }
+/* Chrome Autofill-Hintergrund wegnehmen (gelblicher Streifen) */
+.booking-field input:-webkit-autofill,
+.booking-field textarea:-webkit-autofill{
+  -webkit-text-fill-color:var(--text);
+  -webkit-box-shadow:0 0 0 1000px rgba(255,255,255,.04) inset;
+  caret-color:var(--cyan);
+  transition:background-color 9999s ease-in-out 0s;
+}
+.booking-field input::placeholder,
+.booking-field textarea::placeholder{ color:rgba(152,163,184,.55) }
+.booking-field input:focus,
+.booking-field textarea:focus{
+  outline:none;
+  border-color:rgba(34,233,255,.55);
+  background:rgba(255,255,255,.06);
+  box-shadow:0 0 0 4px rgba(34,233,255,.10);
+}
+.booking-field input:invalid:not(:placeholder-shown),
+.booking-field.has-error input,
+.booking-field.has-error textarea{
+  border-color:rgba(255,90,120,.55);
+  box-shadow:0 0 0 4px rgba(255,90,120,.10);
+}
+.booking-hint{
+  font-size:.78rem; color:var(--text-mute); margin-top:2px;
+}
+
+.booking-status{
+  min-height:0; font-size:.9rem; line-height:1.45;
+  padding:0 2px; color:var(--text-mute);
+}
+.booking-status.is-error{ color:#ff7a8a }
+.booking-status.is-success{ color:#5fe2a3 }
+
+.booking-actions{
+  display:flex; gap:14px; flex-wrap:wrap; margin-top:8px;
+}
+.booking-actions .btn{ flex:1 1 180px; justify-content:center }
+.booking-submit[disabled]{ opacity:.6; cursor:not-allowed }
+
+.booking-foot{
+  font-size:.78rem; color:var(--text-mute); text-align:center;
+  margin-top:6px; line-height:1.5;
+}
+
+body.booking-open{ overflow:hidden }
+
+/* Success state — replaces form */
+.booking-form.is-success > *:not(.booking-status){ display:none }
+.booking-form.is-success .booking-status{
+  text-align:center; padding:30px 0;
+  font-size:1.05rem; color:#5fe2a3;
+}
+
+/* Mobile — kompaktes Layout, alles passt ohne Scrollen */
+@media (max-width:560px){
+  .booking-modal{ padding:12px }
+  .booking-dialog{
+    padding:22px 20px 20px;
+    max-height:calc(100dvh - 24px);
+    border-radius:22px;
+  }
+  .booking-close{ top:10px; right:10px; width:34px; height:34px }
+  .booking-head{ margin-bottom:18px }
+  .booking-head h2{ font-size:1.4rem; margin-bottom:8px }
+  .booking-head p{ font-size:.88rem }
+  .booking-eyebrow{ font-size:.7rem; margin-bottom:10px }
+  .booking-form{ gap:12px }
+  .booking-field input,
+  .booking-field textarea{ padding:11px 14px; font-size:.92rem }
+  .booking-field textarea{ min-height:88px }
+  .booking-label{ font-size:.72rem }
+  .booking-hint{ font-size:.72rem }
+  .booking-actions{ gap:10px; margin-top:4px }
+  .booking-actions .btn{ flex:1 1 100%; padding:13px 18px }
+  .booking-foot{ font-size:.72rem }
+}
+
+/* Sehr kleine Phones — Textarea noch kompakter */
+@media (max-width:380px){
+  .booking-dialog{ padding:20px 16px 18px }
+  .booking-field textarea{ min-height:72px }
 }

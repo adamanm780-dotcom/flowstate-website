@@ -2,7 +2,7 @@
 <html lang="de" class="is-loading">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
 <meta name="theme-color" content="#05070d" />
 <title>Flow State — Webseiten & AI-Lösungen für Unternehmen</title>
 <meta name="description" content="Flow State entwickelt moderne Webseiten und intelligente AI-Berater, die Image und Kommunikation Ihres Unternehmens transformieren." />
@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="style.css?v=phone2d" />
 </head>
 <body>
 
@@ -51,7 +51,7 @@
     <a href="#about">Über uns</a>
     <a href="#kontakt">Kontakt</a>
   </nav>
-  <a href="#kontakt" class="nav-cta">Kostenlose Beratung</a>
+  <a href="#kontakt" class="nav-cta" data-booking-open data-booking-topic="Kostenlose Beratung">Kostenlose Beratung</a>
   <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -90,7 +90,7 @@
       <div class="hero-foot">
         <p class="hero-tag">Moderne Webseiten &amp; AI-Lösungen für Unternehmen.</p>
         <div class="hero-cta-row">
-          <a href="#kontakt" class="btn btn-primary"><span>Projekt anfragen</span></a>
+          <a href="#kontakt" class="btn btn-primary" data-booking-open data-booking-topic="Projektanfrage"><span>Projekt anfragen</span></a>
           <a href="#leistungen" class="btn btn-secondary"><span>Leistungen ansehen</span></a>
         </div>
       </div>
@@ -241,7 +241,7 @@
         </ol>
 
         <div class="rf-foot">
-          <a href="#kontakt" class="btn btn-primary mini" data-bg="assets/btn1.webp">
+          <a href="#kontakt" class="btn btn-primary mini" data-bg="assets/btn1.webp" data-booking-open data-booking-topic="Risikofreies Erstgespräch">
             <span>Risikofreies Erstgespräch</span>
           </a>
           <span class="rf-foot-tag">Antwort innerhalb 24 Stunden.</span>
@@ -349,7 +349,7 @@
           <div class="card-glow"></div>
           <h3>Ihr Projekt?</h3>
           <p>Sprechen wir über Ihr Vorhaben — kostenlos &amp; unverbindlich. In 30 Minuten skizzieren wir die beste Lösung für Sie.</p>
-          <a href="#kontakt" class="btn btn-secondary mini" data-bg="assets/btn2.webp"><span>Erstgespräch sichern</span></a>
+          <a href="#kontakt" class="btn btn-secondary mini" data-bg="assets/btn2.webp" data-booking-open data-booking-topic="Erstgespräch sichern"><span>Erstgespräch sichern</span></a>
         </article>
 
       </div>
@@ -699,12 +699,16 @@
         </a>
         <a href="tel:+491781868874" class="contact-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
-          <div><span>Telefon</span><strong>+49 178 1868874</strong></div>
+          <div><span>Telefon Adrian</span><strong>+49 178 1868874</strong></div>
+        </a>
+        <a href="tel:+4917645289172" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
+          <div><span>Telefon Benet</span><strong>+49 176 45289172</strong></div>
         </a>
       </div>
 
       <div class="contact-cta-row">
-        <a href="mailto:flow-state@gmx.de?subject=Projektanfrage" class="btn btn-primary" data-bg="assets/btn1.webp"><span>Projekt anfragen</span></a>
+        <a href="#kontakt" class="btn btn-primary" data-bg="assets/btn1.webp" data-booking-open data-booking-topic="Projektanfrage"><span>Projekt anfragen</span></a>
         <a href="tel:+491781868874" class="btn btn-secondary" data-bg="assets/btn2.webp"><span>Jetzt anrufen</span></a>
       </div>
     </div>
@@ -777,8 +781,66 @@
   </div>
 </div>
 
+<!-- Booking Modal · opens via [data-booking-open] -->
+<div id="booking-modal" class="booking-modal" aria-hidden="true">
+  <div class="booking-backdrop" data-booking-close></div>
+  <div class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <button class="booking-close" type="button" aria-label="Schließen" data-booking-close>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="booking-head">
+      <span class="booking-eyebrow"><span class="booking-dot" aria-hidden="true"></span> Anfrage senden</span>
+      <h2 id="booking-title">Bereit für Ihr <span class="grad">nächstes Level</span>?</h2>
+      <p>Schreiben Sie uns kurz — wir antworten innerhalb von 24&nbsp;Stunden.</p>
+    </div>
+
+    <form class="booking-form" novalidate>
+      <input type="hidden" name="topic" value="Anfrage">
+
+      <label class="booking-field">
+        <span class="booking-label">Name <em>*</em></span>
+        <input type="text" name="name" required maxlength="120" autocomplete="name" placeholder="Max Mustermann">
+      </label>
+
+      <label class="booking-field">
+        <span class="booking-label">E-Mail <em>*</em></span>
+        <input type="email" name="email" required maxlength="160" autocomplete="email" placeholder="ihre@firma.de">
+        <small class="booking-hint">Pflichtfeld — sonst können wir Ihnen nicht antworten.</small>
+      </label>
+
+      <div class="booking-row">
+        <label class="booking-field">
+          <span class="booking-label">Firma</span>
+          <input type="text" name="company" maxlength="120" autocomplete="organization" placeholder="Optional">
+        </label>
+        <label class="booking-field">
+          <span class="booking-label">Telefon</span>
+          <input type="tel" name="phone" maxlength="40" autocomplete="tel" placeholder="Optional">
+        </label>
+      </div>
+
+      <label class="booking-field">
+        <span class="booking-label">Nachricht</span>
+        <textarea name="message" rows="4" maxlength="2000" placeholder="Worum geht es? (Optional)"></textarea>
+      </label>
+
+      <div class="booking-status" role="status" aria-live="polite"></div>
+
+      <div class="booking-actions">
+        <button type="submit" class="btn btn-primary booking-submit" data-bg="assets/btn1.webp">
+          <span>Anfrage senden</span>
+        </button>
+        <button type="button" class="btn btn-secondary booking-cancel" data-booking-close>
+          <span>Abbrechen</span>
+        </button>
+      </div>
+      <p class="booking-foot">Mit dem Absenden stimmen Sie zu, dass wir Sie unter den genannten Daten kontaktieren.</p>
+    </form>
+  </div>
+</div>
+
 <script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>
-<script src="script.js"></script>
+<script src="script.js?v=phone2d"></script>
 <script src="logo-3d.js" defer></script>
 <script type="module" src="line-waves.js"></script>
 <script src="chatbot.js" defer></script>
