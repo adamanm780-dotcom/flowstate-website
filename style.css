@@ -184,7 +184,7 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
   text-align:center;
   font-family:var(--font-display);
   font-weight:700;
-  font-size:clamp(3.2rem, 13vw, 11rem);
+  font-size:clamp(2.4rem, 8vw, 6.4rem);
   line-height:.92;
   letter-spacing:-.045em;
   color:#fff;
