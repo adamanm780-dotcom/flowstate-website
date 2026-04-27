@@ -1,0 +1,10 @@
+{
+  "name": "flowstate-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Flow State agency website + AI chatbot serverless function",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}
