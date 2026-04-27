@@ -879,7 +879,9 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
   .morph-pin{ gap:24px; }
   .morph-glyph{ display:none; }
   .morph-word{ gap:0; }
-  .morph{ height:340vh; }
+  /* tighter scroll runway on mobile — without glyphs only the word rotates,
+     so 340vh felt like "nothing happens" on a phone */
+  .morph{ height:200vh; }
 }
 
 /* ===== Risk-Free Section · sticky-pinned 3-step USP ===== */
@@ -2317,7 +2319,9 @@ html.is-loading .hero-streaks{ opacity:0; }
   .services-canvas{height:min(70vh, 560px)}
 }
 @media (max-width:640px){
-  .hero{height:260vh}
+  /* hero is content-sized (min-height:100dvh) on mobile — the legacy
+     260vh runway was for a removed scroll-tied F-logo and only created
+     dead space between the hero and the next section */
   .hero-sticky{padding:120px 18px 70px}
   .hero-title{font-size:clamp(2.6rem, 14vw, 5rem)}
   .btn{min-width:300px;min-height:88px;padding:26px 44px}
