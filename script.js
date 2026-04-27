@@ -93,22 +93,31 @@
 
   /* =================================================================
      Scroll-driven canvas frame renderer
-     - All WebP frames are preloaded as Image objects (cache stays warm)
-     - On scroll, the matching frame is drawn into a canvas via drawImage
-       (atomic — no flicker / no blank intermediate paint)
-     - ResizeObserver + image onload force a redraw so dimension races
-       and late-loading frames always end up on screen
+     - Frames are decoded once via createImageBitmap (faster repeated blits)
+     - A continuous rAF loop lerps the rendered frame index toward the
+       scroll-derived target, decoupling render rate from scroll events.
+       This is what makes scrubbing feel smooth on mobile, where touch
+       scroll runs on the compositor thread and JS scroll handlers lag.
+     - DPR is capped harder on coarse pointers (phones) — 2x retina
+       rendering of a 1400px frame at 60fps is wasted fillRate.
+     - rAF only runs while the host is in the viewport.
      ================================================================= */
   function makeScrollSequence({ host, canvas, framePattern, frameCount, framePad }) {
     if (!host || !canvas) return;
     const ctx = canvas.getContext('2d', { alpha: true });
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isCoarse = matchMedia('(pointer: coarse)').matches;
+    const dprCap = isCoarse ? 1.5 : 2;
+    let dpr = Math.min(window.devicePixelRatio || 1, dprCap);
+
     const pad = (n) => String(n).padStart(framePad, '0');
     const url = (i) => framePattern.replace('{n}', pad(i));
 
-    const images = new Array(frameCount);
+    const sources = new Array(frameCount); // ImageBitmap or HTMLImageElement
     let lastDrawnIdx = -1;
-    let pendingIdx = 0;
+    let target = 0;   // scroll-derived target frame index (float, 0..frameCount-1)
+    let current = 0;  // rendered frame index that eases toward target
+    let visible = false;
 
     const sizeCanvas = () => {
       const w = canvas.clientWidth;
@@ -125,62 +134,111 @@
     };
 
     const draw = (idx) => {
-      const img = images[idx];
-      if (!img || !img.complete || img.naturalWidth === 0) return false;
+      const src = sources[idx];
+      if (!src) return false;
+      const sw = src.naturalWidth || src.width;
+      const sh = src.naturalHeight || src.height;
+      if (!sw || !sh) return false;
       if (!sizeCanvas()) return false;
       const cw = canvas.width, ch = canvas.height;
-      const scale = Math.min(cw / img.naturalWidth, ch / img.naturalHeight);
-      const w = img.naturalWidth * scale;
-      const h = img.naturalHeight * scale;
+      const scale = Math.min(cw / sw, ch / sh);
+      const w = sw * scale;
+      const h = sh * scale;
       ctx.clearRect(0, 0, cw, ch);
-      ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+      ctx.drawImage(src, (cw - w) / 2, (ch - h) / 2, w, h);
       lastDrawnIdx = idx;
       return true;
     };
 
-    let raf = 0;
-    const update = () => {
-      raf = 0;
+    const updateTarget = () => {
       const r = host.getBoundingClientRect();
       const total = host.offsetHeight - window.innerHeight;
       if (total <= 0) return;
       const p = Math.max(0, Math.min(1, -r.top / total));
-      pendingIdx = Math.max(0, Math.min(frameCount - 1, Math.round(p * (frameCount - 1))));
-      if (pendingIdx === lastDrawnIdx) return;
-      draw(pendingIdx);
-    };
-    const tick = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(update);
+      target = p * (frameCount - 1);
     };
 
-    // Preload all frames
-    for (let i = 0; i < frameCount; i++) {
+    let rafId = 0;
+    const loop = () => {
+      rafId = 0;
+      if (!visible) return;
+      updateTarget();
+
+      if (reducedMotion) {
+        current = target;
+      } else {
+        const d = target - current;
+        if (Math.abs(d) < 0.0008) current = target;
+        else current += d * 0.22; // critically-damped feel — snappy but smooth
+      }
+
+      const idx = Math.max(0, Math.min(frameCount - 1, Math.round(current)));
+      if (idx !== lastDrawnIdx) draw(idx);
+
+      // Keep ticking while still easing toward target. Once caught up, sleep
+      // until the next scroll/resize wakes us — no idle 60fps repaint.
+      if (current !== target) rafId = requestAnimationFrame(loop);
+    };
+    const wake = () => {
+      if (!rafId) rafId = requestAnimationFrame(loop);
+    };
+
+    // Preload frames. Prefer createImageBitmap — premultiplied, GPU-friendly,
+    // no decode-on-draw cost. Fall back to <img> on older browsers / failures.
+    const supportsBitmap = typeof createImageBitmap === 'function';
+    const loadFrame = (i) => {
+      const u = url(i + 1);
+      if (supportsBitmap) {
+        fetch(u)
+          .then(r => r.ok ? r.blob() : Promise.reject(new Error('fetch ' + r.status)))
+          .then(b => createImageBitmap(b))
+          .then(bm => {
+            sources[i] = bm;
+            if (i === Math.round(current)) draw(i);
+            else if (lastDrawnIdx === -1) wake();
+          })
+          .catch(() => loadFrameImg(i));
+      } else {
+        loadFrameImg(i);
+      }
+    };
+    const loadFrameImg = (i) => {
       const img = new Image();
       img.decoding = 'async';
       img.onload = () => {
-        // Redraw if this happens to be the pending frame (late-loader catch-up)
-        if (i === pendingIdx) draw(i);
-        // First frame: render whatever is current right now
-        else if (lastDrawnIdx === -1) tick();
+        sources[i] = img;
+        if (i === Math.round(current)) draw(i);
+        else if (lastDrawnIdx === -1) wake();
       };
       img.src = url(i + 1);
-      images[i] = img;
+    };
+    for (let i = 0; i < frameCount; i++) loadFrame(i);
+
+    // Visibility-gate the render loop. Off-screen scrolls don't cost anything.
+    if ('IntersectionObserver' in window) {
+      const vio = new IntersectionObserver((entries) => {
+        const wasVisible = visible;
+        visible = entries.some(e => e.isIntersecting);
+        if (visible && !wasVisible) wake();
+      }, { rootMargin: '120px 0px' });
+      vio.observe(host);
+    } else {
+      visible = true;
     }
 
-    // Keep canvas in sync when its CSS size changes (hero resize, sticky reflow, etc.)
     if ('ResizeObserver' in window) {
-      new ResizeObserver(() => { lastDrawnIdx = -1; tick(); }).observe(canvas);
+      new ResizeObserver(() => {
+        // Re-evaluate dpr in case device-pixel-ratio changed (zoom, screen change)
+        dpr = Math.min(window.devicePixelRatio || 1, dprCap);
+        lastDrawnIdx = -1;
+        wake();
+      }).observe(canvas);
     }
-    window.addEventListener('scroll', tick, { passive: true });
-    window.addEventListener('resize', tick);
-    window.addEventListener('load', tick);
+    window.addEventListener('scroll', wake, { passive: true });
+    window.addEventListener('resize', wake);
+    window.addEventListener('load', wake);
 
-    // Initial paint attempts at multiple moments
-    tick();
-    requestAnimationFrame(tick);
-    setTimeout(tick, 250);
-    setTimeout(tick, 1000);
+    wake();
   }
 
   // Hero
