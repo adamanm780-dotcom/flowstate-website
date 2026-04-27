@@ -21,3 +21,8 @@ package-lock.json
 # Logs / temp
 *.log
 *.tmp
+
+# Secrets — never commit local env files
+.env
+.env.*
+!.env.example
