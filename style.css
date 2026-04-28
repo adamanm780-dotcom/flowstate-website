@@ -752,7 +752,7 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
    ============================================================ */
 .morph{
   position:relative;
-  height:400vh;
+  height:500vh;          /* war 400vh — gibt jedem der 4 Wörter 125vh Halten beim Scroll */
   padding:0;
   max-width:none;
   margin:0;
