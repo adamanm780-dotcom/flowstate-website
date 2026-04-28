@@ -627,7 +627,7 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
 */
 .services-stage{
   position:relative;
-  height:320vh;          /* war 220vh — 220vh Pin-Runway gibt 43 Frames Zeit zum Atmen */
+  height:220vh;
   margin:40px calc(-1 * var(--pad-x)) 0;
   padding:0;
 }
@@ -900,7 +900,7 @@ section{position:relative;padding:clamp(72px,10vw,140px) var(--pad-x);max-width:
 }
 .risk-free-stage{
   position:relative;
-  height:300vh;          /* war 200vh — länger damit jeder der 3 Steps in Ruhe „aktiv" wird */
+  height:200vh;
   margin-bottom:clamp(72px, 10vw, 140px);
 }
 .risk-free-pin{
@@ -2378,25 +2378,9 @@ html.is-loading .hero-streaks{ opacity:0; }
   .btn{min-width:300px;min-height:88px;padding:26px 44px}
   .btn>span{font-size:1.1rem}
   .about-points{grid-template-columns:1fr 1fr}
-  .services-stage{height:320vh;margin-left:-18px;margin-right:-18px}
+  .services-stage{height:200vh;margin-left:-18px;margin-right:-18px}
   .services-stage-pin{padding:0 18px}
   .services-canvas{height:60vh}
-
-  /* Morph: 280vh Runway statt 200vh — sonst flitzen die 4 Wörter durch */
-  .morph{ height:280vh; }
-
-  /* Risk-Free Mobile: Pin droppen — Inhalt (3D-Logo + 3 gestapelte Cards) ist
-     größer als ein Viewport, dadurch klebte der Pin praktisch gar nicht.
-     Stattdessen normaler Flow + scroll-tied Step-Highlight bleibt aktiv. */
-  .risk-free-stage{
-    height:auto;
-    margin-bottom:clamp(60px, 10vw, 100px);
-  }
-  .risk-free-pin{
-    position:static;
-    min-height:0;
-    padding:clamp(60px, 12vw, 100px) 0;
-  }
 }
 @media (max-width:380px){
   .btn{min-width:260px;min-height:78px;padding:22px 28px}
