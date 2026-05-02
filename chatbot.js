@@ -25,7 +25,7 @@
   const history = [];
 
   // Welcome message — shown once on first open
-  const WELCOME = 'Hi! Ich bin der KI-Berater von Flow State. Frag mich alles zu unseren Webdesign- und KI-Leistungen, Preisen, dem Risikofreien Modell, oder wie wir mit Juwelieren arbeiten.';
+  const WELCOME = 'Hi! Ich bin der KI-Berater von FlowState. Frag mich alles zu unseren Webdesign- und KI-Leistungen, Preisen, dem Risikofreien Modell, oder wie wir mit Juwelieren arbeiten.';
 
   let opened = false;
 

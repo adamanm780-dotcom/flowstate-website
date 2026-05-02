@@ -2,16 +2,103 @@
 <html lang="de" class="is-loading">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#05070d" />
-<title>Flow State — Webseiten & AI-Lösungen für Unternehmen</title>
-<meta name="description" content="Flow State entwickelt moderne Webseiten und intelligente AI-Berater, die Image und Kommunikation Ihres Unternehmens transformieren." />
 
+<title>FlowState — Webdesign & KI-Lösungen für Unternehmen | Wiesbaden</title>
+<meta name="description" content="FlowState ist die Webagentur für Unternehmen, die mehr wollen als ein Template: maßgeschneidertes Webdesign, KI-Berater & Conversion-optimierte Seiten. Risikofrei: Sie zahlen erst, wenn es Ihnen gefällt." />
+<meta name="author" content="FlowState" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="canonical" href="https://flowstate-website-zeta.vercel.app/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:site_name" content="FlowState" />
+<meta property="og:title" content="FlowState — Webdesign & KI-Lösungen für Unternehmen" />
+<meta property="og:description" content="Maßgeschneiderte Webseiten + KI-Berater für Unternehmen. Risikofreies Modell — Sie zahlen erst, wenn es Ihnen gefällt." />
+<meta property="og:url" content="https://flowstate-website-zeta.vercel.app/" />
+<meta property="og:image" content="https://flowstate-website-zeta.vercel.app/assets/og-cover.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="FlowState — Webdesign & KI-Lösungen" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="FlowState — Webdesign & KI-Lösungen für Unternehmen" />
+<meta name="twitter:description" content="Maßgeschneiderte Webseiten + KI-Berater. Sie zahlen erst, wenn es Ihnen gefällt." />
+<meta name="twitter:image" content="https://flowstate-website-zeta.vercel.app/assets/og-cover.jpg" />
+
+<!-- Icons -->
 <link rel="icon" type="image/webp" href="assets/logo.webp" />
+<link rel="apple-touch-icon" href="assets/logo.webp" />
+
+<!-- Performance: critical asset preconnects + preload -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preload" as="image" href="assets/logo.webp" fetchpriority="high" />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=phone2d" />
+<link rel="stylesheet" href="style.css?v=seo1" />
+
+<!-- Structured Data: Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "FlowState",
+  "alternateName": "Flow State",
+  "url": "https://flowstate-website-zeta.vercel.app/",
+  "logo": "https://flowstate-website-zeta.vercel.app/assets/logo.webp",
+  "description": "FlowState ist eine Webdesign- und KI-Agentur aus Wiesbaden. Wir bauen maßgeschneiderte Webseiten und intelligente KI-Berater für Unternehmen.",
+  "founder": [
+    { "@type": "Person", "name": "Benet Tilinski", "jobTitle": "Founder & Owner" },
+    { "@type": "Person", "name": "Adrian Pötzinger", "jobTitle": "Founder & Owner" }
+  ],
+  "areaServed": "DE",
+  "contactPoint": [
+    { "@type": "ContactPoint", "contactType": "sales", "telephone": "+49-176-45289172", "email": "flow-state@gmx.de", "availableLanguage": ["de","en"] },
+    { "@type": "ContactPoint", "contactType": "customer service", "telephone": "+49-178-1868874", "availableLanguage": ["de","en"] }
+  ]
+}
+</script>
+
+<!-- Structured Data: WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "FlowState",
+  "url": "https://flowstate-website-zeta.vercel.app/",
+  "inLanguage": "de-DE",
+  "publisher": { "@type": "Organization", "name": "FlowState" }
+}
+</script>
+
+<!-- Structured Data: ProfessionalService -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "FlowState",
+  "image": "https://flowstate-website-zeta.vercel.app/assets/logo.webp",
+  "url": "https://flowstate-website-zeta.vercel.app/",
+  "telephone": "+49-176-45289172",
+  "email": "flow-state@gmx.de",
+  "priceRange": "€€€",
+  "areaServed": { "@type": "Country", "name": "Deutschland" },
+  "address": { "@type": "PostalAddress", "addressCountry": "DE", "addressRegion": "Hessen" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Leistungen",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Webdesign & Webentwicklung", "description": "Maßgeschneiderte Webseiten für Unternehmen — performance- und conversion-optimiert." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "KI-Berater & AI-Assistenten", "description": "Telefonische und text-basierte KI-Assistenten für Kundenservice und Lead-Qualifizierung." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO & GEO Optimierung", "description": "Suchmaschinen- und KI-Auffindbarkeit für nachhaltiges organisches Wachstum." } }
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -41,8 +128,8 @@
 
 <!-- Navigation -->
 <header class="nav">
-  <a href="#top" class="nav-logo" aria-label="Flow State Startseite">
-    <img src="assets/logo.webp" alt="Flow State Logo" />
+  <a href="#top" class="nav-logo" aria-label="FlowState Startseite">
+    <img src="assets/logo.webp" alt="FlowState Logo" />
     <span>Flow<em>State</em></span>
   </a>
   <nav class="nav-links" aria-label="Hauptnavigation">
@@ -406,7 +493,7 @@
       <div class="showcase-stage" aria-hidden="true">
         <div class="showcase-laptop">
           <div class="showcase-laptop-screen">
-            <img src="assets/showcase-laptop.jpg" alt="Beispiel-Build von Flow State" loading="lazy" />
+            <img src="assets/showcase-laptop.jpg" alt="Beispiel-Build von FlowState" loading="lazy" />
           </div>
           <div class="showcase-laptop-base"></div>
         </div>
@@ -674,7 +761,7 @@
   <section id="team" class="team">
     <div class="services-head reveal">
       <span class="eyebrow">Unser Team</span>
-      <h2>Die Gründer hinter <span class="grad">Flow State</span>.</h2>
+      <h2>Die Gründer hinter <span class="grad">FlowState</span>.</h2>
     </div>
     <div class="team-grid team-grid--two">
       <article class="member reveal">
@@ -737,7 +824,7 @@
     </nav>
   </div>
   <div class="footer-bottom">
-    <small>© 2026 Flow State. Alle Rechte vorbehalten.</small>
+    <small>© 2026 FlowState. Alle Rechte vorbehalten.</small>
     <div>
       <a href="#">Impressum</a>
       <a href="#">Datenschutz</a>
@@ -753,14 +840,14 @@
     <svg class="chatbot-toggle-icon chatbot-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
   </button>
 
-  <div class="chatbot-panel" role="dialog" aria-label="Flow State KI-Berater">
+  <div class="chatbot-panel" role="dialog" aria-label="FlowState KI-Berater">
     <header class="chatbot-head">
       <div class="chatbot-head-avatar" aria-hidden="true">
         <span class="chatbot-pulse"></span>
         <img src="assets/logo.webp" alt="" />
       </div>
       <div class="chatbot-head-meta">
-        <strong>Flow State Assistent</strong>
+        <strong>FlowState Assistent</strong>
         <span><span class="chatbot-status-dot" aria-hidden="true"></span> Online · antwortet sofort</span>
       </div>
       <button class="chatbot-close" type="button" aria-label="Chat schließen">
