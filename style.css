@@ -135,20 +135,44 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
 .nav-cta:hover{transform:translateY(-1px);filter:brightness(1.08);box-shadow:0 0 0 1px rgba(255,255,255,.3) inset, 0 18px 40px -10px rgba(122,107,255,.8)}
 .nav-burger{display:none;flex-direction:column;gap:5px;padding:10px}
 .nav-burger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .3s, opacity .3s}
+.nav-mobile-cta{display:none}
+.nav-backdrop{
+  position:fixed;inset:0;z-index:9;
+  background:rgba(4,6,12,.55);
+  backdrop-filter:blur(8px);
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.nav.open ~ .nav-backdrop{opacity:1;pointer-events:auto}
 
 @media (max-width:880px){
   .nav{gap:14px;padding:8px 8px 8px 14px}
   .nav-links{
-    position:absolute;top:calc(100% + 12px);left:0;right:0;
-    flex-direction:column;align-items:flex-start;gap:14px;
-    padding:22px;border-radius:24px;
-    background:rgba(8,12,22,.95);backdrop-filter:blur(20px);
+    position:fixed;top:calc(env(safe-area-inset-top, 0px) + 84px);left:14px;right:14px;
+    flex-direction:column;align-items:stretch;gap:4px;
+    padding:18px 18px 22px;border-radius:24px;
+    background:rgba(8,12,22,.96);backdrop-filter:blur(24px);
     border:1px solid var(--border);
-    transform:translateY(-8px);opacity:0;pointer-events:none;
-    transition:opacity .25s, transform .25s
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+    transform:translateY(-8px) scale(.98);opacity:0;pointer-events:none;
+    transition:opacity .28s ease, transform .28s ease;
+    font-size:1.02rem;
   }
-  .nav.open .nav-links{opacity:1;transform:translateY(0);pointer-events:auto}
+  .nav.open .nav-links{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+  .nav-links a:not(.nav-mobile-cta){
+    padding:14px 8px;min-height:44px;
+    color:#fff;
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .nav-links a:not(.nav-mobile-cta):last-of-type{border-bottom:none}
   .nav-cta{display:none}
+  .nav-mobile-cta{
+    display:flex;align-items:center;justify-content:center;
+    margin-top:14px;padding:16px 22px;min-height:52px;
+    background:var(--grad);color:#06080f;font-weight:700;
+    border-radius:14px;text-align:center;
+    box-shadow:0 0 0 1px rgba(255,255,255,.18) inset, 0 16px 36px -12px rgba(122,107,255,.6);
+  }
   .nav-burger{display:flex;margin-left:auto}
   .nav.open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
   .nav.open .nav-burger span:nth-child(2){opacity:0}
@@ -579,6 +603,12 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
   padding:14px 28px;
 }
 .btn.mini>span{ font-size:.92rem; }
+/* Mobile: enforce comfortable touch target on mini buttons regardless of
+   container scaling, so cards in services grid stay tappable. */
+@media (max-width:880px){
+  .btn.mini{ min-height:56px; padding:16px 28px; }
+  .btn.mini>span{ font-size:.95rem; }
+}
 /* Submit form buttons (modal) keep some heft */
 .btn-submit{
   background:linear-gradient(120deg, #22e9ff 0%, #7a6bff 55%, #c062ff 100%);
@@ -2417,8 +2447,10 @@ html.is-loading .hero-streaks{ opacity:0; }
   }
   .risk-free-pin{
     position:static;
+    height:auto;
     min-height:0;
-    padding:clamp(60px, 12vw, 100px) 0;
+    overflow:visible;
+    padding:clamp(96px, 18vw, 130px) 0 clamp(40px, 8vw, 60px);
   }
 }
 @media (max-width:380px){
@@ -2544,6 +2576,16 @@ html.is-loading .hero-streaks{ opacity:0; }
   font-family:var(--font-sans);
   --cb-w: 380px;
   --cb-h: 580px;
+  transition:transform .35s cubic-bezier(.2,.7,.1,1), opacity .25s ease;
+}
+/* Ducked state: when a section's primary CTA is in viewport on mobile,
+   slide the bubble out of the way so it doesn't cover taps. */
+.chatbot.is-ducked{
+  transform:translateY(120%);
+  opacity:0;pointer-events:none;
+}
+.chatbot.is-open.is-ducked{
+  transform:none;opacity:1;pointer-events:auto;
 }
 
 /* Toggle pill button */

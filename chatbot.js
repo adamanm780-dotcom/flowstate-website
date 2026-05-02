@@ -29,6 +29,29 @@
 
   let opened = false;
 
+  /* ---- Mobile: duck the bubble away from primary section CTAs ---- */
+  const isMobile = () => matchMedia('(max-width: 880px)').matches;
+  const duckTargets = [
+    '.rf-foot',
+    '.contact-cta-row',
+  ];
+  const targets = duckTargets
+    .flatMap(sel => Array.from(document.querySelectorAll(sel)))
+    .filter(Boolean);
+  if (targets.length && 'IntersectionObserver' in window) {
+    const seen = new Set();
+    const updateDuck = () => {
+      if (!isMobile()) { root.classList.remove('is-ducked'); return; }
+      root.classList.toggle('is-ducked', seen.size > 0);
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); });
+      updateDuck();
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.4 });
+    targets.forEach(t => io.observe(t));
+    window.addEventListener('resize', updateDuck);
+  }
+
   /* ---- Open / close ---- */
   function open() {
     if (opened) return;

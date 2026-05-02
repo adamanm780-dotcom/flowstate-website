@@ -34,15 +34,21 @@
   /* ---- Mobile nav toggle ---- */
   const nav = $('.nav');
   const burger = $('.nav-burger');
+  const backdrop = $('.nav-backdrop');
+  const closeNav = () => {
+    nav.classList.remove('open');
+    burger?.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  };
   if (burger) {
     burger.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
       burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
     });
-    $$('.nav-links a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }));
+    $$('.nav-links a').forEach(a => a.addEventListener('click', closeNav));
+    backdrop?.addEventListener('click', closeNav);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) closeNav(); });
   }
 
   /* ---- Nav scroll state ---- */
