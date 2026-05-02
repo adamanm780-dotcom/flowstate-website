@@ -916,10 +916,24 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
      across the whole runway. Cap at 100dvh and let content fit inside. */
   height:100dvh;
   display:flex; flex-direction:column; align-items:center; justify-content:center;
-  padding:clamp(32px, 4vw, 60px) 0;
+  /* Top padding clears the fixed nav (~82px) plus breathing room.
+     Bottom padding keeps the CTA out of the clipping zone. */
+  padding:clamp(96px, 11vh, 120px) 0 clamp(56px, 7vh, 80px);
   isolation:isolate;
   overflow:hidden;
   perspective:1400px;
+}
+/* Short viewports (e.g. laptops at 1080p w/ browser chrome): drop the pin
+   so headline + 3 cards + CTA never clip. Animation logic still runs. */
+@media (min-width:641px) and (max-height:760px){
+  .risk-free-stage{ height:auto; margin-bottom:clamp(56px, 7vw, 100px); }
+  .risk-free-pin{
+    position:static;
+    height:auto;
+    min-height:100dvh;
+    overflow:visible;
+    padding:clamp(110px, 14vh, 140px) 0 clamp(72px, 9vh, 100px);
+  }
 }
 .risk-free-glow{
   position:absolute; inset:0; z-index:0; pointer-events:none;
