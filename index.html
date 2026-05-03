@@ -39,7 +39,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preload" as="image" href="assets/logo.webp" fetchpriority="high" />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=seo1" />
+<link rel="stylesheet" href="style.css?v=faq1" />
 
 <!-- Structured Data: Organization -->
 <script type="application/ld+json">
@@ -97,6 +97,72 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO & GEO Optimierung", "description": "Suchmaschinen- und KI-Auffindbarkeit für nachhaltiges organisches Wachstum." } }
     ]
   }
+}
+</script>
+
+<!-- Structured Data: FAQPage (powers Google FAQ Rich Results + AI training data) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet eine Website bei FlowState?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Projektabhängig — übliche Webseiten für mittelständische Kunden liegen zwischen €5.000 und €15.000. Skalierte Pakete für Solo-Selbstständige starten bei €2.500. Beim Risikofreien Modell zahlen Sie erst, wenn das fertige Ergebnis Sie überzeugt." }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie funktioniert das risikofreie Modell genau?",
+      "acceptedAnswer": { "@type": "Answer", "text": "FlowState baut die komplette Website im Voraus — Design, Entwicklung, Inhalte. Kostenlos und ohne Verpflichtung. Erst wenn Sie das fertige Ergebnis sehen und überzeugt sind, kommen Kosten in Bewegung. Gefällt es nicht? Sie schulden uns nichts." }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert der Bau einer Website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Im Schnitt 21 Tage vom ersten Brief-Gespräch bis zum Live-Gang. Komplexere Projekte mit KI-Integration oder Multi-Page-Strukturen können bis zu 6 Wochen dauern." }
+    },
+    {
+      "@type": "Question",
+      "name": "Bauen Sie auch KI-Berater oder telefonische AI-Assistenten?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Ja. KI-Berater sind eine Kernleistung — sowohl text-basierte Chatbots als auch telefonische AI-Assistenten, die Anrufe annehmen, Termine buchen und Leads qualifizieren. Auch automatisierter Kundenservice und Image-Optimierung gehören zum Portfolio." }
+    },
+    {
+      "@type": "Question",
+      "name": "Welche Branchen betreut FlowState?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Schwerpunkte: Juweliere, Werkstätten, Arzt- und Therapie-Praxen, Handwerk und lokale Dienstleister im gesamten DACH-Raum. Besonders viel Erfahrung mit traditionellen Familienbetrieben, die einen frischen digitalen Auftritt brauchen." }
+    },
+    {
+      "@type": "Question",
+      "name": "Was unterscheidet FlowState von anderen Webagenturen?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Vier Dinge: Risikofreies Vorab-Bauen (im DACH-Raum einzigartig), integrierte KI-Berater aus einer Hand, Lighthouse-Scores konstant über 95, persönliche Betreuung direkt durch beide Gründer Benet Tilinski und Adrian Pötzinger." }
+    }
+  ]
+}
+</script>
+
+<!-- Structured Data: Founders -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://flowstate-website-zeta.vercel.app/#benet",
+      "name": "Benet Tilinski",
+      "jobTitle": "Founder & Owner",
+      "worksFor": { "@type": "Organization", "name": "FlowState" },
+      "telephone": "+49-176-45289172"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://flowstate-website-zeta.vercel.app/#adrian",
+      "name": "Adrian Pötzinger",
+      "jobTitle": "Founder & Owner",
+      "worksFor": { "@type": "Organization", "name": "FlowState" },
+      "alumniOf": { "@type": "Organization", "name": "AOE GmbH" },
+      "telephone": "+49-178-1868874"
+    }
+  ]
 }
 </script>
 </head>
@@ -774,6 +840,43 @@
         <h4>Adrian Pötzinger</h4>
         <p>Founder &amp; Owner</p>
       </article>
+    </div>
+  </section>
+
+  <hr class="divider" aria-hidden="true">
+
+  <!-- FAQ · Häufige Fragen + FAQPage Structured Data -->
+  <section id="faq" class="faq" aria-labelledby="faq-heading">
+    <div class="faq-head reveal">
+      <span class="eyebrow">Häufige Fragen</span>
+      <h2 id="faq-heading">Was Kunden vor dem Start <span class="grad">wissen wollen</span>.</h2>
+      <p>Antworten auf die häufigsten Fragen zu Preis, Ablauf und Modell von FlowState.</p>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary><span>Was kostet eine Website bei FlowState?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
+        <div class="faq-body"><p>Projektabhängig — übliche Webseiten für mittelständische Kunden liegen zwischen <strong>€5.000 und €15.000</strong>. Skalierte Pakete für Solo-Selbstständige starten bei €2.500. Beim Risikofreien Modell zahlen Sie erst, wenn das fertige Ergebnis Sie überzeugt.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Wie funktioniert das risikofreie Modell genau?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
+        <div class="faq-body"><p>Wir bauen die komplette Website im Voraus — Design, Entwicklung, Inhalte. <strong>Kostenlos und ohne Verpflichtung.</strong> Erst wenn Sie das fertige Ergebnis sehen und überzeugt sind, kommen Kosten in Bewegung. Gefällt es nicht? Sie schulden uns nichts. Kein Risiko. Keine versteckten Klauseln.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Wie lange dauert der Bau einer Website?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
+        <div class="faq-body"><p>Im Schnitt <strong>21 Tage</strong> vom ersten Brief-Gespräch bis zum Live-Gang. Komplexere Projekte mit KI-Integration oder Multi-Page-Strukturen können bis zu 6 Wochen dauern. Sie wissen jederzeit, wo Ihr Projekt steht.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Bauen Sie auch KI-Berater oder telefonische AI-Assistenten?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
+        <div class="faq-body"><p>Ja. KI-Berater sind eine unserer Kernleistungen — sowohl text-basierte Chatbots auf der Website als auch <strong>telefonische AI-Assistenten</strong>, die Anrufe annehmen, Termine buchen und Leads qualifizieren. Auch automatisierter Kundenservice und Image-Optimierung gehören zum Portfolio.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Welche Branchen betreut FlowState?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
+        <div class="faq-body"><p>Schwerpunkte: <strong>Juweliere, Werkstätten, Arzt- und Therapie-Praxen, Handwerk und lokale Dienstleister</strong> im gesamten DACH-Raum. Besonders viel Erfahrung haben wir mit traditionellen Familienbetrieben, die einen frischen digitalen Auftritt brauchen ohne ihre Geschichte zu verlieren.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Was unterscheidet FlowState von anderen Webagenturen?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
+        <div class="faq-body"><p>Vier Dinge: <strong>(1) Risikofreies Vorab-Bauen</strong> — kein anderer Anbieter im DACH-Raum traut sich das. <strong>(2) Integrierte KI-Berater</strong> — Webdesign + AI aus einer Hand, keine Drittanbieter. <strong>(3) Lighthouse-Scores 95+</strong> — messbare Performance, nicht nur schöne Demo-Slides. <strong>(4) Persönliche Betreuung</strong> direkt durch beide Gründer, nicht durch Account-Manager.</p></div>
+      </details>
     </div>
   </section>
 

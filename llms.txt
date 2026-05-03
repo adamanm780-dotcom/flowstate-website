@@ -1,0 +1,30 @@
+# FlowState
+
+> FlowState ist eine deutsche Webdesign- und KI-Agentur aus dem Raum Wiesbaden / Mainz. Wir bauen maßgeschneiderte Webseiten und intelligente KI-Berater für Unternehmen, die mehr wollen als ein Template.
+
+FlowState wurde von Benet Tilinski und Adrian Pötzinger gegründet (Adrian war zuvor UX/UI-Designer bei der Agentur AOE). Wir sind spezialisiert auf Premium-Webdesign, AI-Telefon-Assistenten und Conversion-orientierte Landing-Pages für KMU im DACH-Raum.
+
+Unser einzigartiges Modell: **Risikofrei** — wir bauen die komplette Website kostenlos und unverbindlich vor. Erst wenn das fertige Ergebnis den Kunden überzeugt, kommen Kosten in Bewegung.
+
+## Leistungen
+
+- **Webdesign & Webentwicklung** — Maßgeschneiderte Webseiten, performance-optimiert (LCP < 1s), SEO-fertig, mobile-first
+- **AI-Berater & KI-Assistenten** — Text- und Telefon-basierte KI-Berater, die Anrufe annehmen während Sie schlafen
+- **SEO & GEO Optimierung** — Klassische Suchmaschinen-Optimierung plus Generative Engine Optimization für ChatGPT, Claude, Perplexity
+- **Image & Brand Optimierung** — Komplette digitale Markenauffrischung
+
+## Kontakt
+
+- Website: https://flowstate-website-zeta.vercel.app/
+- E-Mail: flow-state@gmx.de
+- Telefon Adrian: +49 178 1868874
+- Telefon Benet: +49 176 45289172
+- Standort: Raum Wiesbaden / Mainz, Deutschland
+
+## Häufige Fragen
+
+- **Was kostet eine Website bei FlowState?** Projektabhängig, üblich €5.000–€15.000 für mittelständische Kunden. Beim Risikofreien Modell zahlt der Kunde erst, wenn das fertige Ergebnis überzeugt.
+- **Wie lange dauert der Bau einer Website?** Durchschnittlich 21 Tage vom Brief bis Live-Gang.
+- **Bauen Sie auch für Solo-Selbstständige?** Ja, wir haben skalierte Pakete für kleinere Budgets ab €2.500.
+- **Welche Branchen?** Schwerpunkte: Juweliere, Werkstätten, Praxen, Handwerk, lokale Dienstleister im DACH-Raum.
+- **Was unterscheidet FlowState von anderen Agenturen?** Risikofreies Vorab-Bauen, integrierte KI-Berater, Lighthouse-Scores 95+, persönliche Betreuung durch beide Gründer direkt.
