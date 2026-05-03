@@ -12,7 +12,9 @@
 
 const ALLOWED_ORIGINS = new Set([
   'https://adamanm780-dotcom.github.io',
-  'https://flowstate-website-zeta.vercel.app'
+  'https://flowstate-website-zeta.vercel.app',
+  'https://yourflowstate.de',
+  'https://www.yourflowstate.de'
 ]);
 
 function setCors(req, res) {
@@ -109,7 +111,7 @@ Eingegangen: ${new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })
     </table>
     ${data.message ? `<div style="margin-top:20px;padding:16px;background:#f4f6fb;border-radius:10px;white-space:pre-wrap;font-size:.95rem;line-height:1.55">${escapeHtml(data.message)}</div>` : ''}
     <div style="margin-top:24px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:.8rem;color:#6b7280">
-      Eingegangen am ${new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })} via flowstate-website-zeta.vercel.app
+      Eingegangen am ${new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })} via yourflowstate.de
     </div>
   </div>
 </body></html>`;

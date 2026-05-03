@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flowstate-website-zeta.vercel.app/sitemap.xml
+Sitemap: https://yourflowstate.de/sitemap.xml

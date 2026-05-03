@@ -58,7 +58,9 @@ Wenn der Nutzer Interesse signalisiert ("klingt gut", "wann können wir starten"
 
 const ALLOWED_ORIGINS = new Set([
   'https://adamanm780-dotcom.github.io',
-  'https://flowstate-website-zeta.vercel.app'
+  'https://flowstate-website-zeta.vercel.app',
+  'https://yourflowstate.de',
+  'https://www.yourflowstate.de'
 ]);
 
 function setCors(req, res) {
