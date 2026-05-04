@@ -2041,6 +2041,17 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
   position:relative;width:70%;height:70%;object-fit:contain;
   filter:drop-shadow(0 0 40px rgba(34,233,255,.5));
 }
+.about-logo3d{
+  position:relative;z-index:1;
+  width:78%;height:78%;
+  cursor:grab;
+  filter:drop-shadow(0 30px 60px rgba(34,233,255,.28))
+         drop-shadow(0 16px 50px rgba(160,107,255,.28));
+}
+.about-logo3d:active{cursor:grabbing}
+.about-logo3d .logo-3d-canvas{
+  width:100%!important;height:100%!important;display:block;
+}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ===== Team ===== */
