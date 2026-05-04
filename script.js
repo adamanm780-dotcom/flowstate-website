@@ -175,7 +175,10 @@
       } else {
         const d = target - current;
         if (Math.abs(d) < 0.0008) current = target;
-        else current += d * 0.22; // critically-damped feel — snappy but smooth
+        // Snappier easing on coarse pointers (touch): kompensiert die langsamere
+        // rAF-Cadenz mobiler Browser, sodass Frames der Scroll-Position folgen
+        // statt hinterher zu hängen.
+        else current += d * (isCoarse ? 0.28 : 0.14);
       }
 
       const idx = Math.max(0, Math.min(frameCount - 1, Math.round(current)));
