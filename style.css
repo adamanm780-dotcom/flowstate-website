@@ -661,9 +661,9 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
 */
 .services-stage{
   position:relative;
-  /* runway for the 43-frame canvas scrub: 320vh = 220vh of pin time
-     → mehr Scroll pro Frame = sichtbar smootherer Übergang */
-  height:320vh;
+  /* runway für 43-Frame-Canvas-Scrub: 480vh → ~9vh Scroll pro Frame
+     statt 5vh. Übergang spürbar langsamer und smoother. */
+  height:480vh;
   margin:40px calc(-1 * var(--pad-x)) 0;
   padding:0;
 }
@@ -788,9 +788,9 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
    ============================================================ */
 .morph{
   position:relative;
-  /* Scroll runway = ~120vh per word swap. 4 words → 480vh.
-     Sticky pin holds the headline centered while these 4 phases play. */
-  height:480vh;
+  /* Scroll runway = ~175vh pro Word-Swap. 4 Wörter → 700vh.
+     Längere Sticky-Phase damit Schnell-Scrollen nicht durchrauscht. */
+  height:700vh;
   padding:0;
   max-width:none;
   margin:0;
@@ -925,8 +925,8 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
   .morph-pin{ gap:24px; }
   .morph-glyph{ display:none; }
   .morph-word{ gap:0; }
-  /* tighter scroll runway on mobile — without glyphs only the word rotates */
-  .morph{ height:320vh; }
+  /* Mobile: längerer Runway, damit Schnell-Scroll nicht direkt durchwischt */
+  .morph{ height:480vh; }
 }
 
 /* ===== Risk-Free Section · sticky-pinned 3-step USP ===== */
@@ -1867,9 +1867,9 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
 
 .process-stage{
   position: relative;
-  /* 4 phases × ~80vh runway = 320vh total. Pin holds a phase on screen
-     long enough zum Lesen, bevor die nächste eingeblendet wird. */
-  height: 320vh;
+  /* 4 Phasen × 120vh Runway = 480vh. Phasen halten länger auf Screen,
+     Schnell-Scroll wischt nicht mehr durch. */
+  height: 480vh;
   margin-bottom: clamp(56px, 7vw, 100px);
 }
 .process-pin{
@@ -1885,7 +1885,10 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
 /* Vertical rail with progress fill + 4 dots */
 .process-rail{
   position: absolute;
-  top: 18%; bottom: 18%; left: 50%;
+  top: 18%; bottom: 18%;
+  /* Rail an die linke Seite — Schrift kann sich nicht mehr mit dem
+     Balken überlagern. Nummern + Headlines starten rechts vom Rail. */
+  left: clamp(40px, 11vw, 200px);
   transform: translateX(-50%);
   width: 2px;
   background: linear-gradient(180deg, transparent, rgba(255,255,255,.08) 12%, rgba(255,255,255,.08) 88%, transparent);
@@ -1939,7 +1942,8 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
   inset: 0;
   display: flex; flex-direction: column; justify-content: center;
   align-items: flex-start;
-  padding: 0 0 0 8%;
+  /* Schrift weit rechts vom Rail starten, damit sich beide nicht überlagern */
+  padding: 0 0 0 clamp(96px, 22vw, 320px);
   text-align: left;
   transform-style: preserve-3d;
   opacity: 0;
@@ -2002,8 +2006,8 @@ section{position:relative;padding:clamp(56px,7vw,100px) var(--pad-x);max-width:v
 }
 
 @media (max-width: 780px){
-  /* Mehr Runway → Phasen-Wechsel beim Scrollen ruhiger */
-  .process-stage{ height: 280vh; }
+  /* Mehr Runway → Phasen-Wechsel beim Scrollen deutlich langsamer */
+  .process-stage{ height: 380vh; }
   .phases{ height: 72vh; }
   /* Rail an den linken Rand schieben + Text rechts daneben, damit
      Schrift und Balken sich nicht mehr überlagern */
@@ -2439,12 +2443,13 @@ html.is-loading .hero-streaks{ opacity:0; }
   .btn{min-width:300px;min-height:88px;padding:26px 44px}
   .btn>span{font-size:1.1rem}
   .about-points{grid-template-columns:1fr 1fr}
-  /* Mehr Runway + größere Canvas auf Mobile, damit die 43 Frames nicht
-     pro Scroll-Tick mehrere Frames überspringen (= Hakeln) und das Bild
-     nicht zu winzig wirkt. */
-  .services-stage{height:240vh;margin-left:-18px;margin-right:-18px}
+  /* Deutlich mehr Runway + größere Canvas auf Mobile: 360vh statt 240vh =
+     ~8.4vh Scroll pro Frame statt 5.5vh. Hakelt nicht mehr, weil pro
+     Scroll-Tick weniger Frames übersprungen werden. Canvas-Höhe größer
+     damit das Bild nicht zu winzig wirkt. */
+  .services-stage{height:360vh;margin-left:-18px;margin-right:-18px}
   .services-stage-pin{padding:0 18px}
-  .services-canvas{height:78vh}
+  .services-canvas{height:min(88vh, 720px);width:96vw;max-width:1200px}
 
   /* Risk-Free Mobile: Pin droppen — Inhalt (3D-Logo + 3 gestapelte Cards) ist
      größer als ein Viewport, dadurch klebte der Pin praktisch gar nicht.
@@ -2994,17 +2999,17 @@ body.booking-open{ overflow:hidden }
    MOBILE: Tighter Pin-Runways → keine toten Leerstellen
    ============================================================ */
 @media (max-width: 780px){
-  /* MORPH: langsamer Word-Swap — mehr Runway für ruhigeren Wechsel */
-  .morph{ height: 280vh; }
+  /* MORPH: deutlich langsamer Word-Swap — Schnell-Scroll wischt nicht durch */
+  .morph{ height: 480vh; }
 
   /* PROCESS: längerer Runway → 4 Phasen wechseln langsamer beim Scrollen.
      (Padding / Rail-Position siehe Process-Block weiter oben.) */
-  .process-stage{ height: 280vh; }
+  .process-stage{ height: 380vh; }
   .phases{ height: 72vh; }
 
-  /* SERVICES Stage: längerer Runway → 43 Frames können sauber durchspielen,
-     statt bei jedem Scroll-Tick mehrere Frames zu überspringen. */
-  .services-stage{ height: 240vh; }
+  /* SERVICES Stage: deutlich längerer Runway → 43 Frames spielen ruhig
+     durch, kein Frame-Skip pro Scroll-Tick mehr (= kein Hakeln). */
+  .services-stage{ height: 360vh; }
 
   /* RISK-FREE pin ist auf mobile bereits static (siehe @640px),
      hier nur dafür sorgen, dass kein extra leeres Bottom-Padding
@@ -3016,8 +3021,8 @@ body.booking-open{ overflow:hidden }
    den Animationen, damit die Übergänge nicht durch Leerraum
    verdünnt werden */
 @media (max-width: 640px){
-  .morph{ height: 260vh; padding-bottom: 0; }
-  .process-stage{ height: 260vh; }
+  .morph{ height: 440vh; padding-bottom: 0; }
+  .process-stage{ height: 360vh; }
   .process{ padding-bottom: 60px; }
   hr.divider{ margin-block: 0; }
   /* Ticker direkt an Hero ankleben — keine 20px-Lücke */
