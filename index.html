@@ -34,12 +34,11 @@
 <link rel="icon" type="image/webp" href="assets/logo.webp" />
 <link rel="apple-touch-icon" href="assets/logo.webp" />
 
-<!-- Performance: critical asset preconnects + preload -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Performance: critical asset preload (Fonts werden lokal aus
+     assets/fonts/ ausgeliefert, nicht vom Google-CDN — DSGVO-konform) -->
 <link rel="preload" as="image" href="assets/logo.webp" fetchpriority="high" />
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="style.css?v=scroll5" />
+<link rel="stylesheet" href="assets/fonts/local-fonts.css" />
+<link rel="stylesheet" href="style.css?v=scroll6" />
 
 <!-- Structured Data: Organization -->
 <script type="application/ld+json">
@@ -934,11 +933,10 @@
   </div>
   <div class="footer-bottom">
     <small>© 2026 FlowState. Alle Rechte vorbehalten.</small>
-    <div>
-      <a href="#">Impressum</a>
-      <a href="#">Datenschutz</a>
-      <a href="#">Cookies</a>
-    </div>
+    <nav aria-label="Rechtliche Hinweise">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
   </div>
 </footer>
 
@@ -1037,15 +1035,15 @@
           <span>Abbrechen</span>
         </button>
       </div>
-      <p class="booking-foot">Mit dem Absenden stimmen Sie zu, dass wir Sie unter den genannten Daten kontaktieren.</p>
+      <p class="booking-foot">Mit dem Absenden willigen Sie ein, dass wir Ihre Angaben zur Bearbeitung Ihrer Anfrage verarbeiten und Sie unter den genannten Daten kontaktieren. Details zur Datenverarbeitung und Ihren Rechten finden Sie in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
     </form>
   </div>
 </div>
 
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js" defer></script>
+<script src="assets/vendor/three.min.js" defer></script>
 <script src="script.js?v=scroll3"></script>
 <script src="logo-3d.js" defer></script>
-<script type="module" src="line-waves.js"></script>
-<script src="chatbot.js" defer></script>
+<script type="module" src="line-waves.js?v=2"></script>
+<script src="chatbot.js?v=2" defer></script>
 </body>
 </html>

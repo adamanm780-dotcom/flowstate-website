@@ -2711,6 +2711,7 @@ html.is-loading .hero-streaks{ opacity:0; }
   border-radius:16px;
   font-size:.92rem; line-height:1.5;
   word-wrap:break-word;
+  white-space:pre-wrap;
   animation:chatbotMsgIn .3s cubic-bezier(.2,.7,.1,1) both;
 }
 @keyframes chatbotMsgIn{

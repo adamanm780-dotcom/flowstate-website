@@ -3,7 +3,7 @@
    Auto-initializes on elements with [data-line-waves] (props via data-*).
 */
 
-import { Renderer, Program, Mesh, Triangle } from 'https://esm.sh/ogl@1.0.11';
+import { Renderer, Program, Mesh, Triangle } from './assets/vendor/ogl.min.js';
 
 function hexToVec3(hex) {
   const h = hex.replace('#', '');

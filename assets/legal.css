@@ -1,0 +1,104 @@
+/* Lesefreundliches Layout für Impressum + Datenschutzerklärung.
+   Erbt Variablen + Nav-/Footer-Styles aus style.css. */
+
+main.legal{
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(110px, 14vh, 160px) var(--pad-x) clamp(80px, 10vh, 120px);
+}
+
+.legal-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-l);
+  padding: clamp(28px, 5vw, 56px);
+  box-shadow: var(--shadow-1);
+}
+
+.legal-card .eyebrow{
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid rgba(34,233,255,.32);
+  border-radius: 999px;
+  background: rgba(34,233,255,.06);
+  color: var(--cyan);
+  font-size: .72rem; font-weight: 600;
+  letter-spacing: .24em; text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.legal-card h1{
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  line-height: 1.05; letter-spacing: -.025em;
+  color: #fff;
+  margin-bottom: 18px;
+}
+
+.legal-card h2{
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  letter-spacing: -.01em;
+  color: #fff;
+  margin: 36px 0 12px;
+}
+
+.legal-card .legal-lede{
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  opacity: .9;
+}
+
+.legal-card p,
+.legal-card ul{
+  color: var(--text-mute);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 8px 0;
+}
+
+.legal-card ul{
+  padding-left: 22px;
+}
+.legal-card ul li{ margin: 4px 0; }
+
+.legal-card strong{ color: #fff; font-weight: 600; }
+.legal-card em{ font-style: italic; color: var(--text); opacity: .8; }
+
+.legal-card a{
+  color: var(--cyan);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(34,233,255,.35);
+  transition: color .2s ease, border-color .2s ease;
+}
+.legal-card a:hover,
+.legal-card a:focus-visible{
+  color: #fff;
+  border-bottom-color: rgba(255,255,255,.5);
+}
+
+.legal-card code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .9em;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+
+.legal-foot{
+  margin-top: 48px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  font-size: .9rem !important;
+  opacity: .8;
+}
+
+/* Nav-CTA hier ohne Booking-Modal-Anbindung — als simpler Link gerendert */
+.nav-cta{ cursor: pointer; }
+
+@media (max-width: 640px){
+  main.legal{ padding-top: 100px; }
+  .legal-card{ padding: 28px 22px; }
+}

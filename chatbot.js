@@ -24,8 +24,10 @@
   // In-memory conversation history (system prompt is injected server-side)
   const history = [];
 
-  // Welcome message — shown once on first open
-  const WELCOME = 'Hi! Ich bin der KI-Berater von FlowState. Frag mich alles zu unseren Webdesign- und KI-Leistungen, Preisen, dem Risikofreien Modell, oder wie wir mit Juwelieren arbeiten.';
+  // Welcome message — shown once on first open. Enthält den DSGVO-Hinweis,
+  // damit der Nutzer vor der ersten Eingabe weiß, dass die Daten an
+  // Anthropic (USA) übermittelt werden. Details siehe Datenschutzerklärung.
+  const WELCOME = 'Hi! Ich bin der KI-Berater von FlowState. Frag mich alles zu unseren Webdesign- und KI-Leistungen, dem Risikofreien Modell oder wie wir mit Juwelieren arbeiten.\n\nHinweis: Ihre Eingaben werden zur Antwortgenerierung an unseren KI-Anbieter Anthropic (USA) übermittelt. Bitte keine sensiblen Daten eingeben — Details siehe Datenschutzerklärung.';
 
   let opened = false;
 
