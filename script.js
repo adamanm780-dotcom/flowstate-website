@@ -113,7 +113,11 @@
     const ctx = canvas.getContext('2d', { alpha: true });
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isCoarse = matchMedia('(pointer: coarse)').matches;
-    const dprCap = isCoarse ? 1.5 : 2;
+    /* Coarse-pointer (Touch) DPR Cap fest auf 1.0: spart auf High-DPI-Phones
+       (DPR 2-3) bis zu ~9× Fillrate pro Frame. Visuell auf Phone-Screens
+       kaum Unterschied zu 1.5×, aber ruckelfreies Scrubbing während
+       Momentum-Scroll. */
+    const dprCap = isCoarse ? 1 : 2;
     let dpr = Math.min(window.devicePixelRatio || 1, dprCap);
 
     const pad = (n) => String(n).padStart(framePad, '0');
@@ -175,10 +179,11 @@
       } else {
         const d = target - current;
         if (Math.abs(d) < 0.0008) current = target;
-        // Snappier easing on coarse pointers (touch): kompensiert die langsamere
-        // rAF-Cadenz mobiler Browser, sodass Frames der Scroll-Position folgen
-        // statt hinterher zu hängen.
-        else current += d * (isCoarse ? 0.28 : 0.14);
+        // Auf Touch deutlich snappier (0.5): iOS/Android pausieren rAF
+        // während Momentum-Scroll, dadurch entsteht ein Stau aus
+        // verpassten Frames. Großer Lerp-Faktor holt den Stau in 2-3
+        // Ticks nach Scroll-Ende ein → wirkt nicht mehr ruckelig.
+        else current += d * (isCoarse ? 0.5 : 0.14);
       }
 
       const idx = Math.max(0, Math.min(frameCount - 1, Math.round(current)));
