@@ -1,0 +1,38 @@
+name: Deploy to IONOS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Sync files via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.IONOS_FTP_HOST }}
+          username: ${{ secrets.IONOS_FTP_USER }}
+          password: ${{ secrets.IONOS_FTP_PASSWORD }}
+          server-dir: ${{ secrets.IONOS_FTP_PATH }}
+          protocol: ftps
+          security: loose
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.vercel/**
+            **/.qa-serve.js
+            **/api/**
+            **/node_modules/**
+            **/package*.json
+            **/README.md
+            **/.env*
+            **/.gitignore
+            **/.playwright-mcp/**
+            **/vercel.json
+            **/scripts/**

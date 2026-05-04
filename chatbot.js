@@ -16,10 +16,14 @@
   const sendBtn     = form.querySelector('button');
   const suggestions = root.querySelector('.chatbot-suggestions');
 
-  // API endpoint — relative to current host. On Vercel this resolves to
-  // the serverless function in /api/chat.js. On GitHub Pages it 404s and
-  // we surface a friendly error.
-  const API_URL = '/api/chat';
+  // API endpoint — when on the same host as the Vercel serverless functions
+  // (preview/staging), use a relative path. Production runs on yourflowstate.de
+  // (IONOS static hosting) and routes API calls back to the Vercel deployment.
+  // CORS for yourflowstate.de is whitelisted in api/chat.js.
+  const API_HOST = location.hostname.endsWith('vercel.app') || location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? ''
+    : 'https://flowstate-website-zeta.vercel.app';
+  const API_URL = API_HOST + '/api/chat';
 
   // In-memory conversation history (system prompt is injected server-side)
   const history = [];

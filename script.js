@@ -940,7 +940,12 @@
       statusEl.textContent = 'Wird gesendet…';
 
       try {
-        const res = await fetch('/api/book', {
+        // API host: Vercel/local uses relative path; on IONOS production
+        // the booking call routes back to Vercel (CORS whitelist includes yourflowstate.de).
+        const apiHost = (location.hostname.endsWith('vercel.app') || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+          ? ''
+          : 'https://flowstate-website-zeta.vercel.app';
+        const res = await fetch(apiHost + '/api/book', {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(data)
