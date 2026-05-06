@@ -16,7 +16,7 @@
   const sendBtn     = form.querySelector('button');
   const suggestions = root.querySelector('.chatbot-suggestions');
 
-  // API endpoint — when on the same host as the Vercel serverless functions
+  // API endpoint, when on the same host as the Vercel serverless functions
   // (preview/staging), use a relative path. Production runs on yourflowstate.de
   // (IONOS static hosting) and routes API calls back to the Vercel deployment.
   // CORS for yourflowstate.de is whitelisted in api/chat.js.
@@ -28,10 +28,10 @@
   // In-memory conversation history (system prompt is injected server-side)
   const history = [];
 
-  // Welcome message — shown once on first open. Enthält den DSGVO-Hinweis,
+  // Welcome message, shown once on first open. Enthält den DSGVO-Hinweis,
   // damit der Nutzer vor der ersten Eingabe weiß, dass die Daten an
   // Anthropic (USA) übermittelt werden. Details siehe Datenschutzerklärung.
-  const WELCOME = 'Hi! Ich bin der KI-Berater von FlowState. Frag mich alles zu unseren Webdesign- und KI-Leistungen, dem Risikofreien Modell oder wie wir mit Juwelieren arbeiten.\n\nHinweis: Ihre Eingaben werden zur Antwortgenerierung an unseren KI-Anbieter Anthropic (USA) übermittelt. Bitte keine sensiblen Daten eingeben — Details siehe Datenschutzerklärung.';
+  const WELCOME = 'Hi! Ich bin der KI-Berater von FlowState. Frag mich alles zu unseren Webdesign- und KI-Leistungen, dem Risikofreien Modell oder wie wir mit Juwelieren arbeiten.\n\nHinweis: Ihre Eingaben werden zur Antwortgenerierung an unseren KI-Anbieter Anthropic (USA) übermittelt. Bitte keine sensiblen Daten eingeben, Details siehe Datenschutzerklärung.';
 
   let opened = false;
 
@@ -143,7 +143,7 @@
         if (r.status === 404) {
           msg = 'Der KI-Service ist auf dieser Domain nicht aktiv. Schreiben Sie uns gerne: flow-state@gmx.de · +49 178 1868874.';
         } else if (r.status === 429) {
-          msg = 'Gerade viele Anfragen — bitte einen Moment Geduld. Bei dringenden Themen: flow-state@gmx.de · +49 178 1868874.';
+          msg = 'Gerade viele Anfragen, bitte einen Moment Geduld. Bei dringenden Themen: flow-state@gmx.de · +49 178 1868874.';
         }
         addErrorMessage(msg);
         return;
@@ -152,14 +152,14 @@
       const data = await r.json();
       const text = (data && data.text) ? data.text : '';
       if (!text) {
-        addErrorMessage('Keine Antwort erhalten. Bitte später nochmal versuchen — oder direkt Kontakt aufnehmen: flow-state@gmx.de');
+        addErrorMessage('Keine Antwort erhalten. Bitte später nochmal versuchen, oder direkt Kontakt aufnehmen: flow-state@gmx.de');
         return;
       }
       addBotMessage(text);
       history.push({ role: 'assistant', content: text });
     } catch (e) {
       typingEl.remove();
-      addErrorMessage('Verbindungsfehler. Bitte später nochmal versuchen — oder direkt: flow-state@gmx.de · +49 178 1868874.');
+      addErrorMessage('Verbindungsfehler. Bitte später nochmal versuchen, oder direkt: flow-state@gmx.de · +49 178 1868874.');
     } finally {
       sendBtn.disabled = false;
       textarea.disabled = false;
