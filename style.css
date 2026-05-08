@@ -3135,3 +3135,75 @@ body.booking-open{ overflow:hidden }
   .faq-body{ padding:0 20px 20px; }
 }
 
+/* ============================================================
+   REFERENCE Section · Erster Kunde / Trust-Signal
+   ============================================================ */
+.reference{
+  position:relative;
+  padding:clamp(80px, 10vw, 140px) var(--pad-x);
+  max-width:1200px; margin:0 auto;
+}
+.reference-head{
+  text-align:center;
+  max-width:760px; margin:0 auto clamp(48px, 6vw, 72px);
+}
+.reference-head .eyebrow{ margin-bottom:18px; }
+.reference-head h2{
+  font-family:var(--font-display); font-weight:700;
+  font-size:clamp(2rem, 4.4vw, 3.6rem);
+  line-height:1.05; letter-spacing:-.025em;
+  color:#fff; margin-bottom:18px;
+}
+.reference-head p{
+  color:var(--text-mute);
+  font-size:clamp(.95rem, 1.1vw, 1.05rem);
+  line-height:1.65;
+}
+.reference-figure{
+  margin:0;
+  display:flex; flex-direction:column; align-items:center; gap:20px;
+}
+.reference-frame{
+  position:relative;
+  width:100%;
+  border-radius:24px;
+  overflow:hidden;
+  background:linear-gradient(135deg, rgba(34,233,255,.12), rgba(160,107,255,.12));
+  padding:1px;
+  box-shadow:
+    0 40px 100px -40px rgba(122,107,255,.4),
+    0 20px 60px -30px rgba(34,233,255,.2);
+}
+.reference-frame::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
+  background:linear-gradient(135deg, rgba(34,233,255,.5), rgba(160,107,255,.5));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  pointer-events:none;
+}
+.reference-frame img{
+  display:block;
+  width:100%; height:auto;
+  border-radius:23px;
+  object-fit:cover;
+}
+.reference-figure figcaption{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  text-align:center;
+  max-width:600px;
+}
+.reference-caption-meta{
+  font-family:var(--font-mono, var(--font-sans));
+  font-size:.78rem; letter-spacing:.25em; text-transform:uppercase;
+  color:var(--cyan);
+  opacity:.85;
+}
+.reference-caption-text{
+  font-size:.95rem; color:var(--text-mute); line-height:1.55;
+}
+@media (max-width:640px){
+  .reference{ padding:clamp(60px, 12vw, 100px) var(--pad-x); }
+  .reference-frame{ border-radius:18px; }
+  .reference-frame img{ border-radius:17px; }
+}
+

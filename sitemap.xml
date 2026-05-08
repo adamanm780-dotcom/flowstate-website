@@ -17,6 +17,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://yourflowstate.de/#referenz</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://yourflowstate.de/#team</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
