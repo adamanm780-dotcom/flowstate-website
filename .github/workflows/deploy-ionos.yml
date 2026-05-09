@@ -15,6 +15,20 @@ jobs:
       - name: Install lftp
         run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+      - name: Inspect remote layout
+        env:
+          SFTP_HOST: ${{ secrets.IONOS_FTP_HOST }}
+          SFTP_USER: ${{ secrets.IONOS_FTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.IONOS_FTP_PASSWORD }}
+        run: |
+          lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://"$SFTP_HOST" <<EOF
+            set sftp:auto-confirm yes
+            pwd
+            ls
+            cd public 2>/dev/null && pwd && ls -la | head -20 || echo "no public/ dir"
+            bye
+          EOF
+
       - name: Deploy via SFTP to IONOS
         env:
           SFTP_HOST: ${{ secrets.IONOS_FTP_HOST }}
@@ -41,5 +55,20 @@ jobs:
               --exclude-glob .vercel/ \
               --exclude-glob .playwright-mcp/ \
               ./ "$REMOTE_PATH"
+            bye
+          EOF
+
+      - name: Verify upload
+        env:
+          SFTP_HOST: ${{ secrets.IONOS_FTP_HOST }}
+          SFTP_USER: ${{ secrets.IONOS_FTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.IONOS_FTP_PASSWORD }}
+          REMOTE_PATH: ${{ secrets.IONOS_FTP_PATH }}
+        run: |
+          lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://"$SFTP_HOST" <<EOF
+            set sftp:auto-confirm yes
+            cd "$REMOTE_PATH"
+            pwd
+            ls -la index.html assets 2>&1
             bye
           EOF
