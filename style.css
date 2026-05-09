@@ -3166,6 +3166,7 @@ body.booking-open{ overflow:hidden }
 .reference-frame{
   position:relative;
   width:100%;
+  max-width:720px;
   border-radius:24px;
   overflow:hidden;
   background:linear-gradient(135deg, rgba(34,233,255,.12), rgba(160,107,255,.12));
