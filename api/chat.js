@@ -74,12 +74,33 @@ function setCors(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'content-type');
 }
 
+import { getClientIp, takeToken, looksLikeBot, tooLarge } from './_rate-limit.js';
+
+const MAX_BODY_BYTES = 50 * 1024;     // 50 KB per request
+const MAX_MESSAGES = 30;              // max messages in conversation history
+const RATE_LIMIT = 10;                // chat requests per IP
+const RATE_WINDOW_MS = 60 * 60 * 1000; // per hour
+
 export default async function handler(req, res) {
   setCors(req, res);
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // --- Abuse defenses (cheap checks first) ---
+  if (looksLikeBot(req)) {
+    return res.status(403).json({ error: 'Bots nicht erlaubt.' });
+  }
+  if (tooLarge(req, MAX_BODY_BYTES)) {
+    return res.status(413).json({ error: 'Anfrage zu groß.' });
+  }
+  const ip = getClientIp(req);
+  const limit = takeToken(`chat:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
+  if (!limit.ok) {
+    res.setHeader('Retry-After', String(limit.retryAfter));
+    return res.status(429).json({ error: `Zu viele Anfragen. Bitte in ${Math.ceil(limit.retryAfter / 60)} Minuten erneut versuchen oder direkt: flow-state@gmx.de` });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -92,6 +113,9 @@ export default async function handler(req, res) {
     try { body = JSON.parse(body); } catch { body = null; }
   }
   const messages = body && Array.isArray(body.messages) ? body.messages : null;
+  if (messages && messages.length > MAX_MESSAGES) {
+    return res.status(400).json({ error: `Zu lange Conversation (max ${MAX_MESSAGES} Nachrichten).` });
+  }
   if (!messages || messages.length === 0) {
     return res.status(400).json({ error: 'messages array required' });
   }

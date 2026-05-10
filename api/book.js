@@ -44,10 +44,30 @@ function clamp(s, n) {
   return String(s == null ? '' : s).slice(0, n);
 }
 
+import { getClientIp, takeToken, looksLikeBot, tooLarge } from './_rate-limit.js';
+
+const MAX_BODY_BYTES = 20 * 1024;     // 20 KB per booking
+const RATE_LIMIT = 5;                  // bookings per IP
+const RATE_WINDOW_MS = 60 * 60 * 1000; // per hour
+
 export default async function handler(req, res) {
   setCors(req, res);
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  // --- Abuse defenses ---
+  if (looksLikeBot(req)) {
+    return res.status(403).json({ error: 'Bots nicht erlaubt.' });
+  }
+  if (tooLarge(req, MAX_BODY_BYTES)) {
+    return res.status(413).json({ error: 'Anfrage zu groß.' });
+  }
+  const ip = getClientIp(req);
+  const limit = takeToken(`book:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
+  if (!limit.ok) {
+    res.setHeader('Retry-After', String(limit.retryAfter));
+    return res.status(429).json({ error: `Zu viele Anfragen. Bitte in ${Math.ceil(limit.retryAfter / 60)} Minuten erneut versuchen oder direkt: flow-state@gmx.de` });
+  }
 
   let body = req.body;
   if (typeof body === 'string') {
@@ -55,6 +75,10 @@ export default async function handler(req, res) {
   }
   if (!body || typeof body !== 'object') {
     return res.status(400).json({ error: 'Ungültige Anfrage.' });
+  }
+  // Honeypot field — real users never fill this; bots usually do
+  if (body.website || body.url || body.homepage) {
+    return res.status(204).end(); // pretend success, but ignore
   }
 
   const data = {
