@@ -46,9 +46,9 @@ function clamp(s, n) {
 
 import { getClientIp, takeToken, looksLikeBot, tooLarge } from './_rate-limit.js';
 
-const MAX_BODY_BYTES = 20 * 1024;     // 20 KB per booking
-const RATE_LIMIT = 5;                  // bookings per IP
-const RATE_WINDOW_MS = 60 * 60 * 1000; // per hour
+const MAX_BODY_BYTES = 20 * 1024;          // 20 KB per booking
+const RATE_LIMIT = 5;                       // bookings per IP
+const RATE_WINDOW_MS = 24 * 60 * 60 * 1000; // per day (24 h)
 
 export default async function handler(req, res) {
   setCors(req, res);
@@ -65,8 +65,7 @@ export default async function handler(req, res) {
   const ip = getClientIp(req);
   const limit = takeToken(`book:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
   if (!limit.ok) {
-    res.setHeader('Retry-After', String(limit.retryAfter));
-    return res.status(429).json({ error: `Zu viele Anfragen. Bitte in ${Math.ceil(limit.retryAfter / 60)} Minuten erneut versuchen oder direkt: flow-state@gmx.de` });
+    return res.status(429).json({ error: 'Du hast heute schon mehrere Anfragen geschickt, wir haben sie alle bekommen! Falls es dringend ist, ruf direkt an: Adrian +49 178 1868874 oder Benet +49 176 45289172.' });
   }
 
   let body = req.body;

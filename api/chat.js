@@ -76,10 +76,22 @@ function setCors(req, res) {
 
 import { getClientIp, takeToken, looksLikeBot, tooLarge } from './_rate-limit.js';
 
-const MAX_BODY_BYTES = 50 * 1024;     // 50 KB per request
-const MAX_MESSAGES = 30;              // max messages in conversation history
-const RATE_LIMIT = 10;                // chat requests per IP
-const RATE_WINDOW_MS = 60 * 60 * 1000; // per hour
+const MAX_BODY_BYTES = 50 * 1024;          // 50 KB per request
+const MAX_MESSAGES = 30;                    // max messages in conversation history
+const RATE_LIMIT = 10;                      // chat requests per IP
+const RATE_WINDOW_MS = 24 * 60 * 60 * 1000; // per day (24 h)
+
+// When a visitor hits the chat limit, treat it as a high-intent conversion signal:
+// instead of an error, return a normal-looking bot reply that hands off to the founders.
+const HANDOFF_MESSAGE = `Hey, du hast heute schon viel mit mir gechattet, schön dass du so interessiert bist! 🙌
+
+Ab hier macht ein direkter Call mit einem von uns Gründern mehr Sinn:
+
+📞 Benet: +49 176 45289172
+📞 Adrian: +49 178 1868874
+📧 flow-state@gmx.de
+
+Morgen können wir dann gerne wieder weiterquatschen.`;
 
 export default async function handler(req, res) {
   setCors(req, res);
@@ -99,8 +111,8 @@ export default async function handler(req, res) {
   const ip = getClientIp(req);
   const limit = takeToken(`chat:${ip}`, RATE_LIMIT, RATE_WINDOW_MS);
   if (!limit.ok) {
-    res.setHeader('Retry-After', String(limit.retryAfter));
-    return res.status(429).json({ error: `Zu viele Anfragen. Bitte in ${Math.ceil(limit.retryAfter / 60)} Minuten erneut versuchen oder direkt: flow-state@gmx.de` });
+    // Friendly handoff instead of error — Frontend renders this as a normal bot reply
+    return res.status(200).json({ text: HANDOFF_MESSAGE });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
