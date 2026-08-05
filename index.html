@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#05070d" />
 
+<!-- Reveal-Failsafe · muss vor dem Stylesheet laufen, sonst flackert es.
+     Alle Scroll-Reveals starten auf opacity:0 und werden per JS eingeblendet.
+     Ohne diese Absicherung bliebe die halbe Seite dauerhaft unsichtbar, sobald
+     script.js nicht lädt, blockiert wird oder früh eine Exception wirft.
+     Ablauf: .js setzt den versteckten Ausgangszustand; meldet sich das
+     Reveal-System nicht binnen 4s über data-reveal-ready, wird .js entfernt
+     und alles ist sichtbar. -->
+<script>
+(function(){
+  var d = document.documentElement;
+  d.className += ' js';
+  setTimeout(function(){
+    if (!d.hasAttribute('data-reveal-ready')) d.className = d.className.replace(/\bjs\b/, '');
+  }, 4000);
+})();
+</script>
+
 <title>FlowState, Webdesign & KI-Lösungen für Unternehmen | Wiesbaden</title>
 <meta name="description" content="FlowState ist die Webagentur für Unternehmen, die mehr wollen als ein Template: maßgeschneidertes Webdesign, KI-Berater & Conversion-optimierte Seiten. Risikofrei: Sie zahlen erst, wenn es Ihnen gefällt." />
 <meta name="author" content="FlowState" />
@@ -171,7 +188,7 @@
 <div class="preloader" aria-hidden="true">
   <div class="preloader-inner">
     <div class="preloader-logo">
-      <img src="assets/logo.webp" alt="" />
+      <img src="assets/logo.webp" alt="" width="1024" height="1024" />
       <span>Flow<em>State</em></span>
     </div>
     <div class="preloader-bar" role="progressbar" aria-label="Seite wird geladen">
@@ -194,7 +211,7 @@
 <!-- Navigation -->
 <header class="nav">
   <a href="#top" class="nav-logo" aria-label="FlowState Startseite">
-    <img src="assets/logo.webp" alt="FlowState Logo" />
+    <img src="assets/logo.webp" alt="FlowState Logo" width="1024" height="1024" />
     <span>Flow<em>State</em></span>
   </a>
   <nav class="nav-links" aria-label="Hauptnavigation">
@@ -203,9 +220,9 @@
     <a href="#team">Team</a>
     <a href="#about">Über uns</a>
     <a href="#kontakt">Kontakt</a>
-    <a href="#kontakt" class="nav-mobile-cta" data-booking-open data-booking-topic="Kostenlose Beratung">Kostenlose Beratung</a>
+    <a href="#kontakt" class="nav-mobile-cta">Kostenlose Beratung</a>
   </nav>
-  <a href="#kontakt" class="nav-cta" data-booking-open data-booking-topic="Kostenlose Beratung">Kostenlose Beratung</a>
+  <a href="#kontakt" class="nav-cta">Kostenlose Beratung</a>
   <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -245,7 +262,7 @@
       <div class="hero-foot">
         <p class="hero-tag">Moderne Webseiten &amp; AI-Lösungen für Unternehmen.</p>
         <div class="hero-cta-row">
-          <a href="#kontakt" class="btn btn-primary" data-booking-open data-booking-topic="Projektanfrage"><span>Projekt anfragen</span></a>
+          <a href="mailto:flow-state@gmx.de?subject=Projektanfrage" class="btn btn-primary"><span>Projekt anfragen</span></a>
           <a href="#leistungen" class="btn btn-secondary"><span>Leistungen ansehen</span></a>
         </div>
       </div>
@@ -396,7 +413,7 @@
         </ol>
 
         <div class="rf-foot">
-          <a href="#kontakt" class="btn btn-primary mini" data-bg="assets/btn1.webp" data-booking-open data-booking-topic="Risikofreies Erstgespräch">
+          <a href="mailto:flow-state@gmx.de?subject=Risikofreies%20Erstgespr%C3%A4ch" class="btn btn-primary mini" data-bg="assets/btn1.webp">
             <span>Risikofreies Erstgespräch</span>
           </a>
           <span class="rf-foot-tag">Antwort innerhalb 24 Stunden.</span>
@@ -506,7 +523,7 @@
           <div class="card-glow"></div>
           <h3>Ihr Projekt?</h3>
           <p>Sprechen wir über Ihr Vorhaben, kostenlos &amp; unverbindlich. In 30 Minuten skizzieren wir die beste Lösung für Sie.</p>
-          <a href="#kontakt" class="btn btn-secondary mini" data-bg="assets/btn2.webp" data-booking-open data-booking-topic="Erstgespräch sichern"><span>Erstgespräch sichern</span></a>
+          <a href="mailto:flow-state@gmx.de?subject=Erstgespr%C3%A4ch%20sichern" class="btn btn-secondary mini" data-bg="assets/btn2.webp"><span>Erstgespräch sichern</span></a>
         </article>
 
       </div>
@@ -559,7 +576,7 @@
       <div class="showcase-stage" aria-hidden="true">
         <div class="showcase-laptop">
           <div class="showcase-laptop-screen">
-            <img src="assets/showcase-laptop.jpg" alt="Beispiel-Build von FlowState" loading="lazy" />
+            <img src="assets/showcase-laptop.jpg" alt="Beispiel-Build von FlowState" loading="lazy" decoding="async" width="2478" height="1296" />
           </div>
           <div class="showcase-laptop-base"></div>
         </div>
@@ -609,10 +626,11 @@
         <div class="metric-ai-badge"><span class="ai-pulse"></span>AI · Aktiv</div>
         <h3>AI-Berater nimmt Anrufe an, während Sie schlafen.</h3>
         <div class="metric-ai-chat" aria-hidden="true">
-          <div class="msg msg-bot"><span>Guten Abend, hier ist Ihr Flow-State-Assistent. Wie kann ich helfen?</span></div>
+          <div class="msg msg-bot"><span>Guten Abend, hier spricht der KI-Assistent von FlowState. Wie kann ich helfen?</span></div>
           <div class="msg msg-user"><span>Brauche einen Termin morgen Vormittag</span></div>
           <div class="msg msg-bot"><span>Ich habe 9:00 oder 10:30 frei. Welche passt besser?</span></div>
         </div>
+        <p class="metric-cap">Meldet sich von selbst als KI &mdash; wie es der EU&nbsp;AI&nbsp;Act seit August&nbsp;2026 verlangt.</p>
       </article>
 
       <article class="metric-card metric-card--small metric-card--chart">
@@ -908,11 +926,16 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
           <div><span>Telefon Benet</span><strong>+49 176 45289172</strong></div>
         </a>
+        <a href="https://wa.me/491781868874" target="_blank" rel="noopener" class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.6 9.1c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .6.4l.7 1.6c.1.2 0 .4-.1.5l-.4.5c-.1.2-.2.3 0 .6a6 6 0 0 0 2.7 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.3.4a1.7 1.7 0 0 1-1.2 1.5c-.4.1-1 .2-2.8-.6a9.4 9.4 0 0 1-3.8-3.5c-.7-1.2-.7-2-.7-2.3a2 2 0 0 1 .4-1.3z"/></svg>
+          <div><span>WhatsApp</span><strong>Direkt schreiben</strong></div>
+        </a>
       </div>
 
       <div class="contact-cta-row">
-        <a href="#kontakt" class="btn btn-primary" data-bg="assets/btn1.webp" data-booking-open data-booking-topic="Projektanfrage"><span>Projekt anfragen</span></a>
+        <a href="mailto:flow-state@gmx.de?subject=Projektanfrage" class="btn btn-primary" data-bg="assets/btn1.webp"><span>E-Mail schreiben</span></a>
         <a href="tel:+491781868874" class="btn btn-secondary" data-bg="assets/btn2.webp"><span>Jetzt anrufen</span></a>
+        <a href="https://wa.me/491781868874" target="_blank" rel="noopener" class="btn btn-secondary" data-bg="assets/btn2.webp"><span>WhatsApp</span></a>
       </div>
     </div>
   </section>
@@ -922,7 +945,7 @@
 <footer class="footer">
   <div class="footer-top">
     <a href="#top" class="nav-logo">
-      <img src="assets/logo.webp" alt="" />
+      <img src="assets/logo.webp" alt="" width="1024" height="1024" />
       <span>Flow<em>State</em></span>
     </a>
     <nav aria-label="Footer">
@@ -953,11 +976,11 @@
     <header class="chatbot-head">
       <div class="chatbot-head-avatar" aria-hidden="true">
         <span class="chatbot-pulse"></span>
-        <img src="assets/logo.webp" alt="" />
+        <img src="assets/logo.webp" alt="" width="1024" height="1024" />
       </div>
       <div class="chatbot-head-meta">
-        <strong>FlowState Assistent</strong>
-        <span><span class="chatbot-status-dot" aria-hidden="true"></span> Online · antwortet sofort</span>
+        <strong>FlowState KI-Assistent</strong>
+        <span><span class="chatbot-status-dot" aria-hidden="true"></span> Automatisierte Antworten · kein Mensch</span>
       </div>
       <button class="chatbot-close" type="button" aria-label="Chat schließen">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -980,65 +1003,7 @@
       </button>
     </form>
 
-    <p class="chatbot-foot">Antworten generiert · keine Rechtsberatung</p>
-  </div>
-</div>
-
-<!-- Booking Modal · opens via [data-booking-open] -->
-<div id="booking-modal" class="booking-modal" aria-hidden="true">
-  <div class="booking-backdrop" data-booking-close></div>
-  <div class="booking-dialog" role="dialog" aria-modal="true" aria-labelledby="booking-title">
-    <button class="booking-close" type="button" aria-label="Schließen" data-booking-close>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="booking-head">
-      <span class="booking-eyebrow"><span class="booking-dot" aria-hidden="true"></span> Anfrage senden</span>
-      <h2 id="booking-title">Bereit für Ihr <span class="grad">nächstes Level</span>?</h2>
-      <p>Schreiben Sie uns kurz, wir antworten innerhalb von 24&nbsp;Stunden.</p>
-    </div>
-
-    <form class="booking-form" novalidate>
-      <input type="hidden" name="topic" value="Anfrage">
-
-      <label class="booking-field">
-        <span class="booking-label">Name <em>*</em></span>
-        <input type="text" name="name" required maxlength="120" autocomplete="name" placeholder="Max Mustermann">
-      </label>
-
-      <label class="booking-field">
-        <span class="booking-label">E-Mail <em>*</em></span>
-        <input type="email" name="email" required maxlength="160" autocomplete="email" placeholder="ihre@firma.de">
-        <small class="booking-hint">Pflichtfeld, sonst können wir Ihnen nicht antworten.</small>
-      </label>
-
-      <div class="booking-row">
-        <label class="booking-field">
-          <span class="booking-label">Firma</span>
-          <input type="text" name="company" maxlength="120" autocomplete="organization" placeholder="Optional">
-        </label>
-        <label class="booking-field">
-          <span class="booking-label">Telefon</span>
-          <input type="tel" name="phone" maxlength="40" autocomplete="tel" placeholder="Optional">
-        </label>
-      </div>
-
-      <label class="booking-field">
-        <span class="booking-label">Nachricht</span>
-        <textarea name="message" rows="4" maxlength="2000" placeholder="Worum geht es? (Optional)"></textarea>
-      </label>
-
-      <div class="booking-status" role="status" aria-live="polite"></div>
-
-      <div class="booking-actions">
-        <button type="submit" class="btn btn-primary booking-submit" data-bg="assets/btn1.webp">
-          <span>Anfrage senden</span>
-        </button>
-        <button type="button" class="btn btn-secondary booking-cancel" data-booking-close>
-          <span>Abbrechen</span>
-        </button>
-      </div>
-      <p class="booking-foot">Mit dem Absenden willigen Sie ein, dass wir Ihre Angaben zur Bearbeitung Ihrer Anfrage verarbeiten und Sie unter den genannten Daten kontaktieren. Details zur Datenverarbeitung und Ihren Rechten finden Sie in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-    </form>
+    <p class="chatbot-foot">KI-generierte Antworten &mdash; können Fehler enthalten. Keine Rechtsberatung.</p>
   </div>
 </div>
 

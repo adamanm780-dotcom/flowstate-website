@@ -56,13 +56,72 @@
   onScrollNav();
   window.addEventListener('scroll', onScrollNav, { passive: true });
 
-  /* ---- Reveal on scroll ---- */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    });
+  /* ---- Reveal on scroll ----
+     Der IntersectionObserver macht den gestaffelten Auftritt. Er allein reicht
+     aber nicht: bei schnellem Flick-/Momentum-Scroll (Handy) kann ein Element
+     zwischen zwei Observer-Frames komplett durchs Viewport rutschen, ohne dass
+     der Callback je isIntersecting sieht. Das Element bliebe dann dauerhaft auf
+     opacity:0 — genau der Bug, der vorher fast die halbe Seite unsichtbar
+     gemacht hat. Deshalb läuft zusätzlich ein rAF-gedrosselter Scroll-Sweep,
+     der alles nachzieht, was der Observer verpasst. */
+  let io;
+  const pending = new Set();
+
+  const showReveal = (el) => {
+    if (!el || el.classList.contains('in')) return;
+    el.classList.add('in');
+    if (io) io.unobserve(el);
+    pending.delete(el);
+    /* will-change dauerhaft auf ~30 Elementen kostet auf dem Handy echten
+       Compositor-Speicher. Nach dem Auftritt wird es nicht mehr gebraucht. */
+    setTimeout(() => { el.style.willChange = 'auto'; }, 900);
+  };
+
+  io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) showReveal(e.target); });
   }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
-  $$('.reveal').forEach(el => io.observe(el));
+
+  const observeReveal = (el) => {
+    if (pending.has(el) || el.classList.contains('in')) return;
+    pending.add(el);
+    io.observe(el);
+  };
+  $$('.reveal').forEach(observeReveal);
+
+  /* Registry für weitere Scroll-Trigger (z.B. cardEntrance3D, das Karten per
+     Inline-Style versteckt). Die hängen am selben Sweep, damit auch sie bei
+     Schnell-Scroll nicht dauerhaft unsichtbar hängen bleiben. */
+  const pendingGroups = new Set();
+  const registerScrollTrigger = (el, show) => {
+    const entry = { el, show };
+    pendingGroups.add(entry);
+    return () => pendingGroups.delete(entry);
+  };
+
+  /* Sweep: alles, dessen Oberkante im Viewport liegt oder das bereits
+     vorbeigescrollt ist, wird sichtbar — unabhängig von der Scroll-Geschwindigkeit. */
+  let sweepRaf = 0;
+  const sweep = () => {
+    sweepRaf = 0;
+    const vh = window.innerHeight;
+    Array.from(pending).forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh - 40) showReveal(el);
+    });
+    Array.from(pendingGroups).forEach(g => {
+      const r = g.el.getBoundingClientRect();
+      if (r.top < vh - 40) { pendingGroups.delete(g); g.show(); }
+    });
+  };
+  const queueSweep = () => { if (!sweepRaf) sweepRaf = requestAnimationFrame(sweep); };
+  window.addEventListener('scroll', queueSweep, { passive: true });
+  window.addEventListener('resize', queueSweep);
+  window.addEventListener('orientationchange', queueSweep);
+  window.addEventListener('load', queueSweep);
+  queueSweep();
+
+  /* Signalisiert dem Failsafe im <head>, dass das Reveal-System läuft. */
+  document.documentElement.setAttribute('data-reveal-ready', '1');
 
   /* ---- Stats count-up ---- */
   const statIO = new IntersectionObserver((entries) => {
@@ -501,13 +560,10 @@
       el.style.setProperty('--reveal-i', i);
     });
   });
-  // Re-observe newly added reveal elements
-  $$('.reveal:not(.in)').forEach(el => {
-    if (!el.dataset.observed) {
-      io.observe(el);
-      el.dataset.observed = '1';
-    }
-  });
+  // Re-observe newly added reveal elements (die Stagger-Gruppen oben haben
+  // .reveal erst nachträglich vergeben) und den Sweep einmal nachziehen.
+  $$('.reveal:not(.in)').forEach(observeReveal);
+  queueSweep();
 
   /* ---- 8) SCROLL-TIED HEADLINE SCALE on section headers ---- */
   if (!reduced) {
@@ -826,148 +882,27 @@
         el.style.transition = `opacity .9s cubic-bezier(.22,1,.36,1) ${i * 90}ms, transform 1.1s cubic-bezier(.22,1,.36,1) ${i * 90}ms`;
       });
       c.style.perspective = '1600px';
+
+      const show = () => {
+        nodes.forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0) rotateX(0) scale(1)';
+        });
+      };
+      /* Am gemeinsamen Sweep angemeldet: der Container-Observer allein hat auf
+         dem Handy regelmäßig ausgesetzt (threshold 0.18 auf einem Container,
+         der höher ist als das Viewport, plus übersprungene Frames beim
+         Momentum-Scroll) — die Karten blieben dann für immer auf opacity:0. */
+      const unregister = registerScrollTrigger(c, show);
       const obs = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if (!e.isIntersecting) return;
-          nodes.forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0) rotateX(0) scale(1)';
-          });
+          show();
+          unregister();
           obs.unobserve(c);
         });
-      }, { threshold: 0.18 });
+      }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
       obs.observe(c);
-    });
-  })();
-
-  /* ---- Booking Modal (Termin-/Anfrage-Popup) ---- */
-  (() => {
-    const modal = $('#booking-modal');
-    if (!modal) return;
-    const dialog = $('.booking-dialog', modal);
-    const form = $('.booking-form', modal);
-    const topicInput = form.querySelector('input[name="topic"]');
-    const statusEl = $('.booking-status', form);
-    const submitBtn = $('.booking-submit', form);
-    let lastFocus = null;
-
-    function open(topic){
-      lastFocus = document.activeElement;
-      if (topic) topicInput.value = topic;
-      // reset to a fresh form whenever opened
-      form.classList.remove('is-success');
-      statusEl.textContent = '';
-      statusEl.className = 'booking-status';
-      submitBtn.disabled = false;
-      $$('.has-error', form).forEach(el => el.classList.remove('has-error'));
-      modal.classList.add('is-open');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('booking-open');
-      setTimeout(() => {
-        const firstField = form.querySelector('input[name="name"]');
-        if (firstField) firstField.focus();
-      }, 60);
-    }
-
-    function close(){
-      modal.classList.remove('is-open');
-      modal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('booking-open');
-      if (lastFocus && typeof lastFocus.focus === 'function') {
-        try { lastFocus.focus(); } catch {}
-      }
-    }
-
-    // Open triggers — any element with [data-booking-open]
-    document.addEventListener('click', (e) => {
-      const opener = e.target.closest('[data-booking-open]');
-      if (opener) {
-        e.preventDefault();
-        open(opener.getAttribute('data-booking-topic') || 'Anfrage');
-        return;
-      }
-      const closer = e.target.closest('[data-booking-close]');
-      if (closer && modal.contains(closer)) {
-        e.preventDefault();
-        close();
-      }
-    });
-
-    // ESC to close
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
-    });
-
-    function isValidEmail(v){
-      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v || '').trim());
-    }
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      $$('.has-error', form).forEach(el => el.classList.remove('has-error'));
-      statusEl.textContent = '';
-      statusEl.className = 'booking-status';
-
-      const data = {
-        topic:   (topicInput.value || 'Anfrage').slice(0, 120),
-        name:    form.name.value.trim().slice(0, 120),
-        email:   form.email.value.trim().slice(0, 160),
-        company: form.company.value.trim().slice(0, 120),
-        phone:   form.phone.value.trim().slice(0, 40),
-        message: form.message.value.trim().slice(0, 2000)
-      };
-
-      // Required: name + valid email
-      let firstErr = null;
-      if (!data.name) {
-        form.name.closest('.booking-field').classList.add('has-error');
-        firstErr = firstErr || form.name;
-      }
-      if (!isValidEmail(data.email)) {
-        form.email.closest('.booking-field').classList.add('has-error');
-        firstErr = firstErr || form.email;
-      }
-      if (firstErr) {
-        statusEl.textContent = !data.email
-          ? 'Bitte hinterlegen Sie Ihre E-Mail-Adresse — sonst können wir Ihnen nicht antworten.'
-          : 'Bitte füllen Sie die markierten Pflichtfelder aus.';
-        statusEl.classList.add('is-error');
-        firstErr.focus();
-        return;
-      }
-
-      submitBtn.disabled = true;
-      statusEl.textContent = 'Wird gesendet…';
-
-      try {
-        // API host: Vercel/local uses relative path; on IONOS production
-        // the booking call routes back to Vercel (CORS whitelist includes yourflowstate.de).
-        const apiHost = (location.hostname.endsWith('vercel.app') || location.hostname === 'localhost' || location.hostname === '127.0.0.1')
-          ? ''
-          : 'https://flowstate-website-zeta.vercel.app';
-        const res = await fetch(apiHost + '/api/book', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        let payload = null;
-        try { payload = await res.json(); } catch {}
-        if (!res.ok) {
-          throw new Error((payload && payload.error) || `Server-Fehler (${res.status})`);
-        }
-        form.classList.add('is-success');
-        statusEl.className = 'booking-status is-success';
-        statusEl.textContent = 'Vielen Dank — Ihre Anfrage ist bei uns eingegangen. Wir melden uns innerhalb 24 Stunden.';
-      } catch (err) {
-        submitBtn.disabled = false;
-        statusEl.className = 'booking-status is-error';
-        const fallbackMail = `mailto:flow-state@gmx.de?subject=${encodeURIComponent('Anfrage: ' + data.topic)}&body=${encodeURIComponent(
-          `Name: ${data.name}\nE-Mail: ${data.email}\nFirma: ${data.company}\nTelefon: ${data.phone}\n\n${data.message}`
-        )}`;
-        statusEl.innerHTML =
-          'Senden hat nicht geklappt. Bitte schreiben Sie uns direkt an ' +
-          `<a href="${fallbackMail}" style="color:var(--cyan);text-decoration:underline">flow-state@gmx.de</a>.`;
-      }
     });
   })();
 
