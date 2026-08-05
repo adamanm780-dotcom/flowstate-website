@@ -14,12 +14,18 @@ const ALLOWED_ORIGINS = new Set([
   'https://adamanm780-dotcom.github.io',
   'https://flowstate-website-zeta.vercel.app',
   'https://yourflowstate.de',
-  'https://www.yourflowstate.de'
+  'https://www.yourflowstate.de',
+  // Neue Wallet-Produkt-Site (nutzt Chat/Booking von diesem API-Projekt)
+  'https://flowstate-wallet.de',
+  'https://www.flowstate-wallet.de'
 ]);
 
 function setCors(req, res) {
   const origin = req.headers.origin || '';
-  if (ALLOWED_ORIGINS.has(origin) || /^https:\/\/[\w-]+\.vercel\.app$/.test(origin)) {
+  // Nur exakt bekannte Origins (offener *.vercel.app-Regex entfernt — war von
+  // jedem erfüllbar). Eigene Preview-URLs bei Bedarf über EXTRA_ORIGINS.
+  const extra = (process.env.EXTRA_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+  if (ALLOWED_ORIGINS.has(origin) || extra.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   res.setHeader('Vary', 'Origin');

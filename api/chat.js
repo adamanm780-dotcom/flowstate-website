@@ -60,13 +60,20 @@ const ALLOWED_ORIGINS = new Set([
   'https://adamanm780-dotcom.github.io',
   'https://flowstate-website-zeta.vercel.app',
   'https://yourflowstate.de',
-  'https://www.yourflowstate.de'
+  'https://www.yourflowstate.de',
+  // Neue Wallet-Produkt-Site (nutzt Chat/Booking von diesem API-Projekt)
+  'https://flowstate-wallet.de',
+  'https://www.flowstate-wallet.de'
 ]);
 
 function setCors(req, res) {
   const origin = req.headers.origin || '';
-  // Allow listed origins, plus any *.vercel.app preview domain for this project
-  if (ALLOWED_ORIGINS.has(origin) || /^https:\/\/[\w-]+\.vercel\.app$/.test(origin)) {
+  // Nur exakt bekannte Origins. Der frühere offene Regex /[\w-]+\.vercel\.app/
+  // war von JEDEM erfüllbar (jeder kann gratis ein *.vercel.app deployen) und
+  // wurde entfernt. Zusätzliche eigene Preview-URLs bei Bedarf über die
+  // Env-Var EXTRA_ORIGINS (kommagetrennt) whitelisten.
+  const extra = (process.env.EXTRA_ORIGINS || '').split(',').map(s => s.trim()).filter(Boolean);
+  if (ALLOWED_ORIGINS.has(origin) || extra.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   res.setHeader('Vary', 'Origin');
@@ -167,11 +174,10 @@ export default async function handler(req, res) {
 
     if (!r.ok) {
       const detail = await r.text().catch(() => '');
-      return res.status(r.status === 429 ? 429 : 502).json({
-        error: 'AI provider error',
-        status: r.status,
-        detail: detail.slice(0, 500)
-      });
+      // Provider-Details nur serverseitig loggen, nicht an den anonymen Client
+      // zurückspiegeln (Info-Leak / Backend-Fingerprinting vermeiden).
+      console.error('[chat] Anthropic error', r.status, detail.slice(0, 500));
+      return res.status(r.status === 429 ? 429 : 502).json({ error: 'AI provider error' });
     }
 
     const data = await r.json();
@@ -180,6 +186,7 @@ export default async function handler(req, res) {
       : '';
     return res.status(200).json({ text });
   } catch (e) {
-    return res.status(502).json({ error: 'upstream fetch failed', detail: String(e).slice(0, 300) });
+    console.error('[chat] upstream fetch failed', e);
+    return res.status(502).json({ error: 'upstream fetch failed' });
   }
 }

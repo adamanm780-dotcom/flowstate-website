@@ -214,8 +214,8 @@
 
 <main id="top">
 
-  <!-- HERO · LineWaves WebGL background + 3D logo brand mark -->
-  <section class="hero" id="hero">
+  <!-- HERO · FlowState Wallet — Apple Wallet Pässe für Betriebe -->
+  <section class="hero hero--wallet" id="hero">
     <div class="hero-sticky">
 
       <!-- WebGL line-waves backdrop -->
@@ -236,17 +236,48 @@
            data-mouse-influence="2.0"
            aria-hidden="true"></div>
 
-      <h1 class="hero-title" aria-label="Boost Your Company Image">
-        <span class="line"><span>BOOST&nbsp;YOUR</span></span>
-        <span class="line"><span>COMPANY</span></span>
-        <span class="line accent"><span>IMAGE.</span></span>
-      </h1>
+      <div class="hero-wrap">
+        <div class="hero-copy">
+          <span class="hero-pill">
+            <span class="hero-pill-dot" aria-hidden="true"></span>
+            FlowState&nbsp;Wallet · Apple&nbsp;Wallet für Betriebe
+          </span>
 
-      <div class="hero-foot">
-        <p class="hero-tag">Moderne Webseiten &amp; AI-Lösungen für Unternehmen.</p>
-        <div class="hero-cta-row">
-          <a href="#kontakt" class="btn btn-primary" data-booking-open data-booking-topic="Projektanfrage"><span>Projekt anfragen</span></a>
-          <a href="#leistungen" class="btn btn-secondary"><span>Leistungen ansehen</span></a>
+          <h1 class="hero-title hero-title--wallet">
+            <span class="line"><span>Eure Kunden.</span></span>
+            <span class="line"><span>In Apple&nbsp;Wallet.</span></span>
+            <span class="line accent"><span>Eure Marke.</span></span>
+          </h1>
+
+          <p class="hero-tag hero-tag--wallet">
+            Digitale Stempelkarten, Gutscheine &amp; Pässe — im Design Ihres
+            Betriebs, direkt in Apple&nbsp;Wallet. Jeder Besuch +1&nbsp;Stempel,
+            live aufs Handy. Kein Plastik. Keine App.
+          </p>
+
+          <div class="hero-cta-row hero-cta-row--wallet">
+            <a href="https://qr-voucher-customer-app.vercel.app/api/pass?demo=1"
+               class="btn btn-primary" target="_blank" rel="noopener">
+              <span>Demo-Karte in Wallet laden</span>
+            </a>
+            <a href="#kontakt" class="btn btn-secondary"
+               data-booking-open data-booking-topic="FlowState Wallet · Demo">
+              <span>Demo buchen</span>
+            </a>
+          </div>
+
+          <ul class="hero-trustline" aria-label="Highlights">
+            <li>Echte Apple&nbsp;Wallet Pässe</li>
+            <li>Eigenes Design pro Betrieb</li>
+            <li>Live-Stempel per Push</li>
+          </ul>
+        </div>
+
+        <div class="hero-device" aria-hidden="true">
+          <div class="hero-device-glow"></div>
+          <img class="hero-phone" src="assets/hero-wallet.png?v=3"
+               width="932" height="1982" decoding="async" fetchpriority="high"
+               alt="FlowState Wallet — mehrere Stempelkarten gestapelt in Apple Wallet auf dem iPhone" />
         </div>
       </div>
     </div>
@@ -255,16 +286,20 @@
   <!-- TICKER -->
   <section class="ticker" aria-hidden="true">
     <div class="ticker-track">
-      <span>Webentwicklung</span><span>•</span>
-      <span>AI-Berater</span><span>•</span>
-      <span>Telefonische AI-Assistenten</span><span>•</span>
-      <span>Automatisierter Kundenservice</span><span>•</span>
-      <span>Image-Optimierung</span><span>•</span>
-      <span>Webentwicklung</span><span>•</span>
-      <span>AI-Berater</span><span>•</span>
-      <span>Telefonische AI-Assistenten</span><span>•</span>
-      <span>Automatisierter Kundenservice</span><span>•</span>
-      <span>Image-Optimierung</span><span>•</span>
+      <span>Stempelkarten</span><span>•</span>
+      <span>Gutscheine</span><span>•</span>
+      <span>Guthabenkarten</span><span>•</span>
+      <span>Zeitpässe</span><span>•</span>
+      <span>Zugangspässe</span><span>•</span>
+      <span>Eigenes Design pro Betrieb</span><span>•</span>
+      <span>Live-Stempel per Push</span><span>•</span>
+      <span>Stempelkarten</span><span>•</span>
+      <span>Gutscheine</span><span>•</span>
+      <span>Guthabenkarten</span><span>•</span>
+      <span>Zeitpässe</span><span>•</span>
+      <span>Zugangspässe</span><span>•</span>
+      <span>Eigenes Design pro Betrieb</span><span>•</span>
+      <span>Live-Stempel per Push</span><span>•</span>
     </div>
   </section>
 
@@ -1042,6 +1077,51 @@
   </div>
 </div>
 
+<!-- Wallet hero · live stamp-fill demo -->
+<script>
+(function(){
+  var root = document.querySelector('[data-wallet-demo]');
+  if(!root) return;
+  var stamps = Array.prototype.slice.call(root.querySelectorAll('.stamp'));
+  var left   = root.querySelector('.wcard-left');
+  var reward = root.querySelector('.wcard-reward');
+  var toast  = root.querySelector('.wphone-toast');
+  var n = stamps.length, i = 0;
+  var rewardHTML = reward ? reward.innerHTML : '';
+
+  function setLeft(v){ if(left) left.textContent = v; }
+  function reset(){
+    stamps.forEach(function(s){ s.classList.remove('is-on','just'); });
+    i = 0; if(reward) reward.innerHTML = rewardHTML; setLeft(n);
+  }
+  function popToast(){
+    if(!toast) return;
+    toast.classList.remove('show'); void toast.offsetWidth; toast.classList.add('show');
+  }
+  function tick(){
+    if(i >= n){
+      if(reward) reward.innerHTML = 'Gratis-Kaffee freigeschaltet 🎉';
+      setTimeout(function(){ reset(); setTimeout(tick, 1000); }, 2200);
+      return;
+    }
+    var s = stamps[i];
+    s.classList.add('is-on','just');
+    setTimeout(function(){ s.classList.remove('just'); }, 420);
+    i++; setLeft(n - i); popToast();
+    setTimeout(tick, 780);
+  }
+
+  if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches){
+    stamps.forEach(function(s,k){ if(k < 7) s.classList.add('is-on'); });
+    setLeft(3); return;
+  }
+  var started = false;
+  var io = new IntersectionObserver(function(es){
+    if(es[0].isIntersecting && !started){ started = true; reset(); setTimeout(tick, 650); }
+  }, { threshold: .35 });
+  io.observe(root);
+})();
+</script>
 <script src="assets/vendor/three.min.js" defer></script>
 <script src="script.js?v=scroll3"></script>
 <script src="logo-3d.js" defer></script>

@@ -1,0 +1,45 @@
+# ============================================================
+# FlowState · Security-Header für die IONOS-Live-Site (Apache)
+# ------------------------------------------------------------
+# Grund: Die Header aus vercel.json greifen NUR auf dem Vercel-
+# API-Projekt. Die Website selbst liegt auf IONOS (Apache) und
+# lieferte bisher KEINE Security-Header. Diese Datei schließt
+# die Lücke. Der SFTP-Deploy lädt sie automatisch mit hoch.
+# ============================================================
+
+<IfModule mod_headers.c>
+  # HTTPS erzwingen (2 Jahre, inkl. Subdomains, preload-fähig)
+  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+  # MIME-Sniffing unterbinden
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Clickjacking-Schutz (Seite nicht in fremde Frames einbettbar)
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Referrer nur eingeschränkt weitergeben
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Sensible Browser-APIs abschalten (Seite braucht keine davon)
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # Content-Security-Policy.
+  # Hinweis: 'unsafe-inline' bei script/style ist bewusst gesetzt —
+  # die Seite nutzt einen Inline-<script>-Block (Wallet-Demo), JSON-LD
+  # und Inline-Styles. Der eigentliche Schutzgewinn liegt in
+  # frame-ancestors, object-src, base-uri und der Beschränkung von
+  # connect-src auf den eigenen Chat-/Booking-Endpunkt.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://flowstate-website-zeta.vercel.app; form-action 'self'; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+  # Server-Version nicht ausplaudern
+  Header unset X-Powered-By
+  Header unset Server
+</IfModule>
+
+# Verzeichnis-Listing aus (falls per IONOS-Default aktiv)
+Options -Indexes
+
+# Punkt-Dateien (.htaccess, .git, .env …) nicht ausliefern
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
