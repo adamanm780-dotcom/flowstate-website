@@ -10,6 +10,38 @@ Zwei Leute, ein Branch, keine verlorene Arbeit.
   Deploy auf IONOS (yourflowstate.de). **Nie direkt auf `main` arbeiten.**
 - Solange wir auf `redesign` sind, kann nichts live kaputtgehen.
 
+## Erststart auf einem neuen Rechner
+
+1. Git installieren: https://git-scm.com/download/win
+   Danach **PowerShell einmal komplett schliessen und neu oeffnen** — sonst
+   kennt sie den Befehl `git` noch nicht.
+2. Eigenen Commit-Namen setzen (siehe Abschnitt oben).
+3. Repo holen — mit dem Zugriffs-Token, den du bekommen hast:
+   ```
+   git clone https://<TOKEN>@github.com/adamanm780-dotcom/flowstate-website.git
+   cd flowstate-website
+   git checkout redesign
+   ```
+   `<TOKEN>` durch den echten Token ersetzen (die spitzen Klammern weg).
+   Der Token wird lokal gespeichert, du musst ihn nur einmal eingeben.
+
+## Setup: ein GitHub-Account, zwei Rechner
+
+Wir pushen beide über denselben Account (`adamanm780-dotcom`). Damit man
+trotzdem sieht, **wer** was geändert hat, setzt jeder auf seinem Rechner
+EINMALIG seinen eigenen Commit-Namen:
+
+```
+git config --global user.name "Dein Vorname"
+```
+
+Die E-Mail bleibt bei beiden `adamanm780@gmail.com` — nur der Name
+unterscheidet sich. Danach zeigt `git log` sauber, von wem jeder Commit ist:
+
+```
+git log --oneline --format="%h %an — %s" -10
+```
+
 ## Die eine Regel, die alles rettet
 
 **Vor JEDEM Push: erst ziehen, dann pushen.**
