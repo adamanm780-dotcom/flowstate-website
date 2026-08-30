@@ -8,12 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=6">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
 <div class="progress" aria-hidden="true"></div>
-<div class="draftbar">ENTWURF — Adresse, Öffnungszeiten und Formularversand sind Platzhalter</div>
+<div class="draftpill">Entwurf · Adresse und Versand folgen</div>
 
 <header class="nav">
   <div class="wrap nav-in">
@@ -37,7 +37,7 @@
 <section class="pagehead">
   <div class="wrap">
     <p class="eyebrow rv">Kontakt</p>
-    <h1 class="rv" data-i style="--i:1">Reden wir kurz.<br>Das kostet Sie nichts.</h1>
+    <h1 data-split>Reden wir kurz. Das kostet Sie nichts.</h1>
     <p class="lede rv" data-i style="--i:2">
       Am schnellsten geht es per Telefon oder WhatsApp. Wenn Ihnen Schreiben lieber ist,
       nutzen Sie das Formular — wir melden uns in der Regel noch am selben Werktag.
@@ -141,10 +141,10 @@
 <section class="sec sec-tint">
   <div class="wrap">
     <p class="eyebrow rv">Bevor Sie schreiben</p>
-    <h2 class="rv" data-i style="--i:1">Zwei Dinge, die Sie wissen sollten.</h2>
+    <h2 data-split>Zwei Dinge, die Sie wissen sollten.</h2>
     <div class="reasons" style="grid-template-columns:1fr;max-width:900px">
         <article class="reason rv" data-i style="--i:1">
-          <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <svg class="ico loop-check" viewBox="0 0 40 40" aria-hidden="true">
             <path d="M20 4 L34 9 v11 c0 8-6 13-14 16 -8-3-14-8-14-16 V9 Z"/>
             <path class="accent" d="M13 20 l5 5 9-10"/>
           </svg>
@@ -152,10 +152,10 @@
           <p>Wir schauen uns an, was Sie haben, und sagen Ihnen ehrlich, ob sich eine neue Seite für Sie lohnt. Auch wenn die Antwort nein ist.</p>
         </article>
         <article class="reason rv" data-i style="--i:2">
-          <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+          <svg class="ico loop-clock" viewBox="0 0 40 40" aria-hidden="true">
             <circle cx="20" cy="21" r="14"/>
-            <path class="accent" d="M20 12 v9 l6 4"/>
             <path d="M14 4 h12"/>
+            <path class="hand accent" d="M20 21 v-8"/>
           </svg>
           <h3>Sie zahlen erst nach Freigabe</h3>
           <p>Wir bauen Ihre Website fertig, bevor Geld fließt. Gefällt sie Ihnen nicht, entstehen Ihnen keine Kosten.</p>
@@ -182,6 +182,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js"></script>
+<script src="assets/app.js?v=6"></script>
 </body>
 </html>

@@ -1,40 +1,65 @@
-/* FlowState — Entwurf v3
-   Progressive Enhancement: ohne JS bleibt alles sichtbar und bedienbar. */
+/* FlowState — v4. Progressive Enhancement: ohne JS bleibt alles lesbar. */
 document.documentElement.classList.add('js');
 
 var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var finePointer = window.matchMedia('(pointer: fine)').matches;
 
 /* ---------------------------------------------------------------
-   1. Icons vorbereiten: Strichlaenge direkt als Inline-Style.
-   (Der Umweg ueber eine CSS-Variable war unzuverlaessig.)
+   1. Headlines in Woerter zerlegen (data-split)
    --------------------------------------------------------------- */
-function prepIcons(){
+(function(){
+  document.querySelectorAll('[data-split]').forEach(function(el){
+    if(el.querySelector('.w')) return;
+    var parts = [];
+    el.childNodes.forEach(function(node){
+      if(node.nodeType === 3){
+        node.textContent.split(/(\s+)/).forEach(function(t){
+          if(!t) return;
+          if(/^\s+$/.test(t)){ parts.push(document.createTextNode(' ')); return; }
+          var w = document.createElement('span'); w.className = 'w';
+          var wi = document.createElement('span'); wi.className = 'wi'; wi.textContent = t;
+          w.appendChild(wi); parts.push(w);
+        });
+      } else { parts.push(node.cloneNode(true)); }
+    });
+    el.innerHTML = '';
+    var d = 0;
+    parts.forEach(function(p){
+      if(p.classList && p.classList.contains('w')){
+        p.querySelector('.wi').style.setProperty('--wd', d++);
+      }
+      el.appendChild(p);
+    });
+  });
+})();
+
+/* ---------------------------------------------------------------
+   2. Icons: Strichlaengen setzen (fuer Draw-Animation)
+   --------------------------------------------------------------- */
+(function(){
   if(reduced) return;
   document.querySelectorAll('.ico').forEach(function(svg){
     svg.querySelectorAll('path,circle,rect,line,polyline,polygon,ellipse').forEach(function(el){
       var len = 0;
-      try { len = el.getTotalLength(); } catch(e){ len = 0; }
+      try { len = el.getTotalLength(); } catch(e){}
       if(!len || !isFinite(len) || len < 1) len = 160;
       len = Math.ceil(len) + 2;
-      el.style.strokeDasharray  = len + '';
-      el.style.strokeDashoffset = len + '';
+      el.style.strokeDasharray = String(len);
+      el.style.strokeDashoffset = String(len);
     });
   });
-}
-prepIcons();
+})();
 
 /* ---------------------------------------------------------------
-   2. Reveals + Icon-Zeichnen ausloesen
+   3. Reveals: .rv, data-split, .flowline, Icons
    --------------------------------------------------------------- */
 (function(){
-  var els = document.querySelectorAll('.rv, .divider');
-
+  var els = document.querySelectorAll('.rv, [data-split], .flowline');
   function activate(el){
     el.classList.add('in');
     el.querySelectorAll('.ico').forEach(function(i){ i.classList.add('drawn'); });
-    if(el.classList && el.classList.contains('ico')) el.classList.add('drawn');
+    if(el.classList.contains('ico')) el.classList.add('drawn');
   }
-
   if(!('IntersectionObserver' in window)){
     els.forEach(activate);
     document.querySelectorAll('.ico').forEach(function(i){ i.classList.add('drawn'); });
@@ -44,10 +69,9 @@ prepIcons();
     entries.forEach(function(e){
       if(e.isIntersecting){ activate(e.target); io.unobserve(e.target); }
     });
-  }, { rootMargin:'0px 0px -8% 0px', threshold:0.12 });
+  }, { rootMargin:'0px 0px -8% 0px', threshold:0.1 });
   els.forEach(function(el){ io.observe(el); });
 
-  /* Icons, die in keinem .rv stecken, separat beobachten */
   var io2 = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){ e.target.classList.add('drawn'); io2.unobserve(e.target); }
@@ -59,24 +83,139 @@ prepIcons();
 })();
 
 /* ---------------------------------------------------------------
-   3. Scroll-Engine: Fortschrittsbalken + Parallax, ein rAF-Loop
+   4. Canvas-Flowfield im Hero — die Signatur
    --------------------------------------------------------------- */
 (function(){
-  if(reduced) return;
+  var cv = document.getElementById('flow');
+  if(!cv || reduced) return;
+  var ctx = cv.getContext('2d');
+  var hero = cv.parentElement;
+  var W, H, dpr, parts = [], running = false, raf = 0, t = 0;
+  var N = window.innerWidth < 760 ? 42 : 90;
 
-  var bar   = document.querySelector('.progress');
-  var items = [];
-  document.querySelectorAll('[data-parallax]').forEach(function(el){
-    items.push({
-      el: el,
-      amount: parseFloat(el.getAttribute('data-parallax')) || 0,
-      zoom:   parseFloat(el.getAttribute('data-zoom')) || 0,
-      rect: null
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    W = hero.clientWidth; H = hero.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#FAFBFD'; ctx.fillRect(0, 0, W, H);
+  }
+  function spawn(p){
+    p.x = Math.random() * W; p.y = Math.random() * H;
+    p.life = 120 + Math.random() * 200;
+    p.blue = Math.random() < 0.72;
+    return p;
+  }
+  function angle(x, y){
+    return (Math.sin(x * 0.0021 + t * 0.0011) + Math.cos(y * 0.0024 - t * 0.0009)) * Math.PI
+         + Math.sin((x + y) * 0.0009 + t * 0.0006) * 1.4;
+  }
+  function frame(){
+    if(!running) return;
+    t += 16;
+    ctx.fillStyle = 'rgba(250,251,253,0.055)';
+    ctx.fillRect(0, 0, W, H);
+    for(var i = 0; i < parts.length; i++){
+      var p = parts[i];
+      var a = angle(p.x, p.y);
+      var nx = p.x + Math.cos(a) * 1.35;
+      var ny = p.y + Math.sin(a) * 1.35;
+      ctx.strokeStyle = p.blue ? 'rgba(27,79,232,0.30)' : 'rgba(11,27,51,0.16)';
+      ctx.lineWidth = 1.1;
+      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny); ctx.stroke();
+      p.x = nx; p.y = ny; p.life--;
+      if(p.life <= 0 || p.x < -20 || p.x > W + 20 || p.y < -20 || p.y > H + 20) spawn(p);
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  resize();
+  for(var i = 0; i < N; i++) parts.push(spawn({}));
+  window.addEventListener('resize', function(){ resize(); }, { passive:true });
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && !running){ running = true; frame(); }
+      else if(!e.isIntersecting && running){ running = false; cancelAnimationFrame(raf); }
+    });
+  }, { threshold:0.02 });
+  io.observe(hero);
+})();
+
+/* ---------------------------------------------------------------
+   5. Custom Cursor (Punkt + Ring)
+   --------------------------------------------------------------- */
+(function(){
+  if(!finePointer || reduced) return;
+  var dot = document.createElement('div'); dot.className = 'cur';
+  var ring = document.createElement('div'); ring.className = 'curR';
+  document.body.appendChild(dot); document.body.appendChild(ring);
+  var x = -100, y = -100, rx = -100, ry = -100;
+  document.addEventListener('pointermove', function(e){
+    x = e.clientX; y = e.clientY;
+    dot.style.transform = 'translate(' + (x - 4) + 'px,' + (y - 4) + 'px)';
+  }, { passive:true });
+  (function loop(){
+    rx += (x - rx) * 0.16; ry += (y - ry) * 0.16;
+    ring.style.transform = 'translate(' + (rx - ring.offsetWidth / 2) + 'px,' + (ry - ring.offsetHeight / 2) + 'px)';
+    requestAnimationFrame(loop);
+  })();
+  document.addEventListener('pointerover', function(e){
+    if(e.target.closest('a, button, summary, .pj, .wt')) ring.classList.add('big');
+  }, { passive:true });
+  document.addEventListener('pointerout', function(e){
+    if(e.target.closest('a, button, summary, .pj, .wt')) ring.classList.remove('big');
+  }, { passive:true });
+})();
+
+/* ---------------------------------------------------------------
+   6. Magnet-Buttons
+   --------------------------------------------------------------- */
+(function(){
+  if(!finePointer || reduced) return;
+  document.querySelectorAll('.btn').forEach(function(b){
+    b.addEventListener('pointermove', function(e){
+      var r = b.getBoundingClientRect();
+      var dx = e.clientX - (r.left + r.width / 2);
+      var dy = e.clientY - (r.top + r.height / 2);
+      b.style.transform = 'translate(' + (dx * 0.14) + 'px,' + (dy * 0.22) + 'px)';
+    });
+    b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
+  });
+})();
+
+/* ---------------------------------------------------------------
+   7. 3D-Tilt (Kurhaus, Projekt-Karten)
+   --------------------------------------------------------------- */
+(function(){
+  if(!finePointer || reduced) return;
+  document.querySelectorAll('[data-tilt]').forEach(function(host){
+    var card = host.querySelector('.kurhaus-frame, .pj-shotcard') || host;
+    host.addEventListener('pointermove', function(e){
+      var r = host.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--ry', (px * 7).toFixed(2) + 'deg');
+      card.style.setProperty('--rx', (-py * 7).toFixed(2) + 'deg');
+    });
+    host.addEventListener('pointerleave', function(){
+      card.style.setProperty('--ry', '0deg');
+      card.style.setProperty('--rx', '0deg');
     });
   });
+})();
 
+/* ---------------------------------------------------------------
+   8. Scroll-Engine: Fortschritt, Parallax, Score-Counter
+   --------------------------------------------------------------- */
+(function(){
+  var bar = document.querySelector('.progress');
+  var items = [];
+  if(!reduced){
+    document.querySelectorAll('[data-parallax]').forEach(function(el){
+      items.push({ el:el, amount:parseFloat(el.getAttribute('data-parallax')) || 0, rect:null });
+    });
+  }
   var ticking = false, vh = window.innerHeight;
-
   function measure(){
     vh = window.innerHeight;
     items.forEach(function(it){
@@ -84,42 +223,99 @@ prepIcons();
       it.rect = { top: r.top + window.scrollY, height: r.height };
     });
   }
-
   function frame(){
     ticking = false;
     var y = window.scrollY;
-
     if(bar){
       var max = document.documentElement.scrollHeight - vh;
       bar.style.setProperty('--p', max > 0 ? Math.min(1, y / max) : 0);
     }
-
     for(var i = 0; i < items.length; i++){
       var it = items[i];
       if(!it.rect) continue;
       var center = it.rect.top + it.rect.height / 2 - y;
-      if(center < -it.rect.height || center > vh + it.rect.height) continue;  /* Culling */
-      var prog = (center - vh / 2) / (vh / 2 + it.rect.height / 2);           /* -1 .. 1 */
+      if(center < -it.rect.height || center > vh + it.rect.height) continue;
+      var prog = (center - vh / 2) / (vh / 2 + it.rect.height / 2);
       prog = Math.max(-1, Math.min(1, prog));
       it.el.style.setProperty('--py', (-prog * it.amount).toFixed(1) + 'px');
-      if(it.zoom){
-        it.el.style.setProperty('--ps', (1 + it.zoom * (1 - Math.abs(prog))).toFixed(4));
-      }
     }
   }
-
-  function onScroll(){
-    if(!ticking){ ticking = true; requestAnimationFrame(frame); }
-  }
-
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
   measure(); frame();
   window.addEventListener('scroll', onScroll, { passive:true });
   window.addEventListener('resize', function(){ measure(); onScroll(); }, { passive:true });
   window.addEventListener('load', function(){ measure(); onScroll(); });
+
+  /* 5,0-Counter + Sternfuellung */
+  var score = document.querySelector('.score');
+  if(score && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        io.unobserve(score);
+        var numEl = score.querySelector('.score-num');
+        var starsEl = score.querySelector('.score-stars');
+        if(reduced){ if(starsEl) starsEl.style.setProperty('--fill', 100); return; }
+        if(starsEl){
+          var fillEl = starsEl.querySelector('.fill');
+          if(fillEl){ fillEl.style.transition = 'none'; }
+          starsEl.style.setProperty('--fill', 0);
+          if(fillEl){ void fillEl.offsetWidth; fillEl.style.transition = ''; }
+          starsEl.style.setProperty('--fill', 100);
+        }
+        if(!numEl) return;
+        numEl.textContent = '0,0';
+        var start = null;
+        function step(ts){
+          if(!start) start = ts;
+          var p = Math.min(1, (ts - start) / 1300);
+          p = 1 - Math.pow(1 - p, 3);
+          numEl.textContent = (p * 5).toFixed(1).replace('.', ',');
+          if(p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold:0.4 });
+    io.observe(score);
+  }
 })();
 
 /* ---------------------------------------------------------------
-   4. Typewriter im Hero
+   9. Bewertungs-Slider: Snap + Drag + Pfeile
+   --------------------------------------------------------------- */
+(function(){
+  var track = document.querySelector('.qtrack');
+  if(!track) return;
+  var prev = document.querySelector('[data-q-prev]');
+  var next = document.querySelector('[data-q-next]');
+  function stepWidth(){
+    var q = track.querySelector('.quote');
+    return q ? q.getBoundingClientRect().width + 19 : 340;
+  }
+  if(prev) prev.addEventListener('click', function(){ track.scrollBy({ left:-stepWidth(), behavior:'smooth' }); });
+  if(next) next.addEventListener('click', function(){ track.scrollBy({ left: stepWidth(), behavior:'smooth' }); });
+
+  if(finePointer){
+    var down = false, sx = 0, sl = 0, moved = false;
+    track.addEventListener('pointerdown', function(e){
+      down = true; moved = false; sx = e.clientX; sl = track.scrollLeft;
+      track.classList.add('drag');
+    });
+    window.addEventListener('pointermove', function(e){
+      if(!down) return;
+      var dx = e.clientX - sx;
+      if(Math.abs(dx) > 4) moved = true;
+      track.scrollLeft = sl - dx;
+    }, { passive:true });
+    window.addEventListener('pointerup', function(){
+      down = false; track.classList.remove('drag');
+    }, { passive:true });
+    track.addEventListener('click', function(e){ if(moved) e.preventDefault(); }, true);
+  }
+})();
+
+/* ---------------------------------------------------------------
+   10. Typewriter
    --------------------------------------------------------------- */
 (function(){
   var el = document.getElementById('tw');
@@ -127,10 +323,8 @@ prepIcons();
   var words = (el.getAttribute('data-words') || '').split('|').filter(Boolean);
   if(!words.length) return;
   if(reduced){ el.textContent = words[0]; el.classList.add('blink'); return; }
-
   var wi = 0, ci = words[0].length, deleting = false;
   el.textContent = words[0];
-
   function tick(){
     var word = words[wi];
     if(!deleting){
@@ -146,24 +340,41 @@ prepIcons();
     }
     el.classList.remove('blink');
     el.textContent = word.slice(0, ci);
-    setTimeout(tick, deleting ? 42 : 82);
+    setTimeout(tick, deleting ? 40 : 80);
   }
-  setTimeout(tick, 2200);
+  setTimeout(tick, 2100);
 })();
 
 /* ---------------------------------------------------------------
-   5. Angebot-Popup
+   11. Videos: abspielen, wenn sichtbar
+   --------------------------------------------------------------- */
+(function(){
+  var vids = document.querySelectorAll('video[data-auto]');
+  if(!vids.length) return;
+  if(reduced){ vids.forEach(function(v){ v.removeAttribute('autoplay'); v.pause(); }); return; }
+  if(!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v = e.target;
+      if(e.isIntersecting){ v.play().catch(function(){}); }
+      else { v.pause(); }
+    });
+  }, { threshold:0.25 });
+  vids.forEach(function(v){ io.observe(v); });
+})();
+
+/* ---------------------------------------------------------------
+   12. Angebot-Popup
    --------------------------------------------------------------- */
 (function(){
   var dlg = document.getElementById('angebot');
   if(!dlg) return;
   var last = null;
-
   function open(e){
     if(e) e.preventDefault();
     last = document.activeElement;
     if(typeof dlg.showModal === 'function') dlg.showModal();
-    else dlg.setAttribute('open','');
+    else dlg.setAttribute('open', '');
     var f = dlg.querySelector('.modal-x');
     if(f) f.focus();
   }
@@ -172,54 +383,45 @@ prepIcons();
     else dlg.removeAttribute('open');
     if(last && last.focus) last.focus();
   }
-
-  document.querySelectorAll('[data-open-angebot]').forEach(function(b){
-    b.addEventListener('click', open);
-  });
-  dlg.querySelectorAll('[data-close-angebot]').forEach(function(b){
-    b.addEventListener('click', close);
-  });
+  document.querySelectorAll('[data-open-angebot]').forEach(function(b){ b.addEventListener('click', open); });
+  dlg.querySelectorAll('[data-close-angebot]').forEach(function(b){ b.addEventListener('click', close); });
   dlg.addEventListener('click', function(e){ if(e.target === dlg) close(); });
 })();
 
 /* ---------------------------------------------------------------
-   6. Karte erst nach Einwilligung laden (DSGVO)
+   13. Karte nach Einwilligung
    --------------------------------------------------------------- */
 (function(){
   var box = document.querySelector('.mapbox');
   if(!box) return;
   var btn = box.querySelector('[data-load-map]');
   if(!btn) return;
-
   btn.addEventListener('click', function(){
     var src = box.getAttribute('data-map-src');
     if(!src) return;
     var f = document.createElement('iframe');
-    f.src = src;
-    f.loading = 'lazy';
+    f.src = src; f.loading = 'lazy';
     f.title = 'Karte mit unserem Standort';
     f.referrerPolicy = 'no-referrer-when-downgrade';
-    f.setAttribute('allowfullscreen','');
-    box.innerHTML = '';
-    box.appendChild(f);
+    f.setAttribute('allowfullscreen', '');
+    box.innerHTML = ''; box.appendChild(f);
   });
 })();
 
 /* ---------------------------------------------------------------
-   7. Formular: Spamschutz ohne Captcha
+   14. Formular-Spamschutz
    --------------------------------------------------------------- */
 (function(){
   var form = document.getElementById('kontaktformular');
   if(!form) return;
   var start = form.querySelector('[name="formStart"]');
   if(start) start.value = String(Date.now());
-
   form.addEventListener('submit', function(e){
     var hp = form.querySelector('[name="company"]');
     if(hp && hp.value){ e.preventDefault(); return; }
     if(start){
       var elapsed = Date.now() - parseInt(start.value || '0', 10);
-      if(elapsed < 2500){ e.preventDefault(); }
+      if(elapsed < 2500) e.preventDefault();
     }
   });
 })();

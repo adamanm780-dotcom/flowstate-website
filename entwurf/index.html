@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FlowState — Website erstellen lassen in Wiesbaden</title>
-<meta name="description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden für Handwerk, Praxen und Einzelhandel.">
+<meta name="description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=6">
 <link rel="preload" as="image" href="assets/kurhaus-hero.webp" fetchpriority="high">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
 <div class="progress" aria-hidden="true"></div>
-<div class="draftbar">ENTWURF — Preise, Fotos und Screenshots sind Platzhalter</div>
+<div class="draftpill">Entwurf · Preise sind Platzhalter</div>
 
 <header class="nav">
   <div class="wrap nav-in">
@@ -36,15 +36,16 @@
 
 <main id="main">
 
-<!-- ===== HERO ===== -->
+<!-- ===== HERO mit Canvas-Flowfield ===== -->
 <section class="hero" id="top">
+  <canvas id="flow" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
     <div>
       <div class="trustline rv">
         <span class="stars" aria-hidden="true">★★★★★</span>
         <small><a href="#stimmen">5,0 bei Google</a></small>
         <span class="dotsep" aria-hidden="true"></span>
-        <small>Aus Wiesbaden</small>
+        <small>Webagentur aus Wiesbaden</small>
       </div>
 
       <h1 class="rv" data-i style="--i:1">
@@ -59,12 +60,12 @@
       </p>
 
       <div class="hero-cta rv" data-i style="--i:3">
-        <a class="btn btn-primary pulse" href="tel:+491781868874">Jetzt anrufen</a>
+        <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
         <button class="btn btn-ghost" type="button" data-open-angebot>Angebot ansehen</button>
       </div>
     </div>
 
-    <figure class="kurhaus rv" data-i style="--i:2">
+    <figure class="kurhaus rv" data-i style="--i:2" data-tilt>
       <div class="kurhaus-frame" data-parallax="34">
         <picture>
           <source srcset="assets/kurhaus-hero-sm.webp" media="(max-width:600px)" type="image/webp">
@@ -78,25 +79,15 @@
   </div>
 </section>
 
-<!-- ===== BRANCHEN ===== -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Handwerk</span><span>Zahnarztpraxen</span><span>Juweliere</span><span>Gastronomie</span>
-    <span>Friseure</span><span>Ärzte</span><span>Fotografen</span><span>Einzelhandel</span>
-    <span>Handwerk</span><span>Zahnarztpraxen</span><span>Juweliere</span><span>Gastronomie</span>
-    <span>Friseure</span><span>Ärzte</span><span>Fotografen</span><span>Einzelhandel</span>
-  </div>
-</div>
-
 <!-- ===== WARUM ===== -->
 <section class="sec" id="warum">
   <div class="wrap">
     <p class="eyebrow rv">Warum FlowState</p>
-    <h2 class="rv" data-i style="--i:1">Sie gehen kein Risiko ein.<br>Das ist der ganze Unterschied.</h2>
+    <h2 data-split>Sie gehen kein Risiko ein. Das ist der ganze Unterschied.</h2>
 
     <div class="reasons">
       <article class="reason rv" data-i style="--i:1">
-        <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+        <svg class="ico loop-check" viewBox="0 0 40 40" aria-hidden="true">
           <path d="M20 4 L34 9 v11 c0 8-6 13-14 16 -8-3-14-8-14-16 V9 Z"/>
           <path class="accent" d="M13 20 l5 5 9-10"/>
         </svg>
@@ -105,17 +96,17 @@
       </article>
 
       <article class="reason rv" data-i style="--i:2">
-        <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+        <svg class="ico loop-clock" viewBox="0 0 40 40" aria-hidden="true">
           <circle cx="20" cy="21" r="14"/>
-          <path class="accent" d="M20 12 v9 l6 4"/>
           <path d="M14 4 h12"/>
+          <path class="hand accent" d="M20 21 v-8"/>
         </svg>
         <h3>In 7 Tagen online</h3>
         <p>Keine sechs Wochen Wartezeit. Sie bekommen einen festen Termin und wir halten ihn.</p>
       </article>
 
       <article class="reason rv" data-i style="--i:3">
-        <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+        <svg class="ico loop-pin" viewBox="0 0 40 40" aria-hidden="true">
           <path d="M20 36 C12 26 6 21 6 15 A14 14 0 0 1 34 15 C34 21 28 26 20 36 Z"/>
           <circle class="accent" cx="20" cy="15" r="5"/>
         </svg>
@@ -124,9 +115,9 @@
       </article>
 
       <article class="reason rv" data-i style="--i:4">
-        <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+        <svg class="ico loop-spark" viewBox="0 0 40 40" aria-hidden="true">
           <path d="M6 8 h28 v18 h-17 l-8 7 v-7 h-3 Z"/>
-          <path class="accent" d="M20 13 l1.8 4.2 4.2 1.8 -4.2 1.8 -1.8 4.2 -1.8 -4.2 -4.2 -1.8 4.2 -1.8 Z"/>
+          <path class="accent" d="M20 12 l2 4.6 4.6 2 -4.6 2 -2 4.6 -2 -4.6 -4.6 -2 4.6 -2 Z"/>
         </svg>
         <h3>Gefunden werden — auch von KI</h3>
         <p>Ihre Seite ist für Google optimiert und so gebaut, dass ChatGPT und Co. sie als Antwort ausspielen.</p>
@@ -135,13 +126,11 @@
   </div>
 </section>
 
-<div class="divider rv"></div>
-
-<!-- ===== ABLAUF ===== -->
-<section class="sec" id="ablauf">
+<!-- ===== ABLAUF mit Higgsfield-Videos ===== -->
+<section class="sec sec-tint" id="ablauf">
   <div class="wrap">
     <p class="eyebrow rv">So läuft es</p>
-    <h2 class="rv" data-i style="--i:1">Drei Schritte. Keine Überraschungen.</h2>
+    <h2 data-split>Drei Schritte. Keine Überraschungen.</h2>
 
     <div class="steps">
       <article class="step rv">
@@ -150,8 +139,11 @@
           <h3>Kurzes Gespräch</h3>
           <p>15 Minuten am Telefon oder bei Ihnen vor Ort. Wir hören zu, was Ihr Betrieb braucht — mehr nicht. Danach wissen Sie, was Sie bekommen und was es kostet.</p>
         </div>
-        <div class="step-art" data-parallax="46" data-zoom="0.06">
-          <img src="assets/schritt-1.svg" alt="" width="2048" height="1509" loading="lazy">
+        <div class="step-art" data-parallax="34">
+          <video data-auto autoplay muted loop playsinline preload="metadata"
+                 poster="assets/schritt-1-poster.webp" width="1116" height="824">
+            <source src="assets/schritt-1.mp4" type="video/mp4">
+          </video>
         </div>
       </article>
 
@@ -161,8 +153,11 @@
           <h3>Wir bauen sie fertig</h3>
           <p>Sie müssen nichts liefern und nichts vorbereiten. Texte, Bilder, Technik — das übernehmen wir. Auf unser Risiko.</p>
         </div>
-        <div class="step-art" data-parallax="46" data-zoom="0.06">
-          <img src="assets/schritt-2.svg" alt="" width="2048" height="1509" loading="lazy">
+        <div class="step-art" data-parallax="34">
+          <video data-auto autoplay muted loop playsinline preload="metadata"
+                 poster="assets/schritt-2-poster.webp" width="1116" height="824">
+            <source src="assets/schritt-2.mp4" type="video/mp4">
+          </video>
         </div>
       </article>
 
@@ -172,45 +167,38 @@
           <h3>Sie entscheiden</h3>
           <p>Gefällt sie Ihnen, geht sie online und Sie zahlen. Gefällt sie Ihnen nicht, war es unsere Zeit, nicht Ihr Geld.</p>
         </div>
-        <div class="step-art" data-parallax="46" data-zoom="0.06">
-          <img src="assets/schritt-3.svg" alt="" width="2048" height="1509" loading="lazy">
+        <div class="step-art" data-parallax="34">
+          <video data-auto autoplay muted loop playsinline preload="metadata"
+                 poster="assets/schritt-3-poster.webp" width="1116" height="824">
+            <source src="assets/schritt-3.mp4" type="video/mp4">
+          </video>
         </div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ===== ARBEITEN ===== -->
-<section class="sec sec-tint" id="arbeiten">
+<!-- ===== ARBEITEN (Teaser mit echten Screenshots) ===== -->
+<section class="sec" id="arbeiten">
   <div class="wrap">
     <p class="eyebrow rv">Unsere Arbeiten</p>
-    <h2 class="rv" data-i style="--i:1">Echte Kunden. Echte Seiten.</h2>
-    <p class="lede rv" data-i style="--i:2">Keine Mockups — die Adressen können Sie sofort aufrufen.</p>
+    <h2 data-split>Echte Kunden. Echte Seiten. Prüfen Sie selbst.</h2>
 
-    <div class="works">
-      <article class="work rv" data-i style="--i:1">
-        <div class="browser">
-          <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">juwelier-benjamin-wiesbaden.de</span></div>
-          <div class="shot"><strong>Juwelier Benjamin</strong><span>Screenshot folgt</span></div>
-        </div>
-        <div class="work-meta"><h3>Juwelier Benjamin</h3><em>Wiesbaden · Schmuck &amp; Uhren</em></div>
-        <a class="work-link" href="https://juwelier-benjamin-wiesbaden.de" target="_blank" rel="noopener">
-          Seite ansehen
+    <div class="works-teaser">
+      <a class="wt rv" data-i style="--i:1" href="https://juwelier-benjamin-wiesbaden.de" target="_blank" rel="noopener">
+        <img src="assets/proj-benjamin.webp" width="1400" height="735" alt="Startseite der Website von Juwelier Benjamin" loading="lazy">
+        <span class="wt-cap">
+          <span><h3>Juwelier Benjamin</h3><em>Wiesbaden · Schmuck &amp; Uhren</em></span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H3v18h18v-7h-2v5H5V5z"/></svg>
-        </a>
-      </article>
-
-      <article class="work rv" data-i style="--i:2">
-        <div class="browser">
-          <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">URL folgt</span></div>
-          <div class="shot"><strong>Häusler-Mehlhorn</strong><span>Screenshot folgt</span></div>
-        </div>
-        <div class="work-meta"><h3>Laserzentrum Häusler-Mehlhorn</h3><em>Chemnitz · Hautmedizin</em></div>
-        <a class="work-link" href="projekte.html">
-          Zum Projekt
+        </span>
+      </a>
+      <a class="wt rv" data-i style="--i:2" href="projekte.html">
+        <img src="assets/proj-mehlhorn.webp" width="1600" height="687" alt="Behandlungsfoto aus dem Laserzentrum Häusler-Mehlhorn" loading="lazy">
+        <span class="wt-cap">
+          <span><h3>Laserzentrum Häusler-Mehlhorn</h3><em>Chemnitz · Hautmedizin</em></span>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg>
-        </a>
-      </article>
+        </span>
+      </a>
     </div>
 
     <p class="rv" style="margin-top:2.4rem">
@@ -219,78 +207,72 @@
   </div>
 </section>
 
-<!-- ===== BEWERTUNGEN ===== -->
-<section class="sec" id="stimmen">
+<!-- ===== BEWERTUNGEN: dunkles Schaustueck ===== -->
+<section class="sec reviews" id="stimmen">
   <div class="wrap">
-    <p class="eyebrow rv">Was Kunden sagen</p>
-    <h2 class="rv" data-i style="--i:1">Wir können viel erzählen.<br>Hören Sie lieber die anderen.</h2>
+    <p class="eyebrow rv">Google-Bewertungen</p>
+    <h2 data-split>Wir können viel erzählen. Hören Sie lieber die anderen.</h2>
 
-    <div class="ratingbar rv" data-i style="--i:2">
-      <span class="big">5,0</span>
-      <span class="stars" aria-hidden="true">★★★★★</span>
-      <small>aus 5 Google-Bewertungen</small>
+    <div class="score rv">
+      <span class="score-num">5,0</span>
+      <span class="score-meta">
+        <span class="score-stars" aria-label="5 von 5 Sternen">★★★★★<span class="fill" aria-hidden="true">★★★★★</span></span>
+        <small>aus 5 Bewertungen auf Google</small>
+      </span>
     </div>
 
-    <div class="quotes">
-      <figure class="quote feature rv" data-i style="--i:1">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <blockquote>
-          „Fantastisches Team und ein absolut überzeugendes Ergebnis — wir haben unsere
-          Firmenwebsite neu gestalten lassen. Die Jungs sind für Rücksprachen jederzeit
-          über WhatsApp erreichbar. Schon der erste Entwurf hat unsere Vorstellung perfekt
-          getroffen; wir sind rundum zufrieden. 100 % Empfehlung!"
-        </blockquote>
-        <figcaption>Paul Mehlhorn<em>Google-Bewertung</em></figcaption>
-      </figure>
-
-      <figure class="quote rv" data-i style="--i:2">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <blockquote>
-          „Ich bin sehr zufrieden mit der Arbeit von FlowState. Das Team hat meine Ideen
-          professionell umgesetzt und eine moderne, ansprechende Website sowie ein passendes
-          Logo gestaltet. Änderungswünsche wurden schnell umgesetzt, das Ergebnis wirkt
-          professionell und durchdacht."
-        </blockquote>
-        <figcaption>Familie Schindlmeier<em>Google-Bewertung</em></figcaption>
-      </figure>
-
-      <figure class="quote rv" data-i style="--i:3">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <blockquote>
-          „Ich brauchte ein Logo für meine Firma und hatte selbst nur eine grobe Vorstellung.
-          FlowState hat mir mehrere Entwürfe gezeigt und sie geduldig mit mir verfeinert, bis
-          es passte. Schnelles Feedback, faire Abwicklung, tolles Ergebnis."
-        </blockquote>
-        <figcaption>Aderkan<em>Google-Bewertung</em></figcaption>
-      </figure>
-
-      <figure class="quote rv" data-i style="--i:4">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <blockquote>„Unglaublich nette Jungs, extrem ambitioniert. Klare Empfehlung."</blockquote>
-        <figcaption>Meisam Hoseini<em>Google-Bewertung</em></figcaption>
-      </figure>
-
-      <figure class="quote rv" data-i style="--i:5">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <blockquote>„Sehr sehr freundliche Jungs und Top Leistung!"</blockquote>
-        <figcaption>Jazan Aboalseoud<em>Google-Bewertung</em></figcaption>
-      </figure>
+    <div class="qwrap">
+      <div class="qtrack" tabindex="0" aria-label="Kundenstimmen, horizontal scrollbar">
+        <figure class="quote big">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Fantastisches Team und ein absolut überzeugendes Ergebnis — wir haben unsere Firmenwebsite neu gestalten lassen. Die Jungs sind für Rücksprachen jederzeit über WhatsApp erreichbar. Schon der erste Entwurf hat unsere Vorstellung perfekt getroffen. 100 % Empfehlung!</blockquote>
+          <figcaption>Paul Mehlhorn<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Das Team hat meine Ideen professionell umgesetzt und eine moderne, ansprechende Website sowie ein passendes Logo gestaltet. Änderungswünsche wurden schnell umgesetzt, das Ergebnis wirkt professionell und durchdacht.</blockquote>
+          <figcaption>Familie Schindlmeier<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Ich hatte selbst nur eine grobe Vorstellung. FlowState hat mir mehrere Entwürfe gezeigt und sie geduldig mit mir verfeinert, bis es passte. Schnelles Feedback, faire Abwicklung, tolles Ergebnis.</blockquote>
+          <figcaption>Aderkan<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Unglaublich nette Jungs, extrem ambitioniert. Klare Empfehlung.</blockquote>
+          <figcaption>Meisam Hoseini<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Sehr sehr freundliche Jungs und Top Leistung!</blockquote>
+          <figcaption>Jazan Aboalseoud<em>Google-Bewertung</em></figcaption>
+        </figure>
+      </div>
+      <div class="qnav">
+        <button class="qbtn" type="button" data-q-prev aria-label="Vorherige Bewertung">
+          <svg viewBox="0 0 24 24"><path d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/></svg>
+        </button>
+        <button class="qbtn" type="button" data-q-next aria-label="Nächste Bewertung">
+          <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ===== UNTERSCHIED ===== -->
-<section class="sec dark" id="unterschied">
+<section class="sec" id="unterschied">
   <div class="wrap">
     <p class="eyebrow rv">Der Unterschied</p>
-    <h2 class="rv" data-i style="--i:1">Angebote klingen ähnlich.<br>Entscheidend ist, was Sie bekommen.</h2>
+    <h2 data-split>Angebote klingen ähnlich. Entscheidend ist, was Sie bekommen.</h2>
 
     <div class="compare">
       <div class="col col-them rv" data-i style="--i:1">
         <h3>Übliche Agentur</h3>
         <ul>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg> Anzahlung, bevor Sie etwas gesehen haben</li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg> Sechs bis zwölf Wochen bis zur fertigen Seite</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg> Sechs bis zwölf Wochen Wartezeit</li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg> Fertiges Theme, das tausend andere auch haben</li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg> Suchmaschinen-Optimierung kostet extra</li>
           <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg> Jede Änderung wird nachberechnet</li>
@@ -311,10 +293,10 @@
 </section>
 
 <!-- ===== KI & GEO ===== -->
-<section class="sec dark" id="ki" style="padding-top:0">
+<section class="sec sec-tint" id="ki">
   <div class="wrap">
     <p class="eyebrow rv">KI &amp; Sichtbarkeit</p>
-    <h2 class="rv" data-i style="--i:1">Ihre Kunden fragen heute die KI.<br>Wir sorgen dafür, dass sie Sie nennt.</h2>
+    <h2 data-split>Ihre Kunden fragen heute die KI. Wir sorgen dafür, dass sie Sie nennt.</h2>
 
     <div class="geo">
       <article class="geo-card rv" data-i style="--i:1">
@@ -337,24 +319,24 @@
 </section>
 
 <!-- ===== TEAM ===== -->
-<section class="sec sec-tint" id="team">
+<section class="sec" id="team">
   <div class="wrap">
     <p class="eyebrow rv">Wer wir sind</p>
-    <h2 class="rv" data-i style="--i:1">Drei Leute. Keine Hotline.</h2>
+    <h2 data-split>Zwei Gründer. Keine Hotline.</h2>
     <div class="team">
       <article class="person rv" data-i style="--i:1"><div class="avatar">BT</div><h3>Benet Tilinski</h3><p>Gründer &amp; Inhaber</p></article>
       <article class="person rv" data-i style="--i:2"><div class="avatar">AP</div><h3>Adrian Pötzinger</h3><p>Gründer &amp; Inhaber</p></article>
-      <article class="person rv" data-i style="--i:3"><div class="avatar">DB</div><h3>Damian Braun</h3><p>Lead Developer</p></article>
     </div>
+    <p class="team-note rv">Im Maschinenraum: <b>Damian Braun</b>, Entwicklung.</p>
   </div>
 </section>
 
 <!-- ===== FAQ ===== -->
-<section class="sec" id="faq">
+<section class="sec sec-tint" id="faq">
   <div class="wrap">
     <p class="eyebrow rv">Fragen</p>
-    <h2 class="rv" data-i style="--i:1">Das werden wir am häufigsten gefragt.</h2>
-    <div class="faq rv" data-i style="--i:2">
+    <h2 data-split>Das werden wir am häufigsten gefragt.</h2>
+    <div class="faq rv">
       <details>
         <summary>Was kostet eine Website bei Ihnen wirklich?</summary>
         <div class="answer">Eine komplette Firmenwebsite kostet einmalig 990 € statt regulär 1.890 €. Darin ist alles enthalten: Design, Texte, Bildbearbeitung, Einrichtung, Google-Optimierung und die rechtlichen Seiten. Keine Stundensätze, keine Nachträge.</div>
@@ -381,24 +363,24 @@
       </details>
       <details>
         <summary>Warum sollte ich Ihnen glauben, dass das funktioniert?</summary>
-        <div class="answer">Weil Sie nichts riskieren. Sie können unsere bestehenden Kundenseiten aufrufen und sich selbst überzeugen — und Sie zahlen erst, wenn Ihre eigene Seite fertig vor Ihnen liegt.</div>
+        <div class="answer">Weil Sie nichts riskieren. Sie können unsere Kundenseiten aufrufen und sich selbst überzeugen — und Sie zahlen erst, wenn Ihre eigene Seite fertig vor Ihnen liegt.</div>
       </details>
     </div>
   </div>
 </section>
 
 <!-- ===== FINALE ===== -->
-<section class="sec dark finale">
+<section class="sec finale">
   <div class="wrap">
     <p class="eyebrow rv">Loslegen</p>
-    <h2 class="rv" data-i style="--i:1">Sie riskieren ein Telefonat.<br>Mehr nicht.</h2>
-    <p class="lede rv" data-i style="--i:2">Rufen Sie an oder schreiben Sie uns. Wir schauen uns Ihren Betrieb an und sagen ehrlich, ob und was wir für Sie tun können.</p>
-    <a class="bigtel rv" data-i style="--i:3" href="tel:+491781868874">
+    <h2 data-split>Sie riskieren ein Telefonat. Mehr nicht.</h2>
+    <p class="lede rv">Rufen Sie an oder schreiben Sie uns. Wir schauen uns Ihren Betrieb an und sagen ehrlich, ob und was wir für Sie tun können.</p>
+    <a class="bigtel rv" href="tel:+491781868874">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
       0178 1868874
     </a>
-    <div class="finale-cta rv" data-i style="--i:4">
-      <a class="btn btn-onink" href="kontakt.html">Zum Kontaktformular</a>
+    <div class="finale-cta rv">
+      <a class="btn btn-light" href="kontakt.html">Zum Kontaktformular</a>
     </div>
   </div>
 </section>
@@ -407,9 +389,9 @@
 
 <footer>
   <div class="wrap">
-    <div class="flowline" style="margin-bottom:1.8rem"><i></i><b></b><i></i></div>
+    <div class="flowline" style="margin-bottom:1.9rem"><i></i><b></b><i></i></div>
     <div class="foot">
-      <a class="logo" href="index.html" style="color:#F3F6FB">FlowState<span></span></a>
+      <a class="logo" href="index.html" style="color:#fff">FlowState<span></span></a>
       <nav>
         <a href="projekte.html">Projekte</a>
         <a href="kontakt.html">Kontakt</a>
@@ -426,31 +408,34 @@
   </div>
 </footer>
 
-<!-- ===== ANGEBOT ALS POPUP ===== -->
+<!-- ===== ANGEBOT: Popup mit Higgsfield-Art ===== -->
 <dialog class="modal" id="angebot" aria-labelledby="angebot-titel">
   <div class="modal-card">
-    <span class="modal-flag">Aktion</span>
-    <button class="modal-x" type="button" data-close-angebot aria-label="Schließen">&times;</button>
-    <h3 id="angebot-titel">Komplette Firmenwebsite</h3>
-    <div class="price">
-      <span class="now">990&nbsp;€</span>
-      <span class="was">1.890&nbsp;€</span>
+    <div class="modal-art">
+      <img src="assets/angebot-art.webp" width="880" height="495" alt="">
+      <span class="modal-flag">Aktion</span>
+      <button class="modal-x" type="button" data-close-angebot aria-label="Schließen">&times;</button>
     </div>
-    <p class="price-sub">Einmalig, inkl. MwSt. · Hosting im ersten Jahr enthalten</p>
-    <ul>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Individuelles Design — kein Baukasten</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Für das Handy gebaut</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Schnelle Ladezeiten, auch im Mobilfunk</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Google-Optimierung inklusive</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Sichtbar in KI-Antworten (GEO)</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Texte und Bildbearbeitung übernehmen wir</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Domain und Hosting eingerichtet</li>
-      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Impressum und Datenschutz rechtssicher</li>
-    </ul>
-    <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
+    <div class="modal-body">
+      <h3 id="angebot-titel">Komplette Firmenwebsite</h3>
+      <div class="price">
+        <span class="now">990&nbsp;€</span>
+        <span class="was">1.890&nbsp;€</span>
+      </div>
+      <p class="price-sub">Einmalig, inkl. MwSt. · Hosting im ersten Jahr enthalten · Platzhalter-Preise</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Individuelles Design — kein Baukasten</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Für das Handy gebaut</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Google-Optimierung inklusive</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Sichtbar in KI-Antworten (GEO)</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Texte und Bilder übernehmen wir</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Domain, Hosting, Impressum, Datenschutz</li>
+      </ul>
+      <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
+    </div>
   </div>
 </dialog>
 
-<script src="assets/app.js"></script>
+<script src="assets/app.js?v=6"></script>
 </body>
 </html>

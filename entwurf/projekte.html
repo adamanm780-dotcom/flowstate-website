@@ -8,12 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=6">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
 <div class="progress" aria-hidden="true"></div>
-<div class="draftbar">ENTWURF — Screenshots sind Platzhalter</div>
+<div class="draftpill">Entwurf · Mehlhorn-Link folgt</div>
 
 <header class="nav">
   <div class="wrap nav-in">
@@ -37,97 +37,105 @@
 <section class="pagehead">
   <div class="wrap">
     <p class="eyebrow rv">Projekte</p>
-    <h1 class="rv" data-i style="--i:1">Nachprüfbare Arbeit.<br>Keine Musterseiten.</h1>
-    <p class="lede rv" data-i style="--i:2">
+    <h1 data-split>Nachprüfbare Arbeit. Keine Musterseiten.</h1>
+    <p class="lede rv">
       Jede Adresse hier können Sie sofort im Browser aufrufen. Das ist der Unterschied
       zwischen einem Portfolio und einem Versprechen.
     </p>
   </div>
 </section>
 
-<section class="sec" style="padding-top:0">
+<section class="sec" style="padding-top:1rem">
   <div class="wrap-wide">
     <div class="projects">
 
-      <a class="pj rv" href="https://juwelier-benjamin-wiesbaden.de" target="_blank" rel="noopener">
-        <div class="pj-stage">
-          <div class="pj-bar"><i></i><i></i><i></i><span>juwelier-benjamin-wiesbaden.de</span></div>
-          <div class="pj-shot" data-parallax="26" data-zoom="0.05">
-            <strong>Juwelier Benjamin</strong>
-            <span>Screenshot folgt</span>
-          </div>
-        </div>
-        <div class="pj-info">
-          <div>
-            <span class="pj-no">01 — Einzelhandel</span>
+      <!-- 01 · Juwelier Benjamin: dunkle Gold-Buehne -->
+      <a class="pj pj-benjamin rv" href="https://juwelier-benjamin-wiesbaden.de" target="_blank" rel="noopener" data-tilt>
+        <span class="pj-ghost" aria-hidden="true">01</span>
+        <div class="pj-inner">
+          <div class="pj-info">
+            <span class="pj-no">01 · Einzelhandel · Wiesbaden</span>
             <h2>Juwelier Benjamin</h2>
-            <p>Traditionsgeschäft für Schmuck und Uhren in der Wiesbadener Innenstadt.
-               Website mit angebundenem Shop, laufender Produktpflege und Betreuung.</p>
+            <p class="pj-desc">
+              Traditionsgeschäft für Schmuck und Uhren in der Wiesbadener Innenstadt.
+              Dunkle Luxus-Inszenierung, angebundener Shop, laufende Produktpflege.
+            </p>
             <div class="pj-tags">
               <span class="tag">Website</span>
-              <span class="tag">Shop-Anbindung</span>
+              <span class="tag">Shop</span>
               <span class="tag">Produktfotos</span>
               <span class="tag">Betreuung</span>
             </div>
+            <span class="pj-go">
+              juwelier-benjamin-wiesbaden.de
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H3v18h18v-7h-2v5H5V5z"/></svg>
+            </span>
           </div>
-          <span class="pj-go">
-            Seite öffnen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H3v18h18v-7h-2v5H5V5z"/></svg>
-          </span>
-        </div>
-      </a>
-
-      <a class="pj rv" href="kontakt.html">
-        <div class="pj-stage">
-          <div class="pj-bar"><i></i><i></i><i></i><span>URL folgt</span></div>
-          <div class="pj-shot" data-parallax="26" data-zoom="0.05">
-            <strong>Laserzentrum Häusler-Mehlhorn</strong>
-            <span>Screenshot folgt</span>
-          </div>
-        </div>
-        <div class="pj-info">
-          <div>
-            <span class="pj-no">02 — Medizin</span>
-            <h2>Laserzentrum Häusler-Mehlhorn</h2>
-            <p>Dermatologisches Laserzentrum in Chemnitz. Komplettes Redesign der
-               Firmenwebsite — der erste Entwurf saß bereits.</p>
-            <div class="pj-tags">
-              <span class="tag">Redesign</span>
-              <span class="tag">Terminanfrage</span>
-              <span class="tag">Leistungen</span>
-              <span class="tag">SEO</span>
+          <div class="pj-media">
+            <div class="pj-shotcard" data-parallax="24">
+              <div class="pj-bar"><i></i><i></i><i></i><span>juwelier-benjamin-wiesbaden.de</span></div>
+              <img src="assets/proj-benjamin.webp" width="1400" height="735" alt="Startseite von Juwelier Benjamin: Ein Hauch von Luxus mit Tradition" loading="lazy">
             </div>
           </div>
-          <span class="pj-go">
-            Seite öffnen
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H3v18h18v-7h-2v5H5V5z"/></svg>
-          </span>
         </div>
       </a>
 
-      <a class="pj rv" href="kontakt.html">
-        <div class="pj-stage">
-          <div class="pj-bar"><i></i><i></i><i></i><span>ihre-domain.de</span></div>
-          <div class="pj-shot" data-parallax="26" data-zoom="0.05">
-            <strong>Hier könnte Ihre Seite stehen</strong>
-            <span>In sieben Tagen</span>
+      <!-- 02 · Haeusler-Mehlhorn: helle Klinik-Buehne -->
+      <div class="pj pj-mehlhorn pj-light rv" data-tilt>
+        <span class="pj-ghost" aria-hidden="true">02</span>
+        <div class="pj-inner">
+          <div class="pj-info">
+            <span class="pj-no">02 · Hautmedizin · Chemnitz</span>
+            <h2 class="pj-title">Laserzentrum Häusler-Mehlhorn</h2>
+            <p class="pj-desc">
+              Dermatologisches Laserzentrum. Komplettes Redesign der Firmenwebsite —
+              der erste Entwurf traf die Vorstellung des Kunden, siehe seine
+              Google-Bewertung.
+            </p>
+            <div class="pj-tags">
+              <span class="tag">Redesign</span>
+              <span class="tag">Behandlungen</span>
+              <span class="tag">Terminanfrage</span>
+              <span class="tag">SEO</span>
+            </div>
+            <span class="pj-go">Live-Link folgt in Kürze</span>
+          </div>
+          <div class="pj-media">
+            <div class="pj-shotcard" data-parallax="24">
+              <div class="pj-bar"><i></i><i></i><i></i><span>Neue Website · Link folgt</span></div>
+              <img src="assets/proj-mehlhorn.webp" width="1600" height="687" alt="Laserbehandlung im Dermatologischen Laserzentrum Häusler-Mehlhorn" loading="lazy">
+            </div>
           </div>
         </div>
-        <div class="pj-info">
-          <div>
-            <span class="pj-no">03 — Ihr Betrieb</span>
+      </div>
+
+      <!-- 03 · CTA-Buehne -->
+      <a class="pj pj-cta rv" href="kontakt.html" data-tilt>
+        <span class="pj-ghost" aria-hidden="true">03</span>
+        <div class="pj-inner">
+          <div class="pj-info">
+            <span class="pj-no">03 · Ihr Betrieb</span>
             <h2>Der nächste Platz ist frei</h2>
-            <p>Wir bauen Ihre Seite fertig, bevor Sie zahlen. Sie sehen das Ergebnis und
-               entscheiden danach — nicht davor.</p>
+            <p class="pj-desc">
+              Wir bauen Ihre Seite fertig, bevor Sie zahlen. Sie sehen das Ergebnis
+              und entscheiden danach — nicht davor.
+            </p>
             <div class="pj-tags">
               <span class="tag">Kostenlos ansehen</span>
               <span class="tag">Kein Risiko</span>
+              <span class="tag">In 7 Tagen</span>
+            </div>
+            <span class="pj-go">
+              Gespräch vereinbaren
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg>
+            </span>
+          </div>
+          <div class="pj-media">
+            <div class="pj-shotcard" data-parallax="24">
+              <div class="pj-bar"><i></i><i></i><i></i><span>ihre-domain.de</span></div>
+              <img src="assets/schritt-3-poster.webp" width="760" height="561" alt="" loading="lazy">
             </div>
           </div>
-          <span class="pj-go">
-            Gespräch vereinbaren
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg>
-          </span>
         </div>
       </a>
 
@@ -135,16 +143,16 @@
   </div>
 </section>
 
-<section class="sec dark finale">
+<section class="sec finale">
   <div class="wrap">
     <p class="eyebrow rv">Loslegen</p>
-    <h2 class="rv" data-i style="--i:1">Wir bauen Ihre Seite,<br>bevor Sie sich entscheiden müssen.</h2>
-    <a class="bigtel rv" data-i style="--i:2" href="tel:+491781868874">
+    <h2 data-split>Wir bauen Ihre Seite, bevor Sie sich entscheiden müssen.</h2>
+    <a class="bigtel rv" href="tel:+491781868874">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
       0178 1868874
     </a>
-    <div class="finale-cta rv" data-i style="--i:3">
-      <a class="btn btn-onink" href="kontakt.html">Zum Kontaktformular</a>
+    <div class="finale-cta rv">
+      <a class="btn btn-light" href="kontakt.html">Zum Kontaktformular</a>
     </div>
   </div>
 </section>
@@ -153,9 +161,9 @@
 
 <footer>
   <div class="wrap">
-    <div class="flowline" style="margin-bottom:1.8rem"><i></i><b></b><i></i></div>
+    <div class="flowline" style="margin-bottom:1.9rem"><i></i><b></b><i></i></div>
     <div class="foot">
-      <a class="logo" href="index.html" style="color:#F3F6FB">FlowState<span></span></a>
+      <a class="logo" href="index.html" style="color:#fff">FlowState<span></span></a>
       <nav>
         <a href="projekte.html">Projekte</a>
         <a href="kontakt.html">Kontakt</a>
@@ -167,6 +175,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js"></script>
+<script src="assets/app.js?v=6"></script>
 </body>
 </html>
