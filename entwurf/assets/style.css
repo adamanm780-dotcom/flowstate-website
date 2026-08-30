@@ -268,13 +268,13 @@ h1 .tw-line{display:block; color:var(--blue)}
   .step{grid-template-columns:1fr 1.08fr; gap:clamp(2rem,5vw,4.5rem)}
   .step:nth-child(even) .step-art{order:-1}
 }
-.step-art{position:relative; border-radius:12px; overflow:hidden;
-  max-width:560px; justify-self:center; width:100%;
-  box-shadow:0 34px 70px -34px rgba(11,27,51,.5);
+.step-art{position:relative; max-width:560px; justify-self:center; width:100%}
+@media(min-width:860px){.step-art{justify-self:stretch; max-width:none}}
+.step-art video,.step-art img{
+  width:100%; height:auto; aspect-ratio:1116/824; object-fit:cover;
+  mix-blend-mode:multiply;
   transform:translate3d(0,var(--py,0px),0); will-change:transform;
 }
-@media(min-width:860px){.step-art{justify-self:stretch; max-width:none}}
-.step-art video,.step-art img{width:100%; height:auto; aspect-ratio:1116/824; object-fit:cover; background:var(--tint)}
 .step-mark{display:flex; align-items:center; gap:.95rem; margin-bottom:1.05rem}
 .step-no{
   width:50px; height:50px; border-radius:50%; background:var(--ink); color:#fff;
@@ -601,7 +601,7 @@ footer{background:var(--ink); color:#93A5C4; padding-block:2.6rem; border-top:1p
   .js .rv{opacity:1; transform:none}
   .js [data-split] .wi{transform:none}
   .ico *{stroke-dasharray:none !important; stroke-dashoffset:0 !important}
-  .kurhaus-frame,.kurhaus-frame img,.step-art,.pj-shotcard{transform:none !important}
+  .kurhaus-frame,.kurhaus-frame img,.step-art video,.step-art img,.pj-shotcard{transform:none !important}
   .flowline i{transform:scaleX(1)} .flowline b{opacity:1}
   .cur,.curR{display:none !important}
   @view-transition{ navigation: none; }
