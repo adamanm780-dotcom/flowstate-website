@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=12">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
@@ -16,7 +16,11 @@
 
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="index.html">FlowState<span></span></a>
+    <a class="logo" href="index.html" aria-label="FlowState — Start">
+      <svg class="logomark" viewBox="0 0 40 28" aria-hidden="true">
+        <path class="lm-a" d="M2 19 C9 7 16 7 22 14 C27 20 33 20 38 10"/>
+        <path class="lm-b" d="M10 24 C16 16 22 16 28 21"/>
+      </svg><b>FlowState</b></a>
     <ul class="nav-links">
       <li><a href="index.html#ablauf">Ablauf</a></li>
       <li><a href="projekte.html" aria-current="page">Projekte</a></li>
@@ -49,7 +53,7 @@
     <div class="projects">
 
       <!-- 01 · Juwelier Benjamin: dunkle Gold-Buehne -->
-      <a class="pj pj-benjamin rv" href="https://juwelier-benjamin-wiesbaden.de" target="_blank" rel="noopener" data-tilt>
+      <a class="pj pj-benjamin rv" href="ansehen.html?site=benjamin" data-tilt>
         <span class="pj-ghost" aria-hidden="true">01</span>
         <div class="pj-inner">
           <div class="pj-info">
@@ -80,7 +84,7 @@
       </a>
 
       <!-- 02 · Haeusler-Mehlhorn: helle Klinik-Buehne -->
-      <div class="pj pj-mehlhorn pj-light rv" data-tilt>
+      <a class="pj pj-mehlhorn pj-light rv" href="ansehen.html?site=mehlhorn" data-tilt>
         <span class="pj-ghost" aria-hidden="true">02</span>
         <div class="pj-inner">
           <div class="pj-info">
@@ -97,7 +101,7 @@
               <span class="tag">Terminanfrage</span>
               <span class="tag">SEO</span>
             </div>
-            <span class="pj-go">Live-Link folgt in Kürze</span>
+            <span class="pj-go">Vorschau ansehen</span>
           </div>
           <div class="pj-media">
             <div class="pj-shotcard" data-parallax="24">
@@ -106,7 +110,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </a>
 
       <!-- 03 · CTA-Buehne -->
       <a class="pj pj-cta rv" href="kontakt.html" data-tilt>
@@ -162,7 +166,11 @@
   <div class="wrap">
     <div class="flowline" style="margin-bottom:1.9rem"><i></i><b></b><i></i></div>
     <div class="foot">
-      <a class="logo" href="index.html" style="color:#fff">FlowState<span></span></a>
+      <a class="logo" href="index.html" style="color:#fff" aria-label="FlowState — Start">
+        <svg class="logomark" viewBox="0 0 40 28" aria-hidden="true">
+          <path class="lm-a" style="stroke:#5FCFC5" d="M2 19 C9 7 16 7 22 14 C27 20 33 20 38 10"/>
+          <path class="lm-b" d="M10 24 C16 16 22 16 28 21"/>
+        </svg><b>FlowState</b></a>
       <nav>
         <a href="projekte.html">Projekte</a>
         <a href="kontakt.html">Kontakt</a>
@@ -174,6 +182,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=11"></script>
+<script src="assets/app.js?v=12"></script>
 </body>
 </html>

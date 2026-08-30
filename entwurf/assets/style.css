@@ -771,3 +771,83 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
   .flowline i{transform:scaleX(1)} .flowline b{opacity:1}
   @view-transition{ navigation: none; }
 }
+
+/* --- Logo-Marke (Flow-Welle) -------------------------------- */
+.logomark{width:36px; height:25px; flex:none; overflow:visible}
+.logomark path{fill:none; stroke-linecap:round; stroke-linejoin:round}
+.logomark .lm-a{stroke:var(--blue); stroke-width:3.4}
+.logomark .lm-b{stroke:var(--accent); stroke-width:2.3}
+.logo:hover .lm-a{animation:lmFlow .9s var(--ease)}
+.logo:hover .lm-b{animation:lmFlow .9s var(--ease) .08s}
+@keyframes lmFlow{35%{transform:translateX(4px)}70%{transform:translateX(-2px)}}
+.logo b{font-family:var(--f-display); font-weight:800; letter-spacing:-.02em}
+
+/* --- Wiesbaden-Band (Kurhaus bei Nacht) --------------------- */
+.wiesbaden{
+  position:relative; min-height:min(72svh,620px); display:flex; align-items:center;
+  overflow:hidden; background:#0A1016; color:#F0F3F2;
+}
+.wiesbaden-bg{position:absolute; inset:0}
+.wiesbaden-bg img{
+  width:100%; height:120%; object-fit:cover; object-position:center 62%;
+  transform:translate3d(0,var(--py,0px),0); will-change:transform;
+}
+.wiesbaden-scrim{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(92deg, rgba(6,12,16,.86) 0%, rgba(6,12,16,.55) 46%, rgba(7,94,88,.18) 100%),
+    linear-gradient(to top, rgba(6,12,16,.55), rgba(6,12,16,0) 45%);
+}
+.wiesbaden-in{position:relative; z-index:2; padding-block:clamp(4rem,10vh,6rem)}
+.wiesbaden .eyebrow{color:#9FD8D2}
+.wiesbaden .eyebrow::before{background:var(--accent)}
+.wiesbaden h2{color:#fff; max-width:16ch}
+.wiesbaden .lede{color:#C9D4D2; margin-top:1.2rem; max-width:46ch}
+.wiesbaden .lede strong{color:#fff}
+.wiesbaden-credit{
+  position:absolute; right:1rem; bottom:.7rem; z-index:2;
+  font-size:.68rem; color:rgba(240,243,242,.5); letter-spacing:.04em;
+}
+
+/* --- Referenz-Viewer (Kundenseite + FlowState-Leiste) -------- */
+.viewer-body{overflow:hidden}
+.viewer{position:fixed; inset:0; display:flex; flex-direction:column; background:var(--bg-2)}
+.viewer-frame{flex:1; width:100%; border:0; background:#fff}
+.viewer-empty{
+  flex:1; display:grid; place-items:center; text-align:center; padding:2rem;
+  background:var(--bg-2);
+}
+.viewer-empty h1{margin-block:.7rem 1rem}
+.viewer-bar{
+  display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  padding:.7rem clamp(.9rem,3vw,1.6rem);
+  background:var(--ink); color:#EAF1F0;
+  box-shadow:0 -14px 34px -18px rgba(10,16,22,.6);
+}
+.viewer-brand{
+  display:flex; align-items:center; gap:.5rem; text-decoration:none; color:#fff;
+  font-size:1.15rem;
+}
+.viewer-brand .lm-a{stroke:#5FCFC5}
+.viewer-note{font-size:.98rem; color:#B9C6C4; margin-right:auto}
+.viewer-note strong{color:#fff}
+.viewer-actions{display:flex; align-items:center; gap:.9rem; flex-wrap:wrap}
+.viewer-actions .btn{padding:.62rem 1.15rem; font-size:.8rem}
+.viewer-ext{
+  color:#9FD8D2; text-decoration:none; font-family:var(--f-ui); font-weight:700; font-size:.85rem;
+}
+.viewer-ext:hover{color:#fff}
+.viewer-x{
+  width:38px; height:38px; border-radius:50%; display:grid; place-items:center;
+  color:#EAF1F0; text-decoration:none; font-size:1.5rem; line-height:1;
+  border:1px solid rgba(255,255,255,.25); transition:background .25s var(--ease), transform .3s var(--ease);
+}
+.viewer-x:hover{background:var(--accent); border-color:var(--accent); transform:rotate(90deg)}
+@media(max-width:760px){
+  .viewer-note{flex-basis:100%; order:3; margin:0; font-size:.88rem}
+  .viewer-bar{gap:.6rem}
+}
+
+@media (prefers-reduced-motion: reduce){
+  .wiesbaden-bg img{transform:none !important}
+}
