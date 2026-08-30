@@ -7,13 +7,12 @@
 <meta name="description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=9">
-<link rel="preload" as="image" href="assets/kurhaus-night.webp" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css?v=10">
+<link rel="preload" as="image" href="assets/hero-illu.webp" fetchpriority="high">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
-<div class="progress" aria-hidden="true"></div>
 <div class="draftpill">Entwurf · Preise sind Platzhalter</div>
 
 <header class="nav">
@@ -36,41 +35,41 @@
 
 <main id="main">
 
-<!-- ===== HERO: Kurhaus bei Nacht, Vollbild ===== -->
-<section class="hero-lux" id="top">
-  <picture class="hero-bg" aria-hidden="true">
-    <source media="(max-width:640px)" srcset="assets/kurhaus-night-sm.webp" type="image/webp">
-    <img src="assets/kurhaus-night.webp" width="2400" height="1603" alt=""
-         fetchpriority="high" data-parallax="30">
-  </picture>
-  <div class="hero-scrim" aria-hidden="true"></div>
+<!-- ===== HERO: SR-Split ===== -->
+<section class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <div class="trustline rv">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <small><a href="#stimmen">5,0 &middot; Google-Bewertungen</a></small>
+      </div>
 
-  <div class="wrap hero-lux-in">
-    <div class="trustline rv">
-      <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-      <small><a href="#stimmen">5,0 bei Google</a></small>
-      <span class="dotsep" aria-hidden="true"></span>
-      <small>Webagentur aus Wiesbaden</small>
+      <h1 class="rv" data-i style="--i:1">
+        Website erstellen lassen f&uuml;r
+        <span class="tw-line"><span class="tw" id="tw"
+          data-words="Ihren Betrieb|Handwerk|Zahnarztpraxen|Juweliere|Gastronomie|Friseure">Ihren Betrieb</span></span>
+      </h1>
+
+      <p class="lede rv" data-i style="--i:2">
+        Wir bauen Ihre Website komplett fertig.
+        <strong>Erst dann entscheiden Sie, ob Sie zahlen.</strong>
+      </p>
+
+      <p class="hero-price rv" data-i style="--i:3">
+        Komplette Firmenwebsite <b>990&nbsp;&euro;</b> <s>statt 1.890&nbsp;&euro;</s>
+      </p>
+
+      <div class="hero-cta rv" data-i style="--i:3">
+        <a class="btn btn-accent" href="tel:+491781868874">Jetzt anrufen</a>
+        <button class="btn btn-ghost" type="button" data-open-angebot>Mehr zum Angebot</button>
+      </div>
     </div>
 
-    <h1 class="rv" data-i style="--i:1">
-      Websites, die aussehen,<br>als h&auml;tten sie
-      <span class="tw-line"><span class="tw" id="tw"
-        data-words="das Zehnfache gekostet.|ein ganzes Studio hinter sich.|Jahre Vorsprung.">das Zehnfache gekostet.</span></span>
-    </h1>
-
-    <p class="lede rv" data-i style="--i:2">
-      Wir bauen Ihre Website komplett fertig.
-      <strong>Erst dann entscheiden Sie, ob Sie zahlen.</strong>
-    </p>
-
-    <div class="hero-cta rv" data-i style="--i:3">
-      <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
-      <button class="btn btn-ghost-light" type="button" data-open-angebot>Angebot ansehen</button>
+    <div class="hero-illu rv" data-i style="--i:2" data-parallax="26">
+      <img src="assets/hero-illu.webp" width="1100" height="1100"
+           alt="" fetchpriority="high">
     </div>
   </div>
-
-  <p class="hero-credit">Kurhaus Wiesbaden &middot; Foto: Holger Reinhardt, CC BY-SA 3.0</p>
 </section>
 
 <!-- ===== WARUM ===== -->
@@ -81,40 +80,53 @@
 
     <div class="reasons">
       <article class="reason rv" data-i style="--i:1">
-        <svg class="ico loop-check" viewBox="0 0 48 48" aria-hidden="true">
-          <path d="M24 4 L41 10 v13 c0 10-7 16-17 20 C14 39 7 33 7 23 V10 Z"/>
-          <path d="M24 9.5 L36.5 14 v9.5 c0 7-5 11.6-12.5 14.8"/>
-          <path class="accent" d="M16 24 l6 6 11-12"/>
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <circle class="i-ring" cx="24" cy="24" r="21"/>
+          <path d="M24 7 L38 12 v10.5 c0 8.5-6 13.6-14 17 C16 36.1 10 31 10 22.5 V12 Z"/>
+          <circle class="fillt" cx="24" cy="22.5" r="8.5"/>
+          <path class="accent i-check" d="M19.5 22.5 l3.5 3.5 6.5 -7"/>
         </svg>
         <h3>Erst sehen, dann zahlen</h3>
         <p>Wir bauen Ihre Website fertig, bevor Geld fließt. Gefällt sie Ihnen nicht, kostet sie nichts.</p>
       </article>
 
       <article class="reason rv" data-i style="--i:2">
-        <svg class="ico loop-clock" viewBox="0 0 48 48" aria-hidden="true">
-          <circle cx="24" cy="26" r="17"/>
-          <path d="M18 4.5 h12 M24 4.5 v4 M24 12.5 v2.5 M24 37.5 v2.5 M10.5 26 h2.5 M35 26 h2.5"/>
-          <path class="hand accent" d="M24 26 v-10.5"/>
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <circle class="fillt" cx="24" cy="27" r="16"/>
+          <circle cx="24" cy="27" r="16"/>
+          <path class="soft" d="M24 13.5 v3 M24 37.5 v3 M10.5 27 h3 M34.5 27 h3"/>
+          <path class="i-bell" d="M31.5 6.5 l6 4.5 M35.5 5 l4 7"/>
+          <path class="i-min" d="M24 27 v-9.5" style="transform-origin:24px 27px"/>
+          <path class="accent i-sec" d="M24 27 l6.5 4" style="transform-origin:24px 27px"/>
+          <circle class="dot" cx="24" cy="27" r="1.8"/>
         </svg>
         <h3>In 7 Tagen online</h3>
         <p>Keine sechs Wochen Wartezeit. Sie bekommen einen festen Termin und wir halten ihn.</p>
       </article>
 
       <article class="reason rv" data-i style="--i:3">
-        <svg class="ico loop-pin" viewBox="0 0 48 48" aria-hidden="true">
-          <path d="M24 42 C15 31 9 25.5 9 18 A15 15 0 0 1 39 18 C39 25.5 33 31 24 42 Z"/>
-          <circle class="accent" cx="24" cy="18" r="5.5"/>
-          <path d="M13 45.5 h22" stroke-dasharray="3 4"/>
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path class="soft i-wave1" d="M12 43 h24" style="transform-origin:24px 43px"/>
+          <path class="soft i-wave2" d="M17 46.5 h14" style="transform-origin:24px 46.5px"/>
+          <g class="i-pin">
+            <path d="M24 39 C16 29.5 11 24.6 11 18 A13 13 0 0 1 37 18 C37 24.6 32 29.5 24 39 Z"/>
+            <circle class="fillt" cx="24" cy="18" r="6.5"/>
+            <circle class="accent" cx="24" cy="18" r="3"/>
+          </g>
         </svg>
         <h3>Aus Wiesbaden, persönlich</h3>
         <p>Wir stehen bei Ihnen im Laden statt in einem Ticketsystem. Immer dieselben Ansprechpartner.</p>
       </article>
 
       <article class="reason rv" data-i style="--i:4">
-        <svg class="ico loop-spark" viewBox="0 0 48 48" aria-hidden="true">
-          <path d="M7 9 h34 v22 h-21 l-9 8 v-8 h-4 Z"/>
-          <path class="accent" d="M24 14 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4 Z"/>
-          <path d="M35 12.5 l1 2.3 2.3 1 -2.3 1 -1 2.3 -1 -2.3 -2.3 -1 2.3 -1 Z"/>
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M7 9 h30 v20 h-18 l-8 7.5 v-7.5 h-4 Z"/>
+          <g class="i-dots">
+            <circle class="dot d1" cx="15.5" cy="19" r="2"/>
+            <circle class="dot d2" cx="22" cy="19" r="2"/>
+            <circle class="dot d3" cx="28.5" cy="19" r="2"/>
+          </g>
+          <path class="accent i-spark" d="M39 27 l2.2 5 5 2.2 -5 2.2 -2.2 5 -2.2 -5 -5 -2.2 5 -2.2 Z"/>
         </svg>
         <h3>Gefunden werden — auch von KI</h3>
         <p>Ihre Seite ist für Google optimiert und so gebaut, dass ChatGPT und Co. sie als Antwort ausspielen.</p>
@@ -174,6 +186,7 @@
     </div>
   </div>
 </section>
+<div class="wave on-tint to-white" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
 
 <!-- ===== ARBEITEN: Tab-Showcase mit gefaecherten Screenshots ===== -->
 <section class="sec" id="arbeiten">
@@ -258,6 +271,45 @@
   </div>
 </section>
 
+<!-- ===== SONDERANGEBOT (SR-Preiskarte) ===== -->
+<section class="sec offer-sec" id="sonderangebot">
+  <div class="wrap">
+    <p class="eyebrow rv">Sonderangebot</p>
+    <h2 data-split>Ein Preis. Alles drin. Keine Nachtr&auml;ge.</h2>
+
+    <div class="offer-card rv">
+      <span class="offer-flag">Nur f&uuml;r kurze Zeit</span>
+      <div class="offer-head">
+        <h3>Komplette Firmenwebsite erstellen lassen</h3>
+        <div class="offer-price">
+          <span class="now">990&nbsp;&euro;</span>
+          <span class="was">1.890&nbsp;&euro;</span>
+        </div>
+        <p class="offer-sub">Einmalig, inkl. MwSt. &middot; Hosting im ersten Jahr enthalten &middot; Platzhalter-Preise</p>
+      </div>
+
+      <ul class="offer-feats">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Individuelles Design &mdash; kein Baukasten</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> F&uuml;r das Handy gebaut</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Schnelle Ladezeiten, auch im Mobilfunk</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Google-Optimierung inklusive</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Sichtbar in KI-Antworten (GEO)</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Texte und Bildbearbeitung &uuml;bernehmen wir</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Domain, Hosting und E-Mail eingerichtet</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Impressum und Datenschutz rechtssicher</li>
+      </ul>
+
+      <div class="offer-cta">
+        <a class="btn btn-accent" href="tel:+491781868874">Jetzt anrufen &amp; sichern</a>
+        <a class="btn btn-ghost" href="kontakt.html">Kostenlose Demo anfragen</a>
+      </div>
+      <p class="offer-note">Sie zahlen erst, wenn Ihnen die fertige Website gef&auml;llt.</p>
+    </div>
+  </div>
+</section>
+<div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
+
+
 <!-- ===== BEWERTUNGEN: dunkles Schaustueck ===== -->
 <section class="sec reviews" id="stimmen">
   <div class="wrap">
@@ -311,6 +363,7 @@
     </div>
   </div>
 </section>
+<div class="wave on-tint to-white" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
 
 <!-- ===== UNTERSCHIED ===== -->
 <section class="sec" id="unterschied">
@@ -342,6 +395,7 @@
     </div>
   </div>
 </section>
+<div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
 
 <!-- ===== KI & GEO ===== -->
 <section class="sec sec-tint" id="ki">
@@ -368,6 +422,7 @@
     </div>
   </div>
 </section>
+<div class="wave on-tint to-white" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
 
 <!-- ===== TEAM ===== -->
 <section class="sec" id="team">
@@ -381,6 +436,7 @@
     <p class="team-note rv">Im Maschinenraum: <b>Damian Braun</b>, Entwicklung.</p>
   </div>
 </section>
+<div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
 
 <!-- ===== FAQ ===== -->
 <section class="sec sec-tint" id="faq">
@@ -452,10 +508,8 @@
       <small>© 2026 FlowState · Wiesbaden</small>
     </div>
     <p class="credits">
-      Fotos Kurhaus Wiesbaden: Holger Reinhardt
-      (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>)
-      und Acediscovery
-      (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>),
+      Foto Kurhaus Wiesbaden: Acediscovery,
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>,
       via Wikimedia Commons.
     </p>
   </div>
@@ -489,6 +543,6 @@
   </div>
 </dialog>
 
-<script src="assets/app.js?v=9"></script>
+<script src="assets/app.js?v=10"></script>
 </body>
 </html>

@@ -7,12 +7,11 @@
 <meta name="description" content="Rufen Sie an oder schreiben Sie uns. Wir schauen uns Ihren Betrieb an und sagen ehrlich, was wir für Sie tun können.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css?v=10">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
-<div class="progress" aria-hidden="true"></div>
 <div class="draftpill">Entwurf · Adresse und Versand folgen</div>
 
 <header class="nav">
@@ -144,19 +143,23 @@
     <h2 data-split>Zwei Dinge, die Sie wissen sollten.</h2>
     <div class="reasons" style="grid-template-columns:1fr;max-width:900px">
         <article class="reason rv" data-i style="--i:1">
-          <svg class="ico loop-check" viewBox="0 0 48 48" aria-hidden="true">
-            <path d="M24 4 L41 10 v13 c0 10-7 16-17 20 C14 39 7 33 7 23 V10 Z"/>
-            <path d="M24 9.5 L36.5 14 v9.5 c0 7-5 11.6-12.5 14.8"/>
-            <path class="accent" d="M16 24 l6 6 11-12"/>
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="i-ring" cx="24" cy="24" r="21"/>
+            <path d="M24 7 L38 12 v10.5 c0 8.5-6 13.6-14 17 C16 36.1 10 31 10 22.5 V12 Z"/>
+            <circle class="fillt" cx="24" cy="22.5" r="8.5"/>
+            <path class="accent i-check" d="M19.5 22.5 l3.5 3.5 6.5 -7"/>
           </svg>
           <h3>Ein Gespräch verpflichtet zu nichts</h3>
           <p>Wir schauen uns an, was Sie haben, und sagen Ihnen ehrlich, ob sich eine neue Seite für Sie lohnt. Auch wenn die Antwort nein ist.</p>
         </article>
         <article class="reason rv" data-i style="--i:2">
-          <svg class="ico loop-clock" viewBox="0 0 48 48" aria-hidden="true">
-            <circle cx="24" cy="26" r="17"/>
-            <path d="M18 4.5 h12 M24 4.5 v4 M24 12.5 v2.5 M24 37.5 v2.5 M10.5 26 h2.5 M35 26 h2.5"/>
-            <path class="hand accent" d="M24 26 v-10.5"/>
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+            <circle class="fillt" cx="24" cy="27" r="16"/>
+            <circle cx="24" cy="27" r="16"/>
+            <path class="soft" d="M24 13.5 v3 M24 37.5 v3 M10.5 27 h3 M34.5 27 h3"/>
+            <path class="i-min" d="M24 27 v-9.5" style="transform-origin:24px 27px"/>
+            <path class="accent i-sec" d="M24 27 l6.5 4" style="transform-origin:24px 27px"/>
+            <circle class="dot" cx="24" cy="27" r="1.8"/>
           </svg>
           <h3>Sie zahlen erst nach Freigabe</h3>
           <p>Wir bauen Ihre Website fertig, bevor Geld fließt. Gefällt sie Ihnen nicht, entstehen Ihnen keine Kosten.</p>
@@ -183,6 +186,6 @@
   </div>
 </footer>
 
-<script src="assets/app.js?v=9"></script>
+<script src="assets/app.js?v=10"></script>
 </body>
 </html>

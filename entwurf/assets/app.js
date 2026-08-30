@@ -83,107 +83,6 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
 })();
 
 /* ---------------------------------------------------------------
-   4. Canvas-Flowfield im Hero — die Signatur
-   --------------------------------------------------------------- */
-(function(){
-  var cv = document.getElementById('flow');
-  if(!cv || reduced) return;
-  var ctx = cv.getContext('2d');
-  var hero = cv.parentElement;
-  var W, H, dpr, parts = [], running = false, raf = 0, t = 0;
-  var N = window.innerWidth < 760 ? 42 : 90;
-
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-    W = hero.clientWidth; H = hero.clientHeight;
-    cv.width = W * dpr; cv.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    ctx.fillStyle = '#FAFBFD'; ctx.fillRect(0, 0, W, H);
-  }
-  function spawn(p){
-    p.x = Math.random() * W; p.y = Math.random() * H;
-    p.life = 120 + Math.random() * 200;
-    p.blue = Math.random() < 0.72;
-    return p;
-  }
-  function angle(x, y){
-    return (Math.sin(x * 0.0021 + t * 0.0011) + Math.cos(y * 0.0024 - t * 0.0009)) * Math.PI
-         + Math.sin((x + y) * 0.0009 + t * 0.0006) * 1.4;
-  }
-  function frame(){
-    if(!running) return;
-    t += 16;
-    ctx.fillStyle = 'rgba(250,251,253,0.055)';
-    ctx.fillRect(0, 0, W, H);
-    for(var i = 0; i < parts.length; i++){
-      var p = parts[i];
-      var a = angle(p.x, p.y);
-      var nx = p.x + Math.cos(a) * 1.35;
-      var ny = p.y + Math.sin(a) * 1.35;
-      ctx.strokeStyle = p.blue ? 'rgba(27,79,232,0.30)' : 'rgba(11,27,51,0.16)';
-      ctx.lineWidth = 1.1;
-      ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(nx, ny); ctx.stroke();
-      p.x = nx; p.y = ny; p.life--;
-      if(p.life <= 0 || p.x < -20 || p.x > W + 20 || p.y < -20 || p.y > H + 20) spawn(p);
-    }
-    raf = requestAnimationFrame(frame);
-  }
-  resize();
-  for(var i = 0; i < N; i++) parts.push(spawn({}));
-  window.addEventListener('resize', function(){ resize(); }, { passive:true });
-
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting && !running){ running = true; frame(); }
-      else if(!e.isIntersecting && running){ running = false; cancelAnimationFrame(raf); }
-    });
-  }, { threshold:0.02 });
-  io.observe(hero);
-})();
-
-/* ---------------------------------------------------------------
-   5. Custom Cursor (Punkt + Ring)
-   --------------------------------------------------------------- */
-(function(){
-  if(!finePointer || reduced) return;
-  var dot = document.createElement('div'); dot.className = 'cur';
-  var ring = document.createElement('div'); ring.className = 'curR';
-  document.body.appendChild(dot); document.body.appendChild(ring);
-  var x = -100, y = -100, rx = -100, ry = -100;
-  document.addEventListener('pointermove', function(e){
-    x = e.clientX; y = e.clientY;
-    dot.style.transform = 'translate(' + (x - 4) + 'px,' + (y - 4) + 'px)';
-  }, { passive:true });
-  (function loop(){
-    rx += (x - rx) * 0.16; ry += (y - ry) * 0.16;
-    ring.style.transform = 'translate(' + (rx - ring.offsetWidth / 2) + 'px,' + (ry - ring.offsetHeight / 2) + 'px)';
-    requestAnimationFrame(loop);
-  })();
-  document.addEventListener('pointerover', function(e){
-    if(e.target.closest('a, button, summary, .pj, .wt')) ring.classList.add('big');
-  }, { passive:true });
-  document.addEventListener('pointerout', function(e){
-    if(e.target.closest('a, button, summary, .pj, .wt')) ring.classList.remove('big');
-  }, { passive:true });
-})();
-
-/* ---------------------------------------------------------------
-   6. Magnet-Buttons
-   --------------------------------------------------------------- */
-(function(){
-  if(!finePointer || reduced) return;
-  document.querySelectorAll('.btn').forEach(function(b){
-    b.addEventListener('pointermove', function(e){
-      var r = b.getBoundingClientRect();
-      var dx = e.clientX - (r.left + r.width / 2);
-      var dy = e.clientY - (r.top + r.height / 2);
-      b.style.transform = 'translate(' + (dx * 0.14) + 'px,' + (dy * 0.22) + 'px)';
-    });
-    b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
-  });
-})();
-
-/* ---------------------------------------------------------------
    7. 3D-Tilt (Kurhaus, Projekt-Karten)
    --------------------------------------------------------------- */
 (function(){
@@ -208,7 +107,6 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
    8. Scroll-Engine: Fortschritt, Parallax, Score-Counter
    --------------------------------------------------------------- */
 (function(){
-  var bar = document.querySelector('.progress');
   var items = [];
   if(!reduced){
     document.querySelectorAll('[data-parallax]').forEach(function(el){
@@ -226,10 +124,6 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   function frame(){
     ticking = false;
     var y = window.scrollY;
-    if(bar){
-      var max = document.documentElement.scrollHeight - vh;
-      bar.style.setProperty('--p', max > 0 ? Math.min(1, y / max) : 0);
-    }
     for(var i = 0; i < items.length; i++){
       var it = items[i];
       if(!it.rect) continue;
