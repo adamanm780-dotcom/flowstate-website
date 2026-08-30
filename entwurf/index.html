@@ -7,9 +7,9 @@
 <meta name="description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=8">
-<link rel="preload" as="image" href="assets/kurhaus-hero.webp" fetchpriority="high">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="preload" as="image" href="assets/kurhaus-night.webp" fetchpriority="high">
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
@@ -36,47 +36,41 @@
 
 <main id="main">
 
-<!-- ===== HERO mit Canvas-Flowfield ===== -->
-<section class="hero" id="top">
-  <canvas id="flow" aria-hidden="true"></canvas>
-  <div class="wrap hero-in">
-    <div>
-      <div class="trustline rv">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <small><a href="#stimmen">5,0 bei Google</a></small>
-        <span class="dotsep" aria-hidden="true"></span>
-        <small>Webagentur aus Wiesbaden</small>
-      </div>
+<!-- ===== HERO: Kurhaus bei Nacht, Vollbild ===== -->
+<section class="hero-lux" id="top">
+  <picture class="hero-bg" aria-hidden="true">
+    <source media="(max-width:640px)" srcset="assets/kurhaus-night-sm.webp" type="image/webp">
+    <img src="assets/kurhaus-night.webp" width="2400" height="1603" alt=""
+         fetchpriority="high" data-parallax="30">
+  </picture>
+  <div class="hero-scrim" aria-hidden="true"></div>
 
-      <h1 class="rv" data-i style="--i:1">
-        Website erstellen lassen für
-        <span class="tw-line"><span class="tw" id="tw"
-          data-words="Ihren Betrieb|Handwerk|Zahnarztpraxen|Juweliere|Gastronomie|Friseure">Ihren Betrieb</span></span>
-      </h1>
-
-      <p class="lede rv" data-i style="--i:2">
-        Wir bauen Ihre Website komplett fertig.
-        <strong>Erst dann entscheiden Sie, ob Sie zahlen.</strong>
-      </p>
-
-      <div class="hero-cta rv" data-i style="--i:3">
-        <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
-        <button class="btn btn-ghost" type="button" data-open-angebot>Angebot ansehen</button>
-      </div>
+  <div class="wrap hero-lux-in">
+    <div class="trustline rv">
+      <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <small><a href="#stimmen">5,0 bei Google</a></small>
+      <span class="dotsep" aria-hidden="true"></span>
+      <small>Webagentur aus Wiesbaden</small>
     </div>
 
-    <figure class="kurhaus rv" data-i style="--i:2" data-tilt>
-      <div class="kurhaus-frame" data-parallax="34">
-        <picture>
-          <source srcset="assets/kurhaus-hero-sm.webp" media="(max-width:600px)" type="image/webp">
-          <source srcset="assets/kurhaus-hero.webp" type="image/webp">
-          <img src="assets/kurhaus-hero.jpg" width="1100" height="1375"
-               alt="Das Kurhaus in Wiesbaden mit der Inschrift Aquis Mattiacis" fetchpriority="high">
-        </picture>
-      </div>
-      <figcaption class="kurhaus-cap"><b>Wiesbaden</b> Hier sitzen wir. Hier kommen wir vorbei.</figcaption>
-    </figure>
+    <h1 class="rv" data-i style="--i:1">
+      Websites, die aussehen,<br>als h&auml;tten sie
+      <span class="tw-line"><span class="tw" id="tw"
+        data-words="das Zehnfache gekostet.|ein ganzes Studio hinter sich.|Jahre Vorsprung.">das Zehnfache gekostet.</span></span>
+    </h1>
+
+    <p class="lede rv" data-i style="--i:2">
+      Wir bauen Ihre Website komplett fertig.
+      <strong>Erst dann entscheiden Sie, ob Sie zahlen.</strong>
+    </p>
+
+    <div class="hero-cta rv" data-i style="--i:3">
+      <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
+      <button class="btn btn-ghost-light" type="button" data-open-angebot>Angebot ansehen</button>
+    </div>
   </div>
+
+  <p class="hero-credit">Kurhaus Wiesbaden &middot; Foto: Holger Reinhardt, CC BY-SA 3.0</p>
 </section>
 
 <!-- ===== WARUM ===== -->
@@ -458,8 +452,10 @@
       <small>© 2026 FlowState · Wiesbaden</small>
     </div>
     <p class="credits">
-      Foto Kurhaus Wiesbaden: Acediscovery,
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>,
+      Fotos Kurhaus Wiesbaden: Holger Reinhardt
+      (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>)
+      und Acediscovery
+      (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>),
       via Wikimedia Commons.
     </p>
   </div>
@@ -493,6 +489,6 @@
   </div>
 </dialog>
 
-<script src="assets/app.js?v=8"></script>
+<script src="assets/app.js?v=9"></script>
 </body>
 </html>
