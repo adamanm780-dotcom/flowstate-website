@@ -199,9 +199,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 
 /* Mehrschichtiger Hero: 6 Ebenen, Maus-Parallax */
 .hero-stack{
-  position:relative; aspect-ratio:1/1; width:100%;
+  position:relative; aspect-ratio:1/1; width:100%; max-width:640px; margin-inline:auto;
   transform:translate3d(0,var(--py,0px),0); will-change:transform;
 }
+@media(min-width:940px){.hero-stack{margin-right:0}}
 .hero-stack .layer{
   position:absolute; height:auto;
   translate:calc(var(--mx,0) * var(--depth,0) * 1px) calc(var(--my,0) * var(--depth,0) * 1px);
@@ -209,11 +210,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
   will-change:translate; pointer-events:none;
 }
 /* Position + Groesse je Element (Prozent der 1:1-Buehne) */
-.hero-stack .l1{--depth:6;  left:1%;   top:30%; width:36%}   /* kleines Fenster hinten  */
-.hero-stack .l2{--depth:11; left:27%;  top:5%;  width:60%}   /* grosses Fenster         */
-.hero-stack .l3{--depth:17; left:-10%; top:47%; width:122%}  /* Flow-Welle              */
-.hero-stack .l4{--depth:24; left:47%;  top:24%; width:22%}   /* Smartphone vorn         */
-.hero-stack .l5{--depth:32; left:0%;   top:0%;  width:100%}  /* Badge + Orange (SVG)    */
+.hero-stack .l1{--depth:6;  left:-2%;  top:32%; width:42%}   /* kleines Fenster hinten  */
+.hero-stack .l2{--depth:11; left:22%;  top:3%;  width:76%}   /* grosses Fenster         */
+.hero-stack .l3{--depth:17; left:-7%;  top:54%; width:114%}  /* Flow-Welle              */
+.hero-stack .l4{--depth:24; left:49%;  top:27%; width:28%}   /* Smartphone vorn         */
+.hero-stack .l5{--depth:32; left:0%;   top:-2%; width:100%}  /* Badge + Orange (SVG)    */
 .hero-stack .l6{--depth:42; left:0%;   top:0%;  width:100%}  /* Funken (SVG)            */
 @media (prefers-reduced-motion: reduce){
   .hero-stack .layer{translate:0 0 !important; transition:none}
