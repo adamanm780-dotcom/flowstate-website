@@ -83,6 +83,7 @@ p{margin:0}
 .wave svg{display:block; width:100%; height:100%}
 .wave .fill{fill:var(--bg-2)}
 .wave.to-white .fill{fill:var(--bg)}
+.wave.to-petrol .fill{fill:var(--blue)}
 .wave{background:var(--bg)}
 .wave.on-tint{background:var(--bg-2)}
 
@@ -697,27 +698,67 @@ h1 .tw-line{display:block; color:var(--blue)}
 
 /* --- Finale + Footer ---------------------------------------- */
 .finale{background:var(--blue); color:#EAF6F4; text-align:center; overflow:hidden; position:relative}
+.finale::before{
+  content:""; position:absolute; width:720px; aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.09), transparent 65%);
+  top:-260px; left:-180px; pointer-events:none;
+}
+.finale::after{
+  content:""; position:absolute; width:340px; aspect-ratio:1; border-radius:50%;
+  background:var(--accent); opacity:.16; right:-120px; bottom:-140px; pointer-events:none;
+}
+.finale-flow{position:absolute; inset:auto 0 -2px 0; width:100%; height:44%; pointer-events:none; opacity:.55}
+.finale-flow path{fill:none; stroke-linecap:round}
+.finale .wrap{position:relative; z-index:2}
+.finale-chips{display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-top:1.9rem}
+.chip{
+  font-family:var(--f-ui); font-weight:700; font-size:.78rem; letter-spacing:.08em;
+  text-transform:uppercase; color:#EAF6F4; border:1px solid rgba(255,255,255,.32);
+  border-radius:999px; padding:.5rem 1rem;
+}
+.chip b{color:#FFD9AE}
 .finale .eyebrow{justify-content:center; color:#BFE3DF}
 .finale .eyebrow::before{background:#BFE3DF}
 .finale h2{color:#FFFFFF}
 .finale .lede{margin-inline:auto; margin-top:1.2rem; color:#CFE9E6}
 .finale-cta{display:flex; flex-wrap:wrap; gap:.9rem; justify-content:center; margin-top:2.4rem}
 .bigtel{
-  display:inline-flex; align-items:center; gap:.75rem; margin-top:2rem;
-  font-family:var(--f-display); font-weight:800;
-  font-size:clamp(1.7rem,1.2rem + 2.2vw,2.7rem); text-decoration:none; color:#fff;
+  display:inline-flex; align-items:center; gap:1rem; margin-top:2.2rem;
+  font-family:var(--f-ui); font-weight:800;
+  font-size:clamp(1.6rem,1.1rem + 2vw,2.5rem); text-decoration:none; color:#fff;
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.22);
+  border-radius:999px; padding:.85rem 2rem .85rem 1rem;
+  transition:background .3s var(--ease), transform .3s var(--ease), border-color .3s var(--ease);
 }
-.bigtel svg{width:28px; height:28px; fill:#FFD9AE}
-.bigtel:hover{color:#FFD9AE}
+.bigtel:hover{background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.42); transform:translateY(-3px)}
+.bigtel i{
+  width:52px; height:52px; border-radius:50%; background:var(--accent); flex:none;
+  display:grid; place-items:center; font-style:normal;
+}
+.bigtel svg{width:24px; height:24px; fill:#fff}
 
-footer{background:#152029; color:#9FB0BE; padding-block:2.6rem; border-top:1px solid rgba(255,255,255,.08)}
-.foot{display:flex; flex-wrap:wrap; gap:1.4rem; justify-content:space-between; align-items:center}
-.foot a{color:#9FB0BE; text-decoration:none; font-size:.93rem}
-.foot a:hover{color:#fff}
-.foot nav{display:flex; gap:1.3rem; flex-wrap:wrap}
-.foot small{font-size:.85rem; opacity:.75}
-.credits{margin-top:1.7rem; font-size:.78rem; opacity:.55; max-width:70ch}
-.credits a{text-decoration:underline}
+footer{background:#152029; color:#9FB0BE; padding-block:3.4rem 1.8rem}
+.foot-grid{display:grid; gap:2.4rem}
+@media(min-width:780px){.foot-grid{grid-template-columns:1.3fr .8fr 1fr; gap:3rem}}
+.foot-brand p{font-size:.95rem; max-width:34ch; margin-top:.9rem; line-height:1.6}
+.foot-stars{margin-top:1rem; font-size:.85rem; color:#C9D4DE}
+.foot-stars b{color:#F4B400; letter-spacing:.12em; font-weight:600; margin-right:.45rem}
+.foot h4{
+  font-family:var(--f-ui); font-weight:700; font-size:.75rem; letter-spacing:.16em;
+  text-transform:uppercase; color:#67788A; margin:0 0 1rem;
+}
+.foot-grid a{display:block; color:#B7C4D0; text-decoration:none; font-size:.95rem; padding-block:.32rem; width:max-content}
+.foot-grid a:hover{color:#fff}
+.foot-contact svg{width:15px; height:15px; fill:#5FCFC5; margin-right:.5rem; vertical-align:-2px}
+.foot-bottom{
+  display:flex; flex-wrap:wrap; gap:1rem; justify-content:space-between; align-items:center;
+  margin-top:2.8rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,.08);
+  font-size:.82rem; color:#67788A;
+}
+.foot-bottom a{color:#8899AA; text-decoration:none}
+.foot-bottom a:hover{color:#fff}
+.credits{margin-top:.9rem; font-size:.75rem; color:#4E5D6C; max-width:78ch}
+.credits a{text-decoration:underline; color:inherit}
 
 .pagehead{padding-block:clamp(2.6rem,7vh,4.6rem) clamp(1.5rem,4vh,2.5rem)}
 .pagehead h1{margin-block:.9rem 1rem}
