@@ -348,3 +348,32 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     });
   });
 })();
+
+/* ---------------------------------------------------------------
+   16. Hero-Ebenen: Maus-Parallax (nur feine Zeiger)
+   --------------------------------------------------------------- */
+(function(){
+  var stack = document.getElementById('heroStack');
+  if(!stack || reduced || !finePointer) return;
+  var hero = stack.closest('.hero') || document.body;
+  var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+
+  function loop(){
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+    stack.style.setProperty('--mx', cx.toFixed(3));
+    stack.style.setProperty('--my', cy.toFixed(3));
+    if(Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002){
+      raf = requestAnimationFrame(loop);
+    } else { raf = 0; }
+  }
+  function kick(){ if(!raf) raf = requestAnimationFrame(loop); }
+
+  hero.addEventListener('pointermove', function(e){
+    var r = hero.getBoundingClientRect();
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;   /* -1 .. 1 */
+    ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
+    kick();
+  }, { passive:true });
+  hero.addEventListener('pointerleave', function(){ tx = 0; ty = 0; kick(); }, { passive:true });
+})();
