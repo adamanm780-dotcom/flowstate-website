@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt — FlowState Webdesign aus Wiesbaden</title>
+<meta name="description" content="Rufen Sie an oder schreiben Sie uns. Wir schauen uns Ihren Betrieb an und sagen ehrlich, was wir für Sie tun können.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<div class="draftbar">ENTWURF — Adresse, Öffnungszeiten und Formularversand sind Platzhalter</div>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html">FlowState<span></span></a>
+    <ul class="nav-links">
+      <li><a href="index.html#ablauf">Ablauf</a></li>
+      <li><a href="projekte.html">Projekte</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="kontakt.html" aria-current="page">Kontakt</a></li>
+    </ul>
+    <a class="nav-tel" href="tel:+491781868874" aria-label="Jetzt anrufen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
+      0178 1868874
+    </a>
+    <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="pagehead">
+  <div class="wrap">
+    <p class="eyebrow rv">Kontakt</p>
+    <h1 class="rv" data-i style="--i:1">Reden wir kurz.<br>Das kostet Sie nichts.</h1>
+    <p class="lede rv" data-i style="--i:2">
+      Am schnellsten geht es per Telefon. Wenn Ihnen Schreiben lieber ist, nutzen Sie das
+      Formular — wir melden uns in der Regel noch am selben Werktag.
+    </p>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:clamp(1rem,3vh,2rem)">
+  <div class="wrap">
+    <div class="contactgrid">
+
+      <form class="form rv" id="kontaktformular" method="post" action="#">
+        <!-- Honeypot: fuer Menschen unsichtbar, Bots fuellen ihn aus -->
+        <div class="hp" aria-hidden="true">
+          <label for="company">Firma (bitte frei lassen)</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+        <input type="hidden" name="formStart" value="">
+
+        <div class="field">
+          <label for="name">Ihr Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" placeholder="Vor- und Nachname">
+        </div>
+
+        <div class="field">
+          <label for="betrieb">Ihr Betrieb</label>
+          <input type="text" id="betrieb" name="betrieb" autocomplete="organization" placeholder="Name und Ort">
+        </div>
+
+        <div class="field">
+          <label for="email">E-Mail oder Telefon</label>
+          <input type="text" id="email" name="email" required autocomplete="email" placeholder="Wie erreichen wir Sie?">
+        </div>
+
+        <div class="field">
+          <label for="message">Worum geht es?</label>
+          <textarea id="message" name="message" required placeholder="Ein paar Sätze genügen. Was haben Sie heute, und was fehlt Ihnen?"></textarea>
+        </div>
+
+        <label class="consent">
+          <input type="checkbox" name="consent" required>
+          <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage
+            gespeichert werden. Details in der <a href="/datenschutz">Datenschutzerklärung</a>.</span>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Anfrage senden</button>
+
+        <p style="font-size:.85rem;color:var(--ink-mute)">
+          <span class="ph-tag" style="display:inline-block;margin-right:.5rem">Platzhalter</span>
+          Der Versand ist im Entwurf noch nicht angeschlossen.
+        </p>
+      </form>
+
+      <aside class="contactcard rv" data-i style="--i:1">
+        <div>
+          <h3>Direkt erreichbar</h3>
+          <div class="hours">
+            <div><span>Telefon</span><span class="dots"></span><a href="tel:+491781868874">0178 1868874</a></div>
+            <div><span>E-Mail</span><span class="dots"></span><a href="mailto:flow-state@gmx.de">flow-state@gmx.de</a></div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Besuchen Sie uns</h3>
+          <p style="font-size:.96rem;color:var(--ink-soft)">
+            <span class="ph-tag" style="display:inline-block;margin-bottom:.5rem">Platzhalter</span><br>
+            Straße und Hausnummer<br>
+            65183 Wiesbaden
+          </p>
+        </div>
+
+        <div>
+          <h3>Wann wir da sind</h3>
+          <div class="hours">
+            <div><span>Montag – Freitag</span><span class="dots"></span><span>09:00 – 18:00</span></div>
+            <div><span>Samstag</span><span class="dots"></span><span>nach Absprache</span></div>
+            <div><span>Sonntag</span><span class="dots"></span><span>geschlossen</span></div>
+          </div>
+          <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.7rem">
+            Termine beim Kunden vor Ort auch außerhalb dieser Zeiten.
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-tint">
+  <div class="wrap">
+    <p class="eyebrow rv">Bevor Sie schreiben</p>
+    <h2 class="rv" data-i style="--i:1">Zwei Dinge, die Sie wissen sollten.</h2>
+    <div class="reasons" style="grid-template-columns:1fr">
+      <div class="quotes" style="margin-top:2rem">
+        <article class="reason rv" data-i style="--i:1">
+          <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M20 4 L34 9 v11 c0 8-6 13-14 16 -8-3-14-8-14-16 V9 Z"/>
+            <path class="accent" d="M13 20 l5 5 9-10"/>
+          </svg>
+          <h3>Ein Gespräch verpflichtet zu nichts</h3>
+          <p>Wir schauen uns an, was Sie haben, und sagen Ihnen ehrlich, ob sich eine neue Seite für Sie lohnt. Auch wenn die Antwort nein ist.</p>
+        </article>
+        <article class="reason rv" data-i style="--i:2">
+          <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="21" r="14"/>
+            <path class="accent" d="M20 12 v9 l6 4"/>
+            <path d="M14 4 h12"/>
+          </svg>
+          <h3>Sie zahlen erst nach Freigabe</h3>
+          <p>Wir bauen Ihre Website fertig, bevor Geld fließt. Gefällt sie Ihnen nicht, entstehen Ihnen keine Kosten.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="flowline" style="margin-bottom:1.8rem"><i></i><b></b><i></i></div>
+    <div class="foot">
+      <a class="logo" href="index.html" style="color:#F4F7FB">FlowState<span></span></a>
+      <nav>
+        <a href="projekte.html">Projekte</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="/impressum">Impressum</a>
+        <a href="/datenschutz">Datenschutz</a>
+      </nav>
+      <small>© 2026 FlowState · Wiesbaden</small>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
