@@ -13,7 +13,8 @@
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
-<div class="draftbar">ENTWURF — Preise, Zitate, Fotos und Kennzahlen sind Platzhalter</div>
+<div class="progress" aria-hidden="true"></div>
+<div class="draftbar">ENTWURF — Preise, Fotos und Screenshots sind Platzhalter</div>
 
 <header class="nav">
   <div class="wrap nav-in">
@@ -22,7 +23,7 @@
       <li><a href="index.html#ablauf">Ablauf</a></li>
       <li><a href="projekte.html">Projekte</a></li>
       <li><a href="#angebot" data-open-angebot>Angebot</a></li>
-      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#stimmen">Bewertungen</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
     <a class="nav-tel" href="tel:+491781868874" aria-label="Jetzt anrufen">
@@ -40,9 +41,10 @@
   <div class="wrap hero-in">
     <div>
       <div class="trustline rv">
-        <small>Webagentur aus Wiesbaden</small>
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <small><a href="#stimmen">5,0 bei Google</a></small>
         <span class="dotsep" aria-hidden="true"></span>
-        <small>Persönlich vor Ort</small>
+        <small>Aus Wiesbaden</small>
       </div>
 
       <h1 class="rv" data-i style="--i:1">
@@ -63,7 +65,7 @@
     </div>
 
     <figure class="kurhaus rv" data-i style="--i:2">
-      <div class="kurhaus-frame">
+      <div class="kurhaus-frame" data-parallax="34">
         <picture>
           <source srcset="assets/kurhaus-hero-sm.webp" media="(max-width:600px)" type="image/webp">
           <source srcset="assets/kurhaus-hero.webp" type="image/webp">
@@ -148,7 +150,7 @@
           <h3>Kurzes Gespräch</h3>
           <p>15 Minuten am Telefon oder bei Ihnen vor Ort. Wir hören zu, was Ihr Betrieb braucht — mehr nicht. Danach wissen Sie, was Sie bekommen und was es kostet.</p>
         </div>
-        <div class="step-art">
+        <div class="step-art" data-parallax="46" data-zoom="0.06">
           <img src="assets/schritt-1.svg" alt="" width="2048" height="1509" loading="lazy">
         </div>
       </article>
@@ -159,7 +161,7 @@
           <h3>Wir bauen sie fertig</h3>
           <p>Sie müssen nichts liefern und nichts vorbereiten. Texte, Bilder, Technik — das übernehmen wir. Auf unser Risiko.</p>
         </div>
-        <div class="step-art">
+        <div class="step-art" data-parallax="46" data-zoom="0.06">
           <img src="assets/schritt-2.svg" alt="" width="2048" height="1509" loading="lazy">
         </div>
       </article>
@@ -170,7 +172,7 @@
           <h3>Sie entscheiden</h3>
           <p>Gefällt sie Ihnen, geht sie online und Sie zahlen. Gefällt sie Ihnen nicht, war es unsere Zeit, nicht Ihr Geld.</p>
         </div>
-        <div class="step-art">
+        <div class="step-art" data-parallax="46" data-zoom="0.06">
           <img src="assets/schritt-3.svg" alt="" width="2048" height="1509" loading="lazy">
         </div>
       </article>
@@ -206,7 +208,7 @@
         <div class="work-meta"><h3>Laserzentrum Häusler-Mehlhorn</h3><em>Chemnitz · Hautmedizin</em></div>
         <a class="work-link" href="projekte.html">
           Zum Projekt
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H3v18h18v-7h-2v5H5V5z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg>
         </a>
       </article>
     </div>
@@ -214,6 +216,66 @@
     <p class="rv" style="margin-top:2.4rem">
       <a class="btn btn-ghost" href="projekte.html">Alle Projekte ansehen</a>
     </p>
+  </div>
+</section>
+
+<!-- ===== BEWERTUNGEN ===== -->
+<section class="sec" id="stimmen">
+  <div class="wrap">
+    <p class="eyebrow rv">Was Kunden sagen</p>
+    <h2 class="rv" data-i style="--i:1">Wir können viel erzählen.<br>Hören Sie lieber die anderen.</h2>
+
+    <div class="ratingbar rv" data-i style="--i:2">
+      <span class="big">5,0</span>
+      <span class="stars" aria-hidden="true">★★★★★</span>
+      <small>aus 5 Google-Bewertungen</small>
+    </div>
+
+    <div class="quotes">
+      <figure class="quote feature rv" data-i style="--i:1">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <blockquote>
+          „Fantastisches Team und ein absolut überzeugendes Ergebnis — wir haben unsere
+          Firmenwebsite neu gestalten lassen. Die Jungs sind für Rücksprachen jederzeit
+          über WhatsApp erreichbar. Schon der erste Entwurf hat unsere Vorstellung perfekt
+          getroffen; wir sind rundum zufrieden. 100 % Empfehlung!"
+        </blockquote>
+        <figcaption>Paul Mehlhorn<em>Google-Bewertung</em></figcaption>
+      </figure>
+
+      <figure class="quote rv" data-i style="--i:2">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <blockquote>
+          „Ich bin sehr zufrieden mit der Arbeit von FlowState. Das Team hat meine Ideen
+          professionell umgesetzt und eine moderne, ansprechende Website sowie ein passendes
+          Logo gestaltet. Änderungswünsche wurden schnell umgesetzt, das Ergebnis wirkt
+          professionell und durchdacht."
+        </blockquote>
+        <figcaption>Familie Schindlmeier<em>Google-Bewertung</em></figcaption>
+      </figure>
+
+      <figure class="quote rv" data-i style="--i:3">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <blockquote>
+          „Ich brauchte ein Logo für meine Firma und hatte selbst nur eine grobe Vorstellung.
+          FlowState hat mir mehrere Entwürfe gezeigt und sie geduldig mit mir verfeinert, bis
+          es passte. Schnelles Feedback, faire Abwicklung, tolles Ergebnis."
+        </blockquote>
+        <figcaption>Aderkan<em>Google-Bewertung</em></figcaption>
+      </figure>
+
+      <figure class="quote rv" data-i style="--i:4">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <blockquote>„Unglaublich nette Jungs, extrem ambitioniert. Klare Empfehlung."</blockquote>
+        <figcaption>Meisam Hoseini<em>Google-Bewertung</em></figcaption>
+      </figure>
+
+      <figure class="quote rv" data-i style="--i:5">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <blockquote>„Sehr sehr freundliche Jungs und Top Leistung!"</blockquote>
+        <figcaption>Jazan Aboalseoud<em>Google-Bewertung</em></figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -270,26 +332,6 @@
         <h3>Abläufe automatisieren</h3>
         <p>Anfragen, Termine, Antworten: Wir bauen die Automatisierung dahinter, damit weniger Arbeit an Ihnen hängen bleibt.</p>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ===== STIMMEN ===== -->
-<section class="sec" id="stimmen">
-  <div class="wrap">
-    <p class="eyebrow rv">Was Kunden sagen</p>
-    <h2 class="rv" data-i style="--i:1">Wir können viel erzählen.</h2>
-    <div class="quotes">
-      <figure class="quote ph rv" data-i style="--i:1">
-        <span class="ph-tag">Platzhalter</span>
-        <blockquote>Hier steht ein echtes Kundenzitat — zwei bis drei Sätze darüber, wie der Ablauf war und was die Seite gebracht hat.</blockquote>
-        <figcaption>Name des Kunden<em>Betrieb, Ort</em></figcaption>
-      </figure>
-      <figure class="quote ph rv" data-i style="--i:2">
-        <span class="ph-tag">Platzhalter</span>
-        <blockquote>Zweites echtes Zitat. Am stärksten wirkt eine konkrete Aussage: mehr Anrufe, mehr Termine, endlich auf dem Handy brauchbar.</blockquote>
-        <figcaption>Name des Kunden<em>Betrieb, Ort</em></figcaption>
-      </figure>
     </div>
   </div>
 </section>
@@ -367,7 +409,7 @@
   <div class="wrap">
     <div class="flowline" style="margin-bottom:1.8rem"><i></i><b></b><i></i></div>
     <div class="foot">
-      <a class="logo" href="index.html" style="color:#F4F7FB">FlowState<span></span></a>
+      <a class="logo" href="index.html" style="color:#F3F6FB">FlowState<span></span></a>
       <nav>
         <a href="projekte.html">Projekte</a>
         <a href="kontakt.html">Kontakt</a>

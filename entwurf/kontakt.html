@@ -12,6 +12,7 @@
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
+<div class="progress" aria-hidden="true"></div>
 <div class="draftbar">ENTWURF — Adresse, Öffnungszeiten und Formularversand sind Platzhalter</div>
 
 <header class="nav">
@@ -20,7 +21,7 @@
     <ul class="nav-links">
       <li><a href="index.html#ablauf">Ablauf</a></li>
       <li><a href="projekte.html">Projekte</a></li>
-      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#stimmen">Bewertungen</a></li>
       <li><a href="kontakt.html" aria-current="page">Kontakt</a></li>
     </ul>
     <a class="nav-tel" href="tel:+491781868874" aria-label="Jetzt anrufen">
@@ -38,8 +39,8 @@
     <p class="eyebrow rv">Kontakt</p>
     <h1 class="rv" data-i style="--i:1">Reden wir kurz.<br>Das kostet Sie nichts.</h1>
     <p class="lede rv" data-i style="--i:2">
-      Am schnellsten geht es per Telefon. Wenn Ihnen Schreiben lieber ist, nutzen Sie das
-      Formular — wir melden uns in der Regel noch am selben Werktag.
+      Am schnellsten geht es per Telefon oder WhatsApp. Wenn Ihnen Schreiben lieber ist,
+      nutzen Sie das Formular — wir melden uns in der Regel noch am selben Werktag.
     </p>
   </div>
 </section>
@@ -49,7 +50,6 @@
     <div class="contactgrid">
 
       <form class="form rv" id="kontaktformular" method="post" action="#">
-        <!-- Honeypot: fuer Menschen unsichtbar, Bots fuellen ihn aus -->
         <div class="hp" aria-hidden="true">
           <label for="company">Firma (bitte frei lassen)</label>
           <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
@@ -85,7 +85,7 @@
         <button class="btn btn-primary" type="submit">Anfrage senden</button>
 
         <p style="font-size:.85rem;color:var(--ink-mute)">
-          <span class="ph-tag" style="display:inline-block;margin-right:.5rem">Platzhalter</span>
+          <span class="ph-tag" style="margin-right:.5rem">Platzhalter</span>
           Der Versand ist im Entwurf noch nicht angeschlossen.
         </p>
       </form>
@@ -95,6 +95,7 @@
           <h3>Direkt erreichbar</h3>
           <div class="hours">
             <div><span>Telefon</span><span class="dots"></span><a href="tel:+491781868874">0178 1868874</a></div>
+            <div><span>WhatsApp</span><span class="dots"></span><a href="https://wa.me/491781868874" target="_blank" rel="noopener">Nachricht senden</a></div>
             <div><span>E-Mail</span><span class="dots"></span><a href="mailto:flow-state@gmx.de">flow-state@gmx.de</a></div>
           </div>
         </div>
@@ -102,7 +103,7 @@
         <div>
           <h3>Besuchen Sie uns</h3>
           <p style="font-size:.96rem;color:var(--ink-soft)">
-            <span class="ph-tag" style="display:inline-block;margin-bottom:.5rem">Platzhalter</span><br>
+            <span class="ph-tag" style="margin-bottom:.5rem">Platzhalter</span><br>
             Straße und Hausnummer<br>
             65183 Wiesbaden
           </p>
@@ -116,11 +117,23 @@
             <div><span>Sonntag</span><span class="dots"></span><span>geschlossen</span></div>
           </div>
           <p style="font-size:.85rem;color:var(--ink-mute);margin-top:.7rem">
-            Termine beim Kunden vor Ort auch außerhalb dieser Zeiten.
+            Termine bei Ihnen vor Ort auch außerhalb dieser Zeiten.
           </p>
         </div>
       </aside>
 
+    </div>
+
+    <!-- Karte: laedt erst nach Einwilligung (DSGVO) -->
+    <div class="mapbox rv" data-map-src="https://www.google.com/maps?q=Kurhausplatz+1,+65189+Wiesbaden&amp;z=15&amp;output=embed">
+      <div class="map-gate">
+        <h3>Karte von Google Maps</h3>
+        <p>
+          Beim Laden der Karte werden Daten an Google übertragen. Damit das nicht ungefragt
+          passiert, laden wir sie erst auf Ihren Klick.
+        </p>
+        <button class="btn btn-ghost" type="button" data-load-map>Karte laden</button>
+      </div>
     </div>
   </div>
 </section>
@@ -129,8 +142,7 @@
   <div class="wrap">
     <p class="eyebrow rv">Bevor Sie schreiben</p>
     <h2 class="rv" data-i style="--i:1">Zwei Dinge, die Sie wissen sollten.</h2>
-    <div class="reasons" style="grid-template-columns:1fr">
-      <div class="quotes" style="margin-top:2rem">
+    <div class="reasons" style="grid-template-columns:1fr;max-width:900px">
         <article class="reason rv" data-i style="--i:1">
           <svg class="ico" viewBox="0 0 40 40" aria-hidden="true">
             <path d="M20 4 L34 9 v11 c0 8-6 13-14 16 -8-3-14-8-14-16 V9 Z"/>
@@ -148,7 +160,6 @@
           <h3>Sie zahlen erst nach Freigabe</h3>
           <p>Wir bauen Ihre Website fertig, bevor Geld fließt. Gefällt sie Ihnen nicht, entstehen Ihnen keine Kosten.</p>
         </article>
-      </div>
     </div>
   </div>
 </section>
@@ -159,7 +170,7 @@
   <div class="wrap">
     <div class="flowline" style="margin-bottom:1.8rem"><i></i><b></b><i></i></div>
     <div class="foot">
-      <a class="logo" href="index.html" style="color:#F4F7FB">FlowState<span></span></a>
+      <a class="logo" href="index.html" style="color:#F3F6FB">FlowState<span></span></a>
       <nav>
         <a href="projekte.html">Projekte</a>
         <a href="kontakt.html">Kontakt</a>
