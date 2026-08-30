@@ -364,9 +364,7 @@ h1 .tw-line{display:block; color:var(--blue)}
 @media(min-width:860px){.step-art{justify-self:stretch; max-width:none}}
 .step-art video,.step-art img{
   width:100%; height:auto; aspect-ratio:1116/824; object-fit:cover;
-  mix-blend-mode:multiply; filter:hue-rotate(-42deg) saturate(.92) brightness(1.02);
-  -webkit-mask-image:radial-gradient(115% 115% at 50% 50%, #000 58%, transparent 84%);
-  mask-image:radial-gradient(115% 115% at 50% 50%, #000 58%, transparent 84%);
+  background:var(--bg-2);
   transform:translate3d(0,var(--py,0px),0); will-change:transform;
 }
 .step-mark{display:flex; align-items:center; gap:.95rem; margin-bottom:1.05rem}
