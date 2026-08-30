@@ -25,7 +25,7 @@
 
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --snap: cubic-bezier(0.87, 0, 0.13, 1);
-  --wrap: 1180px;
+  --wrap: 1240px;
   --wide: 1560px;
   --pad: clamp(1.15rem, 4vw, 2.5rem);
   --sec: clamp(4rem, 10vh, 7.5rem);
@@ -199,23 +199,25 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 
 /* Mehrschichtiger Hero: 6 Ebenen, Maus-Parallax */
 .hero-stack{
-  position:relative; aspect-ratio:1/1; width:100%; max-width:640px; margin-inline:auto;
+  position:relative; aspect-ratio:1/1; width:100%; max-width:760px; margin-inline:auto;
   transform:translate3d(0,var(--py,0px),0); will-change:transform;
 }
 @media(min-width:940px){.hero-stack{margin-right:0}}
 .hero-stack .layer{
   position:absolute; height:auto;
-  translate:calc(var(--mx,0) * var(--depth,0) * 1px) calc(var(--my,0) * var(--depth,0) * 1px);
-  transition:translate .18s cubic-bezier(.2,.6,.3,1);
-  will-change:translate; pointer-events:none;
+  will-change:transform; pointer-events:none;
+}
+.hero-stack .l3{
+  -webkit-mask-image:linear-gradient(to right, transparent 0, #000 12%, #000 90%, transparent 100%);
+  mask-image:linear-gradient(to right, transparent 0, #000 12%, #000 90%, transparent 100%);
 }
 /* Position + Groesse je Element (Prozent der 1:1-Buehne) */
-.hero-stack .l1{--depth:6;  left:-2%;  top:32%; width:42%}   /* kleines Fenster hinten  */
-.hero-stack .l2{--depth:11; left:22%;  top:3%;  width:76%}   /* grosses Fenster         */
-.hero-stack .l3{--depth:17; left:-7%;  top:54%; width:114%}  /* Flow-Welle              */
-.hero-stack .l4{--depth:24; left:49%;  top:27%; width:28%}   /* Smartphone vorn         */
-.hero-stack .l5{--depth:32; left:0%;   top:-2%; width:100%}  /* Badge + Orange (SVG)    */
-.hero-stack .l6{--depth:42; left:0%;   top:0%;  width:100%}  /* Funken (SVG)            */
+.hero-stack .l1{left:-2%;  top:32%; width:42%}   /* kleines Fenster hinten  */
+.hero-stack .l2{left:22%;  top:3%;  width:76%}   /* grosses Fenster         */
+.hero-stack .l3{left:-7%;  top:54%; width:114%}  /* Flow-Welle              */
+.hero-stack .l4{left:49%;  top:27%; width:28%}   /* Smartphone vorn         */
+.hero-stack .l5{left:0%;   top:-2%; width:100%}  /* Badge + Orange (SVG)    */
+.hero-stack .l6{left:0%;   top:0%;  width:100%}  /* Funken (SVG)            */
 @media (prefers-reduced-motion: reduce){
   .hero-stack .layer{translate:0 0 !important; transition:none}
 }

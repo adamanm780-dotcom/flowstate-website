@@ -350,28 +350,39 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
 })();
 
 /* ---------------------------------------------------------------
-   16. Hero-Ebenen: Maus-Parallax (nur feine Zeiger)
+   16. Hero-Ebenen: Maus-Parallax (direkt, kraeftig, ohne Umwege)
    --------------------------------------------------------------- */
 (function(){
   var stack = document.getElementById('heroStack');
   if(!stack || reduced || !finePointer) return;
   var hero = stack.closest('.hero') || document.body;
-  var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+  var DEPTH = { l1:12, l2:20, l3:30, l4:42, l5:54, l6:70 };
+  var layers = [];
+  stack.querySelectorAll('.layer').forEach(function(el){
+    var d = 16;
+    el.classList.forEach(function(c){ if(DEPTH[c]) d = DEPTH[c]; });
+    layers.push({ el:el, d:d });
+  });
+  if(!layers.length) return;
 
-  function loop(){
-    cx += (tx - cx) * 0.12;
-    cy += (ty - cy) * 0.12;
-    stack.style.setProperty('--mx', cx.toFixed(3));
-    stack.style.setProperty('--my', cy.toFixed(3));
-    if(Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002){
-      raf = requestAnimationFrame(loop);
-    } else { raf = 0; }
+  var tx = 0, ty = 0, cx = 0, cy = 0, running = false;
+
+  function frame(){
+    cx += (tx - cx) * 0.10;
+    cy += (ty - cy) * 0.10;
+    for(var i = 0; i < layers.length; i++){
+      var L = layers[i];
+      L.el.style.transform = 'translate3d(' + (cx * L.d).toFixed(1) + 'px,' + (cy * L.d * 0.75).toFixed(1) + 'px,0)';
+    }
+    if(Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001){
+      requestAnimationFrame(frame);
+    } else { running = false; }
   }
-  function kick(){ if(!raf) raf = requestAnimationFrame(loop); }
+  function kick(){ if(!running){ running = true; requestAnimationFrame(frame); } }
 
   hero.addEventListener('pointermove', function(e){
     var r = hero.getBoundingClientRect();
-    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;   /* -1 .. 1 */
+    tx = ((e.clientX - r.left) / r.width - 0.5) * 2;
     ty = ((e.clientY - r.top) / r.height - 0.5) * 2;
     kick();
   }, { passive:true });
