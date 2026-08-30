@@ -272,7 +272,9 @@ h1 .tw-line{display:block; color:var(--blue)}
 @media(min-width:860px){.step-art{justify-self:stretch; max-width:none}}
 .step-art video,.step-art img{
   width:100%; height:auto; aspect-ratio:1116/824; object-fit:cover;
-  mix-blend-mode:multiply;
+  mix-blend-mode:multiply; filter:brightness(1.03);
+  -webkit-mask-image:radial-gradient(115% 115% at 50% 50%, #000 58%, transparent 84%);
+  mask-image:radial-gradient(115% 115% at 50% 50%, #000 58%, transparent 84%);
   transform:translate3d(0,var(--py,0px),0); will-change:transform;
 }
 .step-mark{display:flex; align-items:center; gap:.95rem; margin-bottom:1.05rem}
@@ -592,6 +594,65 @@ footer{background:var(--ink); color:#93A5C4; padding-block:2.6rem; border-top:1p
 
 .pagehead{padding-block:clamp(2.6rem,7vh,4.6rem) clamp(1.5rem,4vh,2.5rem)}
 .pagehead h1{margin-block:.9rem 1rem}
+
+/* --- Referenz-Showcase: Tabs + gefaecherte Screenshots ------ */
+.showcase{margin-top:2.8rem}
+.tabs{
+  display:flex; flex-wrap:wrap; gap:.4rem; padding:.45rem;
+  background:var(--white); border:1px solid var(--line); border-radius:999px;
+  width:max-content; max-width:100%;
+}
+.tab{
+  font-family:var(--f-display); font-weight:700; font-size:1rem; letter-spacing:.01em;
+  color:var(--ink-soft); background:transparent; border:none; cursor:pointer;
+  padding:.62rem 1.3rem; border-radius:999px;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.tab:hover{color:var(--ink)}
+.tab.is-on{background:var(--blue); color:#fff}
+.panel{margin-top:2.4rem}
+.js .panel{display:none}
+.js .panel.is-on{display:grid}
+.panel{display:grid; gap:clamp(2rem,5vw,3.5rem); align-items:center}
+@media(min-width:900px){.panel{grid-template-columns:.9fr 1.1fr}}
+@keyframes panelIn{from{opacity:0; transform:translateY(16px)}}
+.js .panel.is-on{animation:panelIn .5s var(--ease) both}
+.panel-copy h3{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem); margin-bottom:.8rem; color:var(--blue)}
+.panel-copy > p{color:var(--ink-soft); max-width:46ch}
+.gbadge{display:flex; align-items:center; gap:.7rem; margin-top:1.5rem}
+.gword{font-family:var(--f-body); font-weight:600; font-size:1.35rem; letter-spacing:-.02em}
+.gword b{font-weight:600}
+.gw-b{color:#4285F4}.gw-r{color:#EA4335}.gw-y{color:#FBBC05}.gw-g{color:#34A853}
+.gstars{color:#F4B400; letter-spacing:.1em; font-size:1.05rem}
+.panel-copy blockquote{
+  margin:.9rem 0 0; font-style:italic; color:var(--ink-soft); line-height:1.55;
+  border-left:3px solid var(--tint-2); padding-left:1rem; max-width:52ch;
+}
+.gname{font-family:var(--f-display); font-weight:700; margin-top:.7rem}
+.gdomain{
+  display:inline-block; margin-top:.4rem; font-family:var(--f-display); font-weight:700;
+  color:var(--blue); text-decoration:none; border-bottom:2px solid var(--tint-2);
+  transition:border-color .25s var(--ease), color .25s var(--ease);
+}
+a.gdomain:hover{color:var(--blue-deep); border-color:var(--blue)}
+span.gdomain{color:var(--ink-mute); border-color:transparent}
+.fan{position:relative; min-height:clamp(300px,42vw,470px)}
+.fan-card{
+  position:absolute; border-radius:8px; overflow:hidden; background:#fff;
+  border:1px solid var(--line); box-shadow:0 30px 60px -26px rgba(11,27,51,.45);
+  transition:transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.fan-card img{width:100%; height:100%; object-fit:cover; object-position:top; display:block}
+.fan .f1{left:0; top:8%; width:60%; aspect-ratio:4/3; transform:rotate(-7deg); z-index:3}
+.fan .f2{right:6%; top:0; width:55%; aspect-ratio:4/3; transform:rotate(5deg); z-index:2}
+.fan .f3{right:0; bottom:2%; width:52%; aspect-ratio:4/3; transform:rotate(12deg); z-index:1}
+.fan:hover .f1{transform:rotate(-9deg) translate(-2%,-2%)}
+.fan:hover .f2{transform:rotate(7deg) translate(2%,-2%)}
+.fan:hover .f3{transform:rotate(15deg) translate(2%,2%)}
+@keyframes fanIn{from{opacity:0; translate:0 30px}}
+.js .panel.is-on .fan-card{animation:fanIn .65s var(--ease) both}
+.js .panel.is-on .f2{animation-delay:.1s}
+.js .panel.is-on .f3{animation-delay:.2s}
 
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{

@@ -425,3 +425,32 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     }
   });
 })();
+
+/* ---------------------------------------------------------------
+   15. Referenz-Showcase: Tabs
+   --------------------------------------------------------------- */
+(function(){
+  var tabs = document.querySelectorAll('.tab[role="tab"]');
+  if(!tabs.length) return;
+  /* Init: inaktive Panels fuer Screenreader verstecken (nur mit JS) */
+  tabs.forEach(function(t){
+    var p = document.getElementById(t.getAttribute('aria-controls'));
+    if(p && !p.classList.contains('is-on')) p.hidden = true;
+  });
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var target = document.getElementById(tab.getAttribute('aria-controls'));
+      if(!target) return;
+      tabs.forEach(function(t){
+        t.classList.remove('is-on'); t.setAttribute('aria-selected','false');
+        var p = document.getElementById(t.getAttribute('aria-controls'));
+        if(p){ p.classList.remove('is-on'); p.hidden = true; }
+      });
+      tab.classList.add('is-on'); tab.setAttribute('aria-selected','true');
+      target.hidden = false;
+      /* Reflow, damit die Einflug-Animation neu startet */
+      void target.offsetWidth;
+      target.classList.add('is-on');
+    });
+  });
+})();

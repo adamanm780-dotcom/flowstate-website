@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=7">
 <link rel="preload" as="image" href="assets/kurhaus-hero.webp" fetchpriority="high">
 </head>
 <body>
@@ -178,30 +178,84 @@
   </div>
 </section>
 
-<!-- ===== ARBEITEN (Teaser mit echten Screenshots) ===== -->
+<!-- ===== ARBEITEN: Tab-Showcase mit gefaecherten Screenshots ===== -->
 <section class="sec" id="arbeiten">
   <div class="wrap">
     <p class="eyebrow rv">Unsere Arbeiten</p>
     <h2 data-split>Echte Kunden. Echte Seiten. Prüfen Sie selbst.</h2>
 
-    <div class="works-teaser">
-      <a class="wt rv" data-i style="--i:1" href="https://juwelier-benjamin-wiesbaden.de" target="_blank" rel="noopener">
-        <img src="assets/proj-benjamin.webp" width="1400" height="735" alt="Startseite der Website von Juwelier Benjamin" loading="lazy">
-        <span class="wt-cap">
-          <span><h3>Juwelier Benjamin</h3><em>Wiesbaden · Schmuck &amp; Uhren</em></span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v2h3.6l-9.8 9.8 1.4 1.4L19 6.4V10h2V3h-7zM5 5h5V3H3v18h18v-7h-2v5H5V5z"/></svg>
-        </span>
-      </a>
-      <a class="wt rv" data-i style="--i:2" href="projekte.html">
-        <img src="assets/proj-mehlhorn.webp" width="1600" height="687" alt="Behandlungsfoto aus dem Laserzentrum Häusler-Mehlhorn" loading="lazy">
-        <span class="wt-cap">
-          <span><h3>Laserzentrum Häusler-Mehlhorn</h3><em>Chemnitz · Hautmedizin</em></span>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg>
-        </span>
-      </a>
+    <div class="showcase rv">
+      <div class="tabs" role="tablist" aria-label="Branchen">
+        <button class="tab is-on" role="tab" id="tab-juwelier" aria-controls="panel-juwelier" aria-selected="true">Juwelier</button>
+        <button class="tab" role="tab" id="tab-haut" aria-controls="panel-haut" aria-selected="false">Hautmedizin</button>
+        <button class="tab" role="tab" id="tab-ihre" aria-controls="panel-ihre" aria-selected="false">Ihre Branche</button>
+      </div>
+
+      <div class="panel is-on" role="tabpanel" id="panel-juwelier" aria-labelledby="tab-juwelier">
+        <div class="panel-copy">
+          <h3>Websites für Juweliere</h3>
+          <p>Schmuck kauft niemand bei einem Betrieb, dessen Website nach 2010 aussieht.
+             Für Juwelier Benjamin haben wir eine dunkle Luxus-Inszenierung mit
+             angebundenem Shop gebaut — und pflegen sie laufend.</p>
+          <div class="gbadge">
+            <span class="gword"><b class="gw-b">G</b><b class="gw-r">o</b><b class="gw-y">o</b><b class="gw-b">g</b><b class="gw-g">l</b><b class="gw-r">e</b></span>
+            <span class="gstars" aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote>„Das Team hat meine Ideen professionell umgesetzt und eine moderne, ansprechende Website sowie ein passendes Logo gestaltet. Das Ergebnis wirkt professionell und durchdacht."</blockquote>
+          <p class="gname">— Familie Schindlmeier</p>
+          <a class="gdomain" href="https://juwelier-benjamin-wiesbaden.de" target="_blank" rel="noopener">juwelier-benjamin-wiesbaden.de</a>
+        </div>
+        <div class="fan" aria-hidden="false">
+          <figure class="fan-card f1"><img src="assets/proj-benjamin.webp" alt="Startseite von Juwelier Benjamin" loading="lazy" width="1400" height="735"></figure>
+          <figure class="fan-card f2"><img src="assets/bj-ringe.webp" alt="Verlobungsringe-Seite von Juwelier Benjamin" loading="lazy" width="1280" height="960"></figure>
+          <figure class="fan-card f3"><img src="assets/bj-gold.webp" alt="Goldschmiede-Seite von Juwelier Benjamin" loading="lazy" width="1280" height="960"></figure>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-haut" aria-labelledby="tab-haut">
+        <div class="panel-copy">
+          <h3>Websites für Praxen</h3>
+          <p>Patienten entscheiden in Sekunden, ob eine Praxis Vertrauen weckt.
+             Für das Dermatologische Laserzentrum Häusler-Mehlhorn in Chemnitz haben
+             wir die komplette Website neu gestaltet.</p>
+          <div class="gbadge">
+            <span class="gword"><b class="gw-b">G</b><b class="gw-r">o</b><b class="gw-y">o</b><b class="gw-b">g</b><b class="gw-g">l</b><b class="gw-r">e</b></span>
+            <span class="gstars" aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote>„Fantastisches Team und ein absolut überzeugendes Ergebnis. Schon der erste Entwurf hat unsere Vorstellung perfekt getroffen. 100 % Empfehlung!"</blockquote>
+          <p class="gname">— Paul Mehlhorn</p>
+          <span class="gdomain">Live-Link folgt in Kürze</span>
+        </div>
+        <div class="fan">
+          <figure class="fan-card f1"><img src="assets/proj-mehlhorn.webp" alt="Laserbehandlung im Laserzentrum Häusler-Mehlhorn" loading="lazy" width="1600" height="687"></figure>
+          <figure class="fan-card f2"><img src="assets/mehl-praxis.webp" alt="Praxis in der Leipziger Straße" loading="lazy" width="900" height="700"></figure>
+          <figure class="fan-card f3"><img src="assets/mehl-laser.webp" alt="Laserbehandlung Detail" loading="lazy" width="900" height="700"></figure>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-ihre" aria-labelledby="tab-ihre">
+        <div class="panel-copy">
+          <h3>Websites für Ihren Betrieb</h3>
+          <p>Handwerk, Gastronomie, Friseur, Einzelhandel — wir bauen Ihre Seite
+             komplett fertig, bevor Sie einen Cent zahlen. Sie sehen das Ergebnis
+             und entscheiden danach.</p>
+          <div class="gbadge">
+            <span class="gword"><b class="gw-b">G</b><b class="gw-r">o</b><b class="gw-y">o</b><b class="gw-b">g</b><b class="gw-g">l</b><b class="gw-r">e</b></span>
+            <span class="gstars" aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote>„Unglaublich nette Jungs, extrem ambitioniert. Klare Empfehlung."</blockquote>
+          <p class="gname">— Meisam Hoseini</p>
+          <a class="gdomain" href="kontakt.html">Kostenloses Gespräch vereinbaren</a>
+        </div>
+        <div class="fan">
+          <figure class="fan-card f1"><img src="assets/schritt-2-poster.webp" alt="" loading="lazy" width="760" height="561"></figure>
+          <figure class="fan-card f2"><img src="assets/schritt-1-poster.webp" alt="" loading="lazy" width="760" height="561"></figure>
+          <figure class="fan-card f3"><img src="assets/schritt-3-poster.webp" alt="" loading="lazy" width="760" height="561"></figure>
+        </div>
+      </div>
     </div>
 
-    <p class="rv" style="margin-top:2.4rem">
+    <p class="rv" style="margin-top:2.6rem">
       <a class="btn btn-ghost" href="projekte.html">Alle Projekte ansehen</a>
     </p>
   </div>
@@ -436,6 +490,6 @@
   </div>
 </dialog>
 
-<script src="assets/app.js?v=6"></script>
+<script src="assets/app.js?v=7"></script>
 </body>
 </html>
