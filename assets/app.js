@@ -491,3 +491,22 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     stage.addEventListener('pointerleave', function(){ tx = 0; ty = 0; kick(); }, { passive:true });
   });
 })();
+
+/* ---------------------------------------------------------------
+   17. FAQ: Papke-Akkordeon — eins offen, weiche Hoehe
+   --------------------------------------------------------------- */
+(function(){
+  var items = document.querySelectorAll('.faq details');
+  if(!items.length) return;
+
+  items.forEach(function(d){
+    /* Inhalt bleibt im DOM gerendert; Sichtbarkeit steuert die Klasse */
+    d.setAttribute('open', '');
+    d.querySelector('summary').addEventListener('click', function(e){
+      e.preventDefault();
+      var willOpen = !d.classList.contains('is-open');
+      items.forEach(function(other){ other.classList.remove('is-open'); });
+      if(willOpen) d.classList.add('is-open');
+    });
+  });
+})();

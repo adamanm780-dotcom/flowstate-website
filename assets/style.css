@@ -823,20 +823,61 @@ h1 .tw-line{display:block; color:var(--blue)}
 .team-note{margin-top:1.4rem; font-size:.92rem; color:var(--ink-mute)}
 .team-note b{font-family:var(--f-display); font-weight:700; color:var(--ink-soft)}
 
-/* --- FAQ ---------------------------------------------------- */
-.faq{margin-top:2.8rem; border-top:1px solid var(--line)}
-.faq details{border-bottom:1px solid var(--line)}
+/* --- FAQ: Papke-Bauart (Karten + Chevron-Chip + weiche Hoehe) ---- */
+.faq{margin-top:2.8rem; display:grid; gap:.9rem; max-width:900px}
+.faq details{
+  background:var(--white); border:1px solid var(--line); border-radius:12px;
+  box-shadow:0 8px 22px -16px rgba(27,39,51,.35); overflow:hidden;
+  transition:box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.faq details.is-open,
+html:not(.js) .faq details[open]{
+  box-shadow:0 18px 40px -20px rgba(27,39,51,.4);
+  border-color:var(--tint-2);
+}
 .faq summary{
-  cursor:pointer; list-style:none; padding:1.3rem 2.6rem 1.3rem 0; position:relative;
-  font-family:var(--f-display); font-weight:700; font-size:clamp(1.1rem,1rem + .4vw,1.32rem);
+  cursor:pointer; list-style:none; display:flex; align-items:center;
+  justify-content:space-between; gap:1rem; padding:1.15rem 1.4rem;
+  font-family:var(--f-display); font-weight:700;
+  font-size:clamp(1.05rem,1rem + .3vw,1.22rem);
   transition:color .2s var(--ease);
 }
-.faq summary::-webkit-details-marker{display:none}
 .faq summary:hover{color:var(--blue)}
-.faq summary::after{content:""; position:absolute; right:.35rem; top:50%; width:14px; height:2px; background:var(--blue); transform:translateY(-50%)}
-.faq summary::before{content:""; position:absolute; right:calc(.35rem + 6px); top:50%; width:2px; height:14px; background:var(--blue); transition:opacity .25s var(--ease), transform .3s var(--ease); transform:translateY(-50%)}
-.faq details[open] summary::before{opacity:0; transform:translateY(-50%) rotate(90deg)}
-.faq .answer{padding:0 0 1.5rem; color:var(--ink-soft); max-width:70ch}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before,.faq summary::after{content:none}
+.faq-chevron{
+  flex:none; width:32px; height:32px; border-radius:50%;
+  background:var(--tint); position:relative;
+  transition:background-color .25s var(--ease), transform .35s var(--ease);
+}
+.faq-chevron::before{
+  content:""; position:absolute; top:50%; left:50%; width:9px; height:9px;
+  border-right:2.4px solid var(--blue-deep); border-bottom:2.4px solid var(--blue-deep);
+  transform:translate(-50%,-65%) rotate(45deg);
+  transition:border-color .25s var(--ease);
+}
+.faq details.is-open .faq-chevron,
+html:not(.js) .faq details[open] .faq-chevron{
+  background:var(--blue); transform:rotate(180deg);
+}
+.faq details.is-open .faq-chevron::before,
+html:not(.js) .faq details[open] .faq-chevron::before{
+  border-color:#fff;
+}
+.faq .answer{color:var(--ink-soft); max-width:none}
+.faq .answer-in{padding:0 1.4rem 1.3rem; max-width:70ch}
+/* Weiche Hoehen-Animation nur mit JS (Klasse steuert, Grid-Rows animieren) */
+.js .faq details .answer{
+  display:grid; grid-template-rows:0fr;
+  transition:grid-template-rows .45s var(--ease);
+}
+.js .faq details .answer > .answer-in{overflow:hidden; min-height:0}
+.js .faq details.is-open .answer{grid-template-rows:1fr}
+.js .faq details .answer-in{
+  opacity:0; transform:translateY(-4px);
+  transition:opacity .35s var(--ease) .08s, transform .35s var(--ease) .08s;
+}
+.js .faq details.is-open .answer-in{opacity:1; transform:none}
 
 /* --- Angebot-Popup (mit Higgsfield-Art) --------------------- */
 .modal{border:none; padding:0; background:transparent; max-width:min(94vw,480px); width:100%; margin:auto; overflow:visible}
