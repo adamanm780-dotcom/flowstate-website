@@ -510,3 +510,67 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     });
   });
 })();
+
+/* ---------------------------------------------------------------
+   18. FAQ: Papke-3D-Scroll-Engine (Original-Mathematik der
+   zahnarzt-papke.vercel.app — rotateX d*24, translateZ -|d|*165,
+   translateY d*26, perspective 1150, flach in Viewport-Mitte)
+   --------------------------------------------------------------- */
+(function(){
+  if(reduced) return;
+  var items = Array.prototype.slice.call(document.querySelectorAll('.faq details'));
+  if(!items.length) return;
+
+  function clamp(v, a, b){ return v < a ? a : (v > b ? b : v); }
+
+  var vh = window.innerHeight, ticking = false;
+  var tops = [], heights = [];
+
+  function absTop(el){ var y = 0; while(el){ y += el.offsetTop; el = el.offsetParent; } return y; }
+  function measure(){
+    vh = window.innerHeight;
+    for(var i = 0; i < items.length; i++){
+      tops[i] = absTop(items[i]); heights[i] = items[i].offsetHeight;
+    }
+  }
+
+  function update(){
+    ticking = false;
+    var sy = window.pageYOffset;
+    for(var k = 0; k < items.length; k++){
+      var top = tops[k] - sy;
+      var h = heights[k];
+      if(top + h < -260 || top > vh + 260) continue;
+      var el = items[k];
+      var d = clamp((top + h / 2 - vh / 2) / (vh * 0.62), -1, 1);
+      var ad = Math.abs(d);
+      if(ad < 0.035){
+        if(el.style.transform){ el.style.transform = ''; }
+        continue;
+      }
+      var rotX = d * 24;
+      var tz = -ad * 165;
+      var ty = d * 26;
+      el.style.transform =
+        'perspective(1150px) translateY(' + ty.toFixed(1) +
+        'px) translateZ(' + tz.toFixed(1) + 'px) rotateX(' + rotX.toFixed(2) + 'deg)';
+    }
+  }
+
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  window.addEventListener('resize', function(){ measure(); onScroll(); }, { passive:true });
+  window.addEventListener('load', function(){ measure(); onScroll(); });
+
+  /* Akkordeon aendert Hoehen -> nach jedem Toggle neu vermessen */
+  items.forEach(function(d){
+    d.querySelector('summary').addEventListener('click', function(){
+      setTimeout(function(){ measure(); onScroll(); }, 60);
+      setTimeout(function(){ measure(); onScroll(); }, 520);
+    });
+  });
+
+  measure(); update();
+  setTimeout(function(){ measure(); update(); }, 200);
+  setTimeout(function(){ measure(); update(); }, 500);
+})();
