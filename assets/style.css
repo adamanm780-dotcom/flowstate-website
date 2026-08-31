@@ -824,7 +824,22 @@ h1 .tw-line{display:block; color:var(--blue)}
 .team-note b{font-family:var(--f-display); font-weight:700; color:var(--ink-soft)}
 
 /* --- FAQ: Papke-Bauart (Karten + Chevron-Chip + weiche Hoehe) ---- */
-.faq{margin-top:2.8rem; display:grid; gap:.9rem; max-width:900px}
+.faq{margin-top:2.8rem; display:grid; gap:.9rem; max-width:860px; margin-inline:auto}
+#faq .eyebrow{justify-content:center}
+#faq h2{text-align:center; margin-inline:auto}
+/* Papke-Einflug: Karten kippen nacheinander herein */
+.js .faq details{
+  opacity:0; transform:perspective(950px) rotateX(16deg) translateY(30px);
+  transition:opacity .7s var(--ease), transform .7s var(--ease),
+             box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.js .faq.in details{opacity:1; transform:none}
+.js .faq.in details:nth-child(2){transition-delay:.09s}
+.js .faq.in details:nth-child(3){transition-delay:.18s}
+.js .faq.in details:nth-child(4){transition-delay:.27s}
+.js .faq.in details:nth-child(5){transition-delay:.36s}
+.js .faq.in details:nth-child(6){transition-delay:.45s}
+.js .faq.in details:nth-child(7){transition-delay:.54s}
 .faq details{
   background:var(--white); border:1px solid var(--line); border-radius:12px;
   box-shadow:0 8px 22px -16px rgba(27,39,51,.35); overflow:hidden;
