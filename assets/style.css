@@ -1369,3 +1369,32 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
   margin-top:2.4rem; padding-top:1.3rem; border-top:1px solid var(--line);
   font-size:.88rem; color:var(--ink-mute);
 }
+
+
+/* ============================================================
+   Mobile-Feinschliff (31.08. Nacht): Bewertungen nie angeschnitten,
+   Team mittig, zwei Rufnummern im Finale.
+   ============================================================ */
+
+/* Bewertungs-Slider: Karten fuellen exakt — nie ein Anschnitt.
+   1 Karte mobil, 2 ab Tablet, 3 ab Desktop; Snap sitzt buendig. */
+.qtrack{grid-auto-columns:100%; gap:1rem; scroll-padding-inline:0}
+.qtrack .quote{scroll-snap-align:start; width:100%; max-width:none; min-width:0}
+@media(min-width:700px){.qtrack{grid-auto-columns:calc((100% - 1rem) / 2)}}
+@media(min-width:1080px){.qtrack{grid-auto-columns:calc((100% - 2rem) / 3)}}
+
+/* Team: komplett mittig */
+#team .eyebrow{justify-content:center}
+#team h2{text-align:center; margin-inline:auto}
+#team .team{margin-inline:auto; justify-items:stretch}
+#team .person{text-align:center}
+#team .person .avatar{margin-inline:auto}
+#team .team-note{text-align:center}
+
+/* Finale: zwei Rufnummern nebeneinander */
+.finale-tels{
+  display:flex; flex-wrap:wrap; gap:.9rem; justify-content:center;
+  align-items:center; margin-top:2.2rem;
+}
+.finale-tels .bigtel{margin-top:0; font-size:clamp(1.25rem,1rem + 1.3vw,1.9rem); padding:.7rem 1.5rem .7rem .8rem}
+.finale-tels .bigtel i{width:44px; height:44px}

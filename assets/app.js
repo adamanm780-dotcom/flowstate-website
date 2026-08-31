@@ -246,15 +246,43 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   var vids = document.querySelectorAll('video[data-auto]');
   if(!vids.length) return;
   if(reduced){ vids.forEach(function(v){ v.removeAttribute('autoplay'); v.pause(); }); return; }
-  if(!('IntersectionObserver' in window)) return;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      var v = e.target;
-      if(e.isIntersecting){ v.play().catch(function(){}); }
-      else { v.pause(); }
-    });
-  }, { threshold:0.25 });
-  vids.forEach(function(v){ io.observe(v); });
+
+  /* Handy-Haertung: Eigenschaften explizit setzen (Attribute reichen
+     manchen Mobil-Browsern nicht) */
+  vids.forEach(function(v){
+    v.muted = true; v.playsInline = true; v.defaultMuted = true;
+    v.setAttribute('muted', ''); v.setAttribute('webkit-playsinline', '');
+  });
+
+  var visible = new Set();
+  function tryPlay(v){
+    v.muted = true;
+    var pr = v.play();
+    if(pr && pr.catch) pr.catch(function(){});
+  }
+
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var v = e.target;
+        if(e.isIntersecting){ visible.add(v); tryPlay(v); }
+        else { visible.delete(v); v.pause(); }
+      });
+    }, { threshold:0.2 });
+    vids.forEach(function(v){ io.observe(v); });
+  } else {
+    vids.forEach(function(v){ visible.add(v); tryPlay(v); });
+  }
+
+  /* Fallback fuer Stromspar-/Datensparmodus: erste Beruehrung
+     entsperrt und startet alles Sichtbare */
+  function unlock(){
+    visible.forEach(tryPlay);
+    document.removeEventListener('touchstart', unlock);
+    document.removeEventListener('pointerdown', unlock);
+  }
+  document.addEventListener('touchstart', unlock, { passive:true, once:true });
+  document.addEventListener('pointerdown', unlock, { passive:true, once:true });
 })();
 
 /* ---------------------------------------------------------------
