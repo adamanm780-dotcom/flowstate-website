@@ -1,1016 +1,747 @@
-<!DOCTYPE html>
-<html lang="de" class="is-loading">
+<!doctype html>
+<html lang="de">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#05070d" />
-
-<!-- Reveal-Failsafe · muss vor dem Stylesheet laufen, sonst flackert es.
-     Alle Scroll-Reveals starten auf opacity:0 und werden per JS eingeblendet.
-     Ohne diese Absicherung bliebe die halbe Seite dauerhaft unsichtbar, sobald
-     script.js nicht lädt, blockiert wird oder früh eine Exception wirft.
-     Ablauf: .js setzt den versteckten Ausgangszustand; meldet sich das
-     Reveal-System nicht binnen 4s über data-reveal-ready, wird .js entfernt
-     und alles ist sichtbar. -->
-<script>
-(function(){
-  var d = document.documentElement;
-  d.className += ' js';
-  setTimeout(function(){
-    if (!d.hasAttribute('data-reveal-ready')) d.className = d.className.replace(/\bjs\b/, '');
-  }, 4000);
-})();
-</script>
-
-<title>FlowState, Webdesign & KI-Lösungen für Unternehmen | Wiesbaden</title>
-<meta name="description" content="FlowState ist die Webagentur für Unternehmen, die mehr wollen als ein Template: maßgeschneidertes Webdesign, KI-Berater & Conversion-optimierte Seiten. Risikofrei: Sie zahlen erst, wenn es Ihnen gefällt." />
-<meta name="author" content="FlowState" />
-<meta name="robots" content="index, follow, max-image-preview:large" />
-<meta name="format-detection" content="telephone=no" />
-<link rel="canonical" href="https://yourflowstate.de/" />
-
-<!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="de_DE" />
-<meta property="og:site_name" content="FlowState" />
-<meta property="og:title" content="FlowState, Webdesign & KI-Lösungen für Unternehmen" />
-<meta property="og:description" content="Maßgeschneiderte Webseiten + KI-Berater für Unternehmen. Risikofreies Modell, Sie zahlen erst, wenn es Ihnen gefällt." />
-<meta property="og:url" content="https://yourflowstate.de/" />
-<meta property="og:image" content="https://yourflowstate.de/assets/og-cover.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="FlowState, Webdesign & KI-Lösungen" />
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="FlowState, Webdesign & KI-Lösungen für Unternehmen" />
-<meta name="twitter:description" content="Maßgeschneiderte Webseiten + KI-Berater. Sie zahlen erst, wenn es Ihnen gefällt." />
-<meta name="twitter:image" content="https://yourflowstate.de/assets/og-cover.jpg" />
-
-<!-- Icons -->
-<link rel="icon" type="image/webp" href="assets/logo.webp" />
-<link rel="apple-touch-icon" href="assets/logo.webp" />
-
-<!-- Performance: critical asset preload (Fonts werden lokal aus
-     assets/fonts/ ausgeliefert, nicht vom Google-CDN, DSGVO-konform) -->
-<link rel="preload" as="image" href="assets/logo.webp" fetchpriority="high" />
-<link rel="stylesheet" href="assets/fonts/local-fonts.css" />
-<link rel="stylesheet" href="style.css?v=20260805" />
-
-<!-- Structured Data: Organization -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "FlowState",
-  "alternateName": "Flow State",
-  "url": "https://yourflowstate.de/",
-  "logo": "https://yourflowstate.de/assets/logo.webp",
-  "description": "FlowState ist eine Webdesign- und KI-Agentur aus Wiesbaden. Wir bauen maßgeschneiderte Webseiten und intelligente KI-Berater für Unternehmen.",
-  "founder": [
-    { "@type": "Person", "name": "Benet Tilinski", "jobTitle": "Founder & Owner" },
-    { "@type": "Person", "name": "Adrian Pötzinger", "jobTitle": "Founder & Owner" }
-  ],
-  "areaServed": "DE",
-  "contactPoint": [
-    { "@type": "ContactPoint", "contactType": "sales", "telephone": "+49-176-45289172", "email": "flow-state@gmx.de", "availableLanguage": ["de","en"] },
-    { "@type": "ContactPoint", "contactType": "customer service", "telephone": "+49-178-1868874", "availableLanguage": ["de","en"] }
-  ]
-}
-</script>
-
-<!-- Structured Data: WebSite -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "FlowState",
-  "url": "https://yourflowstate.de/",
-  "inLanguage": "de-DE",
-  "publisher": { "@type": "Organization", "name": "FlowState" }
-}
-</script>
-
-<!-- Structured Data: ProfessionalService -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlowState — Website erstellen lassen in Wiesbaden</title>
+<meta name="description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="assets/style.css?v=26">
+<link rel="preload" as="image" href="assets/hero-illu.webp" fetchpriority="high">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "FlowState",
-  "image": "https://yourflowstate.de/assets/logo.webp",
-  "url": "https://yourflowstate.de/",
-  "telephone": "+49-176-45289172",
+  "description": "Webagentur aus Wiesbaden. Wir bauen die Website komplett fertig — bezahlt wird erst, wenn sie gefällt.",
+  "url": "https://flowstate-redesign.vercel.app/",
+  "telephone": "+49 178 1868874",
   "email": "flow-state@gmx.de",
-  "priceRange": "€€€",
-  "areaServed": { "@type": "Country", "name": "Deutschland" },
-  "address": { "@type": "PostalAddress", "addressCountry": "DE", "addressRegion": "Hessen" },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Leistungen",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Webdesign & Webentwicklung", "description": "Maßgeschneiderte Webseiten für Unternehmen, performance- und conversion-optimiert." } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "KI-Berater & AI-Assistenten", "description": "Telefonische und text-basierte KI-Assistenten für Kundenservice und Lead-Qualifizierung." } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO & GEO Optimierung", "description": "Suchmaschinen- und KI-Auffindbarkeit für nachhaltiges organisches Wachstum." } }
-    ]
-  }
-}
-</script>
-
-<!-- Structured Data: FAQPage (powers Google FAQ Rich Results + AI training data) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Was kostet eine Website bei FlowState?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Projektabhängig, jede Website ist individuell, deshalb nennen wir keine Pauschalpreise. Schreiben Sie uns kurz Ihr Vorhaben, und Sie bekommen innerhalb von 24 Stunden ein konkretes Angebot. Beim Risikofreien Modell zahlen Sie erst, wenn das fertige Ergebnis Sie überzeugt." }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie funktioniert das risikofreie Modell genau?",
-      "acceptedAnswer": { "@type": "Answer", "text": "FlowState baut die komplette Website im Voraus, Design, Entwicklung, Inhalte. Kostenlos und ohne Verpflichtung. Erst wenn Sie das fertige Ergebnis sehen und überzeugt sind, kommen Kosten in Bewegung. Gefällt es nicht? Sie schulden uns nichts." }
-    },
-    {
-      "@type": "Question",
-      "name": "Wie lange dauert der Bau einer Website?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Im Schnitt 21 Tage vom ersten Brief-Gespräch bis zum Live-Gang. Komplexere Projekte mit KI-Integration oder Multi-Page-Strukturen können bis zu 6 Wochen dauern." }
-    },
-    {
-      "@type": "Question",
-      "name": "Bauen Sie auch KI-Berater oder telefonische AI-Assistenten?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Ja. KI-Berater sind eine Kernleistung, sowohl text-basierte Chatbots als auch telefonische AI-Assistenten, die Anrufe annehmen, Termine buchen und Leads qualifizieren. Auch automatisierter Kundenservice und Image-Optimierung gehören zum Portfolio." }
-    },
-    {
-      "@type": "Question",
-      "name": "Welche Branchen betreut FlowState?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Schwerpunkte: Juweliere, Werkstätten, Arzt- und Therapie-Praxen, Handwerk und lokale Dienstleister im gesamten DACH-Raum. Besonders viel Erfahrung mit traditionellen Familienbetrieben, die einen frischen digitalen Auftritt brauchen." }
-    },
-    {
-      "@type": "Question",
-      "name": "Was unterscheidet FlowState von anderen Webagenturen?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Vier Dinge: Risikofreies Vorab-Bauen (im DACH-Raum einzigartig), integrierte KI-Berater aus einer Hand, Lighthouse-Scores konstant über 95, persönliche Betreuung direkt durch beide Gründer Benet Tilinski und Adrian Pötzinger." }
-    }
-  ]
-}
-</script>
-
-<!-- Structured Data: Founders -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "@id": "https://yourflowstate.de/#benet",
-      "name": "Benet Tilinski",
-      "jobTitle": "Founder & Owner",
-      "worksFor": { "@type": "Organization", "name": "FlowState" },
-      "telephone": "+49-176-45289172"
-    },
-    {
-      "@type": "Person",
-      "@id": "https://yourflowstate.de/#adrian",
-      "name": "Adrian Pötzinger",
-      "jobTitle": "Founder & Owner",
-      "worksFor": { "@type": "Organization", "name": "FlowState" },
-      "alumniOf": { "@type": "Organization", "name": "AOE GmbH" },
-      "telephone": "+49-178-1868874"
-    }
-  ]
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Wiesbaden",
+    "addressRegion": "Hessen",
+    "addressCountry": "DE"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 50.0825, "longitude": 8.2400 },
+  "areaServed": ["Wiesbaden", "Mainz", "Frankfurt am Main", "Rheingau", "Taunus", "Rhein-Main-Gebiet"],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "09:00", "closes": "18:00"
+  },
+  "knowsAbout": ["Webdesign", "Website erstellen", "Local SEO", "Lokale Suchmaschinenoptimierung"]
 }
 </script>
 </head>
 <body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
 
-<!-- Preloader · shown until window load + min-display time -->
-<div class="preloader" aria-hidden="true">
-  <div class="preloader-inner">
-    <div class="preloader-logo">
-      <img src="assets/logo.webp" alt="" width="1024" height="1024" />
-      <span>Flow<em>State</em></span>
-    </div>
-    <div class="preloader-bar" role="progressbar" aria-label="Seite wird geladen">
-      <div class="preloader-fill"></div>
-    </div>
-    <div class="preloader-status">Wird geladen…</div>
-  </div>
-</div>
-
-<!-- Ambient background light -->
-<div class="ambient" aria-hidden="true">
-  <span class="orb orb-cyan"></span>
-  <span class="orb orb-violet"></span>
-  <span class="grid"></span>
-</div>
-
-<!-- Cursor follow glow -->
-<div class="cursor-glow" aria-hidden="true"></div>
-
-<!-- Navigation -->
 <header class="nav">
-  <a href="#top" class="nav-logo" aria-label="FlowState Startseite">
-    <img src="assets/logo.webp" alt="FlowState Logo" width="1024" height="1024" />
-    <span>Flow<em>State</em></span>
-  </a>
-  <nav class="nav-links" aria-label="Hauptnavigation">
-    <a href="#leistungen">Leistungen</a>
-    <a href="partner.html">Partner</a>
-    <a href="#team">Team</a>
-    <a href="#about">Über uns</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#kontakt" class="nav-mobile-cta">Kostenlose Beratung</a>
-  </nav>
-  <a href="#kontakt" class="nav-cta">Kostenlose Beratung</a>
-  <button class="nav-burger" aria-label="Menü öffnen" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="wrap-wide nav-in">
+    <a class="logo" href="index.html" aria-label="FlowState — Start">
+      <svg class="logomark" viewBox="0 0 40 28" aria-hidden="true">
+        <path class="lm-a" d="M2 19 C9 7 16 7 22 14 C27 20 33 20 38 10"/>
+        <path class="lm-b" d="M10 24 C16 16 22 16 28 21"/>
+      </svg><b>FlowState</b></a>
+    <ul class="nav-links">
+      <li><a href="index.html#ablauf">Ablauf</a></li>
+      <li><a href="projekte.html">Projekte</a></li>
+      <li><a href="#angebot" data-open-angebot>Angebot</a></li>
+      <li><a href="index.html#stimmen">Bewertungen</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <a class="nav-tel" href="tel:+491781868874" aria-label="Jetzt anrufen">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>
+      0178 1868874
+    </a>
+    <a class="btn btn-primary" href="kontakt.html">Kostenlose Demo</a>
+  </div>
 </header>
-<div class="nav-backdrop" aria-hidden="true"></div>
 
-<main id="top">
+<main id="main">
 
-  <!-- HERO · LineWaves WebGL background + 3D logo brand mark -->
-  <section class="hero" id="hero">
-    <div class="hero-sticky">
+<!-- ===== HERO: SR-Split ===== -->
+<section class="hero" id="top">
+  <div class="wrap-wide hero-in">
+    <div>
+      <div class="trustline rv">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <small><a href="#stimmen">5,0 &middot; Google-Bewertungen</a></small>
+      </div>
 
-      <!-- WebGL line-waves backdrop -->
-      <div class="hero-aurora line-waves-container"
-           data-line-waves
-           data-speed="0.3"
-           data-inner-line-count="32"
-           data-outer-line-count="40"
-           data-warp-intensity="1.1"
-           data-rotation="-40"
-           data-edge-fade-width="0.25"
-           data-color-cycle-speed="0.1"
-           data-brightness="0.2"
-           data-color1="#3982eb"
-           data-color2="#2ecfdd"
-           data-color3="#a455e6"
-           data-enable-mouse-interaction="true"
-           data-mouse-influence="2.0"
-           aria-hidden="true"></div>
-
-      <h1 class="hero-title" aria-label="Boost Your Company Image">
-        <span class="line"><span>BOOST&nbsp;YOUR</span></span>
-        <span class="line"><span>COMPANY</span></span>
-        <span class="line accent"><span>IMAGE.</span></span>
+      <h1 class="rv" data-i style="--i:1">
+        Website erstellen lassen f&uuml;r
+        <span class="tw-line"><span class="tw" id="tw"
+          data-words="Ihren Betrieb|Handwerk|Zahnarztpraxen|Juweliere|Gastronomie|Friseure">Ihren Betrieb</span></span>
       </h1>
 
-      <div class="hero-foot">
-        <p class="hero-tag">Moderne Webseiten &amp; AI-Lösungen für Unternehmen.</p>
-        <div class="hero-cta-row">
-          <a href="mailto:flow-state@gmx.de?subject=Projektanfrage" class="btn btn-primary"><span>Projekt anfragen</span></a>
-          <a href="#leistungen" class="btn btn-secondary"><span>Leistungen ansehen</span></a>
+      <p class="hero-price rv" data-i style="--i:2">
+        Fertig gebaut, bevor Sie zahlen &mdash; <b>990&nbsp;&euro;</b> <s>statt 1.890&nbsp;&euro;</s>
+      </p>
+
+      <div class="hero-cta rv" data-i style="--i:3">
+        <a class="btn btn-accent" href="tel:+491781868874">Jetzt anrufen</a>
+        <button class="btn btn-ghost" type="button" data-open-angebot>Mehr zum Angebot</button>
+      </div>
+    </div>
+
+    <div class="hero-illu rv" data-i style="--i:2">
+      <div class="hero-stack" id="heroStack" data-parallax="26" aria-hidden="true">
+        <img class="layer l1" src="assets/hero-p1.webp" width="1000" height="736" alt="" loading="lazy">
+        <img class="layer l2" src="assets/hero-p2.webp" width="1000" height="736" alt="" fetchpriority="high">
+        <img class="layer l3" src="assets/hero-p3.webp" width="1000" height="572" alt="" fetchpriority="high">
+        <img class="layer l4" src="assets/hero-p4.webp" width="768" height="1344" alt="" fetchpriority="high">
+        <img class="layer l5" src="assets/hero-l5.svg" width="1100" height="1100" alt="" loading="lazy">
+        <img class="layer l6" src="assets/hero-l6.svg" width="1100" height="1100" alt="" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WARUM ===== -->
+<section class="sec" id="warum">
+  <div class="wrap">
+    <p class="eyebrow rv">Warum FlowState</p>
+    <h2 data-split>Sie gehen kein Risiko ein. Das ist der ganze Unterschied.</h2>
+
+    <div class="reasons">
+      <article class="reason rv" data-i style="--i:1">
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <circle class="i-ring" cx="24" cy="24" r="21"/>
+          <path class="s" d="M24 7 L38 12 v10.5 c0 8.5-6 13.6-14 17 C16 36.1 10 31 10 22.5 V12 Z"/>
+          <circle class="fillt" cx="24" cy="22.5" r="8.5"/>
+          <path class="accent i-check" d="M19.5 22.5 l3.5 3.5 6.5 -7"/>
+        </svg>
+        <h3>Erst sehen, dann zahlen</h3>
+        <p>Wir bauen Ihre Website fertig, bevor Geld fließt. Gefällt sie Ihnen nicht, kostet sie nichts.</p>
+      </article>
+
+      <article class="reason rv" data-i style="--i:2">
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <circle class="fillt" cx="24" cy="27" r="16"/>
+          <circle class="s" cx="24" cy="27" r="16"/>
+          <path class="soft s2" d="M24 13.5 v3 M24 37.5 v3 M10.5 27 h3 M34.5 27 h3"/>
+          <path class="s3 i-bell" d="M33 6 l5.5 4" style="transform-origin:33px 6px"/>
+          <path class="i-min vb" d="M24 27 v-9.5" style="transform-origin:24px 27px"/>
+          <path class="accent i-sec vb" d="M24 27 l6.5 4" style="transform-origin:24px 27px"/>
+          <circle class="dot" cx="24" cy="27" r="1.8"/>
+        </svg>
+        <h3>In 7 Tagen online</h3>
+        <p>Keine sechs Wochen Wartezeit. Sie bekommen einen festen Termin und wir halten ihn.</p>
+      </article>
+
+      <article class="reason rv" data-i style="--i:3">
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path class="i-wave1" d="M12 43 h24"/>
+          <path class="i-wave2" d="M17 46.5 h14"/>
+          <g class="i-pin">
+            <path class="s" d="M24 39 C16 29.5 11 24.6 11 18 A13 13 0 0 1 37 18 C37 24.6 32 29.5 24 39 Z"/>
+            <circle class="fillt" cx="24" cy="18" r="6.5"/>
+            <circle class="accent s2" cx="24" cy="18" r="3"/>
+          </g>
+        </svg>
+        <h3>Aus Wiesbaden, persönlich</h3>
+        <p>Wir stehen bei Ihnen im Laden statt in einem Ticketsystem. Immer dieselben Ansprechpartner.</p>
+      </article>
+
+      <article class="reason rv" data-i style="--i:4">
+        <svg class="ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path class="s" d="M7 9 h30 v20 h-18 l-8 7.5 v-7.5 h-4 Z"/>
+          <g class="i-dots">
+            <circle class="dot d1" cx="15.5" cy="19" r="2"/>
+            <circle class="dot d2" cx="22" cy="19" r="2"/>
+            <circle class="dot d3" cx="28.5" cy="19" r="2"/>
+          </g>
+          <path class="accent i-spark" d="M39 27 l2.2 5 5 2.2 -5 2.2 -2.2 5 -2.2 -5 -5 -2.2 5 -2.2 Z"/>
+        </svg>
+        <h3>Gefunden werden — auch von KI</h3>
+        <p>Ihre Seite ist für Google optimiert und so gebaut, dass ChatGPT und Co. sie als Antwort ausspielen.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WIESBADEN ===== -->
+<section class="wiesbaden" id="wiesbaden">
+  <div class="wiesbaden-bg" data-parallax="46" aria-hidden="true">
+    <img src="assets/kurhaus-night.webp" width="2400" height="1603" alt="" loading="lazy">
+  </div>
+  <div class="wiesbaden-scrim" aria-hidden="true"></div>
+  <div class="wrap wiesbaden-in">
+    <p class="eyebrow rv">Zuhause in Wiesbaden</p>
+    <h2 data-split>Man sieht sich. Am Kurhaus &mdash; und bei Ihnen im Laden.</h2>
+    <p class="lede rv">
+      FlowState ist eine Wiesbadener Agentur. Kein Ticketsystem, keine Warteschleife:
+      <strong>Wir kommen pers&ouml;nlich vorbei</strong> &mdash; vom ersten Gespr&auml;ch
+      bis zur &Uuml;bergabe Ihrer fertigen Website.
+    </p>
+  </div>
+  <p class="wiesbaden-credit">Kurhaus Wiesbaden &middot; Foto: Holger Reinhardt, CC BY-SA 3.0</p>
+</section>
+
+<!-- ===== ABLAUF mit Higgsfield-Videos ===== -->
+<section class="sec sec-tint" id="ablauf">
+  <div class="wrap">
+    <p class="eyebrow rv">So läuft es</p>
+    <h2 data-split>Drei Schritte. Keine Überraschungen.</h2>
+
+    <div class="steps">
+      <article class="step rv">
+        <div>
+          <div class="step-mark"><span class="step-no">1</span><span class="flowline"><i></i><b></b></span></div>
+          <h3>Kurzes Gespräch</h3>
+          <p>15 Minuten am Telefon oder bei Ihnen vor Ort. Wir hören zu, was Ihr Betrieb braucht — mehr nicht. Danach wissen Sie, was Sie bekommen und was es kostet.</p>
+        </div>
+        <div class="step-art">
+          <video data-parallax="34" data-auto autoplay muted loop playsinline preload="metadata"
+                 poster="assets/schritt-1-poster-v2.webp" width="1116" height="824">
+            <source src="assets/schritt-1-v2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </article>
+
+      <article class="step rv">
+        <div>
+          <div class="step-mark"><span class="step-no">2</span><span class="flowline"><i></i><b></b></span></div>
+          <h3>Wir bauen sie fertig</h3>
+          <p>Sie müssen nichts liefern und nichts vorbereiten. Texte, Bilder, Technik — das übernehmen wir. Auf unser Risiko.</p>
+        </div>
+        <div class="step-art">
+          <video data-parallax="34" data-auto autoplay muted loop playsinline preload="metadata"
+                 poster="assets/schritt-2-poster-v2.webp" width="1116" height="824">
+            <source src="assets/schritt-2-v2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </article>
+
+      <article class="step rv">
+        <div>
+          <div class="step-mark"><span class="step-no">3</span><span class="flowline"><i></i><b></b></span></div>
+          <h3>Sie entscheiden</h3>
+          <p>Gefällt sie Ihnen, geht sie online und Sie zahlen. Gefällt sie Ihnen nicht, war es unsere Zeit, nicht Ihr Geld.</p>
+        </div>
+        <div class="step-art">
+          <video data-parallax="34" data-auto autoplay muted loop playsinline preload="metadata"
+                 poster="assets/schritt-3-poster-v2.webp" width="1116" height="824">
+            <source src="assets/schritt-3-v2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<div class="wave on-tint to-white" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
+
+<!-- ===== ARBEITEN: Tab-Showcase mit gefaecherten Screenshots ===== -->
+<section class="sec" id="arbeiten">
+  <div class="wrap">
+    <p class="eyebrow rv">Unsere Arbeiten</p>
+    <h2 data-split>Echte Kunden. Echte Seiten. Prüfen Sie selbst.</h2>
+
+    <div class="showcase rv">
+      <div class="tabs" role="tablist" aria-label="Branchen">
+        <button class="tab is-on" role="tab" id="tab-juwelier" aria-controls="panel-juwelier" aria-selected="true">Juwelier</button>
+        <button class="tab" role="tab" id="tab-haut" aria-controls="panel-haut" aria-selected="false">Hautmedizin</button>
+        <button class="tab" role="tab" id="tab-ihre" aria-controls="panel-ihre" aria-selected="false">Ihre Branche</button>
+      </div>
+
+      <div class="panel is-on" role="tabpanel" id="panel-juwelier" aria-labelledby="tab-juwelier">
+        <div class="panel-copy">
+          <h3>Websites für Juweliere</h3>
+          <p>Schmuck kauft niemand bei einem Betrieb, dessen Website nach 2010 aussieht.
+             Für Juwelier Benjamin haben wir eine dunkle Luxus-Inszenierung mit
+             angebundenem Shop gebaut — und pflegen sie laufend.</p>
+          <div class="gbadge">
+            <span class="gword"><b class="gw-b">G</b><b class="gw-r">o</b><b class="gw-y">o</b><b class="gw-b">g</b><b class="gw-g">l</b><b class="gw-r">e</b></span>
+            <span class="gstars" aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote>„Das Team hat meine Ideen professionell umgesetzt und eine moderne, ansprechende Website sowie ein passendes Logo gestaltet. Das Ergebnis wirkt professionell und durchdacht."</blockquote>
+          <p class="gname">— Familie Schindlmeier</p>
+          <a class="gdomain" href="ansehen.html?site=benjamin">Website ansehen &mdash; mit einem Klick zur&uuml;ck</a>
+        </div>
+        <div class="devstage" data-devstage>
+          <span class="dev dev-pc" data-parallax="12">
+            <span class="dev-screen"><img src="assets/bj-pc.webp" alt="Trauringe-Seite von Juwelier Benjamin am Bildschirm" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-pc.webp" width="1000" height="766" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="dev dev-tab" data-parallax="26">
+            <span class="dev-screen"><img src="assets/bj-tab.webp" alt="Verlobungsringe-Seite von Juwelier Benjamin auf dem Tablet" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-tab.webp" width="560" height="760" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="dev dev-phone" data-parallax="44">
+            <span class="dev-screen"><img src="assets/bj-phone.webp" alt="Goldschmiede-Seite von Juwelier Benjamin auf dem Handy" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-phone.webp" width="380" height="750" alt="" loading="lazy" decoding="async">
+          </span>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-haut" aria-labelledby="tab-haut">
+        <div class="panel-copy">
+          <h3>Websites für Praxen</h3>
+          <p>Patienten entscheiden in Sekunden, ob eine Praxis Vertrauen weckt.
+             Für das Dermatologische Laserzentrum Häusler-Mehlhorn in Chemnitz haben
+             wir die komplette Website neu gestaltet.</p>
+          <div class="gbadge">
+            <span class="gword"><b class="gw-b">G</b><b class="gw-r">o</b><b class="gw-y">o</b><b class="gw-b">g</b><b class="gw-g">l</b><b class="gw-r">e</b></span>
+            <span class="gstars" aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote>„Fantastisches Team und ein absolut überzeugendes Ergebnis. Schon der erste Entwurf hat unsere Vorstellung perfekt getroffen. 100 % Empfehlung!"</blockquote>
+          <p class="gname">— Paul Mehlhorn</p>
+          <a class="gdomain" href="ansehen.html?site=mehlhorn">Vorschau ansehen</a>
+        </div>
+        <div class="devstage" data-devstage>
+          <span class="dev dev-pc" data-parallax="12">
+            <span class="dev-screen"><img src="assets/mh-pc.webp" alt="Akne-Seite des Laserzentrums Haeusler-Mehlhorn am Bildschirm" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-pc.webp" width="1000" height="766" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="dev dev-tab" data-parallax="26">
+            <span class="dev-screen"><img src="assets/mh-tab.webp" alt="Botox-Seite des Laserzentrums auf dem Tablet" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-tab.webp" width="560" height="760" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="dev dev-phone" data-parallax="44">
+            <span class="dev-screen"><img src="assets/mh-phone.webp" alt="Haarentfernungs-Seite des Laserzentrums auf dem Handy" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-phone.webp" width="380" height="750" alt="" loading="lazy" decoding="async">
+          </span>
+        </div>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-ihre" aria-labelledby="tab-ihre">
+        <div class="panel-copy">
+          <h3>Websites für Ihren Betrieb</h3>
+          <p>Handwerk, Gastronomie, Friseur, Einzelhandel — wir bauen Ihre Seite
+             komplett fertig, bevor Sie einen Cent zahlen. Sie sehen das Ergebnis
+             und entscheiden danach.</p>
+          <div class="gbadge">
+            <span class="gword"><b class="gw-b">G</b><b class="gw-r">o</b><b class="gw-y">o</b><b class="gw-b">g</b><b class="gw-g">l</b><b class="gw-r">e</b></span>
+            <span class="gstars" aria-hidden="true">★★★★★</span>
+          </div>
+          <blockquote>„Unglaublich nette Jungs, extrem ambitioniert. Klare Empfehlung."</blockquote>
+          <p class="gname">— Meisam Hoseini</p>
+          <a class="gdomain" href="kontakt.html">Kostenloses Gespräch vereinbaren</a>
+        </div>
+        <div class="devstage" data-devstage>
+          <span class="dev dev-pc" data-parallax="12">
+            <span class="dev-screen"><img src="assets/schritt-2-poster-v2.webp" alt="" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-pc.webp" width="1000" height="766" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="dev dev-tab" data-parallax="26">
+            <span class="dev-screen"><img src="assets/schritt-1-poster-v2.webp" alt="" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-tab.webp" width="560" height="760" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="dev dev-phone" data-parallax="44">
+            <span class="dev-screen"><img src="assets/schritt-3-poster-v2.webp" alt="" loading="lazy" decoding="async"></span>
+            <img class="dev-frame" src="assets/dev-phone.webp" width="380" height="750" alt="" loading="lazy" decoding="async">
+          </span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- TICKER -->
-  <section class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span>Webentwicklung</span><span>•</span>
-      <span>AI-Berater</span><span>•</span>
-      <span>Telefonische AI-Assistenten</span><span>•</span>
-      <span>Automatisierter Kundenservice</span><span>•</span>
-      <span>Image-Optimierung</span><span>•</span>
-      <span>Webentwicklung</span><span>•</span>
-      <span>AI-Berater</span><span>•</span>
-      <span>Telefonische AI-Assistenten</span><span>•</span>
-      <span>Automatisierter Kundenservice</span><span>•</span>
-      <span>Image-Optimierung</span><span>•</span>
-    </div>
-  </section>
+    <p class="rv" style="margin-top:2.6rem">
+      <a class="btn btn-ghost" href="projekte.html">Alle Projekte ansehen</a>
+    </p>
+  </div>
+</section>
 
-  <!-- USPs -->
-  <section class="stats reveal">
-    <div class="stat">
-      <div class="stat-num"><span data-count="50">0</span>+</div>
-      <div class="stat-label">Projekte realisiert</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num"><span data-count="3">0</span></div>
-      <div class="stat-label">Experten im Team</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num"><span data-count="24">0</span>/7</div>
-      <div class="stat-label">KI-Support</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num"><span data-count="100">0</span>%</div>
-      <div class="stat-label">Persönliche Betreuung</div>
-    </div>
-  </section>
+<!-- ===== SONDERANGEBOT (SR-Preiskarte) ===== -->
+<section class="sec offer-sec" id="sonderangebot">
+  <div class="wrap">
+    <p class="eyebrow rv">Sonderangebot</p>
+    <h2 data-split>Ein Preis. Alles drin. Keine Nachtr&auml;ge.</h2>
 
-  <hr class="divider" aria-hidden="true">
+    <div class="offer-card rv">
+      <span class="offer-flag">Nur f&uuml;r kurze Zeit</span>
+      <div class="offer-head">
+        <h3>Komplette Firmenwebsite erstellen lassen</h3>
+        <div class="offer-price">
+          <span class="now">990&nbsp;&euro;</span>
+          <span class="was">1.890&nbsp;&euro;</span>
+        </div>
+        <p class="offer-sub">Einmalig, inkl. MwSt. &middot; Hosting im ersten Jahr enthalten</p>
+      </div>
 
-  <!-- MORPH · sticky-pinned word-swap on scroll (Superconscious-style) -->
-  <section id="morph" class="morph" aria-label="Was wir bauen">
-    <div class="morph-pin">
-      <span class="morph-eyebrow">
-        <span class="morph-eyebrow-dot" aria-hidden="true"></span>
-        <span>Was wir bauen</span>
-      </span>
+      <ul class="offer-feats">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Individuelles Design &mdash; kein Baukasten</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> F&uuml;r das Handy gebaut</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Schnelle Ladezeiten, auch im Mobilfunk</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Basis-SEO: bei Google auffindbar</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> F&uuml;r lokale Suchen optimiert</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Texte und Bildbearbeitung &uuml;bernehmen wir</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Domain, Hosting und E-Mail eingerichtet</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11"/><path d="M7.5 12.5 l3 3 6-7"/></svg> Impressum und Datenschutz rechtssicher</li>
+      </ul>
 
-      <h2 class="morph-title">
-        <span class="morph-static">Wir bauen</span>
-        <span class="morph-rotate">
-          <span class="morph-word is-active">
-            <span class="morph-glyph" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-            </span>
-            Webseiten
+      <div class="offer-cta">
+        <a class="btn btn-accent" href="tel:+491781868874">Jetzt anrufen &amp; sichern</a>
+        <a class="btn btn-ghost" href="kontakt.html">Kostenlose Demo anfragen</a>
+      </div>
+      <p class="offer-note">Sie zahlen erst, wenn Ihnen die fertige Website gef&auml;llt.</p>
+    </div>
+  </div>
+</section>
+<div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
+
+
+<!-- ===== BEWERTUNGEN: dunkles Schaustueck ===== -->
+<section class="sec reviews" id="stimmen">
+  <div class="wrap">
+
+    <div class="rev-top">
+      <div class="rev-copy">
+        <p class="eyebrow rv">Google-Bewertungen</p>
+        <h2 data-split>Wir k&ouml;nnen viel erz&auml;hlen. H&ouml;ren Sie lieber die anderen.</h2>
+
+        <div class="score rv">
+          <span class="score-num">5,0</span>
+          <span class="score-meta">
+            <span class="score-stars" aria-label="5 von 5 Sternen">★★★★★<span class="fill" aria-hidden="true">★★★★★</span></span>
+            <small>aus 5 Bewertungen auf Google</small>
           </span>
-          <span class="morph-word">
-            <span class="morph-glyph" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-            </span>
-            AI&#8209;Systeme
-          </span>
-          <span class="morph-word">
-            <span class="morph-glyph" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.5 2.7"/><polyline points="21 3 21 9 15 9"/></svg>
-            </span>
-            Automatisierungen
-          </span>
-          <span class="morph-word">
-            <span class="morph-glyph" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12c5 0 5 9 9 9 4 0 4-9 9-9"/><path d="M3 12c5 0 5-9 9-9 4 0 4 9 9 9"/></svg>
-            </span>
-            Brand&#8209;Auftritte
-          </span>
+        </div>
+      </div>
+
+      <div class="rev-art rv" data-i style="--i:2" aria-hidden="true">
+        <span class="rev-glow"></span>
+        <span class="rev-layer rev-layer-1" data-parallax="20">
+          <img src="assets/rev-3d-cluster.webp" width="1120" height="932" alt="" loading="lazy" decoding="async">
         </span>
-        <span class="morph-static">die <em class="grad">wirklich funktionieren</em>.</span>
-      </h2>
-
-      <div class="morph-progress" aria-hidden="true">
-        <span class="morph-progress-fill"></span>
-      </div>
-
-      <div class="morph-scenery" aria-hidden="true">
-        <span class="morph-blob morph-blob--1"></span>
-        <span class="morph-blob morph-blob--2"></span>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- RISK-FREE PROMISE · sticky-pinned 3-step USP -->
-  <section id="risk-free" class="risk-free" aria-labelledby="risk-free-heading">
-    <div class="risk-free-stage">
-      <div class="risk-free-pin">
-        <div class="risk-free-glow" aria-hidden="true"></div>
-
-        <!-- Big 3D extruded logo as brand seal -->
-        <div class="risk-free-logo3d"
-             data-logo3d
-             data-src="assets/logo-source.png"
-             data-slices="64"
-             data-depth="0.55"
-             data-zoom="9"
-             aria-hidden="true"></div>
-
-        <div class="risk-free-eyebrow">
-          <span class="risk-free-shield" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 2 L4 5 V11 C4 16 7 20 12 22 C17 20 20 16 20 11 V5 Z"/>
-              <path d="M9 12 L11 14 L15 10"/>
-            </svg>
-          </span>
-          <span>Unser Versprechen</span>
-        </div>
-
-        <h2 id="risk-free-heading" class="risk-free-headline">
-          <span class="rf-line">Sie zahlen erst,</span>
-          <span class="rf-line accent">wenn es Ihnen gefällt.</span>
-        </h2>
-
-        <p class="risk-free-sub">
-          Wir bauen Ihre komplette Website im Voraus, Design, Entwicklung, Inhalte. <strong>Kostenlos und ohne Verpflichtung.</strong>
-          Erst wenn das fertige Ergebnis Sie überzeugt, kommen Kosten in Bewegung. Kein Risiko. Keine versteckten Klauseln.
-        </p>
-
-        <ol class="rf-steps">
-          <li class="rf-step" data-step="1">
-            <span class="rf-step-num">01</span>
-            <h3>Brief</h3>
-            <p>30-Min-Gespräch. Ihre Branche, Ziele, Stilvorlieben.</p>
-          </li>
-          <li class="rf-step rf-step--accent" data-step="2">
-            <span class="rf-step-num">02</span>
-            <h3>Wir bauen</h3>
-            <p>Komplette Website. Design, Code, Texte. Auf unsere Kosten.</p>
-          </li>
-          <li class="rf-step" data-step="3">
-            <span class="rf-step-num">03</span>
-            <h3>Sie entscheiden</h3>
-            <p>Gefällt es? Sie zahlen. Gefällt es nicht? Sie schulden uns nichts.</p>
-          </li>
-        </ol>
-
-        <div class="rf-foot">
-          <a href="mailto:flow-state@gmx.de?subject=Risikofreies%20Erstgespr%C3%A4ch" class="btn btn-primary mini" data-bg="assets/btn1.webp">
-            <span>Risikofreies Erstgespräch</span>
-          </a>
-          <span class="rf-foot-tag">Antwort innerhalb 24 Stunden.</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- LEISTUNGEN -->
-  <section id="leistungen" class="services">
-    <div class="services-head reveal">
-      <span class="eyebrow">Unsere Leistungen</span>
-      <h2>Webseiten, die <span class="grad">wirken</span>.<br />AI, die für Sie <span class="grad">arbeitet</span>.</h2>
-      <p>Wir verbinden präzises Webdesign mit intelligenten AI-Systemen, alles aus einer Hand, damit Ihr Unternehmen digital sichtbar, schneller und produktiver wird.</p>
-    </div>
-
-    <div class="services-stage"
-         data-frames="assets/card-frames/frame-{n}.webp?v=2"
-         data-frame-count="43"
-         data-frame-pad="3">
-      <div class="services-stage-pin" aria-hidden="true">
-        <div class="services-stage-glow"></div>
-        <canvas class="services-canvas"></canvas>
-        <div class="services-stage-hint"><span></span> WEITER SCROLLEN</div>
-
-      </div>
-    </div>
-
-    <div class="services-grid-wrap">
-
-      <div class="services-grid">
-
-        <article class="card reveal">
-          <div class="card-glow"></div>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/><path d="M3 17l9 4 9-4"/></svg>
-          </div>
-          <h3>Webentwicklung</h3>
-          <p>Wir entwickeln moderne Webseiten, die nicht nur gut aussehen, sie performen. Schnell, präzise und exakt auf Ihre Zielgruppe zugeschnitten.</p>
-          <ul class="card-list">
-            <li>Premium UI &amp; UX Design</li>
-            <li>Performance &amp; SEO</li>
-            <li>Mobile First &amp; barrierearm</li>
-          </ul>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-glow"></div>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>
-          </div>
-          <h3>AI-Berater</h3>
-          <p>Intelligente Chat- und Sprachassistenten, die Ihre Kunden beraten, Termine vereinbaren und Anfragen automatisch qualifizieren, rund um die Uhr.</p>
-          <ul class="card-list">
-            <li>Custom Chatbots</li>
-            <li>Wissensbasierte Antworten</li>
-            <li>Nahtlose Website-Integration</li>
-          </ul>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-glow"></div>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
-          </div>
-          <h3>Telefonische AI-Assistenten</h3>
-          <p>Ihre Telefonzentrale, komplett automatisiert. Unsere Voice-Agents nehmen Anrufe an, klären Anliegen und übergeben relevante Calls an Ihr Team.</p>
-          <ul class="card-list">
-            <li>24/7 Erreichbarkeit</li>
-            <li>Natürliche Stimme</li>
-            <li>CRM-Anbindung</li>
-          </ul>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-glow"></div>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16v6H4z"/><path d="M4 14h16v6H4z"/><circle cx="8" cy="7" r="1.2"/><circle cx="8" cy="17" r="1.2"/></svg>
-          </div>
-          <h3>Automatisierter Kundenservice</h3>
-          <p>End-to-End Workflows, die Tickets klassifizieren, beantworten und bei Bedarf eskalieren. Weniger Aufwand, mehr Zufriedenheit.</p>
-          <ul class="card-list">
-            <li>E-Mail &amp; Ticket-Routing</li>
-            <li>Wissensdatenbank</li>
-            <li>Reporting &amp; Analytics</li>
-          </ul>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-glow"></div>
-          <div class="card-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12l4-4 4 4 4-4 6 6"/><path d="M21 21H3V3"/></svg>
-          </div>
-          <h3>Image-Optimierung</h3>
-          <p>Wir schärfen Ihre Marke digital, von Logo &amp; Wording bis hin zu konsistenten Touchpoints, die Vertrauen und Wiedererkennung schaffen.</p>
-          <ul class="card-list">
-            <li>Markenstrategie</li>
-            <li>Visuelle Identität</li>
-            <li>Content &amp; Tonalität</li>
-          </ul>
-        </article>
-
-        <article class="card card-cta reveal">
-          <div class="card-glow"></div>
-          <h3>Ihr Projekt?</h3>
-          <p>Sprechen wir über Ihr Vorhaben, kostenlos &amp; unverbindlich. In 30 Minuten skizzieren wir die beste Lösung für Sie.</p>
-          <a href="mailto:flow-state@gmx.de?subject=Erstgespr%C3%A4ch%20sichern" class="btn btn-secondary mini" data-bg="assets/btn2.webp"><span>Erstgespräch sichern</span></a>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- SHOWCASE · tilted laptop with real customer build -->
-  <section id="showcase" class="showcase" aria-label="Showcase">
-    <div class="showcase-grid">
-      <div class="showcase-content">
-        <span class="eyebrow">
-          <span class="eyebrow-glyph" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M2 20h20"/></svg>
-          </span>
-          <span>So sehen unsere Builds aus</span>
+        <span class="rev-layer rev-layer-2" data-parallax="46">
+          <img src="assets/rev-3d-star.webp" width="360" height="376" alt="" loading="lazy" decoding="async">
         </span>
-        <h2>
-          Mehr als <span class="grad">nur eine Website</span> &mdash;<br/>
-          ein Verkaufsargument.
-        </h2>
-        <p>
-          Jeder Build wird wie ein eigenes Produkt behandelt. Premium-UI,
-          messbare Ladezeiten, SEO-optimiert. Das Ergebnis: Ihre Besucher bleiben,
-          klicken, kaufen.
-        </p>
-        <ul class="showcase-bullets">
-          <li>
-            <span class="showcase-check" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            <strong>Pixel-perfekt</strong> auf jedem Device, von 320px bis 4K
-          </li>
-          <li>
-            <span class="showcase-check" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            <strong>Lighthouse-Scores 95+</strong> für Speed, SEO, A11y
-          </li>
-          <li>
-            <span class="showcase-check" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            </span>
-            <strong>Conversion-orientiert</strong> &mdash; jede Sektion hat einen Job
-          </li>
+      </div>
+    </div>
+
+    <div class="qwrap">
+      <div class="qtrack" tabindex="0" aria-label="Kundenstimmen, horizontal scrollbar">
+        <figure class="quote big">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Fantastisches Team und ein absolut überzeugendes Ergebnis — wir haben unsere Firmenwebsite neu gestalten lassen. Die Jungs sind für Rücksprachen jederzeit über WhatsApp erreichbar. Schon der erste Entwurf hat unsere Vorstellung perfekt getroffen. 100 % Empfehlung!</blockquote>
+          <figcaption>Paul Mehlhorn<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Das Team hat meine Ideen professionell umgesetzt und eine moderne, ansprechende Website sowie ein passendes Logo gestaltet. Änderungswünsche wurden schnell umgesetzt, das Ergebnis wirkt professionell und durchdacht.</blockquote>
+          <figcaption>Familie Schindlmeier<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Ich hatte selbst nur eine grobe Vorstellung. FlowState hat mir mehrere Entwürfe gezeigt und sie geduldig mit mir verfeinert, bis es passte. Schnelles Feedback, faire Abwicklung, tolles Ergebnis.</blockquote>
+          <figcaption>Aderkan<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Unglaublich nette Jungs, extrem ambitioniert. Klare Empfehlung.</blockquote>
+          <figcaption>Meisam Hoseini<em>Google-Bewertung</em></figcaption>
+        </figure>
+        <figure class="quote">
+          <span class="qstars" aria-hidden="true">★★★★★</span>
+          <blockquote>Sehr sehr freundliche Jungs und Top Leistung!</blockquote>
+          <figcaption>Jazan Aboalseoud<em>Google-Bewertung</em></figcaption>
+        </figure>
+      </div>
+      <div class="qnav">
+        <button class="qbtn" type="button" data-q-prev aria-label="Vorherige Bewertung">
+          <svg viewBox="0 0 24 24"><path d="M20 11H7.8l5.6-5.6L12 4l-8 8 8 8 1.4-1.4L7.8 13H20z"/></svg>
+        </button>
+        <button class="qbtn" type="button" data-q-next aria-label="Nächste Bewertung">
+          <svg viewBox="0 0 24 24"><path d="M4 11h12.2l-5.6-5.6L12 4l8 8-8 8-1.4-1.4 5.6-5.6H4z"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="wave on-tint to-white" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
+
+<!-- ===== UNTERSCHIED ===== -->
+<section class="sec cmp" id="unterschied">
+  <div class="wrap">
+    <p class="eyebrow rv">Der Unterschied</p>
+    <h2 data-split>Angebote klingen &auml;hnlich. Entscheidend ist, was Sie bekommen.</h2>
+
+    <div class="cmp-grid">
+      <div class="cmp-col cmp-them rv" data-i style="--i:1">
+        <div class="cmp-head"><h3>&Uuml;bliche Agentur</h3><span class="cmp-tag">Standard</span></div>
+        <ul data-seq="90">
+          <li data-row><i class="cmp-x" aria-hidden="true"></i>Anzahlung, bevor Sie etwas gesehen haben</li>
+          <li data-row><i class="cmp-x" aria-hidden="true"></i>Sechs bis zw&ouml;lf Wochen Wartezeit</li>
+          <li data-row><i class="cmp-x" aria-hidden="true"></i>Fertiges Theme, das tausend andere auch haben</li>
+          <li data-row><i class="cmp-x" aria-hidden="true"></i>Suchmaschinen-Optimierung kostet extra</li>
+          <li data-row><i class="cmp-x" aria-hidden="true"></i>Jede &Auml;nderung wird nachberechnet</li>
         </ul>
       </div>
 
-      <div class="showcase-stage" aria-hidden="true">
-        <div class="showcase-laptop">
-          <div class="showcase-laptop-screen">
-            <img src="assets/showcase-laptop.jpg" alt="Beispiel-Build von FlowState" loading="lazy" decoding="async" width="2478" height="1296" />
-          </div>
-          <div class="showcase-laptop-base"></div>
-        </div>
-        <div class="showcase-glow"></div>
-        <div class="showcase-orbit">
-          <span class="showcase-orbit-tag tag-1">Performance · 98</span>
-          <span class="showcase-orbit-tag tag-2">SEO-optimiert</span>
-          <span class="showcase-orbit-tag tag-3">Mobile-first</span>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- METRICS · visual bento with mixed cards -->
-  <section id="metrics" class="metrics" aria-label="Metriken">
-    <div class="services-head reveal">
-      <span class="eyebrow">
-        <span class="eyebrow-glyph" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </span>
-        <span>Was Sie bekommen</span>
-      </span>
-      <h2>Eine Plattform, <span class="grad">die Resultate liefert</span>.</h2>
-      <p>Jeder Klick gemessen. Jede Sekunde optimiert. Jedes Element justifiziert.</p>
-    </div>
-
-    <div class="metrics-bento">
-
-      <article class="metric-card metric-card--lg">
-        <div class="metric-tag">PERFORMANCE · LIVE</div>
-        <div class="metric-bignum">
-          <span class="metric-num">98</span><span class="metric-unit">/100</span>
-        </div>
-        <div class="metric-bars" aria-hidden="true">
-          <div class="metric-bar"><span style="--p:96%"></span><label>FCP</label></div>
-          <div class="metric-bar"><span style="--p:99%"></span><label>LCP</label></div>
-          <div class="metric-bar"><span style="--p:97%"></span><label>CLS</label></div>
-          <div class="metric-bar"><span style="--p:100%"></span><label>SEO</label></div>
-        </div>
-        <p class="metric-cap">Lighthouse-Scores auf jedem Build &mdash; nicht verhandelbar.</p>
-      </article>
-
-      <article class="metric-card metric-card--ai">
-        <div class="metric-ai-badge"><span class="ai-pulse"></span>AI · Aktiv</div>
-        <h3>AI-Berater nimmt Anrufe an, während Sie schlafen.</h3>
-        <div class="metric-ai-chat" aria-hidden="true">
-          <div class="msg msg-bot"><span>Guten Abend, hier spricht der KI-Assistent von FlowState. Wie kann ich helfen?</span></div>
-          <div class="msg msg-user"><span>Brauche einen Termin morgen Vormittag</span></div>
-          <div class="msg msg-bot"><span>Ich habe 9:00 oder 10:30 frei. Welche passt besser?</span></div>
-        </div>
-        <p class="metric-cap">Meldet sich von selbst als KI &mdash; wie es der EU&nbsp;AI&nbsp;Act seit August&nbsp;2026 verlangt.</p>
-      </article>
-
-      <article class="metric-card metric-card--small metric-card--chart">
-        <div class="metric-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        </div>
-        <div class="metric-card-title">Auffindbarkeit klettert.</div>
-        <svg class="mini-chart" viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true">
-          <defs>
-            <linearGradient id="miniLine" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%"  stop-color="#22e9ff"/>
-              <stop offset="100%" stop-color="#c062ff"/>
-            </linearGradient>
-            <linearGradient id="miniFill" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%"  stop-color="rgba(122,107,255,.35)"/>
-              <stop offset="100%" stop-color="rgba(34,233,255,0)"/>
-            </linearGradient>
-            <!-- Clip path that grows from left → right over time, revealing the line organically -->
-            <clipPath id="miniClip">
-              <rect class="mini-chart-clip" x="0" y="0" width="0" height="80"/>
-            </clipPath>
-          </defs>
-
-          <!-- subtle baseline grid -->
-          <g stroke="rgba(255,255,255,.04)" stroke-width="1">
-            <line x1="0" y1="20" x2="200" y2="20"/>
-            <line x1="0" y1="40" x2="200" y2="40"/>
-            <line x1="0" y1="60" x2="200" y2="60"/>
-          </g>
-
-          <!-- area fill (trading-chart shape: organic ups + downs trending up) -->
-          <path class="mini-chart-fill"
-                clip-path="url(#miniClip)"
-                d="M 6 70 L 12 71 L 18 67 L 24 69 L 30 64 L 36 65 L 42 61 L 48 58 L 54 60 L 60 55 L 66 56 L 72 50 L 78 53 L 84 47 L 90 49 L 96 44 L 102 46 L 108 40 L 114 42 L 120 36 L 126 38 L 132 32 L 138 34 L 144 28 L 150 30 L 156 24 L 162 26 L 168 20 L 174 17 L 180 19 L 186 14 L 192 12 L 196 9 L 196 78 L 6 78 Z"
-                fill="url(#miniFill)"/>
-
-          <!-- main line (trading-chart shape) -->
-          <path class="mini-chart-line"
-                clip-path="url(#miniClip)"
-                d="M 6 70 L 12 71 L 18 67 L 24 69 L 30 64 L 36 65 L 42 61 L 48 58 L 54 60 L 60 55 L 66 56 L 72 50 L 78 53 L 84 47 L 90 49 L 96 44 L 102 46 L 108 40 L 114 42 L 120 36 L 126 38 L 132 32 L 138 34 L 144 28 L 150 30 L 156 24 L 162 26 L 168 20 L 174 17 L 180 19 L 186 14 L 192 12 L 196 9"
-                fill="none"
-                stroke="url(#miniLine)"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"/>
-
-          <!-- end dot pulses at the peak -->
-          <circle class="mini-chart-dot" cx="196" cy="9" r="4" fill="#c062ff"/>
-        </svg>
-        <p class="metric-cap">Bessere SEO-Rankings über Zeit &mdash; Sichtbarkeit auf Google steigt mit jedem Monat.</p>
-      </article>
-
-      <article class="metric-card metric-card--small">
-        <div class="metric-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="metric-num metric-num-md">21<span class="metric-unit">Tage</span></div>
-        <p class="metric-cap">Average Time-to-Launch &mdash; vom Brief bis Live.</p>
-      </article>
-
-      <article class="metric-card metric-card--small">
-        <div class="metric-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9 12 2z"/></svg>
-        </div>
-        <div class="metric-num metric-num-md">4.9<span class="metric-unit">/ 5</span></div>
-        <p class="metric-cap">Durchschnittliche Kundenbewertung &mdash; basierend auf Hosted-Reviews.</p>
-      </article>
-
-    </div>
-
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- PROCESS · sticky-pinned 3D phase walk -->
-  <section id="prozess" class="process" aria-labelledby="process-heading">
-    <div class="process-head reveal">
-      <span class="eyebrow">Wie wir arbeiten</span>
-      <h2 id="process-heading">Vier Schritte. <span class="grad">Ein klarer Weg.</span></h2>
-      <p>Vom ersten Gespräch bis zum Live-Gang, Sie wissen jederzeit, wo Ihr Projekt steht.</p>
-    </div>
-
-    <div class="process-stage" data-phase-count="4">
-      <div class="process-pin">
-        <div class="process-rail" aria-hidden="true">
-          <div class="process-rail-fill"></div>
-          <div class="process-rail-dots">
-            <span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-
-        <ol class="phases">
-          <li class="phase" data-phase="0">
-            <span class="phase-num">01</span>
-            <h3>Brief</h3>
-            <p>Erstgespräch. Wir lernen Ihren Betrieb, Ihre Ziele, Ihre Zielgruppe, kostenlos und unverbindlich.</p>
-          </li>
-          <li class="phase" data-phase="1">
-            <span class="phase-num">02</span>
-            <h3>Design</h3>
-            <p>Mockups in mehreren Designrichtungen. Sie wählen die DNA, wir polieren bis es sitzt.</p>
-          </li>
-          <li class="phase" data-phase="2">
-            <span class="phase-num">03</span>
-            <h3>Build</h3>
-            <p>Entwicklung mit modernem Stack. Mobile-first, performant, sauber. Iteratives Polish bis Premium-Niveau.</p>
-          </li>
-          <li class="phase" data-phase="3">
-            <span class="phase-num">04</span>
-            <h3>Launch &amp; Care</h3>
-            <p>Deploy auf Ihre Domain, SSL, SEO, Schema.org. 60 Tage Support nach Live-Gang inklusive.</p>
-          </li>
-        </ol>
-
-        <div class="process-glow" aria-hidden="true"></div>
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- ABOUT -->
-  <section id="about" class="about">
-    <div class="about-grid">
-      <div class="about-text reveal">
-        <span class="eyebrow">Über uns</span>
-        <h2>Zwei Köpfe.<br /><span class="grad">Eine Mission.</span><br />Maximale Wirkung.</h2>
-        <p>Jedes Unternehmen braucht einen starken digitalen Auftritt. Wir kombinieren erstklassiges Design, moderne Webentwicklung und KI-Automatisierung, pragmatisch umgesetzt, ohne Buzzwords, immer mit messbarem Ergebnis.</p>
-        <div class="about-points">
-          <div><strong>50+ Projekte</strong><span>realisiert &amp; live</span></div>
-          <div><strong>24/7 Support</strong><span>via KI &amp; Team</span></div>
-          <div><strong>Klein &amp; agil</strong><span>persönliche Betreuung</span></div>
-        </div>
-      </div>
-      <div class="about-frame reveal">
-        <div class="about-orb"></div>
-        <div class="about-logo3d"
-             data-logo3d
-             data-src="assets/logo-source.png"
-             data-slices="64"
-             data-depth="0.55"
-             data-zoom="9"
-             aria-hidden="true"></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- PHONE SHOWCASE · tilted phone mockup with mobile-first pitch -->
-  <section id="phone-showcase" class="phone-showcase" aria-label="Mobile First">
-    <div class="phone-grid">
-
-      <div class="phone-stage" aria-hidden="true">
-        <div class="phone-frame">
-          <div class="phone-screen">
-            <div class="phone-status">
-              <span>9:41</span>
-              <span class="phone-icons">⌁ ●</span>
-            </div>
-            <div class="phone-hero">
-              <div class="phone-pill">
-                <span class="phone-pill-dot"></span>
-                <span>Mobile First</span>
-              </div>
-              <h4>Schnell.<br/>Schön.<br/><span class="grad">Einfach.</span></h4>
-              <button class="phone-cta">Jetzt entdecken</button>
-            </div>
-            <div class="phone-stats">
-              <div><strong>1.2s</strong><span>LCP</span></div>
-              <div><strong>96</strong><span>Score</span></div>
-              <div><strong>0</strong><span>CLS</span></div>
-            </div>
-          </div>
-          <div class="phone-notch"></div>
-        </div>
-        <div class="phone-glow"></div>
+      <div class="cmp-split rv" aria-hidden="true">
+        <span class="cmp-line"></span>
+        <span class="cmp-vs">vs</span>
+        <span class="cmp-line"></span>
       </div>
 
-      <div class="phone-content">
-        <span class="eyebrow">
-          <span class="eyebrow-glyph" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+      <div class="cmp-col cmp-us rv" data-i style="--i:2" data-spot data-tilt>
+        <img class="cmp-badge" src="assets/cmp-shield.webp" width="360" height="425" alt="" loading="lazy" decoding="async">
+        <div class="cmp-inner tilt-target">
+          <div class="cmp-head"><h3>FlowState</h3><span class="cmp-tag">Ihr Weg</span></div>
+          <ul data-seq="90">
+            <li data-row><i class="cmp-c" aria-hidden="true"></i>Sie zahlen erst, wenn die fertige Seite Ihnen gef&auml;llt</li>
+            <li data-row><i class="cmp-c" aria-hidden="true"></i>Fester Termin, in der Regel eine Woche</li>
+            <li data-row><i class="cmp-c" aria-hidden="true"></i>Von Hand f&uuml;r Ihren Betrieb gebaut</li>
+            <li data-row><i class="cmp-c" aria-hidden="true"></i>Basis-SEO und Google-Sichtbarkeit inklusive</li>
+            <li data-row><i class="cmp-c" aria-hidden="true"></i>Wir &auml;ndern, bis es sitzt</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
+
+<!-- ===== KI & SICHTBARKEIT ===== -->
+<section class="sec sec-tint ki" id="ki">
+  <span class="ki-aurora" aria-hidden="true"></span>
+  <div class="wrap">
+    <p class="eyebrow rv">KI &amp; Sichtbarkeit</p>
+    <h2 data-split>Websites zuerst. Und wenn Sie mehr wollen: KI, die mitarbeitet.</h2>
+
+    <div class="ki-grid" data-seq="130">
+      <article class="ki-card" data-row data-spot data-tilt>
+        <div class="ki-inner tilt-target">
+          <span class="ki-ico">
+            <img src="assets/ki-globe.webp" width="400" height="392" alt="" loading="lazy" decoding="async">
           </span>
-          <span>Mobile First</span>
-        </span>
-        <h2>
-          Wir bauen <span class="grad">mobile-first</span> &mdash;<br/>
-          weil 70% Ihrer Kunden so kommen.
-        </h2>
-        <p>
-          Jede Interaktion wird zuerst auf dem Smartphone designt und entwickelt.
-          Was am Handy nicht funktioniert, kommt nicht in den Build &mdash; egal wie schick es am Desktop aussieht.
-        </p>
-        <div class="phone-stats-row">
-          <div class="phone-stat">
-            <strong>70%</strong>
-            <span>der Visits kommen mobile</span>
-          </div>
-          <div class="phone-stat">
-            <strong>1.4s</strong>
-            <span>durchschnittl. Ladezeit auf 3G</span>
-          </div>
-          <div class="phone-stat">
-            <strong>0px</strong>
-            <span>Layout-Shift bei Scroll</span>
-          </div>
+          <span class="num">Sichtbarkeit</span>
+          <h3>Gefunden werden, wo gesucht wird</h3>
+          <p>Wir bauen Ihre Seite so, dass Google und moderne KI-Systeme Ihre Leistungen, Ihren Ort und Ihre &Ouml;ffnungszeiten sauber auslesen k&ouml;nnen.</p>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <hr class="divider" aria-hidden="true">
-
-  <!-- TEAM -->
-  <section id="team" class="team">
-    <div class="services-head reveal">
-      <span class="eyebrow">Unser Team</span>
-      <h2>Die Gründer hinter <span class="grad">FlowState</span>.</h2>
-    </div>
-    <div class="team-grid team-grid--two">
-      <article class="member reveal">
-        <div class="member-avatar"><span>BT</span></div>
-        <h4>Benet Tilinski</h4>
-        <p>Founder &amp; Owner</p>
       </article>
-      <article class="member reveal">
-        <div class="member-avatar"><span>AP</span></div>
-        <h4>Adrian Pötzinger</h4>
-        <p>Founder &amp; Owner</p>
+
+      <article class="ki-card" data-row data-spot data-tilt>
+        <div class="ki-inner tilt-target">
+          <span class="ki-ico">
+            <img src="assets/ki-headset.webp" width="400" height="439" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="num">KI-Berater</span>
+          <h3>Nimmt Anfragen an, w&auml;hrend Sie arbeiten</h3>
+          <p>Telefonische und Text-Assistenten beantworten Fragen, qualifizieren Anfragen und buchen Termine &mdash; auch nachts und am Wochenende.</p>
+        </div>
+      </article>
+
+      <article class="ki-card" data-row data-spot data-tilt>
+        <div class="ki-inner tilt-target">
+          <span class="ki-ico">
+            <img src="assets/ki-gears.webp" width="400" height="314" alt="" loading="lazy" decoding="async">
+          </span>
+          <span class="num">Automation</span>
+          <h3>Weniger H&auml;ndisches, mehr Laden</h3>
+          <p>Termine, Anfragen, Wiedervorlagen: pragmatisch automatisiert &mdash; ohne Buzzwords, immer mit messbarem Ergebnis.</p>
+        </div>
       </article>
     </div>
-  </section>
+  </div>
+</section>
+<div class="wave on-tint to-white" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
 
-  <hr class="divider" aria-hidden="true">
+<!-- ===== STANDORT ===== -->
+<section class="sec locband" id="standort">
+  <div class="wrap-wide locband-in">
 
-  <!-- FAQ · Häufige Fragen + FAQPage Structured Data -->
-  <section id="faq" class="faq" aria-labelledby="faq-heading">
-    <div class="faq-head reveal">
-      <span class="eyebrow">Häufige Fragen</span>
-      <h2 id="faq-heading">Was Kunden vor dem Start <span class="grad">wissen wollen</span>.</h2>
-      <p>Antworten auf die häufigsten Fragen zu Preis, Ablauf und Modell von FlowState.</p>
-    </div>
-    <div class="faq-list reveal">
-      <details class="faq-item">
-        <summary><span>Was kostet eine Website bei FlowState?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
-        <div class="faq-body"><p>Projektabhängig, jede Website ist individuell, deshalb nennen wir keine Pauschalpreise. <strong>Fragen Sie einfach unverbindlich bei uns an</strong>: Schreiben Sie uns kurz Ihr Vorhaben und Sie bekommen innerhalb von 24&nbsp;Stunden ein konkretes Angebot. Beim Risikofreien Modell zahlen Sie ohnehin erst, wenn das fertige Ergebnis Sie überzeugt.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary><span>Wie funktioniert das risikofreie Modell genau?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
-        <div class="faq-body"><p>Wir bauen die komplette Website im Voraus, Design, Entwicklung, Inhalte. <strong>Kostenlos und ohne Verpflichtung.</strong> Erst wenn Sie das fertige Ergebnis sehen und überzeugt sind, kommen Kosten in Bewegung. Gefällt es nicht? Sie schulden uns nichts. Kein Risiko. Keine versteckten Klauseln.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary><span>Wie lange dauert der Bau einer Website?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
-        <div class="faq-body"><p>Im Schnitt <strong>21 Tage</strong> vom ersten Brief-Gespräch bis zum Live-Gang. Komplexere Projekte mit KI-Integration oder Multi-Page-Strukturen können bis zu 6 Wochen dauern. Sie wissen jederzeit, wo Ihr Projekt steht.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary><span>Bauen Sie auch KI-Berater oder telefonische AI-Assistenten?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
-        <div class="faq-body"><p>Ja. KI-Berater sind eine unserer Kernleistungen, sowohl text-basierte Chatbots auf der Website als auch <strong>telefonische AI-Assistenten</strong>, die Anrufe annehmen, Termine buchen und Leads qualifizieren. Auch automatisierter Kundenservice und Image-Optimierung gehören zum Portfolio.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary><span>Welche Branchen betreut FlowState?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
-        <div class="faq-body"><p>Schwerpunkte: <strong>Juweliere, Werkstätten, Arzt- und Therapie-Praxen, Handwerk und lokale Dienstleister</strong> im gesamten DACH-Raum. Besonders viel Erfahrung haben wir mit traditionellen Familienbetrieben, die einen frischen digitalen Auftritt brauchen ohne ihre Geschichte zu verlieren.</p></div>
-      </details>
-      <details class="faq-item">
-        <summary><span>Was unterscheidet FlowState von anderen Webagenturen?</span><span class="faq-arrow" aria-hidden="true"></span></summary>
-        <div class="faq-body"><p>Vier Dinge: <strong>(1) Risikofreies Vorab-Bauen</strong>, kein anderer Anbieter im DACH-Raum traut sich das. <strong>(2) Integrierte KI-Berater</strong>, Webdesign + AI aus einer Hand, keine Drittanbieter. <strong>(3) Lighthouse-Scores 95+</strong>, messbare Performance, nicht nur schöne Demo-Slides. <strong>(4) Persönliche Betreuung</strong> direkt durch beide Gründer, nicht durch Account-Manager.</p></div>
-      </details>
-    </div>
-  </section>
+    <div class="locband-copy">
+      <p class="eyebrow rv">Standort</p>
+      <h2 data-split>Wiesbaden. Und alles im Rhein-Main-Gebiet.</h2>
+      <p class="lede rv">Kein Ticketsystem, keine Warteschleife. Wir sitzen hier &mdash; und kommen f&uuml;r den Termin zu Ihnen in den Betrieb.</p>
 
-  <hr class="divider" aria-hidden="true">
+      <ul class="locband-rows rv" data-seq="110">
+        <li data-row><span>Standort</span><b>Wiesbaden &middot; Hessen</b></li>
+        <li data-row><span>Termine</span><b>Mo&ndash;Fr 9&ndash;18 Uhr</b></li>
+        <li data-row><span>Anfahrt</span><b>Wir kommen zu Ihnen</b></li>
+      </ul>
 
-  <!-- KONTAKT -->
-  <section id="kontakt" class="contact">
-    <div class="contact-card reveal">
-      <span class="eyebrow">Kontakt</span>
-      <h2>Bereit für Ihr <span class="grad">nächstes Level</span>?</h2>
-      <p>Lassen Sie uns über Ihr Projekt sprechen. Innerhalb von 24&nbsp;Stunden hören Sie von uns.</p>
-
-      <div class="contact-info">
-        <a href="mailto:flow-state@gmx.de" class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-          <div><span>E-Mail</span><strong>flow-state@gmx.de</strong></div>
-        </a>
-        <a href="tel:+491781868874" class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
-          <div><span>Telefon Adrian</span><strong>+49 178 1868874</strong></div>
-        </a>
-        <a href="tel:+4917645289172" class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92V21a1 1 0 0 1-1.11 1A19.86 19.86 0 0 1 2 4.11 1 1 0 0 1 3 3h4.09a1 1 0 0 1 1 .75l1 4a1 1 0 0 1-.27 1L7 10.5a16 16 0 0 0 6.5 6.5l1.75-1.82a1 1 0 0 1 1-.27l4 1a1 1 0 0 1 .75 1z"/></svg>
-          <div><span>Telefon Benet</span><strong>+49 176 45289172</strong></div>
-        </a>
-        <a href="https://wa.me/491781868874" target="_blank" rel="noopener" class="contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.7-5.2A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.6 9.1c.2-.5.4-.5.6-.5h.5c.2 0 .4 0 .6.4l.7 1.6c.1.2 0 .4-.1.5l-.4.5c-.1.2-.2.3 0 .6a6 6 0 0 0 2.7 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.3-.2.5-.1l1.6.8c.2.1.3.2.3.4a1.7 1.7 0 0 1-1.2 1.5c-.4.1-1 .2-2.8-.6a9.4 9.4 0 0 1-3.8-3.5c-.7-1.2-.7-2-.7-2.3a2 2 0 0 1 .4-1.3z"/></svg>
-          <div><span>WhatsApp</span><strong>Direkt schreiben</strong></div>
-        </a>
+      <div class="locband-chips rv" aria-label="Einzugsgebiet">
+        <span>Wiesbaden</span><span>Mainz</span><span>Frankfurt</span>
+        <span>Rheingau</span><span>Taunus</span><span>Rhein-Main</span>
       </div>
 
-      <div class="contact-cta-row">
-        <a href="mailto:flow-state@gmx.de?subject=Projektanfrage" class="btn btn-primary" data-bg="assets/btn1.webp"><span>E-Mail schreiben</span></a>
-        <a href="tel:+491781868874" class="btn btn-secondary" data-bg="assets/btn2.webp"><span>Jetzt anrufen</span></a>
-        <a href="https://wa.me/491781868874" target="_blank" rel="noopener" class="btn btn-secondary" data-bg="assets/btn2.webp"><span>WhatsApp</span></a>
+      <div class="locband-cta rv">
+        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=Wiesbaden" target="_blank" rel="noopener">In Google Maps &ouml;ffnen</a>
+        <a class="btn btn-ghost" href="tel:+491781868874">0178 1868874</a>
       </div>
     </div>
-  </section>
+
+    <!-- Karte laedt erst nach Einwilligung (DSGVO) -->
+    <div class="locband-stage rv" data-mapband data-map-src="https://www.google.com/maps?q=Wiesbaden,+Deutschland&amp;z=12&amp;output=embed">
+      <span class="lb-grid" aria-hidden="true"></span>
+      <span class="lb-radar" aria-hidden="true"></span>
+      <span class="lb-radar lb-radar-2" aria-hidden="true"></span>
+      <span class="lb-isle" data-parallax="24" aria-hidden="true">
+        <img src="assets/loc-island.webp" width="900" height="1022" alt="" loading="lazy" decoding="async">
+      </span>
+      <div class="lb-gate">
+        <p>Karte von <b>Google Maps</b> &mdash; beim Laden werden Daten an Google &uuml;bertragen. Deshalb erst auf Ihren Klick.</p>
+        <button class="btn btn-accent" type="button" data-load-band>Karte laden</button>
+      </div>
+      <span class="lb-veil" aria-hidden="true"></span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section class="sec" id="team">
+  <div class="wrap">
+    <p class="eyebrow rv">Wer wir sind</p>
+    <h2 data-split>Zwei Gründer. Keine Hotline.</h2>
+    <div class="team">
+      <article class="person rv" data-i style="--i:1"><div class="avatar">BT</div><h3>Benet Tilinski</h3><p>Gründer &amp; Inhaber</p></article>
+      <article class="person rv" data-i style="--i:2"><div class="avatar">AP</div><h3>Adrian Pötzinger</h3><p>Gründer &amp; Inhaber</p></article>
+    </div>
+    <p class="team-note rv">Im Maschinenraum: <b>Damian Braun</b>, Entwicklung.</p>
+  </div>
+</section>
+<div class="wave" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
+
+<!-- ===== FAQ ===== -->
+<section class="sec sec-tint" id="faq">
+  <div class="wrap">
+    <p class="eyebrow rv">Fragen</p>
+    <h2 data-split>Das werden wir am häufigsten gefragt.</h2>
+    <div class="faq rv">
+      <details>
+        <summary>Was kostet eine Website bei Ihnen wirklich?</summary>
+        <div class="answer">Eine komplette Firmenwebsite kostet einmalig 990 € statt regulär 1.890 €. Darin ist alles enthalten: Design, Texte, Bildbearbeitung, Einrichtung, Google-Optimierung und die rechtlichen Seiten. Keine Stundensätze, keine Nachträge.</div>
+      </details>
+      <details>
+        <summary>Was heißt „ich zahle erst, wenn es mir gefällt"?</summary>
+        <div class="answer">Genau das. Wir bauen Ihre Website komplett fertig, bevor Sie einen Cent zahlen. Sagen Sie ja, geht die Seite online und wir stellen die Rechnung. Sagen Sie nein, entstehen Ihnen keine Kosten.</div>
+      </details>
+      <details>
+        <summary>Wie lange dauert es, bis meine Seite online ist?</summary>
+        <div class="answer">In der Regel eine Woche ab dem ersten Gespräch. Sie bekommen von uns einen festen Termin.</div>
+      </details>
+      <details>
+        <summary>Kann ich meine bisherige Domain und E-Mail-Adresse behalten?</summary>
+        <div class="answer">Ja. Wir übernehmen den Umzug Ihrer Domain und richten alles so ein, dass Ihre E-Mail-Adressen unverändert weiterlaufen.</div>
+      </details>
+      <details>
+        <summary>Kann ich die Seite später selbst ändern?</summary>
+        <div class="answer">Ja. Kleinere Änderungen erledigen wir für Sie, meist am selben Tag. Wenn Sie lieber selbst Hand anlegen, richten wir Ihnen einen einfachen Zugang ein.</div>
+      </details>
+      <details>
+        <summary>Fallen laufende Kosten an?</summary>
+        <div class="answer">Für Domain und Hosting fallen laufende Kosten an, die wir Ihnen vorher offenlegen. Im ersten Jahr sind sie im Preis enthalten.</div>
+      </details>
+      <details>
+        <summary>Warum sollte ich Ihnen glauben, dass das funktioniert?</summary>
+        <div class="answer">Weil Sie nichts riskieren. Sie können unsere Kundenseiten aufrufen und sich selbst überzeugen — und Sie zahlen erst, wenn Ihre eigene Seite fertig vor Ihnen liegt.</div>
+      </details>
+    </div>
+  </div>
+</section>
+<div class="wave on-tint to-petrol" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
+
+<!-- ===== FINALE: Kontakt + Standort ===== -->
+<section class="sec finale" id="loslegen">
+  <svg class="finale-flow" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-40 200 C240 90 480 250 740 170 C1000 90 1240 210 1480 120" stroke="rgba(255,255,255,.35)" stroke-width="2.5"/>
+    <path d="M-40 235 C260 140 520 275 780 200 C1040 130 1260 235 1480 165" stroke="rgba(21,32,41,.4)" stroke-width="3.5"/>
+  </svg>
+
+  <div class="wrap">
+
+      <p class="eyebrow rv">Loslegen</p>
+      <h2 data-split>Sie riskieren ein Telefonat. Mehr nicht.</h2>
+      <p class="lede rv">Rufen Sie an oder schreiben Sie uns. Wir schauen uns Ihren Betrieb an und sagen ehrlich, ob und was wir für Sie tun können.</p>
+      <a class="bigtel rv" href="tel:+491781868874">
+        <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg></i>
+        0178 1868874
+      </a>
+      <div class="finale-cta rv">
+        <a class="btn btn-light" href="kontakt.html">Zum Kontaktformular</a>
+        <a class="btn btn-ghost-light" href="https://wa.me/491781868874" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+      <div class="finale-chips rv">
+        <span class="chip"><b>&#9733;</b> 5,0 auf Google</span>
+        <span class="chip">Erst sehen, dann zahlen</span>
+        <span class="chip">Aus Wiesbaden</span>
+      </div>
+  </div>
+</section>
 
 </main>
 
-<footer class="footer">
-  <div class="footer-top">
-    <a href="#top" class="nav-logo">
-      <img src="assets/logo.webp" alt="" width="1024" height="1024" />
-      <span>Flow<em>State</em></span>
-    </a>
-    <nav aria-label="Footer">
-      <a href="#leistungen">Leistungen</a>
-      <a href="partner.html">Partner</a>
-      <a href="#team">Team</a>
-      <a href="#about">Über uns</a>
-      <a href="#kontakt">Kontakt</a>
-    </nav>
-  </div>
-  <div class="footer-bottom">
-    <small>© 2026 FlowState. Alle Rechte vorbehalten.</small>
-    <nav aria-label="Rechtliche Hinweise">
-      <a href="impressum.html">Impressum</a>
-      <a href="datenschutz.html">Datenschutz</a>
-    </nav>
+<footer>
+  <div class="wrap-wide">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="index.html" style="color:#fff" aria-label="FlowState — Start">
+          <svg class="logomark" viewBox="0 0 40 28" aria-hidden="true">
+            <path class="lm-a" style="stroke:#5FCFC5" d="M2 19 C9 7 16 7 22 14 C27 20 33 20 38 10"/>
+            <path class="lm-b" d="M10 24 C16 16 22 16 28 21"/>
+          </svg><b>FlowState</b></a>
+        <p>Webagentur aus Wiesbaden. Wir bauen Ihre Website komplett fertig &mdash; Sie zahlen erst, wenn sie Ihnen gef&auml;llt.</p>
+        <p class="foot-stars"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b>5,0 auf Google</p>
+      </div>
+      <div>
+        <h4>Seiten</h4>
+        <a href="index.html#ablauf">Ablauf</a>
+        <a href="projekte.html">Projekte</a>
+        <a href="index.html#stimmen">Bewertungen</a>
+        <a href="kontakt.html">Kontakt</a>
+      </div>
+      <div class="foot-contact">
+        <h4>Direkt zu uns</h4>
+        <a href="tel:+491781868874"><svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>0178 1868874</a>
+        <a href="https://wa.me/491781868874" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5l-.4.6c-.1.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg>WhatsApp schreiben</a>
+        <a href="mailto:flow-state@gmx.de"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 7L4 6v12h16V6l-8 5zm0-2 8-5H4l8 5z"/></svg>flow-state@gmx.de</a>
+      </div>
+      <div class="foot-area">
+        <h4>Wo wir arbeiten</h4>
+        <p>Wiesbaden und das ganze Rhein-Main-Gebiet. Termine bei Ihnen im Betrieb, ohne Aufpreis.</p>
+        <div class="tags">
+          <span>Wiesbaden</span><span>Mainz</span><span>Frankfurt</span><span>Rheingau</span><span>Taunus</span>
+        </div>
+        <a href="index.html#standort"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>Auf der Karte ansehen</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 FlowState &middot; Wiesbaden</span>
+      <span><a href="impressum.html">Impressum</a> &nbsp;&middot;&nbsp; <a href="datenschutz.html">Datenschutz</a></span>
+      <a class="foot-up" href="#top"><i aria-hidden="true"></i>Nach oben</a>
+    </div>
+    <p class="credits">Foto Kurhaus Wiesbaden: Holger Reinhardt (<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>), via Wikimedia Commons.</p>
   </div>
 </footer>
 
-<!-- AI Chatbot · floating widget -->
-<div id="chatbot" class="chatbot is-closed" aria-hidden="true">
-  <button class="chatbot-toggle" type="button" aria-label="Chat öffnen" aria-expanded="false">
-    <svg class="chatbot-toggle-icon chatbot-icon-chat" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-    <svg class="chatbot-toggle-icon chatbot-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
 
-  <div class="chatbot-panel" role="dialog" aria-label="FlowState KI-Berater">
-    <header class="chatbot-head">
-      <div class="chatbot-head-avatar" aria-hidden="true">
-        <span class="chatbot-pulse"></span>
-        <img src="assets/logo.webp" alt="" width="1024" height="1024" />
-      </div>
-      <div class="chatbot-head-meta">
-        <strong>FlowState KI-Assistent</strong>
-        <span><span class="chatbot-status-dot" aria-hidden="true"></span> Automatisierte Antworten · kein Mensch</span>
-      </div>
-      <button class="chatbot-close" type="button" aria-label="Chat schließen">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
-    </header>
-
-    <div class="chatbot-log" role="log" aria-live="polite"></div>
-
-    <div class="chatbot-suggestions" role="list">
-      <button type="button" class="chatbot-suggestion" data-q="Was kostet eine Website?">Was kostet eine Website?</button>
-      <button type="button" class="chatbot-suggestion" data-q="Wie funktioniert das Risiko­freie-Modell?">Risikofrei-Modell?</button>
-      <button type="button" class="chatbot-suggestion" data-q="Macht ihr auch AI-Berater für Kunden?">AI-Berater?</button>
-      <button type="button" class="chatbot-suggestion" data-q="Wie lange dauert ein Projekt?">Projektdauer?</button>
+<!-- ===== ANGEBOT: Popup mit Higgsfield-Art ===== -->
+<dialog class="modal" id="angebot" aria-labelledby="angebot-titel">
+  <div class="modal-card">
+    <div class="modal-art">
+      <img src="assets/angebot-art.webp" width="880" height="495" alt="">
+      <span class="modal-flag">Aktion</span>
+      <button class="modal-x" type="button" data-close-angebot aria-label="Schließen">&times;</button>
     </div>
-
-    <form class="chatbot-input">
-      <textarea rows="1" placeholder="Frage stellen…" aria-label="Nachricht" maxlength="1500" required></textarea>
-      <button type="submit" aria-label="Senden">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-      </button>
-    </form>
-
-    <p class="chatbot-foot">KI-generierte Antworten &mdash; können Fehler enthalten. Keine Rechtsberatung.</p>
+    <div class="modal-body">
+      <h3 id="angebot-titel">Komplette Firmenwebsite</h3>
+      <div class="price">
+        <span class="now">990&nbsp;€</span>
+        <span class="was">1.890&nbsp;€</span>
+      </div>
+      <p class="price-sub">Einmalig, inkl. MwSt. · Hosting im ersten Jahr enthalten</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Individuelles Design — kein Baukasten</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Für das Handy gebaut</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Basis-SEO: bei Google auffindbar</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> F&uuml;r lokale Suchen optimiert</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Texte und Bilder übernehmen wir</li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Domain, Hosting, Impressum, Datenschutz</li>
+      </ul>
+      <a class="btn btn-primary" href="tel:+491781868874">Jetzt anrufen</a>
+    </div>
   </div>
-</div>
+</dialog>
 
-<script src="assets/vendor/three.min.js" defer></script>
-<script src="script.js?v=20260805"></script>
-<script src="logo-3d.js" defer></script>
-<script type="module" src="line-waves.js?v=2"></script>
-<script src="chatbot.js?v=2" defer></script>
+<script src="assets/app.js?v=26"></script>
 </body>
 </html>

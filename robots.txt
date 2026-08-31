@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /ansehen.html
+Disallow: /danke.html
 
 Sitemap: https://yourflowstate.de/sitemap.xml
