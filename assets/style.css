@@ -1431,3 +1431,26 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 /* hidden darf nie von display-Regeln ueberstimmt werden */
 .viewer-empty[hidden]{display:none !important}
 [hidden]{display:none}
+
+
+/* Angebots-Popup: passt IMMER in den Viewport, Inhalt scrollt */
+.modal{max-height:min(92dvh,760px); overflow:visible}
+.modal-card{display:flex; flex-direction:column; max-height:min(92dvh,760px)}
+.modal-art{flex:none}
+.modal-art img{max-height:min(30dvh,240px); object-fit:cover; width:100%}
+.modal-body{overflow-y:auto; -webkit-overflow-scrolling:touch; overscroll-behavior:contain}
+.modal-body .btn{flex:none}
+.modal-cta-row{display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1.4rem}
+.modal-cta-row .btn{flex:1 1 auto; width:auto; margin-top:0}
+@media(max-height:640px){.modal-art img{max-height:22dvh}}
+
+/* Viewer: Vorschau-Stapel fuer Referenzen ohne Live-URL */
+.viewer-previews{
+  display:grid; gap:1rem; max-width:760px; margin:1.6rem auto 0;
+}
+.viewer-previews img{
+  width:100%; height:auto; border-radius:10px; border:1px solid var(--line);
+  box-shadow:0 14px 34px -22px rgba(27,39,51,.4);
+}
+.viewer-empty{overflow-y:auto; place-items:start center; padding-block:3rem}
+.viewer-empty > div{max-width:820px}
