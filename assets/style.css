@@ -1398,3 +1398,19 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 }
 .finale-tels .bigtel{margin-top:0; font-size:clamp(1.25rem,1rem + 1.3vw,1.9rem); padding:.7rem 1.5rem .7rem .8rem}
 .finale-tels .bigtel i{width:44px; height:44px}
+
+
+/* Kontakt: 'Zwei Dinge' mittig */
+#wissen .eyebrow{justify-content:center}
+#wissen h2{text-align:center; margin-inline:auto}
+#wissen .reason{text-align:center}
+#wissen .reason .ico{margin-inline:auto}
+#wissen .reason p{margin-inline:auto}
+
+/* Karte: kompakt statt prominent */
+.mapbox{max-width:620px; margin-inline:auto; aspect-ratio:21/10}
+@media(max-width:640px){.mapbox{aspect-ratio:16/10}}
+.map-gate{padding:1.4rem 1.2rem; gap:.7rem}
+.map-gate h3{font-size:1.02rem}
+.map-gate p{font-size:.85rem; max-width:40ch}
+.map-gate .btn{padding:.65rem 1.2rem; font-size:.8rem}
