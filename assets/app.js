@@ -150,7 +150,8 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     }
   }
   function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
-  measure(); frame();
+  var idleInit = window.requestIdleCallback || function(f){ setTimeout(f, 300); };
+  idleInit(function(){ measure(); frame(); });
   window.addEventListener('scroll', onScroll, { passive:true });
   window.addEventListener('resize', function(){ measure(); onScroll(); }, { passive:true });
   window.addEventListener('load', function(){ measure(); onScroll(); });
@@ -613,7 +614,8 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     });
   });
 
-  measure(); update();
-  setTimeout(function(){ measure(); update(); }, 200);
-  setTimeout(function(){ measure(); update(); }, 500);
+  (window.requestIdleCallback || function(f){ setTimeout(f, 350); })(function(){
+    measure(); update();
+    setTimeout(function(){ measure(); update(); }, 400);
+  });
 })();
