@@ -13,7 +13,7 @@
   --white:     #FFFFFF;
   --ink:       #1B2733;
   --ink-soft:  #46566A;
-  --ink-mute:  #6E7E90;
+  --ink-mute:  #5D6E82;
   --blue:      #0B7C74;
   --blue-hot:  #12968C;
   --blue-deep: #075E58;
@@ -1157,7 +1157,7 @@ footer::before{
   width:.5em; height:.5em; border-left:2px solid currentColor; border-top:2px solid currentColor;
   transform:rotate(45deg); display:block; margin-top:.15em;
 }
-.credits{margin-top:.9rem; font-size:.75rem; color:#4E5D6C; max-width:78ch}
+.credits{margin-top:.9rem; font-size:.75rem; color:#8A99A8; max-width:78ch}
 .credits a{text-decoration:underline; color:inherit}
 
 
