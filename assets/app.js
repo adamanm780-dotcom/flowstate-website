@@ -8,7 +8,9 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
    1. Headlines in Woerter zerlegen (data-split)
    --------------------------------------------------------------- */
 (function(){
-  document.querySelectorAll('[data-split]').forEach(function(el){
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-split]'));
+  var idle = window.requestIdleCallback || function(f){ setTimeout(f, 1); };
+  function splitOne(el){
     if(el.querySelector('.w')) return;
     var parts = [];
     el.childNodes.forEach(function(node){
@@ -30,7 +32,12 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
       }
       el.appendChild(p);
     });
-  });
+  }
+  (function chunk(){
+    var t0 = performance.now();
+    while(els.length && performance.now() - t0 < 8){ splitOne(els.shift()); }
+    if(els.length) idle(chunk);
+  })();
 })();
 
 /* ---------------------------------------------------------------
@@ -38,15 +45,23 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
    --------------------------------------------------------------- */
 (function(){
   if(reduced) return;
+  var parts = [];
   document.querySelectorAll('.ico').forEach(function(svg){
     svg.querySelectorAll('path,circle,rect,line,polyline,polygon,ellipse').forEach(function(el){
-      var len = 0;
-      try { len = el.getTotalLength(); } catch(e){}
-      if(!len || !isFinite(len) || len < 1) len = 160;
-      len = Math.ceil(len) + 2;
-      el.style.strokeDasharray = String(len);
-      el.style.strokeDashoffset = String(len);
+      parts.push(el);
     });
+  });
+  /* Phase 1: nur LESEN (ein Layout fuer alle) */
+  var lens = parts.map(function(el){
+    var len = 0;
+    try { len = el.getTotalLength(); } catch(e){}
+    if(!len || !isFinite(len) || len < 1) len = 160;
+    return Math.ceil(len) + 2;
+  });
+  /* Phase 2: nur SCHREIBEN */
+  parts.forEach(function(el, i){
+    el.style.strokeDasharray = String(lens[i]);
+    el.style.strokeDashoffset = String(lens[i]);
   });
 })();
 
