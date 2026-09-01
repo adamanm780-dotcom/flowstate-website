@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap"></noscript>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css?v=37">
+<link rel="stylesheet" href="assets/style.css?v=38">
 </head>
 <body class="viewer-body">
 
@@ -27,7 +27,6 @@
         Die neue Website ist fertig gebaut und geht in K&uuml;rze live.
         Hier ein erster Blick &mdash; gern zeigen wir sie Ihnen pers&ouml;nlich komplett.
       </p>
-      <div class="viewer-previews" id="vpreviews" hidden></div>
       <div class="hero-cta" style="justify-content:center">
         <a class="btn btn-accent" href="tel:+491781868874">Jetzt anrufen</a>
         <a class="btn btn-ghost" href="projekte.html">Zur&uuml;ck zu den Projekten</a>
@@ -66,8 +65,7 @@
     mehlhorn: {
       name: 'Laserzentrum Häusler-Mehlhorn',
       sub: 'Chemnitz · Hautmedizin',
-      url: null,
-      previews: ['assets/mh-pc.webp', 'assets/mh-tab.webp', 'assets/mh-phone.webp']
+      url: 'https://www.hautarzt-chemnitz.de/'
     }
   };
   var key = new URLSearchParams(location.search).get('site') || 'benjamin';
@@ -88,15 +86,6 @@
     empty.hidden = false;
     ext.style.display = 'none';
     document.getElementById('vempty-name').textContent = site.name;
-    if(site.previews){
-      var box = document.getElementById('vpreviews');
-      box.hidden = false;
-      site.previews.forEach(function(src){
-        var img = document.createElement('img');
-        img.src = src; img.alt = 'Vorschau der neuen Website'; img.loading = 'lazy';
-        box.appendChild(img);
-      });
-    }
   }
 })();
 </script>
