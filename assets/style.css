@@ -1427,3 +1427,7 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 .qtrack{gap:.8rem}
 @media(min-width:700px){.qtrack{grid-auto-columns:calc((100% - .8rem) / 2)}}
 @media(min-width:1080px){.qtrack{grid-auto-columns:calc((100% - 1.6rem) / 3)}}
+
+/* hidden darf nie von display-Regeln ueberstimmt werden */
+.viewer-empty[hidden]{display:none !important}
+[hidden]{display:none}
