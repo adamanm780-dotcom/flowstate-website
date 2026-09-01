@@ -1414,3 +1414,16 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 .map-gate h3{font-size:1.02rem}
 .map-gate p{font-size:.85rem; max-width:40ch}
 .map-gate .btn{padding:.65rem 1.2rem; font-size:.8rem}
+
+
+/* Bewertungen: leichter statt grosse Boxen */
+.quote{padding:1.05rem 1.1rem; gap:.6rem; border-radius:10px}
+.quote::before{font-size:2.4rem; top:1.4rem; right:.9rem}
+.quote .qstars{font-size:.8rem}
+.quote blockquote{font-size:.9rem; line-height:1.5}
+.quote.big blockquote{font-size:.98rem}
+.quote figcaption{font-size:.88rem}
+.quote figcaption em{font-size:.76rem}
+.qtrack{gap:.8rem}
+@media(min-width:700px){.qtrack{grid-auto-columns:calc((100% - .8rem) / 2)}}
+@media(min-width:1080px){.qtrack{grid-auto-columns:calc((100% - 1.6rem) / 3)}}

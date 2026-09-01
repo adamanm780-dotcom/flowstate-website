@@ -619,3 +619,42 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     setTimeout(function(){ measure(); update(); }, 400);
   });
 })();
+
+/* ---------------------------------------------------------------
+   19. Angebots-Popup nach etwas Scrollen (1x je 3 Tage)
+   --------------------------------------------------------------- */
+(function(){
+  var dlg = document.getElementById('angebot');
+  if(!dlg || !dlg.showModal) return;
+  var KEY = 'fs-offer-seen';
+  function seen(){
+    try {
+      var t = parseInt(localStorage.getItem(KEY) || '0', 10);
+      return t && (Date.now() - t) < 3 * 24 * 3600 * 1000;
+    } catch(e){ return true; }
+  }
+  function markSeen(){ try { localStorage.setItem(KEY, String(Date.now())); } catch(e){} }
+  if(seen()) return;
+
+  /* Manuelles oeffnen zaehlt ebenfalls */
+  document.querySelectorAll('[data-open-angebot]').forEach(function(b){
+    b.addEventListener('click', markSeen);
+  });
+  dlg.addEventListener('close', markSeen);
+
+  var fired = false;
+  function onScroll(){
+    if(fired || dlg.open) return;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if(max < 400) return;
+    var p = window.scrollY / max;
+    if(window.scrollY > 1200 || p > 0.35){
+      fired = true;
+      window.removeEventListener('scroll', onScroll);
+      setTimeout(function(){
+        if(!dlg.open && !seen()){ markSeen(); dlg.showModal(); }
+      }, 700);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+})();
