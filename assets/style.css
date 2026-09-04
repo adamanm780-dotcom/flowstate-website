@@ -476,6 +476,11 @@ h1 .tw-line{display:block; color:var(--blue)}
 .pj-mehlhorn .pj-desc{color:var(--ink-soft)}
 .pj-mehlhorn .tag{background:rgba(122,94,168,.12); color:#5F4787}
 .pj-mehlhorn .pj-go{color:#5F4787}
+.pj-palmberry{background:#F7EFE3; color:var(--ink)}
+.pj-palmberry .pj-no{color:#A81A55}
+.pj-palmberry .pj-desc{color:var(--ink-soft)}
+.pj-palmberry .tag{background:rgba(45,74,28,.10); color:#2D4A1C}
+.pj-palmberry .pj-go{color:#2D4A1C}
 .pj-cta{background:var(--blue); color:#fff}
 .pj-cta .pj-no{color:#B9CCFF}
 .pj-cta .pj-desc{color:#D6E0FF}
@@ -1188,6 +1193,7 @@ footer::before{
 .js .panel.is-on{animation:panelIn .5s var(--ease) both}
 .panel-copy h3{font-size:clamp(1.5rem,1.2rem + 1.2vw,2.1rem); margin-bottom:.8rem; color:var(--blue)}
 .panel-copy > p{color:var(--ink-soft); max-width:46ch}
+.panel-copy > p + p{margin-top:.9rem}
 .gbadge{display:flex; align-items:center; gap:.7rem; margin-top:1.5rem}
 .gword{font-family:var(--f-body); font-weight:600; font-size:1.35rem; letter-spacing:-.02em}
 .gword b{font-weight:600}
@@ -1257,13 +1263,9 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
   @view-transition{ navigation: none; }
 }
 
-/* --- Logo-Marke (Flow-Welle) -------------------------------- */
-.logomark{width:36px; height:25px; flex:none; overflow:visible}
-.logomark path{fill:none; stroke-linecap:round; stroke-linejoin:round}
-.logomark .lm-a{stroke:var(--blue); stroke-width:3.4}
-.logomark .lm-b{stroke:var(--accent); stroke-width:2.3}
-.logo:hover .lm-a{animation:lmFlow .9s var(--ease)}
-.logo:hover .lm-b{animation:lmFlow .9s var(--ease) .08s}
+/* --- Logo-Marke (Flow-Figur) -------------------------------- */
+.logomark{width:auto; height:30px; flex:none; display:block}
+.logo:hover .logomark{animation:lmFlow .9s var(--ease)}
 @keyframes lmFlow{35%{transform:translateX(4px)}70%{transform:translateX(-2px)}}
 .logo b{font-family:var(--f-display); font-weight:800; letter-spacing:-.02em}
 
