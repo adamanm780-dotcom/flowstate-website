@@ -696,8 +696,11 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     setTimeout(finish, d - 180);
   }
 
-  var wait = Math.max(0, 2750 - (performance.now() - window.__lrT0));
-  var timer = setTimeout(fly, wait);
+  var wait = Math.max(0, 2650 - (performance.now() - window.__lrT0));
+  var timer = setTimeout(function(){
+    ov.classList.add('lr-flip');
+    timer = setTimeout(fly, 330);
+  }, wait);
   /* Klick oder Taste ueberspringt */
   function skip(){ clearTimeout(timer); finish(); }
   ov.addEventListener('click', skip);
