@@ -19,7 +19,7 @@
 <meta property="og:title" content="FlowState — Website erstellen lassen in Wiesbaden">
 <meta property="og:description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css?v=42">
+<link rel="stylesheet" href="assets/style.css?v=43">
 <link rel="preload" as="image" href="assets/hero-p2.webp" imagesrcset="assets/hero-p2-sm.webp 520w, assets/hero-p2.webp 1000w" imagesizes="(max-width:940px) 70vw, 580px" fetchpriority="high">
 <script type="application/ld+json">
 {
@@ -48,6 +48,43 @@
 </script>
 </head>
 <body>
+<div id="logoreveal" aria-hidden="true">
+  <div class="lr-stage">
+    <div class="lr-mark">
+      <img class="lr-p lr-m0" src="assets/rv-m0.webp" alt="" style="left:35.69%;top:18.53%;width:51.39%">
+      <img class="lr-p lr-m1" src="assets/rv-m1.webp" alt="" style="left:20.97%;top:46.12%;width:54.03%">
+      <img class="lr-p lr-m2" src="assets/rv-m2.webp" alt="" style="left:2.92%;top:68.53%;width:46.11%">
+      <img class="lr-p lr-m3" src="assets/rv-m3.webp" alt="" style="left:9.86%;top:37.72%;width:42.22%">
+      <img class="lr-p lr-m4" src="assets/rv-m4.webp" alt="" style="left:26.11%;top:35.78%;width:7.92%">
+    </div>
+    <div class="lr-word">
+      <img class="lr-p lr-l" src="assets/rv-w4.webp" alt="" style="left:3.21%;top:30.00%;width:5.71%;--li:0">
+      <img class="lr-p lr-l" src="assets/rv-w8.webp" alt="" style="left:13.57%;top:30.00%;width:5.48%;--li:1">
+      <img class="lr-p lr-l" src="assets/rv-w1.webp" alt="" style="left:22.74%;top:29.00%;width:7.74%;--li:2">
+      <img class="lr-p lr-l" src="assets/rv-w0.webp" alt="" style="left:34.64%;top:30.00%;width:10.60%;--li:3">
+      <img class="lr-p lr-l" src="assets/rv-w3.webp" alt="" style="left:49.40%;top:29.00%;width:5.83%;--li:4">
+      <img class="lr-p lr-l" src="assets/rv-w7.webp" alt="" style="left:59.29%;top:30.00%;width:6.07%;--li:5">
+      <img class="lr-p lr-l" src="assets/rv-w5.webp" alt="" style="left:68.57%;top:30.00%;width:7.50%;--li:6">
+      <img class="lr-p lr-l" src="assets/rv-w6.webp" alt="" style="left:78.93%;top:30.00%;width:6.19%;--li:7">
+      <img class="lr-p lr-l" src="assets/rv-w2.webp" alt="" style="left:89.64%;top:30.00%;width:5.71%;--li:8">
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var el = document.getElementById('logoreveal');
+  var keep = true;
+  try {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) keep = false;
+    var t = parseInt(localStorage.getItem('fs-reveal-seen') || '0', 10);
+    if (t && Date.now() - t < 24 * 3600 * 1000) keep = false;
+  } catch (e) {}
+  if (!keep) { el.parentNode.removeChild(el); return; }
+  try { localStorage.setItem('fs-reveal-seen', String(Date.now())); } catch (e) {}
+  document.documentElement.classList.add('lr-lock');
+  window.__lrT0 = performance.now();
+})();
+</script>
 <a class="skip" href="#main">Zum Inhalt springen</a>
 
 <header class="nav">
@@ -814,6 +851,6 @@
   </div>
 </dialog>
 
-<script defer src="assets/app.js?v=42"></script>
+<script defer src="assets/app.js?v=43"></script>
 </body>
 </html>

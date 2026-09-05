@@ -1463,3 +1463,34 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 .foot-brand .logotype{height:12px}
 .viewer-brand .logotype{height:11px}
 @media(max-width:640px){.logotype{height:11px}}
+
+
+/* =============== Logo-Reveal (Intro-Overlay) =============== */
+html.lr-lock{overflow:hidden}
+#logoreveal{
+  position:fixed; inset:0; z-index:2000; display:grid; place-items:center;
+  background:radial-gradient(120% 90% at 50% 8%, #0E5B54 0%, #075E58 34%, #063C38 100%);
+  transition:opacity .3s ease;
+}
+#logoreveal.lr-out{opacity:0; pointer-events:none}
+.lr-stage{display:grid; justify-items:center; gap:clamp(1.1rem,3.2vh,2rem); will-change:transform}
+.lr-mark{
+  position:relative; width:min(54vw,300px); aspect-ratio:720/464; will-change:transform;
+}
+.lr-word{
+  position:relative; width:min(70vw,430px); aspect-ratio:840/100; will-change:transform;
+}
+.lr-p{position:absolute; height:auto; display:block; will-change:transform,opacity}
+
+/* Teile fliegen riesig herein */
+.lr-m0{transform:translate(88vw,-55vh) rotate(38deg) scale(6); animation:lrIn 1.45s cubic-bezier(0.22,1,0.36,1) .05s both}
+.lr-m1{transform:translate(-92vw,-18vh) rotate(-32deg) scale(7); animation:lrIn 1.45s cubic-bezier(0.22,1,0.36,1) .18s both}
+.lr-m2{transform:translate(-58vw,68vh) rotate(26deg) scale(6); animation:lrIn 1.45s cubic-bezier(0.22,1,0.36,1) .31s both}
+.lr-m3{transform:translate(34vw,80vh) rotate(-46deg) scale(7); animation:lrIn 1.45s cubic-bezier(0.22,1,0.36,1) .44s both}
+@keyframes lrIn{to{transform:translate(0,0) rotate(0) scale(1)}}
+/* Kopf-Punkt ploppt zum Schluss */
+.lr-m4{transform:scale(0); animation:lrPop .55s cubic-bezier(0.34,1.56,0.64,1) 1.7s both}
+@keyframes lrPop{0%{transform:scale(0)}70%{transform:scale(1.45)}100%{transform:scale(1)}}
+/* Buchstaben tracken gestaffelt ein */
+.lr-l{opacity:0; transform:translateY(130%); animation:lrLetter .5s cubic-bezier(0.16,1,0.3,1) calc(1.62s + var(--li)*0.05s) both}
+@keyframes lrLetter{to{opacity:1; transform:translateY(0)}}

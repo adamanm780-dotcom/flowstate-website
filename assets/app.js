@@ -658,3 +658,48 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   }
   window.addEventListener('scroll', onScroll, { passive:true });
 })();
+
+/* ---------------------------------------------------------------
+   20. Logo-Reveal Phase 2: Lockup fliegt in die Navigation
+   --------------------------------------------------------------- */
+(function(){
+  var ov = document.getElementById('logoreveal');
+  if(!ov || window.__lrT0 === undefined) return;
+  var mark = ov.querySelector('.lr-mark');
+  var word = ov.querySelector('.lr-word');
+  var done = false;
+
+  function finish(){
+    if(done) return; done = true;
+    ov.classList.add('lr-out');
+    document.documentElement.classList.remove('lr-lock');
+    setTimeout(function(){ if(ov.parentNode) ov.parentNode.removeChild(ov); }, 340);
+  }
+
+  function fly(){
+    if(done) return;
+    var tm = document.querySelector('.nav .logomark');
+    var tw = document.querySelector('.nav .logotype');
+    if(!tm || !tw || !mark.animate){ finish(); return; }
+    var d = 640, ease = 'cubic-bezier(0.16,1,0.3,1)';
+    [[mark, tm], [word, tw]].forEach(function(pair){
+      var from = pair[0].getBoundingClientRect();
+      var to = pair[1].getBoundingClientRect();
+      var s = to.width / from.width;
+      var dx = (to.left + to.width/2) - (from.left + from.width/2);
+      var dy = (to.top + to.height/2) - (from.top + from.height/2);
+      pair[0].animate(
+        [{ transform:'translate(0,0) scale(1)' },
+         { transform:'translate(' + dx + 'px,' + dy + 'px) scale(' + s + ')' }],
+        { duration:d, easing:ease, fill:'forwards' });
+    });
+    setTimeout(finish, d - 180);
+  }
+
+  var wait = Math.max(0, 2750 - (performance.now() - window.__lrT0));
+  var timer = setTimeout(fly, wait);
+  /* Klick oder Taste ueberspringt */
+  function skip(){ clearTimeout(timer); finish(); }
+  ov.addEventListener('click', skip);
+  document.addEventListener('keydown', skip, { once:true });
+})();
