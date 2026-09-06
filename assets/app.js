@@ -273,6 +273,7 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   var visible = new Set();
   function tryPlay(v){
     v.muted = true;
+    if(v.readyState === 0){ try{ v.load(); }catch(e){} }
     var pr = v.play();
     if(pr && pr.catch) pr.catch(function(){});
   }
