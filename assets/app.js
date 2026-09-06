@@ -291,15 +291,23 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     vids.forEach(function(v){ visible.add(v); tryPlay(v); });
   }
 
-  /* Fallback fuer Stromspar-/Datensparmodus: erste Beruehrung
-     entsperrt und startet alles Sichtbare */
+  /* Stromspar-/Datensparmodus: iOS erlaubt play() nur in einer echten
+     Geste. Deshalb bei JEDEM Touch die sichtbaren, pausierten Videos
+     nachstarten — bleibt aktiv, bis alle einmal gespielt haben. */
+  var played = new Set();
+  vids.forEach(function(v){ v.addEventListener('playing', function(){ played.add(v); }); });
   function unlock(){
-    visible.forEach(tryPlay);
-    document.removeEventListener('touchstart', unlock);
-    document.removeEventListener('pointerdown', unlock);
+    var open = false;
+    visible.forEach(function(v){ if(v.paused){ open = true; tryPlay(v); } });
+    if(!open && played.size >= vids.length){
+      document.removeEventListener('touchstart', unlock);
+      document.removeEventListener('touchend', unlock);
+      document.removeEventListener('pointerdown', unlock);
+    }
   }
-  document.addEventListener('touchstart', unlock, { passive:true, once:true });
-  document.addEventListener('pointerdown', unlock, { passive:true, once:true });
+  document.addEventListener('touchstart', unlock, { passive:true });
+  document.addEventListener('touchend', unlock, { passive:true });
+  document.addEventListener('pointerdown', unlock, { passive:true });
 })();
 
 /* ---------------------------------------------------------------
