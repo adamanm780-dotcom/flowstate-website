@@ -19,7 +19,7 @@
 <meta property="og:title" content="FlowState — Website erstellen lassen in Wiesbaden">
 <meta property="og:description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css?v=46">
+<link rel="stylesheet" href="assets/style.css?v=47">
 <link rel="preload" as="image" href="assets/hero-p2.webp" imagesrcset="assets/hero-p2-sm.webp 520w, assets/hero-p2.webp 1000w" imagesizes="(max-width:940px) 70vw, 580px" fetchpriority="high">
 <script type="application/ld+json">
 {
@@ -74,15 +74,11 @@
 (function(){
   var el = document.getElementById('logoreveal');
   var keep = true;
-  var force = /intro/.test(location.hash + location.search);
   try {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) keep = false;
-    var t = parseInt(localStorage.getItem('fs-reveal-seen') || '0', 10);
-    if (t && Date.now() - t < 24 * 3600 * 1000) keep = false;
   } catch (e) {}
-  if (force) keep = true;
+  if (/intro/.test(location.hash + location.search)) keep = true;
   if (!keep) { el.parentNode.removeChild(el); return; }
-  try { localStorage.setItem('fs-reveal-seen', String(Date.now())); } catch (e) {}
   document.documentElement.classList.add('lr-lock');
   window.__lrT0 = performance.now();
 })();
@@ -853,6 +849,6 @@
   </div>
 </dialog>
 
-<script defer src="assets/app.js?v=46"></script>
+<script defer src="assets/app.js?v=47"></script>
 </body>
 </html>
