@@ -715,3 +715,88 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   ov.addEventListener('click', skip);
   document.addEventListener('keydown', skip, { once:true });
 })();
+
+/* ---------------------------------------------------------------
+   22. Wallet-Sektion: der Pass fuellt sich beim Scrollen mit Stempeln
+   --------------------------------------------------------------- */
+(function(){
+  var pass = document.getElementById('wlPass');
+  if(!pass) return;
+  var frames = pass.querySelectorAll('.wl-frame');
+  var count  = document.getElementById('wlCount');
+  var toast  = document.getElementById('wlToast');
+  var msg    = document.getElementById('wlToastMsg');
+  if(frames.length < 2) return;
+
+  var last = frames.length - 1;
+
+  function show(i){
+    frames.forEach(function(f, n){ f.classList.toggle('is-on', n === i); });
+    if(count) count.textContent = String(i);
+  }
+  function preload(){
+    frames.forEach(function(f){
+      var s = f.getAttribute('data-src');
+      if(s){ f.src = s; f.removeAttribute('data-src'); }
+    });
+  }
+
+  /* reduced motion: volle Karte, keine Show */
+  if(reduced){ preload(); show(last); pass.classList.add('ready'); return; }
+
+  var timers = [];
+  function run(){
+    preload();
+    for(var i = 1; i <= last; i++){
+      (function(n){
+        timers.push(setTimeout(function(){
+          show(n);
+          pass.classList.remove('stamped');
+          void pass.offsetWidth;
+          pass.classList.add('stamped');
+          if(toast && msg){
+            msg.textContent = n === last ? 'Prämie freigeschaltet' : '+1 Stempel';
+            toast.classList.add('show');
+            timers.push(setTimeout(function(){ toast.classList.remove('show'); }, 1250));
+          }
+          if(n === last) pass.classList.add('ready');
+        }, 620 + (n - 1) * 900));
+      })(i);
+    }
+  }
+
+  if(!('IntersectionObserver' in window)){ preload(); show(last); pass.classList.add('ready'); return; }
+
+  var started = false;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(started) return;
+      /* komplett vorbeigescrollt: volle Karte sofort, ohne Show */
+      if(!e.isIntersecting && e.boundingClientRect.top < 0){
+        started = true; io.disconnect();
+        preload(); show(last); pass.classList.add('ready');
+        return;
+      }
+      /* genug im Bild ODER der Nutzer ist schon halb daran vorbei */
+      if(e.isIntersecting && (e.intersectionRatio >= 0.34 || e.boundingClientRect.top < 0)){
+        started = true; io.disconnect(); run();
+      }
+    });
+  }, { threshold:[0, 0.34] });
+  io.observe(pass);
+
+  /* Verlaesst die Karte waehrend der Show das Bild nach oben, wird sofort
+     durchgestempelt — beim Zurueckscrollen steht nie eine halbe Karte da. */
+  var ioEnd = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(!started) return;
+      if(!e.isIntersecting && e.boundingClientRect.top < 0){
+        ioEnd.disconnect();
+        timers.forEach(clearTimeout); timers.length = 0;
+        if(toast) toast.classList.remove('show');
+        show(last); pass.classList.add('ready');
+      }
+    });
+  }, { threshold:0 });
+  ioEnd.observe(pass);
+})();

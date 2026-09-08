@@ -19,7 +19,7 @@
 <meta property="og:title" content="FlowState — Website erstellen lassen in Wiesbaden">
 <meta property="og:description" content="Wir bauen Ihre Website fertig. Sie sehen sie. Erst dann entscheiden Sie, ob Sie zahlen. Webagentur aus Wiesbaden.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="assets/style.css?v=48">
+<link rel="stylesheet" href="assets/style.css?v=49">
 <link rel="preload" as="image" href="assets/hero-p2.webp" imagesrcset="assets/hero-p2-sm.webp 520w, assets/hero-p2.webp 1000w" imagesizes="(max-width:940px) 70vw, 580px" fetchpriority="high">
 <script type="application/ld+json">
 {
@@ -43,7 +43,18 @@
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
     "opens": "09:00", "closes": "18:00"
   },
-  "knowsAbout": ["Webdesign", "Website erstellen", "Local SEO", "Lokale Suchmaschinenoptimierung"]
+  "knowsAbout": ["Webdesign", "Website erstellen", "Local SEO", "Lokale Suchmaschinenoptimierung"],
+  "sameAs": ["https://flowstatewallet.com"],
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "SoftwareApplication",
+      "name": "FlowState Wallet",
+      "url": "https://flowstatewallet.com",
+      "applicationCategory": "BusinessApplication",
+      "description": "Digitale Stempelkarte für Apple Wallet und Google Wallet, entwickelt von FlowState."
+    }
+  }
 }
 </script>
 </head>
@@ -645,6 +656,57 @@
 </section>
 <div class="wave on-tint to-white" aria-hidden="true"><svg viewBox="0 0 1440 96" preserveAspectRatio="none"><path class="fill" d="M0,64 C240,96 480,16 720,40 C960,64 1200,88 1440,32 L1440,96 L0,96 Z"/></svg></div>
 
+<!-- ===== WALLET: eigenes Produkt ===== -->
+<section class="sec wl" id="wallet">
+  <div class="wrap wl-in">
+
+    <div class="wl-copy">
+      <p class="eyebrow rv">Eigenes Produkt</p>
+      <h2 data-split>Nicht nur Websites. Auch eigene Software.</h2>
+      <p class="lede rv">FlowState&nbsp;Wallet ist unser eigenes Produkt: die Stempelkarte Ihres Betriebs, direkt in Apple&nbsp;Wallet und Google&nbsp;Wallet. Keine App, kein Papier, kein Pappkarten&shy;chaos &mdash; ein QR-Scan an der Theke gen&uuml;gt.</p>
+
+      <ul class="wl-rows rv" data-seq="120">
+        <li data-row><span>01</span><b>Karte statt App</b><i>Landet in der Wallet, die auf jedem Handy schon installiert ist.</i></li>
+        <li data-row><span>02</span><b>Stempel nur per Scan</b><i>Signiert nach Apple- und Google-Standard, f&auml;lschungssicher.</i></li>
+        <li data-row><span>03</span><b>G&auml;ste kommen wieder</b><i>Push-Nachricht auf den Sperrbildschirm, wenn die Pr&auml;mie wartet.</i></li>
+      </ul>
+
+      <div class="wl-cta rv">
+        <a class="btn btn-primary" href="https://flowstatewallet.com" target="_blank" rel="noopener">FlowState Wallet ansehen</a>
+        <span class="wl-dom">flowstatewallet.com</span>
+      </div>
+    </div>
+
+    <div class="wl-stage rv">
+      <span class="wl-glow" aria-hidden="true"></span>
+      <div class="wl-pass" id="wlPass">
+        <div class="wl-pass-head">
+          <img src="assets/wl-icon.webp" width="54" height="54" alt="" loading="lazy" decoding="async">
+          <b>Morberry</b><span>Stempelkarte</span>
+        </div>
+        <div class="wl-strip">
+          <img class="wl-frame is-on" src="assets/wl-strip-0.webp" width="560" height="215" alt="Digitale Stempelkarte in der Wallet" loading="lazy" decoding="async">
+          <img class="wl-frame" data-src="assets/wl-strip-1.webp" width="560" height="215" alt="" aria-hidden="true">
+          <img class="wl-frame" data-src="assets/wl-strip-2.webp" width="560" height="215" alt="" aria-hidden="true">
+          <img class="wl-frame" data-src="assets/wl-strip-3.webp" width="560" height="215" alt="" aria-hidden="true">
+          <img class="wl-frame" data-src="assets/wl-strip-4.webp" width="560" height="215" alt="" aria-hidden="true">
+          <img class="wl-frame" data-src="assets/wl-strip-5.webp" width="560" height="215" alt="" aria-hidden="true">
+        </div>
+        <div class="wl-pass-mid">
+          <div><small>Pr&auml;mie</small><b>Gratis Bowl</b></div>
+          <div class="wl-r"><small>Stempel</small><b><span id="wlCount">0</span>/5</b></div>
+        </div>
+      </div>
+      <div class="wl-toast" id="wlToast" aria-hidden="true">
+        <img src="assets/wl-icon.webp" width="54" height="54" alt="" loading="lazy" decoding="async">
+        <div><b>Morberry</b><span id="wlToastMsg">+1 Stempel</span></div>
+      </div>
+      <p class="wl-cap">Beispiel: Stempelkarte eines Betriebs aus Wiesbaden</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- ===== STANDORT ===== -->
 <section class="sec locband" id="standort">
   <div class="wrap-wide locband-in">
@@ -791,6 +853,7 @@
         <a href="projekte.html">Projekte</a>
         <a href="index.html#stimmen">Bewertungen</a>
         <a href="kontakt.html">Kontakt</a>
+        <a href="https://flowstatewallet.com" target="_blank" rel="noopener">FlowState Wallet</a>
       </div>
       <div class="foot-contact">
         <h3>Direkt zu uns</h3>
@@ -849,6 +912,6 @@
   </div>
 </dialog>
 
-<script defer src="assets/app.js?v=48"></script>
+<script defer src="assets/app.js?v=49"></script>
 </body>
 </html>
