@@ -717,86 +717,106 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
 })();
 
 /* ---------------------------------------------------------------
-   22. Wallet-Sektion: der Pass fuellt sich beim Scrollen mit Stempeln
+   22. Wallet-Sektion: die Karte stempelt sich in Dauerschleife voll,
+       beim letzten Stempel knallt kurz Konfetti. Laeuft nur, solange
+       die Karte im Bild ist (Akku/Jank), und pausiert bei reduced-motion.
    --------------------------------------------------------------- */
 (function(){
   var pass = document.getElementById('wlPass');
   if(!pass) return;
-  var frames = pass.querySelectorAll('.wl-frame');
-  var count  = document.getElementById('wlCount');
-  var toast  = document.getElementById('wlToast');
-  var msg    = document.getElementById('wlToastMsg');
-  if(frames.length < 2) return;
+  var chks  = [].slice.call(pass.querySelectorAll('.wl-chk'));
+  var count = document.getElementById('wlCount');
+  var toast = document.getElementById('wlToast');
+  var msg   = document.getElementById('wlToastMsg');
+  var cvs   = document.getElementById('wlConfetti');
+  if(!chks.length) return;
 
-  var last = frames.length - 1;
+  var GOAL = chks.length, STEP = 620, HOLD = 2600, GAP = 900;
 
-  function show(i){
-    frames.forEach(function(f, n){ f.classList.toggle('is-on', n === i); });
-    if(count) count.textContent = String(i);
-  }
-  function preload(){
-    frames.forEach(function(f){
-      var s = f.getAttribute('data-src');
-      if(s){ f.src = s; f.removeAttribute('data-src'); }
-    });
-  }
+  function setCount(n){ if(count) count.textContent = String(n); }
+  function fill(n){ chks.forEach(function(g,i){ g.classList.toggle('on', i < n); }); setCount(n); }
 
-  /* reduced motion: volle Karte, keine Show */
-  if(reduced){ preload(); show(last); pass.classList.add('ready'); return; }
-
-  var timers = [];
-  function run(){
-    preload();
-    for(var i = 1; i <= last; i++){
-      (function(n){
-        timers.push(setTimeout(function(){
-          show(n);
-          pass.classList.remove('stamped');
-          void pass.offsetWidth;
-          pass.classList.add('stamped');
-          if(toast && msg){
-            msg.textContent = n === last ? 'Prämie freigeschaltet' : '+1 Stempel';
-            toast.classList.add('show');
-            timers.push(setTimeout(function(){ toast.classList.remove('show'); }, 1250));
-          }
-          if(n === last) pass.classList.add('ready');
-        }, 620 + (n - 1) * 900));
-      })(i);
+  /* --- Konfetti: kleines Canvas, keine Library ------------------ */
+  var COLS = ['#7E1233','#C2295A','#F2871C','#3AA84A','#FCF4DF','#0B7C74'];
+  function confetti(){
+    if(!cvs || !cvs.getContext) return;
+    var stage = cvs.parentNode;
+    var w = cvs.width  = stage.clientWidth;
+    var h = cvs.height = stage.clientHeight;
+    var ctx = cvs.getContext('2d');
+    /* Ursprung: Mitte der Karte */
+    var pr = pass.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+    var ox = pr.left - sr.left + pr.width / 2, oy = pr.top - sr.top + pr.height * 0.52;
+    var bits = [];
+    for(var i = 0; i < 90; i++){
+      bits.push({
+        x: ox + (Math.random() - 0.5) * pr.width * 0.7, y: oy + (Math.random() - 0.5) * 20,
+        vx: (Math.random() - 0.5) * 9.2, vy: -4.4 - Math.random() * 6.6,
+        s: 4 + Math.random() * 5.4, rot: Math.random() * Math.PI,
+        vr: (Math.random() - 0.5) * 0.34, c: COLS[(Math.random() * COLS.length) | 0]
+      });
     }
+    cvs.classList.add('on');
+    var t0 = 0;
+    function frame(ts){
+      if(!t0) t0 = ts;
+      var life = ts - t0;
+      ctx.clearRect(0, 0, w, h);
+      bits.forEach(function(b){
+        b.vy += 0.17; b.x += b.vx; b.y += b.vy; b.rot += b.vr;
+        ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.rot);
+        ctx.globalAlpha = Math.max(0, 1 - life / 1800);
+        ctx.fillStyle = b.c; ctx.fillRect(-b.s / 2, -b.s / 2, b.s, b.s * 0.62);
+        ctx.restore();
+      });
+      if(life < 1800) requestAnimationFrame(frame);
+      else { ctx.clearRect(0, 0, w, h); cvs.classList.remove('on'); }
+    }
+    requestAnimationFrame(frame);
   }
 
-  if(!('IntersectionObserver' in window)){ preload(); show(last); pass.classList.add('ready'); return; }
+  /* --- reduced motion: volle Karte, keine Schleife -------------- */
+  if(reduced){ fill(GOAL); pass.classList.add('ready'); return; }
 
-  var started = false;
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(started) return;
-      /* komplett vorbeigescrollt: volle Karte sofort, ohne Show */
-      if(!e.isIntersecting && e.boundingClientRect.top < 0){
-        started = true; io.disconnect();
-        preload(); show(last); pass.classList.add('ready');
+  var n = 0, timer = null, running = false;
+
+  function pop(){
+    pass.classList.remove('stamped'); void pass.offsetWidth; pass.classList.add('stamped');
+  }
+  function say(text){
+    if(!toast || !msg) return;
+    msg.textContent = text;
+    toast.classList.add('show');
+    clearTimeout(say._t);
+    say._t = setTimeout(function(){ toast.classList.remove('show'); }, 1400);
+  }
+  function tick(){
+    if(!running) return;
+    if(n < GOAL){
+      n++; fill(n); pop();
+      if(n === GOAL){
+        pass.classList.add('ready');
+        confetti();
+        say('Prämie freigeschaltet');
+        timer = setTimeout(function(){ n = 0; fill(0); pass.classList.remove('ready'); timer = setTimeout(tick, GAP); }, HOLD);
         return;
       }
-      /* genug im Bild ODER der Nutzer ist schon halb daran vorbei */
-      if(e.isIntersecting && (e.intersectionRatio >= 0.34 || e.boundingClientRect.top < 0)){
-        started = true; io.disconnect(); run();
-      }
-    });
-  }, { threshold:[0, 0.34] });
-  io.observe(pass);
+      say('+1 Stempel');
+    }
+    timer = setTimeout(tick, STEP);
+  }
+  function start(){ if(running) return; running = true; timer = setTimeout(tick, 500); }
+  function stop(){ running = false; clearTimeout(timer); if(toast) toast.classList.remove('show'); }
 
-  /* Verlaesst die Karte waehrend der Show das Bild nach oben, wird sofort
-     durchgestempelt — beim Zurueckscrollen steht nie eine halbe Karte da. */
-  var ioEnd = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(!started) return;
-      if(!e.isIntersecting && e.boundingClientRect.top < 0){
-        ioEnd.disconnect();
-        timers.forEach(clearTimeout); timers.length = 0;
-        if(toast) toast.classList.remove('show');
-        show(last); pass.classList.add('ready');
-      }
-    });
-  }, { threshold:0 });
-  ioEnd.observe(pass);
+  if(!('IntersectionObserver' in window)){ start(); }
+  else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ e.isIntersecting ? start() : stop(); });
+    }, { threshold:0.15 });
+    io.observe(pass);
+  }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden) stop();
+    else if(pass.getBoundingClientRect().top < innerHeight && pass.getBoundingClientRect().bottom > 0) start();
+  });
 })();
