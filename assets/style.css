@@ -1655,3 +1655,17 @@ html.lr-lock{overflow:hidden}
   .wl-pass.stamped{animation:none}
   .wl-toast{display:none}
 }
+
+/* ============================================================
+   FIX: Bewertungs-Slider mobil
+   Karten wurden auf die Hoehe der laengsten gestreckt — kurze
+   Bewertungen zeigten eine grosse Leerflaeche. Auf einer Karte
+   pro Bild traegt jede Karte jetzt nur ihre eigene Hoehe.
+   Pfeile am Rand werden deaktiviert statt still ins Leere zu klicken.
+   ============================================================ */
+@media(max-width:699px){
+  .qtrack{align-items:start; transition:height .34s var(--ease)}
+  .quote figcaption{margin-top:1.1rem}
+}
+.qbtn[disabled]{opacity:.34; cursor:default; pointer-events:none}
+.qbtn[disabled]:hover{background:var(--white); border-color:var(--tint-2); color:var(--blue)}

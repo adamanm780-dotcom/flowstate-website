@@ -198,12 +198,52 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   if(!track) return;
   var prev = document.querySelector('[data-q-prev]');
   var next = document.querySelector('[data-q-next]');
+  /* Schrittweite aus den echten Kartenabstaenden — der Gap ist je
+     Breakpoint anders, ein fester Wert schiebt sonst daneben. */
   function stepWidth(){
-    var q = track.querySelector('.quote');
-    return q ? q.getBoundingClientRect().width + 19 : 340;
+    var qs = track.querySelectorAll('.quote');
+    if(qs.length > 1) return qs[1].offsetLeft - qs[0].offsetLeft;
+    return qs.length ? qs[0].getBoundingClientRect().width : 340;
+  }
+  /* Pfeile an den Enden sperren: sonst klickt man ins Leere.
+     Gemessen wird an den echten Kartenkanten — scrollLeft startet je
+     nach Layout nicht bei 0. */
+  function syncArrows(){
+    var qs = track.querySelectorAll('.quote');
+    if(!qs.length) return;
+    var t = track.getBoundingClientRect();
+    var first = qs[0].getBoundingClientRect();
+    var last = qs[qs.length - 1].getBoundingClientRect();
+    if(prev) prev.disabled = first.left >= t.left - 4;
+    if(next) next.disabled = last.right <= t.right + 4;
   }
   if(prev) prev.addEventListener('click', function(){ track.scrollBy({ left:-stepWidth(), behavior:'smooth' }); });
   if(next) next.addEventListener('click', function(){ track.scrollBy({ left: stepWidth(), behavior:'smooth' }); });
+  /* Mobil ist nur EINE Karte sichtbar: dann traegt die Spur genau die
+     Hoehe der aktiven Karte — sonst steht unter kurzen Bewertungen die
+     Leerflaeche der laengsten. */
+  var oneUp = window.matchMedia('(max-width:699px)');
+  function sizeTrack(){
+    if(!oneUp.matches){ track.style.height = ''; return; }
+    var qs = track.querySelectorAll('.quote');
+    if(!qs.length) return;
+    var t = track.getBoundingClientRect(), best = null, bd = Infinity;
+    for(var i = 0; i < qs.length; i++){
+      var d = Math.abs(qs[i].getBoundingClientRect().left - t.left);
+      if(d < bd){ bd = d; best = qs[i]; }
+    }
+    var pad = parseFloat(getComputedStyle(track).paddingBottom) || 0;
+    track.style.height = Math.round(best.getBoundingClientRect().height + pad) + 'px';
+  }
+  function refresh(){ syncArrows(); sizeTrack(); }
+  track.addEventListener('scroll', function(){
+    if(refresh._r) return;
+    refresh._r = requestAnimationFrame(function(){ refresh._r = 0; refresh(); });
+  }, { passive:true });
+  if(oneUp.addEventListener) oneUp.addEventListener('change', refresh);
+  addEventListener('resize', refresh, { passive:true });
+  addEventListener('load', refresh);
+  refresh();
 
   if(finePointer){
     var down = false, sx = 0, sl = 0, moved = false;
@@ -256,10 +296,15 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
 })();
 
 /* ---------------------------------------------------------------
-   11. Videos: abspielen, wenn sichtbar
+   11. Videos: abspielen, wenn sichtbar — mit Fallback fuer iOS
+   Wichtig: Im iOS-Stromsparmodus verweigert Safari JEDES Autoplay,
+   auch stumm und playsinline; erlaubt ist es dort nur in einer echten
+   Tap-Geste (Scrollen zaehlt nicht). Deshalb wird geprueft, ob das
+   Video wirklich laeuft — wenn nicht, tritt ein animiertes WebP an
+   seine Stelle. Bilder unterliegen keiner Autoplay-Sperre.
    --------------------------------------------------------------- */
 (function(){
-  var vids = document.querySelectorAll('video[data-auto]');
+  var vids = [].slice.call(document.querySelectorAll('video[data-auto]'));
   if(!vids.length) return;
   if(reduced){ vids.forEach(function(v){ v.removeAttribute('autoplay'); v.pause(); }); return; }
 
@@ -270,20 +315,47 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     v.setAttribute('muted', ''); v.setAttribute('webkit-playsinline', '');
   });
 
-  var visible = new Set();
+  var visible = new Set(), played = new Set(), swapped = new Set();
+
+  /* Video gegen das animierte WebP tauschen (einmal pro Video). */
+  function swap(v){
+    var src = v.getAttribute('data-anim');
+    if(!src || swapped.has(v)) return;
+    swapped.add(v);
+    var img = new Image();
+    img.src = src;
+    img.alt = '';
+    img.setAttribute('aria-hidden', 'true');
+    img.width = v.width || 1116; img.height = v.height || 824;
+    img.className = v.className;
+    img.decoding = 'async';
+    var px = v.getAttribute('data-parallax');
+    if(px) img.setAttribute('data-parallax', px);
+    img.addEventListener('load', function(){
+      if(v.parentNode){ v.parentNode.insertBefore(img, v); v.remove(); }
+    });
+    img.addEventListener('error', function(){ swapped.delete(v); });
+  }
+
   function tryPlay(v){
     v.muted = true;
     if(v.readyState === 0){ try{ v.load(); }catch(e){} }
     var pr = v.play();
-    if(pr && pr.catch) pr.catch(function(){});
+    if(pr && pr.catch) pr.catch(function(){ if(visible.has(v)) swap(v); });
+    /* Auch ohne Rejection kann iOS stillstehen: nachmessen. */
+    setTimeout(function(){
+      if(visible.has(v) && !played.has(v) && v.paused) swap(v);
+    }, 900);
   }
+
+  vids.forEach(function(v){ v.addEventListener('playing', function(){ played.add(v); }); });
 
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         var v = e.target;
         if(e.isIntersecting){ visible.add(v); tryPlay(v); }
-        else { visible.delete(v); v.pause(); }
+        else { visible.delete(v); if(!v.paused) v.pause(); }
       });
     }, { threshold:0.2 });
     vids.forEach(function(v){ io.observe(v); });
@@ -291,21 +363,15 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     vids.forEach(function(v){ visible.add(v); tryPlay(v); });
   }
 
-  /* Stromspar-/Datensparmodus: iOS erlaubt play() nur in einer echten
-     Geste. Deshalb bei JEDEM Touch die sichtbaren, pausierten Videos
-     nachstarten — bleibt aktiv, bis alle einmal gespielt haben. */
-  var played = new Set();
-  vids.forEach(function(v){ v.addEventListener('playing', function(){ played.add(v); }); });
+  /* Tap gibt die Wiedergabe frei, solange noch ein Video uebrig ist. */
   function unlock(){
     var open = false;
-    visible.forEach(function(v){ if(v.paused){ open = true; tryPlay(v); } });
-    if(!open && played.size >= vids.length){
-      document.removeEventListener('touchstart', unlock);
+    visible.forEach(function(v){ if(v.isConnected && v.paused){ open = true; tryPlay(v); } });
+    if(!open && played.size + swapped.size >= vids.length){
       document.removeEventListener('touchend', unlock);
       document.removeEventListener('pointerdown', unlock);
     }
   }
-  document.addEventListener('touchstart', unlock, { passive:true });
   document.addEventListener('touchend', unlock, { passive:true });
   document.addEventListener('pointerdown', unlock, { passive:true });
 })();
