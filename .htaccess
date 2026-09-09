@@ -21,3 +21,8 @@
   AddOutputFilterByType DEFLATE application/javascript application/json
   AddOutputFilterByType DEFLATE image/svg+xml application/xml
 </IfModule>
+
+# Backup- und Quelldateien nie ausliefern
+<FilesMatch "\.(bak|old|orig|log|sql)$">
+  Require all denied
+</FilesMatch>

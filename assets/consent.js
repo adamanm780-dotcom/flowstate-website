@@ -78,10 +78,11 @@
     'animation:fsc-in .42s cubic-bezier(.16,1,.3,1) both}',
     '@keyframes fsc-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}',
     '@media (prefers-reduced-motion:reduce){.fsc-box{animation:none}}',
+    '.fsc-box:focus{outline:none}',
     '.fsc-h{margin:0 0 .35rem;font-family:var(--f-display,inherit);font-size:1.06rem;font-weight:700;letter-spacing:-.01em}',
-    '.fsc-p{margin:0 0 .95rem;font-size:.925rem;line-height:1.55;color:var(--ink-soft,#46566A)}',
+    '.fsc-p{margin:0 0 .95rem;font-size:.9rem;line-height:1.5;color:var(--ink-soft,#46566A)}',
     '.fsc-btns{display:flex;flex-wrap:wrap;gap:.6rem}',
-    '.fsc-btn{flex:1 1 190px;min-height:48px;padding:.78rem 1.1rem;border:0;border-radius:11px;cursor:pointer;',
+    '.fsc-btn{flex:1 1 140px;min-height:48px;padding:.78rem .9rem;border:0;border-radius:11px;cursor:pointer;',
     'font-family:var(--f-ui,inherit);font-size:.955rem;font-weight:700;letter-spacing:.01em;color:#fff;',
     'transition:transform .18s ease,filter .18s ease}',
     '.fsc-btn:hover{transform:translateY(-1px);filter:brightness(1.08)}',
@@ -92,7 +93,7 @@
     '.fsc-legal{display:inline-block;margin-top:.8rem;font-size:.83rem;color:var(--ink-mute,#5D6E82);',
     'text-decoration:underline;text-underline-offset:2px}',
     '.fsc-legal:focus-visible{outline:3px solid var(--accent,#F2871C);outline-offset:2px}',
-    '@media (max-width:430px){.fsc-btn{flex:1 1 100%}}'
+    '@media (max-width:359px){.fsc-btn{flex:1 1 100%}}'
   ].join('');
 
   function injectCSS() {
@@ -123,12 +124,11 @@
     banner.setAttribute('aria-labelledby', 'fsc-h');
     banner.setAttribute('aria-describedby', 'fsc-p');
     banner.innerHTML =
-      '<div class="fsc-box">' +
-        '<h2 class="fsc-h" id="fsc-h">Kurz gefragt: dürfen wir mitzählen?</h2>' +
-        '<p class="fsc-p" id="fsc-p">Wir würden gern mit Google Analytics messen, welche Seiten hier gelesen werden, ' +
-          'damit wir sie besser machen können. Dafür wird ein Cookie gesetzt und eine gekürzte IP-Adresse ' +
-          'an Google übertragen. Das passiert nur, wenn Sie zustimmen. Ihre Entscheidung können Sie jederzeit ' +
-          'im Fußbereich unter „Cookie-Einstellungen“ ändern.</p>' +
+      '<div class="fsc-box" tabindex="-1">' +
+        '<h2 class="fsc-h" id="fsc-h">Dürfen wir mitzählen?</h2>' +
+        '<p class="fsc-p" id="fsc-p">Mit Google Analytics würden wir gern messen, welche Seiten gelesen werden, ' +
+          'um sie besser zu machen. Dafür wird ein Cookie gesetzt und eine gekürzte IP-Adresse an Google ' +
+          'übertragen. Nur mit Ihrer Zustimmung, jederzeit widerrufbar über „Cookie-Einstellungen“ im Fußbereich.</p>' +
         '<div class="fsc-btns">' +
           '<button type="button" class="fsc-btn fsc-deny" data-fsc="deny">Nur notwendige</button>' +
           '<button type="button" class="fsc-btn fsc-ok" data-fsc="accept">Alle akzeptieren</button>' +
@@ -172,8 +172,11 @@
     };
     document.addEventListener('focusin', guardHandler, true);
 
-    var f0 = focusables();
-    if (f0.length) f0[0].focus({ preventScroll: true });
+    /* Fokus auf den Dialog selbst, nicht auf einen der beiden Buttons: sonst
+       bekaeme "Nur notwendige" beim Oeffnen einen Fokusring und waere optisch
+       hervorgehoben. Die Reihenfolge im Tab bleibt deny, dann accept. */
+    var box = banner.firstChild;
+    if (box && box.focus) box.focus({ preventScroll: true });
   }
 
   function close() {
