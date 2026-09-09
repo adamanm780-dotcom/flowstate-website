@@ -2,6 +2,11 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<!-- Google Consent Mode v2: Vorgabe ist "verweigert". Muss vor allem anderen laufen. -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Danke — FlowState</title>
 <meta name="robots" content="noindex">
@@ -9,12 +14,10 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=55">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=55">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=55">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="assets/style.css?v=56">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/encode-sans-semi-condensed-latin-800-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/encode-sans-latin-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=57">
+<script defer src="assets/consent.js?v=57"></script>
 </head>
 <body>
 <main style="min-height:78svh;display:grid;place-items:center;text-align:center;padding:2rem">
@@ -29,6 +32,7 @@
     <div class="hero-cta" style="justify-content:center;margin-top:2rem">
       <a class="btn btn-primary" href="index.html">Zur&uuml;ck zur Startseite</a>
     </div>
+    <p style="margin-top:2.2rem;font-size:.83rem;color:var(--ink-mute)"><a href="impressum.html" style="color:inherit">Impressum</a> &nbsp;&middot;&nbsp; <a href="datenschutz.html" style="color:inherit">Datenschutz</a> &nbsp;&middot;&nbsp; <a href="datenschutz.html#cookies" data-cookie-settings style="color:inherit">Cookie-Einstellungen</a></p>
   </div>
 </main>
 </body>

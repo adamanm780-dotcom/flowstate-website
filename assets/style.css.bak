@@ -5,16 +5,6 @@
    Flow-Linien in Ablauf & Footer).
    ============================================================ */
 
-/* Schriften lokal (kein Google-Fonts-CDN, keine IP-Uebertragung an Google).
-   Encode Sans + Encode Sans Semi Condensed, latin-Subset, SIL Open Font License. */
-@font-face{font-family:'Encode Sans';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/encode-sans-latin-400-normal.woff2') format('woff2')}
-@font-face{font-family:'Encode Sans';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/encode-sans-latin-500-normal.woff2') format('woff2')}
-@font-face{font-family:'Encode Sans';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/encode-sans-latin-600-normal.woff2') format('woff2')}
-@font-face{font-family:'Encode Sans Semi Condensed';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/encode-sans-semi-condensed-latin-500-normal.woff2') format('woff2')}
-@font-face{font-family:'Encode Sans Semi Condensed';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/encode-sans-semi-condensed-latin-600-normal.woff2') format('woff2')}
-@font-face{font-family:'Encode Sans Semi Condensed';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/encode-sans-semi-condensed-latin-700-normal.woff2') format('woff2')}
-@font-face{font-family:'Encode Sans Semi Condensed';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/encode-sans-semi-condensed-latin-800-normal.woff2') format('woff2')}
-
 :root{
   /* FlowState-CI: Petrol als Vertrauensfarbe, Amber als Handlungsakzent,
      Weiss + kuehles Mint-Grau als Flaechen. SR-System, eigene Toene. */
@@ -1764,20 +1754,3 @@ body.nav-open{overflow:hidden}
   .navdrawer .nd-links li,.navdrawer .nd-foot{opacity:1; transform:none; transition:none}
   .navburger i{transition:none}
 }
-
-/* Referenz-Viewer: Seiten, die das Einbetten verbieten
-   (X-Frame-Options), bekommen Vorschau + Direktlink statt leerer Flaeche */
-.viewer-extern{
-  flex:1; min-height:0; overflow-y:auto; background:var(--bg-2);
-  display:grid; place-items:center; padding:clamp(1.4rem,5vw,3rem) var(--pad);
-}
-.viewer-extern[hidden]{display:none !important}
-.ve-in{max-width:760px; text-align:center; display:grid; gap:1.1rem; justify-items:center}
-.ve-in h1{font-size:clamp(1.9rem,1.4rem + 2.4vw,3rem)}
-.ve-shot{
-  display:block; margin-top:.6rem; border-radius:18px 6px 18px 6px; overflow:hidden;
-  border:1px solid var(--line); box-shadow:0 30px 60px -34px rgba(27,39,51,.5);
-  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
-}
-.ve-shot:hover{transform:translateY(-4px); box-shadow:0 38px 70px -34px rgba(27,39,51,.6)}
-.ve-shot img{display:block; width:100%; height:auto}

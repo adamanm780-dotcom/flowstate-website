@@ -1,3 +1,10 @@
+# www dauerhaft auf die Apex-Domain (Canonical zeigt dorthin, sonst Duplicate Content)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^www\.yourflowstate\.de$ [NC]
+  RewriteRule ^(.*)$ https://yourflowstate.de/$1 [R=301,L]
+</IfModule>
+
 # FlowState — Cache-Steuerung (IONOS/Apache)
 <IfModule mod_headers.c>
   <FilesMatch "\.(html)$">

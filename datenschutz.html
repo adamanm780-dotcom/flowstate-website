@@ -2,14 +2,14 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<!-- Google Consent Mode v2: Vorgabe ist "verweigert". Muss vor allem anderen laufen. -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Datenschutzerklärung — FlowState Webdesign aus Wiesbaden</title>
-<meta name="description" content="Wie wir mit Ihren Daten umgehen: Hosting, Kontaktwege, Google Maps und Ihre Rechte nach DSGVO.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap"></noscript>
+<meta name="description" content="Wie wir mit Ihren Daten umgehen: Hosting, Kontaktwege, Google Maps, Google Analytics und Ihre Rechte nach DSGVO.">
 <link rel="canonical" href="https://yourflowstate.de/datenschutz.html">
 <meta property="og:site_name" content="FlowState">
 <meta property="og:type" content="website">
@@ -17,12 +17,15 @@
 <meta property="og:image" content="https://yourflowstate.de/assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta property="og:title" content="Datenschutzerklärung — FlowState Webdesign aus Wiesbaden">
-<meta property="og:description" content="Wie wir mit Ihren Daten umgehen: Hosting, Kontaktwege, Google Maps und Ihre Rechte nach DSGVO.">
+<meta property="og:description" content="Wie wir mit Ihren Daten umgehen: Hosting, Kontaktwege, Google Maps, Google Analytics und Ihre Rechte nach DSGVO.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=55">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=55">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=55">
-<link rel="stylesheet" href="assets/style.css?v=56">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/encode-sans-semi-condensed-latin-800-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/encode-sans-latin-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=57">
+<script defer src="assets/consent.js?v=57"></script>
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
@@ -97,14 +100,24 @@
         Diese Daten werden nicht mit anderen Datenquellen zusammengef&uuml;hrt und nach maximal 30 Tagen gel&ouml;scht.
       </p>
 
-      <h2>3. Hosting (Vercel Inc., USA)</h2>
+      <h2>3. Hosting (IONOS SE, Deutschland) und Cloudflare</h2>
       <p>
-        Diese Webseite wird gehostet bei <strong>Vercel Inc.</strong>, 340 S Lemon Ave #4133, Walnut, CA 91789, USA.
-        Vercel verarbeitet dabei zwangsl&auml;ufig die unter Punkt 2 genannten Verbindungsdaten.
-        Beim Aufruf wird Ihre Anfrage in der Regel &uuml;ber einen EU-Edge-Knoten (Frankfurt) ausgeliefert; eine &Uuml;bermittlung in die USA kann nicht ausgeschlossen werden.
-        Vercel ist nach dem EU-US Data Privacy Framework zertifiziert und stellt einen Auftragsverarbeitungsvertrag (Data Processing Addendum) bereit, den wir abgeschlossen haben.
-        Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO; Drittlandtransfer auf Grundlage des Angemessenheitsbeschlusses (DPF) bzw. Standardvertragsklauseln.
-        <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Datenschutzerkl&auml;rung von Vercel</a>.
+        Diese Webseite wird auf dem Webspace der <strong>IONOS SE</strong>, Elgendorfer Stra&szlig;e 57, 56410 Montabaur, Deutschland
+        gehostet. Die Server stehen in Deutschland. IONOS verarbeitet dabei zwangsl&auml;ufig die unter Punkt 2 genannten
+        Verbindungsdaten. Mit IONOS besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO.
+        Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem stabilen, sicheren Betrieb).
+        <a href="https://www.ionos.de/terms-gtc/datenschutzerklaerung/" target="_blank" rel="noopener noreferrer">Datenschutzerkl&auml;rung von IONOS</a>.
+      </p>
+      <p>
+        Aufrufe &uuml;ber die Adresse <em>www.yourflowstate.de</em> laufen zus&auml;tzlich &uuml;ber das Content-Delivery-Netzwerk der
+        <strong>Cloudflare Germany GmbH</strong> (Rosental 7, 80331 M&uuml;nchen; Mutterunternehmen: Cloudflare, Inc., 101 Townsend St.,
+        San Francisco, CA 94107, USA). Cloudflare liefert die Inhalte &uuml;ber einen Server in Ihrer N&auml;he aus und filtert
+        Angriffe ab. Dabei werden Ihre IP-Adresse und technische Verbindungsdaten verarbeitet; eine Verarbeitung in
+        Drittl&auml;ndern ist nicht auszuschlie&szlig;en. Cloudflare, Inc. ist unter dem EU-US Data Privacy Framework zertifiziert;
+        erg&auml;nzend gelten die Standardvertragsklauseln der EU-Kommission.
+        Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Sicherheit und Verf&uuml;gbarkeit des Angebots).
+        Diese Adresse leitet dauerhaft auf <em>yourflowstate.de</em> weiter.
+        <a href="https://www.cloudflare.com/de-de/privacypolicy/" target="_blank" rel="noopener noreferrer">Datenschutzerkl&auml;rung von Cloudflare</a>.
       </p>
 
       <h2>4. Kontaktaufnahme (Formular, E-Mail, Telefon, WhatsApp)</h2>
@@ -143,25 +156,93 @@
         <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerkl&auml;rung von Google</a>.
       </p>
 
-      <h2>7. Schriftarten (Google Fonts)</h2>
+      <h2>7. Schriftarten</h2>
       <p>
         Diese Webseite verwendet die Schriftarten <em>Encode Sans</em> und <em>Encode Sans Semi Condensed</em>.
-        Die Schriften werden derzeit &uuml;ber den Dienst <strong>Google Fonts</strong> der Google Ireland Limited
-        (Gordon House, Barrow Street, Dublin 4, Irland) geladen. Beim Aufruf der Seite baut Ihr Browser dazu eine
-        Verbindung zu Servern von Google auf und &uuml;bermittelt dabei Ihre IP-Adresse.
-        Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer einheitlichen Darstellung).
+        Beide werden ausschlie&szlig;lich <strong>lokal von unserem Server</strong> geladen. Es findet <strong>keine</strong>
+        Verbindung zu Google Fonts oder einem anderen externen Anbieter statt, es wird also auch keine IP-Adresse
+        an Google &uuml;bertragen.
         Die Schriften sind unter der <a href="https://scripts.sil.org/OFL" target="_blank" rel="noopener noreferrer">SIL Open Font License</a> lizenziert.
-        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerkl&auml;rung von Google</a>.
       </p>
 
-      <h2>8. Cookies &amp; lokale Speicherung</h2>
+      <h2 id="analytics">8. Google Analytics 4 (nur nach Ihrer Einwilligung)</h2>
       <p>
-        Diese Webseite verwendet <strong>keine</strong> Tracking-Cookies, kein Analytics, kein Werbe-Pixel und keine
-        Drittanbieter-Cookies. Es werden von uns keine Daten in <code>localStorage</code> oder <code>sessionStorage</code> gespeichert.
-        Solange Sie die Karte nicht laden, werden auch keine Cookies von Google gesetzt.
+        Diese Webseite nutzt <strong>Google Analytics 4</strong>, einen Webanalysedienst der
+        <strong>Google Ireland Limited</strong>, Gordon House, Barrow Street, Dublin 4, Irland.
+      </p>
+      <p>
+        <strong>Rechtsgrundlage.</strong> Wir setzen Google Analytics ausschlie&szlig;lich auf Grundlage Ihrer
+        <strong>Einwilligung</strong> nach Art. 6 Abs. 1 lit. a DSGVO ein; das Speichern und Auslesen von Informationen
+        auf Ihrem Endger&auml;t erfolgt nach &sect; 25 Abs. 1 TDDDG ebenfalls nur mit Ihrer Einwilligung.
+        Solange Sie nicht zustimmen, wird <strong>kein</strong> Analytics-Skript geladen, es wird
+        <strong>kein</strong> Cookie gesetzt und es geht <strong>keine</strong> Verbindung zu Google hinaus.
+      </p>
+      <p>
+        <strong>Zweck.</strong> Reichweitenmessung und Verbesserung unseres Angebots: Wir wollen wissen, welche Seiten
+        gelesen werden, wie Besucher zu uns finden und wo sie abspringen, um die Webseite daran auszurichten.
+      </p>
+      <p>
+        <strong>Verarbeitete Daten.</strong> Gek&uuml;rzte IP-Adresse (Google Analytics 4 k&uuml;rzt die IP-Adresse
+        grunds&auml;tzlich vor jeder Speicherung), Ger&auml;te- und Browserdaten (Ger&auml;tetyp, Betriebssystem,
+        Browser, Bildschirmaufl&ouml;sung, Spracheinstellung), ungef&auml;hrer Standort auf Stadt- oder Regionsebene,
+        aufgerufene Seiten, Zeitpunkt und Verweildauer, Referrer sowie eine pseudonyme Kennung in einem Cookie
+        (<code>_ga</code>), &uuml;ber die wiederkehrende Besuche zusammengef&uuml;hrt werden. Wir erhalten keine Klarnamen
+        und f&uuml;hren die Daten nicht mit anderen Datenbest&auml;nden zusammen. Werbefunktionen, Google Signals und
+        Datenweitergabe zu Werbezwecken sind deaktiviert.
+      </p>
+      <p>
+        <strong>Speicherdauer.</strong> Die nutzerbezogenen Daten und Ereignisdaten in Google Analytics werden nach
+        <strong>14 Monaten</strong> automatisch gel&ouml;scht. Das Cookie <code>_ga</code> l&auml;uft nach
+        <strong>24 Monaten</strong> ab, das Cookie <code>_ga_&lt;ID&gt;</code> ebenfalls; Sie k&ouml;nnen beide jederzeit
+        &uuml;ber Ihren Browser oder &uuml;ber den Widerruf (siehe unten) entfernen.
+      </p>
+      <p>
+        <strong>Drittlandtransfer.</strong> Vertragspartner ist die Google Ireland Limited in Irland. Eine
+        &Uuml;bermittlung an die Google LLC, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA und damit in die
+        USA ist nicht auszuschlie&szlig;en. Die Google LLC ist unter dem
+        <strong>EU-US Data Privacy Framework</strong> zertifiziert, sodass ein Angemessenheitsbeschluss der
+        EU-Kommission vorliegt. Erg&auml;nzend haben wir mit Google die
+        <strong>Standardvertragsklauseln</strong> der EU-Kommission nach Art. 46 Abs. 2 lit. c DSGVO vereinbart.
+        Trotz dieser Ma&szlig;nahmen l&auml;sst sich ein Zugriff US-amerikanischer Beh&ouml;rden auf die Daten nicht
+        vollst&auml;ndig ausschlie&szlig;en.
+      </p>
+      <p>
+        <strong>Widerruf.</strong> Sie k&ouml;nnen Ihre Einwilligung jederzeit mit Wirkung f&uuml;r die Zukunft widerrufen.
+        Der Widerruf ist so einfach wie die Erteilung: &Ouml;ffnen Sie
+        <a href="#cookies" data-cookie-settings><strong>Cookie-Einstellungen</strong></a>
+        (der Link steht auch im Fu&szlig;bereich jeder Seite) und w&auml;hlen Sie &bdquo;Nur notwendige&ldquo;.
+        Danach wird kein Analytics-Skript mehr geladen und die gesetzten Cookies werden entfernt.
+        <strong>Die Rechtm&auml;&szlig;igkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unber&uuml;hrt.</strong>
+      </p>
+      <p>
+        Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerkl&auml;rung von Google</a>
+        und <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener noreferrer">Google Datenschutz und Nutzungsbedingungen</a>.
       </p>
 
-      <h2>9. Ihre Rechte</h2>
+      <h2 id="cookies">9. Cookies &amp; lokale Speicherung</h2>
+      <p>
+        Ohne Ihre Einwilligung setzt diese Webseite <strong>keine</strong> Tracking-Cookies, kein Werbe-Pixel und
+        keine Drittanbieter-Cookies.
+      </p>
+      <ul>
+        <li>
+          <strong>Ihre Cookie-Entscheidung</strong> speichern wir technisch notwendig in Ihrem Browser
+          (<code>localStorage</code>, Schl&uuml;ssel <code>fs_consent_v1</code>), damit wir Sie nicht bei jedem Besuch
+          erneut fragen m&uuml;ssen. Diese Angabe verl&auml;sst Ihr Ger&auml;t nicht.
+          Rechtsgrundlage: &sect; 25 Abs. 2 Nr. 2 TDDDG, Art. 6 Abs. 1 lit. f DSGVO.
+        </li>
+        <li>
+          <strong>Nur nach Einwilligung:</strong> die Cookies von Google Analytics (<code>_ga</code>,
+          <code>_ga_&lt;ID&gt;</code>) sowie das Nachladen von Google Maps (Punkt 6) und Google Analytics (Punkt 8).
+        </li>
+      </ul>
+      <p>
+        Ihre Entscheidung k&ouml;nnen Sie jederzeit &uuml;ber
+        <a href="#cookies" data-cookie-settings><strong>Cookie-Einstellungen</strong></a> im Fu&szlig;bereich jeder Seite
+        &auml;ndern. Ohne aktives JavaScript wird ohnehin nichts geladen und nichts gespeichert.
+      </p>
+
+      <h2>10. Ihre Rechte</h2>
       <p>Sie haben jederzeit das Recht auf:</p>
       <ul>
         <li><strong>Auskunft</strong> &uuml;ber Ihre verarbeiteten Daten (Art. 15 DSGVO)</li>
@@ -176,7 +257,7 @@
         Zur Geltendmachung Ihrer Rechte gen&uuml;gt eine formlose E-Mail an <a href="mailto:flow-state@gmx.de">flow-state@gmx.de</a>.
       </p>
 
-      <h2>10. &Auml;nderungen dieser Datenschutzerkl&auml;rung</h2>
+      <h2>11. &Auml;nderungen dieser Datenschutzerkl&auml;rung</h2>
       <p>
         Wir passen diese Datenschutzerkl&auml;rung an, sobald sich die rechtliche Situation oder die eingesetzten Dienste &auml;ndern.
         Es gilt jeweils die zum Zeitpunkt Ihres Besuchs abrufbare Fassung.
@@ -227,12 +308,12 @@
     </div>
     <div class="foot-bottom">
       <span>&copy; 2026 FlowState &middot; Wiesbaden</span>
-      <span><a href="impressum.html">Impressum</a> &nbsp;&middot;&nbsp; <a href="datenschutz.html">Datenschutz</a></span>
+      <span><a href="impressum.html">Impressum</a> &nbsp;&middot;&nbsp; <a href="datenschutz.html">Datenschutz</a> &nbsp;&middot;&nbsp; <a href="datenschutz.html#cookies" data-cookie-settings>Cookie-Einstellungen</a></span>
       <a class="foot-up" href="#top"><i aria-hidden="true"></i>Nach oben</a>
     </div>
   </div>
 </footer>
 
-<script defer src="assets/app.js?v=56"></script>
+<script defer src="assets/app.js?v=57"></script>
 </body>
 </html>

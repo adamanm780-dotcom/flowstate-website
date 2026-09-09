@@ -2,19 +2,22 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
+<!-- Google Consent Mode v2: Vorgabe ist "verweigert". Muss vor allem anderen laufen. -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
+gtag('consent','default',{ad_storage:'denied',analytics_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:500});
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Referenz ansehen — FlowState</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Encode+Sans+Semi+Condensed:wght@500;600;700;800&family=Encode+Sans:wght@400;500;600&display=swap"></noscript>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=55">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=55">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=55">
-<link rel="stylesheet" href="assets/style.css?v=56">
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/encode-sans-semi-condensed-latin-800-normal.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="assets/fonts/encode-sans-latin-400-normal.woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css?v=57">
+<script defer src="assets/consent.js?v=57"></script>
 </head>
 <body class="viewer-body">
 
@@ -37,6 +40,26 @@
     </div>
   </div>
 
+
+  <div class="viewer-extern" id="vextern" hidden>
+    <div class="ve-in">
+      <p class="eyebrow" style="justify-content:center">Referenz</p>
+      <h1 id="vextern-name">Diese Website</h1>
+      <p class="lede" style="margin-inline:auto">
+        Diese Kundenseite sch&uuml;tzt sich dagegen, in fremde Seiten eingebettet zu werden.
+        Wir zeigen sie Ihnen deshalb direkt beim Kunden. Der Link &ouml;ffnet einen neuen Tab,
+        diese &Uuml;bersicht bleibt offen.
+      </p>
+      <a class="ve-shot" id="vextern-link" href="#" target="_blank" rel="noopener">
+        <img id="vextern-shot" src="" alt="" width="1600" height="688" decoding="async">
+      </a>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn btn-accent" id="vextern-cta" href="#" target="_blank" rel="noopener">Website &ouml;ffnen</a>
+        <a class="btn btn-ghost" href="projekte.html">Zur&uuml;ck zu den Projekten</a>
+      </div>
+    </div>
+  </div>
+
   <div class="viewer-bar" role="region" aria-label="FlowState Leiste">
     <a class="viewer-brand" href="index.html" aria-label="Zurück zu FlowState">
       <img class="logomark" src="assets/logo-fs-white.webp" width="720" height="464" alt="" decoding="async">
@@ -49,6 +72,7 @@
     <div class="viewer-actions">
       <a class="btn btn-accent" href="kontakt.html">So eine will ich auch</a>
       <a class="viewer-ext" id="vext" href="#" target="_blank" rel="noopener">Original &ouml;ffnen&nbsp;&#8599;</a>
+      <a class="viewer-ext" href="datenschutz.html#cookies" data-cookie-settings>Cookie-Einstellungen</a>
       <a class="viewer-x" href="index.html#arbeiten" aria-label="Vorschau schließen">&times;</a>
     </div>
   </div>
@@ -75,7 +99,11 @@
     fotostudio9: {
       name: 'fotostudio9',
       sub: 'Wiesbaden · Tageslicht-Fotostudio',
-      url: 'https://fotostudio9.de/'
+      url: 'https://www.fotostudio9.de/',
+      /* Die Seite sendet X-Frame-Options: SAMEORIGIN und laesst sich
+         deshalb nicht einbetten. Statt weisser Flaeche: Vorschau + Link. */
+      frame: false,
+      shot: 'assets/proj-fotostudio9.webp'
     },
     palmberry: {
       name: 'Palm & Berry',
@@ -93,7 +121,19 @@
   var empty = document.getElementById('vempty');
   var ext = document.getElementById('vext');
 
-  if(site.url){
+  var extern = document.getElementById('vextern');
+
+  if(site.url && site.frame === false){
+    frame.hidden = true;
+    extern.hidden = false;
+    ext.href = site.url;
+    document.getElementById('vextern-name').textContent = site.name;
+    document.getElementById('vextern-link').href = site.url;
+    document.getElementById('vextern-cta').href = site.url;
+    var shot = document.getElementById('vextern-shot');
+    if(site.shot){ shot.src = site.shot; shot.alt = 'Startseite von ' + site.name; }
+    else { shot.remove(); }
+  } else if(site.url){
     frame.src = site.url;
     ext.href = site.url;
   } else {
