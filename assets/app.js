@@ -886,3 +886,64 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     else if(pass.getBoundingClientRect().top < innerHeight && pass.getBoundingClientRect().bottom > 0) start();
   });
 })();
+
+/* ---------------------------------------------------------------
+   23. Mobil-Navigation: Burger oeffnet die Schublade
+   --------------------------------------------------------------- */
+(function(){
+  var btn = document.getElementById('navburger');
+  var drawer = document.getElementById('navdrawer');
+  if(!btn || !drawer) return;
+  var offen = false, vorher = null;
+
+  function fokusZiele(){
+    return drawer.querySelectorAll('a[href], button:not([disabled])');
+  }
+  function auf(){
+    if(offen) return;
+    offen = true; vorher = document.activeElement;
+    drawer.hidden = false;
+    void drawer.offsetWidth;                    /* Reflow, damit die Transition laeuft */
+    drawer.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    btn.setAttribute('aria-label', 'Menü schließen');
+    document.body.classList.add('nav-open');
+  }
+  function zu(fokusZurueck){
+    if(!offen) return;
+    offen = false;
+    drawer.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-label', 'Menü öffnen');
+    document.body.classList.remove('nav-open');
+    var fertig = function(){ if(!offen) drawer.hidden = true; };
+    if(reduced) fertig(); else setTimeout(fertig, 320);
+    if(fokusZurueck && vorher && vorher.focus) vorher.focus();
+  }
+
+  btn.addEventListener('click', function(){ offen ? zu(false) : auf(); });
+
+  /* Ziel gewaehlt: Schublade schliessen. Bei Ankern auf derselben
+     Seite muss sie weg sein, bevor gescrollt wird. */
+  drawer.addEventListener('click', function(e){
+    var a = e.target.closest('a');
+    if(a) zu(false);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(!offen) return;
+    if(e.key === 'Escape'){ zu(true); return; }
+    if(e.key !== 'Tab') return;
+    var ziele = fokusZiele();
+    if(!ziele.length) return;
+    var erste = ziele[0], letzte = ziele[ziele.length - 1];
+    if(e.shiftKey && document.activeElement === erste){ e.preventDefault(); letzte.focus(); }
+    else if(!e.shiftKey && document.activeElement === letzte){ e.preventDefault(); erste.focus(); }
+  });
+
+  /* Am Desktop hat die Schublade nichts zu suchen */
+  var breit = window.matchMedia('(min-width:920px)');
+  function pruefe(){ if(breit.matches) zu(false); }
+  if(breit.addEventListener) breit.addEventListener('change', pruefe);
+  addEventListener('resize', pruefe, { passive:true });
+})();
