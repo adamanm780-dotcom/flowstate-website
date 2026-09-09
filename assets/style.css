@@ -1669,3 +1669,10 @@ html.lr-lock{overflow:hidden}
 }
 .qbtn[disabled]{opacity:.34; cursor:default; pointer-events:none}
 .qbtn[disabled]:hover{background:var(--white); border-color:var(--tint-2); color:var(--blue)}
+
+/* Referenz fotostudio9: helles Studio-Papier, Signalorange als Akzent */
+.pj-fotostudio9{background:#F4F2EF; color:var(--ink)}
+.pj-fotostudio9 .pj-no{color:#D93400}
+.pj-fotostudio9 .pj-desc{color:var(--ink-soft)}
+.pj-fotostudio9 .tag{background:rgba(255,59,0,.10); color:#C43000}
+.pj-fotostudio9 .pj-go{color:#C43000}
