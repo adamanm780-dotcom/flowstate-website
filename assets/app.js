@@ -947,3 +947,40 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   if(breit.addEventListener) breit.addEventListener('change', pruefe);
   addEventListener('resize', pruefe, { passive:true });
 })();
+
+/* ---------------------------------------------------------------
+   24. Anker beim Seitenwechsel ansteuern
+   Mit @view-transition (navigation:auto) ueberspringt der Browser
+   den Sprung zum Fragment: ein Klick auf "Wallet" oder "Ablauf" von
+   einer Unterseite landete oben auf der Startseite. Wir holen den
+   Sprung nach, sofern der Besucher nicht selbst schon gescrollt hat.
+   --------------------------------------------------------------- */
+(function(){
+  var hash = location.hash;
+  if(!hash || hash.length < 2) return;
+  var ziel;
+  try { ziel = document.querySelector(hash); } catch(e){ return; }
+  if(!ziel) return;
+
+  var eigenerScroll = false;
+  function merke(){ if(window.scrollY > 40) eigenerScroll = true; }
+  addEventListener('scroll', merke, { passive:true });
+
+  function hin(){
+    if(eigenerScroll) return;
+    var top = ziel.getBoundingClientRect().top;
+    if(Math.abs(top) < 6) return;                 /* sitzt bereits */
+    var vorher = document.documentElement.style.scrollBehavior;
+    document.documentElement.style.scrollBehavior = 'auto';   /* kein 8000px-Flug */
+    window.scrollTo(0, window.scrollY + top);
+    document.documentElement.style.scrollBehavior = vorher;
+  }
+
+  function los(){
+    hin();
+    setTimeout(hin, 240);   /* nachziehen, wenn Bilder das Layout noch schieben */
+    setTimeout(function(){ hin(); removeEventListener('scroll', merke); }, 900);
+  }
+  if(document.readyState === 'complete') los();
+  else addEventListener('load', los);
+})();
