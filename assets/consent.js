@@ -212,8 +212,24 @@
     var links = document.querySelectorAll('[data-cookie-settings]');
     for (var i = 0; i < links.length; i++) links[i].addEventListener('click', reopen);
     var saved = read();
-    if (!saved) { open(); return; }
+    if (!saved) { nachIntro(open); return; }
     if (saved.analytics) loadAnalytics();
+  }
+
+  /* Banner erst, wenn das Logo-Intro komplett durch ist. Das Intro setzt die
+     Klasse lr-lock auf <html> und nimmt sie am Ende wieder weg. Seiten ohne
+     Intro (Unterseiten, reduzierte Bewegung) oeffnen den Banner sofort. */
+  function nachIntro(fn) {
+    var html = document.documentElement, lief = false;
+    function los() { if (lief) return; lief = true; fn(); }
+    if (!html.classList.contains('lr-lock')) { los(); return; }
+    var mo = new MutationObserver(function () {
+      if (html.classList.contains('lr-lock')) return;
+      mo.disconnect();
+      setTimeout(los, 900);             /* Vorhang ausblenden + Hero-Einstieg abwarten */
+    });
+    mo.observe(html, { attributes: true, attributeFilter: ['class'] });
+    setTimeout(function () { mo.disconnect(); los(); }, 12000);   /* Notbremse */
   }
 
   if (document.readyState === 'loading') {
