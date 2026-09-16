@@ -776,7 +776,7 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     setTimeout(finish, d - 180);
   }
 
-  var wait = Math.max(0, 2650 - (performance.now() - window.__lrT0));
+  var wait = Math.max(0, 1250 - (performance.now() - window.__lrT0));
   var timer = setTimeout(function(){
     ov.classList.add('lr-flip');
     timer = setTimeout(fly, 330);
