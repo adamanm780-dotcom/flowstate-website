@@ -190,7 +190,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,t
 .nav-in{display:flex; align-items:center; gap:1.4rem; min-height:68px}
 .logo{
   font-family:var(--f-display); font-weight:800; font-size:1.45rem; letter-spacing:-.03em;
-  text-decoration:none; display:flex; align-items:center; gap:.45rem; color:var(--ink);
+  text-decoration:none; display:flex; align-items:center; gap:.6rem; color:var(--ink);
 }
 .logo span{width:9px; height:9px; background:var(--blue); border-radius:50%}
 .nav-links{display:none; gap:1.6rem; margin-left:auto; list-style:none; padding:0; margin-block:0}
@@ -1274,7 +1274,7 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 }
 
 /* --- Logo-Marke (Flow-Figur) -------------------------------- */
-.logomark{width:auto; height:30px; flex:none; display:block}
+.logomark{width:auto; height:24px; flex:none; display:block}
 .logo:hover .logomark{animation:lmFlow .9s var(--ease)}
 @keyframes lmFlow{35%{transform:translateX(4px)}70%{transform:translateX(-2px)}}
 .logo b{font-family:var(--f-display); font-weight:800; letter-spacing:-.02em}
@@ -1469,10 +1469,10 @@ span.gdomain{color:var(--ink-mute); border-color:transparent}
 
 
 /* Logo-Wortmarke (aus dem Original) statt Systemschrift */
-.logotype{height:13px; width:auto; display:block; flex:none}
-.foot-brand .logotype{height:12px}
-.viewer-brand .logotype{height:11px}
-@media(max-width:640px){.logotype{height:11px}}
+.logotype{height:11px; width:auto; display:block; flex:none}
+.foot-brand .logotype{height:11px}
+.viewer-brand .logotype{height:10px}
+@media(max-width:640px){.nav .logotype{display:none}.logomark{height:26px}}
 
 
 /* =============== Logo-Reveal (Intro-Overlay, s/w) =============== */
@@ -1495,8 +1495,8 @@ html.lr-lock{overflow:hidden}
   animation:lrZoom 2.5s cubic-bezier(0.22,1,0.36,1) both;
 }
 @keyframes lrZoom{from{transform:scale(1.3)}to{transform:scale(1)}}
-.lr-mark{position:relative; width:min(54vw,300px); aspect-ratio:720/464; will-change:transform}
-.lr-word{position:relative; width:min(70vw,430px); aspect-ratio:840/100; will-change:transform}
+.lr-mark{position:relative; width:min(46vw,262px); aspect-ratio:1300/324; will-change:transform}
+.lr-word{position:relative; width:min(76vw,440px); aspect-ratio:2169/140; will-change:transform}
 .lr-p{position:absolute; height:auto; display:block; will-change:transform,opacity,filter; transition:filter .3s ease}
 /* Farb-Flip: weisse Teile werden Ink */
 #logoreveal.lr-flip .lr-p{filter:brightness(0.12)}

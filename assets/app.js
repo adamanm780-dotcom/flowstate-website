@@ -760,6 +760,11 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     [[mark, tm], [word, tw]].forEach(function(pair){
       var from = pair[0].getBoundingClientRect();
       var to = pair[1].getBoundingClientRect();
+      if(!to.width){ /* Ziel ausgeblendet (mobil: nur der Falke bleibt) -> weich ausblenden */
+        pair[0].animate([{ opacity:1, transform:'scale(1)' }, { opacity:0, transform:'scale(.7)' }],
+          { duration:d * .6, easing:ease, fill:'forwards' });
+        return;
+      }
       var s = to.width / from.width;
       var dx = (to.left + to.width/2) - (from.left + from.width/2);
       var dy = (to.top + to.height/2) - (from.top + from.height/2);
