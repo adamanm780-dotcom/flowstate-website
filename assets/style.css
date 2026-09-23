@@ -1757,3 +1757,40 @@ body.nav-open{overflow:hidden}
 }
 .ve-shot:hover{transform:translateY(-4px); box-shadow:0 38px 70px -34px rgba(27,39,51,.6)}
 .ve-shot img{display:block; width:100%; height:auto}
+
+/* Referenzen 05 bis 08: jede Karte in der Farbwelt ihres Betriebs */
+.pj-aya{background:#0F1210; color:#F2EDE3}
+.pj-aya .pj-no{color:#C9A227}
+.pj-aya .pj-desc{color:#CFC8BA}
+.pj-aya .tag{background:rgba(201,162,39,.14); color:#DDBB55}
+.pj-aya .pj-go{color:#DDBB55}
+
+.pj-noir{background:#15110E; color:#EDE6DC}
+.pj-noir .pj-no{color:#C9B89C}
+.pj-noir .pj-desc{color:#C6BCAE}
+.pj-noir .tag{background:rgba(237,230,220,.12); color:#E6DCCC}
+.pj-noir .pj-go{color:#E6DCCC}
+
+.pj-zenz{background:#120F0B; color:#F4EADA}
+.pj-zenz .pj-no{color:#D8A93C}
+.pj-zenz .pj-desc{color:#CDBFA6}
+.pj-zenz .tag{background:rgba(216,169,60,.15); color:#E3B851}
+.pj-zenz .pj-go{color:#E3B851}
+
+.pj-m1900{background:#F6F1EC; color:var(--ink)}
+.pj-m1900 .pj-no{color:#8A5A4A}
+.pj-m1900 .pj-desc{color:var(--ink-soft)}
+.pj-m1900 .tag{background:rgba(138,90,74,.12); color:#7A4C3D}
+.pj-m1900 .pj-go{color:#7A4C3D}
+
+/* Zehn Branchen passen auf dem Handy nicht in eine Chip-Wolke:
+   dort laeuft die Leiste seitlich statt auf fuenf Zeilen umzubrechen. */
+@media(max-width:899px){
+  .showcase .tabs{
+    flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start;
+    scroll-snap-type:x proximity; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+    width:100%; border-radius:999px;
+  }
+  .showcase .tabs::-webkit-scrollbar{display:none}
+  .showcase .tab{flex:none; scroll-snap-align:center; white-space:nowrap}
+}
