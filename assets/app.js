@@ -296,6 +296,58 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
 })();
 
 /* ---------------------------------------------------------------
+   10b. Solo-Regel fuer Videos
+   Laufen zwei oder mehr <video> gleichzeitig, taktet Chrome die GANZE
+   Seite auf 30 fps herunter (Sparregel fuer Videokonferenzen; gemessen
+   29.09.2026: 1 Video = 60 fps, ab 2 Videos = 30 fps, auch mit GPU).
+   Deshalb laeuft immer nur das Video mit der groessten sichtbaren
+   Flaeche; die anderen halten auf ihrem aktuellen Bild.
+   Gestartet wird nur in einer Scroll-Pause: das Hochfahren des Dekoders
+   kostet einmalig ein paar Millisekunden, und die sollen nie in eine
+   Bewegung fallen. Waehrend des Scrollens steht das Standbild.
+   --------------------------------------------------------------- */
+var solo = (function(){
+  var flaeche = new Map(), start = new Map(), wahl = null, geplant = false;
+  var zuletztGescrollt = 0, warte = 0, RUHE = 160;
+  window.addEventListener('scroll', function(){ zuletztGescrollt = performance.now(); }, { passive:true });
+  function entscheiden(){
+    geplant = false;
+    var best = null, max = 0;
+    flaeche.forEach(function(f, v){ if(f > max && v.isConnected){ max = f; best = v; } });
+    flaeche.forEach(function(f, v){ if(v !== best && !v.paused) v.pause(); });
+    wahl = best;
+    if(best && best.paused && !document.hidden && start.has(best)){
+      var seit = performance.now() - zuletztGescrollt;
+      if(seit < RUHE){ clearTimeout(warte); warte = setTimeout(planen, RUHE - seit + 10); return; }
+      start.get(best)();
+    }
+  }
+  function planen(){ if(!geplant){ geplant = true; requestAnimationFrame(entscheiden); } }
+  document.addEventListener('visibilitychange', planen);
+  return {
+    /* f = sichtbare Flaeche in px², spiel = Funktion, die v startet */
+    melden: function(v, f, spiel){ if(spiel) start.set(v, spiel); if(f > 0) flaeche.set(v, f); else flaeche.delete(v); planen(); },
+    weg: function(v){ flaeche.delete(v); if(v === wahl) wahl = null; if(!v.paused) v.pause(); planen(); },
+    ist: function(v){ return wahl === v; },
+    /* true, wenn gerade nicht gescrollt wird (Tipp statt Wischgeste) */
+    ruhig: function(){ return performance.now() - zuletztGescrollt >= RUHE; },
+    /* fn ausfuehren, sobald das Scrollen ruht (fuer teure Einmal-Arbeit) */
+    inRuhe: function(fn){
+      (function pruefe(){
+        var seit = performance.now() - zuletztGescrollt;
+        if(seit < RUHE) setTimeout(pruefe, RUHE - seit + 10); else fn();
+      })();
+    },
+    /* In einer echten Geste sofort umschalten (iOS erlaubt play() nur dort synchron) */
+    jetzt: function(v, spiel){
+      if(spiel) start.set(v, spiel);
+      flaeche.forEach(function(f, o){ if(o !== v && !o.paused) o.pause(); });
+      wahl = v; if(v.paused && start.has(v)) start.get(v)();
+    }
+  };
+})();
+
+/* ---------------------------------------------------------------
    11. Videos: abspielen, wenn sichtbar — mit Fallback fuer iOS
    Wichtig: Im iOS-Stromsparmodus verweigert Safari JEDES Autoplay,
    auch stumm und playsinline; erlaubt ist es dort nur in einer echten
@@ -313,6 +365,9 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   vids.forEach(function(v){
     v.muted = true; v.playsInline = true; v.defaultMuted = true;
     v.setAttribute('muted', ''); v.setAttribute('webkit-playsinline', '');
+    /* Start/Stopp regelt ab hier allein die Solo-Regel (10b); das
+       autoplay-Attribut bleibt nur fuer Besucher ohne JS wirksam. */
+    v.autoplay = false; v.removeAttribute('autoplay');
   });
 
   var visible = new Set(), played = new Set(), swapped = new Set();
@@ -333,6 +388,7 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     if(px) img.setAttribute('data-parallax', px);
     img.addEventListener('load', function(){
       if(v.parentNode){ v.parentNode.insertBefore(img, v); v.remove(); }
+      solo.weg(v);
     });
     img.addEventListener('error', function(){ swapped.delete(v); });
   }
@@ -341,10 +397,13 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
     v.muted = true;
     if(v.readyState === 0){ try{ v.load(); }catch(e){} }
     var pr = v.play();
-    if(pr && pr.catch) pr.catch(function(){ if(visible.has(v)) swap(v); });
+    /* AbortError = von der Solo-Regel pausiert, kein Autoplay-Problem */
+    if(pr && pr.catch) pr.catch(function(err){
+      if(visible.has(v) && solo.ist(v) && !(err && err.name === 'AbortError')) swap(v);
+    });
     /* Auch ohne Rejection kann iOS stillstehen: nachmessen. */
     setTimeout(function(){
-      if(visible.has(v) && !played.has(v) && v.paused) swap(v);
+      if(visible.has(v) && solo.ist(v) && !played.has(v) && v.paused) swap(v);
     }, 900);
   }
 
@@ -353,11 +412,14 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        var v = e.target;
-        if(e.isIntersecting){ visible.add(v); tryPlay(v); }
-        else { visible.delete(v); if(!v.paused) v.pause(); }
+        var v = e.target, r = e.intersectionRect;
+        if(e.isIntersecting && e.intersectionRatio >= 0.2){
+          visible.add(v);
+          solo.melden(v, r.width * r.height, function(){ tryPlay(v); });
+        }
+        else { visible.delete(v); solo.weg(v); }
       });
-    }, { threshold:0.2 });
+    }, { threshold:[0, 0.2, 0.35, 0.5, 0.65, 0.8, 1] });
     vids.forEach(function(v){ io.observe(v); });
   } else {
     vids.forEach(function(v){ visible.add(v); tryPlay(v); });
@@ -366,7 +428,10 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
   /* Tap gibt die Wiedergabe frei, solange noch ein Video uebrig ist. */
   function unlock(){
     var open = false;
-    visible.forEach(function(v){ if(v.isConnected && v.paused){ open = true; tryPlay(v); } });
+    /* Nur ein Tipp zaehlt, nicht das Ende einer Wischgeste (sonst startet
+       der Film mitten im Nachschwung, entgegen der Scroll-Pausen-Regel) */
+    if(!solo.ruhig()) return;
+    visible.forEach(function(v){ if(v.isConnected && v.paused && solo.ist(v)){ open = true; tryPlay(v); } });
     if(!open && played.size + swapped.size >= vids.length){
       document.removeEventListener('touchend', unlock);
       document.removeEventListener('pointerdown', unlock);
@@ -468,6 +533,147 @@ var finePointer = window.matchMedia('(pointer: fine)').matches;
       window.dispatchEvent(new Event('resize'));
     });
   });
+})();
+
+/* ---------------------------------------------------------------
+   15b. Referenz-Filme in den Geraeten
+   Pro Referenz EIN kurzer H.264-Loop (Hardware-Dekoder, auch auf alten
+   Handys), in dem PC, Tablet und Handy nebeneinander liegen (Atlas).
+   Der PC zeigt seinen Ausschnitt direkt im <video>, Tablet und Handy
+   bekommen ihren Ausschnitt per drawImage in ein Canvas. So laeuft pro
+   Buehne nur ein einziges Video (siehe Solo-Regel 10b).
+   Geladen wird erst, wenn die Buehne naht, und nur fuer den aktiven Tab.
+   Ohne Film bleibt das Standbild (= erstes Filmbild) stehen.
+   --------------------------------------------------------------- */
+(function(){
+  var stages = [].slice.call(document.querySelectorAll('[data-devstage][data-film]'));
+  if(!stages.length || reduced || !('IntersectionObserver' in window)) return;
+  var con = navigator.connection;
+  if(con && (con.saveData || /2g$/.test(con.effectiveType || ''))) return;
+
+  /* Ausschnitte im Atlas (1656x626), identisch mit der Aufnahme-Pipeline */
+  var AUSSCHNITT = { tab:[960, 0, 440, 626], phone:[1400, 0, 256, 538] };
+  var rvfc = 'requestVideoFrameCallback' in HTMLVideoElement.prototype;
+  var flaeche = new Map();
+
+  function aktiv(st){ var p = st.closest('.panel'); return !!p && p.classList.contains('is-on') && !p.hidden; }
+
+  function film(st){
+    if(st._film) return st._film;
+    var v = document.createElement('video');
+    v.className = 'dev-film';
+    v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+    v.setAttribute('aria-hidden', 'true'); v.setAttribute('tabindex', '-1');
+    v.disablePictureInPicture = true; v.preload = 'auto';
+    v.src = st.getAttribute('data-film');
+    st.querySelector('.dev-pc .dev-screen').appendChild(v);
+
+    var flaechen = ['tab', 'phone'].map(function(k){
+      var sc = st.querySelector('.dev-' + k + ' .dev-screen');
+      var c = document.createElement('canvas');
+      c.className = 'dev-film'; c.setAttribute('aria-hidden', 'true');
+      c.width = 0; c.height = 0;   /* Groesse erst beim ersten Bild (groesse) */
+      sc.appendChild(c);
+      return { c:c, x:c.getContext('2d'), q:AUSSCHNITT[k], sc:sc };
+    });
+
+    var f = { v:v, laeuft:false, id:0, live:false };
+    function groesse(){
+      var d = Math.min(window.devicePixelRatio || 1, 2);
+      flaechen.forEach(function(l){
+        var w = Math.round(l.sc.clientWidth * d), h = Math.round(l.sc.clientHeight * d);
+        if(w && h && (l.c.width !== w || l.c.height !== h)){ l.c.width = w; l.c.height = h; }
+      });
+    }
+    function zeichnen(){
+      if(v.readyState < 2) return;
+      if(!f.live) groesse();
+      var alle = true;
+      for(var i = 0; i < flaechen.length; i++){
+        var l = flaechen[i];
+        if(!l.c.width){ alle = false; continue; }
+        try{ l.x.drawImage(v, l.q[0], l.q[1], l.q[2], l.q[3], 0, 0, l.c.width, l.c.height); }catch(e){ return; }
+      }
+      /* Standbild erst weg, wenn jede Flaeche wirklich ein Bild hat */
+      if(!f.live && alle){
+        f.live = true;
+        st.querySelectorAll('.dev-screen').forEach(function(sc){ sc.classList.add('is-film'); });
+      }
+    }
+    function tick(){
+      if(!f.laeuft) return;
+      zeichnen();
+      f.id = rvfc ? v.requestVideoFrameCallback(tick) : requestAnimationFrame(tick);
+    }
+    function stopp(){
+      f.laeuft = false;
+      if(f.id){ if(rvfc) v.cancelVideoFrameCallback(f.id); else cancelAnimationFrame(f.id); f.id = 0; }
+    }
+    v.addEventListener('playing', function(){ stopp(); f.laeuft = true; groesse(); tick(); });
+    v.addEventListener('pause', function(){ stopp(); zeichnen(); });
+    window.addEventListener('resize', function(){ if(f.live){ groesse(); zeichnen(); } }, { passive:true });
+    f.spielen = function(){
+      if(!v.paused) return;
+      var pr = v.play();
+      if(pr && pr.catch) pr.catch(function(){});
+    };
+    st._film = f;
+    return f;
+  }
+
+  function melden(st){
+    var f = st._film;
+    if(!f) return;
+    var a = aktiv(st) ? (flaeche.get(st) || 0) : 0;
+    if(a > 0) solo.melden(f.v, a, f.spielen); else solo.weg(f.v);
+  }
+
+  /* Anlegen + erstes Dekodieren ebenfalls nur in einer Scroll-Pause */
+  function bald(st){
+    if(st._film || st._bald || !aktiv(st)) return;
+    st._bald = true;
+    solo.inRuhe(function(){ st._bald = false; if(aktiv(st)){ film(st); melden(st); } });
+  }
+  var ioNah = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) bald(e.target); });
+  }, { rootMargin:'900px 0px' });
+  var ioSicht = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var r = e.intersectionRect;
+      flaeche.set(e.target, e.isIntersecting && e.intersectionRatio >= 0.12 ? r.width * r.height : 0);
+      if(flaeche.get(e.target) > 0) bald(e.target);
+      melden(e.target);
+    });
+  }, { threshold:[0, 0.12, 0.3, 0.5, 0.7, 0.85, 1] });
+  stages.forEach(function(st){ ioNah.observe(st); ioSicht.observe(st); });
+
+  /* Tab-Klick ist eine echte Geste: direkt darin starten. So laeuft der
+     Film auch dort, wo Autoplay gesperrt ist (iOS-Stromsparmodus). */
+  document.querySelectorAll('.tab[role="tab"]').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      var p = document.getElementById(tab.getAttribute('aria-controls'));
+      stages.forEach(function(st){ if(st._film && (!p || !p.contains(st))) solo.weg(st._film.v); });
+      var st = p && p.querySelector('[data-devstage][data-film]');
+      if(!st) return;
+      var f = film(st);
+      /* Sichtbare Flaeche JETZT messen: war die Buehne versteckt und liegt sie
+         auch danach ausserhalb des Bildes (Handy: Text steht darueber), meldet
+         der IntersectionObserver keine Aenderung, und der Film liefe unsichtbar. */
+      var r = st.getBoundingClientRect();
+      var w = Math.max(0, Math.min(r.right, innerWidth) - Math.max(r.left, 0));
+      var h = Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0));
+      var a = r.width && r.height && (w * h) / (r.width * r.height) >= 0.12 ? w * h : 0;
+      flaeche.set(st, a);
+      if(a > 0){ solo.melden(f.v, a, f.spielen); solo.jetzt(f.v, f.spielen); }
+      else solo.weg(f.v);
+    });
+  });
+  /* Tipp irgendwo gibt den Film frei (Stromsparmodus), Wischgesten nicht */
+  document.addEventListener('touchend', function(){
+    if(!solo.ruhig()) return;
+    stages.forEach(function(st){ var f = st._film; if(f && aktiv(st) && solo.ist(f.v) && f.v.paused) f.spielen(); });
+  }, { passive:true });
 })();
 
 /* ---------------------------------------------------------------
