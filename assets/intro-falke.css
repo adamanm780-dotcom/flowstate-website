@@ -1,0 +1,45 @@
+/* FlowState Logo-Intro (assets/intro-falke.js) */
+html.fi-lock{overflow:hidden}
+#fsintro{
+  position:fixed; inset:0; z-index:2000; display:grid; place-items:center; overflow:hidden;
+  background:#070709; color:#fff; transition:opacity .34s cubic-bezier(0.16,1,0.3,1), color .3s cubic-bezier(0.16,1,0.3,1);
+}
+#fsintro.fi-ink{color:#1B2733}
+#fsintro.fi-out{opacity:0; pointer-events:none}
+/* Weisse Kreis-Oeffnung; traegt eine Tinten-Kopie des Logos, damit der Farbwechsel exakt an der Kreiskante passiert */
+.fi-flash{position:absolute; inset:0; z-index:3; display:grid; place-items:center; background:#fff; clip-path:circle(0px at 50% 46%)}
+.fi-klon{color:#1B2733}
+#fsintro.fi-sofort, #fsintro.fi-sofort *{transition:none !important}
+.fi-lines{position:absolute; left:-50%; top:-50%; width:200%; height:200%; pointer-events:none}
+.fi-stage{position:relative; display:grid; justify-items:center; gap:clamp(.8rem,2.4vh,1.4rem); will-change:transform}
+.fi-mark{position:relative; width:min(62vw,440px); aspect-ratio:1300/324}
+.fi-word{position:relative; width:min(84vw,640px); aspect-ratio:2169/140}
+.fi svg{position:absolute; inset:0; width:100%; height:100%; display:block; overflow:visible}
+.fi path{fill:currentColor}
+.fi-full,.fi-piece,.fi-hilfe{position:absolute; inset:0; will-change:transform,opacity}
+.fi-l{position:absolute; will-change:transform,opacity}
+
+/* A: Konstruktion */
+.fi .fi-g{stroke:#fff; stroke-width:1.2; vector-effect:non-scaling-stroke; fill:none; stroke-dasharray:1; stroke-dashoffset:1; opacity:0}
+.fi path.fi-outline{fill:none; stroke:currentColor; stroke-width:2; vector-effect:non-scaling-stroke; stroke-dasharray:1; stroke-dashoffset:1}
+.fi-pt{position:absolute; width:11px; height:11px; box-sizing:border-box; background:#070709; border:2px solid #F2871C; opacity:0; transform:translate(-50%,-50%)}
+.fi-rahmen{position:absolute; box-sizing:border-box; border:1px solid rgba(255,255,255,.55); opacity:0}
+
+/* B: Montage */
+.fi-funke{position:absolute; width:26px; height:26px; border-radius:50%; opacity:0;
+  background:radial-gradient(circle, #FFE3C4 0 12%, #F2871C 26%, rgba(242,135,28,0) 68%)}
+
+/* C: Sturzflug */
+.fi-speed{position:absolute; left:0; height:2.5px; border-radius:2px; opacity:0;
+  background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.9))}
+.fi-speed--akzent{height:3px; background:linear-gradient(90deg, rgba(242,135,28,0), #F2871C)}
+.fi-ring{position:absolute; width:90px; height:90px; border-radius:50%; border:1.5px solid rgba(255,255,255,.85); opacity:0}
+
+/* Vorschau-Umschalter (nur intro-vorschau.html) */
+.fi-wahl{position:fixed; left:50%; bottom:max(16px, env(safe-area-inset-bottom, 0px)); transform:translateX(-50%); z-index:2100;
+  display:flex; gap:4px; padding:5px; border-radius:999px; background:rgba(14,18,22,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 10px 30px rgba(0,0,0,.25); font:600 14px/1 system-ui, sans-serif}
+.fi-wahl a{color:#cfd6dc; text-decoration:none; padding:10px 14px; border-radius:999px; white-space:nowrap}
+.fi-wahl a b{color:#F2871C; margin-right:4px}
+.fi-wahl a.on{background:#fff; color:#1B2733}
+@media(max-width:420px){.fi-wahl a{padding:10px 10px; font-size:13px}}
