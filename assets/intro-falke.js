@@ -77,7 +77,8 @@
     }, t);
   }
   function landen(t){
-    spaeter(function(){
+    spaeter(function los(){
+      if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', los, { once:true }); return; }
       var tm = document.querySelector('.nav .logomark'), tw = document.querySelector('.nav .logotype');
       var d = 640;
       [[mark, tm], [word, tw]].forEach(function(p){
@@ -235,8 +236,9 @@
     oeffnen(1350); landen(1840);
   }
 
-  /* Start, sobald das Layout steht (Ziel-Rechtecke der Navigation) */
+  /* Sofort starten: der Aufbau braucht nur die eigene Buehne. Nur die Landung
+     braucht die Navigation; ist die bei sehr langsamem Netz noch nicht geparst,
+     wartet landen() darauf (siehe unten), statt dass vorher nur Schwarz steht. */
   function los(){ if(V === 'a') varianteA(); else if(V === 'c') varianteC(); else varianteB(); }
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function(){ requestAnimationFrame(los); });
-  else requestAnimationFrame(los);
+  requestAnimationFrame(los);
 })();
