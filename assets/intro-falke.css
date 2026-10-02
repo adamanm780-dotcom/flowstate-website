@@ -35,6 +35,17 @@ html.fi-lock{overflow:hidden}
 .fi-speed--akzent{height:3px; background:linear-gradient(90deg, rgba(242,135,28,0), #F2871C)}
 .fi-ring{position:absolute; width:90px; height:90px; border-radius:50%; border:1.5px solid rgba(255,255,255,.85); opacity:0}
 
+/* B2/B3: Motion-Design-Bausteine */
+.fi-laser{position:absolute; left:calc(50% - 5px); top:calc(46% - 5px); width:10px; height:10px; border-radius:5px; background:#F2871C; opacity:0}
+.fi-burst{position:absolute; width:0; height:0}
+.fi-strahl{position:absolute; left:0; top:-1px; width:22px; height:2px; border-radius:2px; background:#fff; transform-origin:0 50%; opacity:0}
+.fi-blitz{position:absolute; inset:0; z-index:4; background:#fff; opacity:0; pointer-events:none}
+.fi-band{position:absolute; top:-50%; left:-25vw; width:150vw; height:200%; z-index:5; transform:skewX(-16deg) translateX(-175vw); will-change:transform}
+.fi-strich{position:absolute; left:-4%; right:-4%; bottom:0; height:2px; background:#F2871C; transform:scaleX(0); transform-origin:50% 50%}
+.fi-word.fi-maske{clip-path:inset(-40% -8% 0 -8%)}
+.fi-mark.fi-tief{perspective:900px}
+.fi-shard{position:absolute; inset:0; background-repeat:no-repeat; background-size:100% 100%; will-change:transform,opacity; backface-visibility:hidden}
+
 /* Vorschau-Umschalter (nur intro-vorschau.html) */
 .fi-wahl{position:fixed; left:50%; bottom:max(16px, env(safe-area-inset-bottom, 0px)); transform:translateX(-50%); z-index:2100;
   display:flex; gap:4px; padding:5px; border-radius:999px; background:rgba(14,18,22,.88); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
