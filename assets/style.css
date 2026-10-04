@@ -1488,40 +1488,31 @@ canvas.dev-film{width:100%; height:100%}
 @media(max-width:640px){.nav .logotype{display:none}.logomark{height:26px}}
 
 
-/* =============== Logo-Reveal (Intro-Overlay, s/w) =============== */
+/* =============== Logo-Intro "Montage Motion" (assets/intro.js) =============== */
 html.lr-lock{overflow:hidden}
-#logoreveal{
-  position:fixed; inset:0; z-index:2000; display:grid; place-items:center;
-  background:#070709; overflow:hidden; transition:opacity .3s ease;
+#fsintro{
+  position:fixed; inset:0; z-index:2000; display:grid; place-items:center; overflow:hidden;
+  background:#070709; color:#fff; transition:opacity .34s cubic-bezier(0.16,1,0.3,1);
 }
-#logoreveal.lr-out{opacity:0; pointer-events:none}
-/* Weiss-Blitz: radialer Wipe vom Logo aus */
-#logoreveal::before{
-  content:""; position:absolute; inset:0; background:#FFFFFF;
-  clip-path:circle(0% at 50% 46%);
-}
-#logoreveal.lr-flip::before{animation:lrWipe .5s cubic-bezier(0.4,0,0.2,1) both}
-@keyframes lrWipe{to{clip-path:circle(142% at 50% 46%)}}
-.lr-stage{
-  position:relative; display:grid; justify-items:center;
-  gap:clamp(.7rem,2.2vh,1.3rem); will-change:transform;
-}
-/* Der Falke ist ein Tempo-Motiv (lange Schleppe -> Kopf) — er wird nicht aus
-   Teilen zusammengesetzt, sondern faehrt als EIN Stueck von der Schwanzspitze
-   bis zum Schnabel ins Bild: Wisch-Reveal + Schaerfe-Einrasten, kein Aufbau-Puzzle. */
-.lr-mark{position:relative; width:min(50vw,292px); aspect-ratio:1000/249; will-change:clip-path,transform,filter}
-.lr-word{position:relative; width:min(70vw,410px); aspect-ratio:1400/90; will-change:clip-path,transform,filter}
-.lr-p{width:100%; height:auto; display:block; transition:filter .3s ease}
-/* Farb-Flip: weisse Teile werden Ink */
-#logoreveal.lr-flip .lr-p{filter:brightness(0.12)}
-
-.lr-mark{clip-path:inset(0 100% 0 0); animation:lrSweep .6s var(--ease) .08s both}
-.lr-word{clip-path:inset(0 100% 0 0); animation:lrSweep .46s var(--ease) .42s both}
-@keyframes lrSweep{
-  0%{clip-path:inset(0 100% 0 0); transform:translateX(-3%) skewX(-9deg); filter:blur(10px)}
-  60%{filter:blur(0)}
-  100%{clip-path:inset(0 0% 0 0); transform:translateX(0) skewX(0); filter:blur(0)}
-}
+#fsintro.fi-ink{color:#1B2733}
+#fsintro.fi-out{opacity:0; pointer-events:none}
+#fsintro.fi-sofort, #fsintro.fi-sofort *{transition:none !important}
+.fi-stage{position:relative; display:grid; justify-items:center; gap:clamp(.8rem,2.4vh,1.4rem); will-change:transform}
+.fi-mark{position:relative; width:min(62vw,440px); aspect-ratio:1300/324}
+.fi-word{position:relative; width:min(84vw,640px); aspect-ratio:2169/140}
+.fi svg{position:absolute; inset:0; width:100%; height:100%; display:block; overflow:visible}
+.fi path{fill:currentColor}
+.fi-full,.fi-piece{position:absolute; inset:0; will-change:transform,opacity}
+.fi-l{position:absolute; will-change:transform}
+.fi-word.fi-maske{clip-path:inset(-40% -8% 0 -8%)}
+.fi-strich{position:absolute; left:-4%; right:-4%; bottom:0; height:2px; background:#F2871C; transform:scaleX(0); transform-origin:50% 50%}
+.fi-laser{position:absolute; left:calc(50% - 5px); top:calc(46% - 5px); width:10px; height:10px; border-radius:5px; background:#F2871C; opacity:0}
+.fi-burst{position:absolute; width:0; height:0}
+.fi-strahl{position:absolute; left:0; top:-1px; width:22px; height:2px; border-radius:2px; background:#fff; transform-origin:0 50%; opacity:0}
+.fi-blitz{position:absolute; inset:0; z-index:4; background:#fff; opacity:0; pointer-events:none}
+.fi-band{position:absolute; top:-50%; left:-25vw; width:150vw; height:200%; z-index:5; transform:skewX(-16deg) translateX(-175vw); will-change:transform}
+.fi-funke{position:absolute; width:26px; height:26px; border-radius:50%; opacity:0;
+  background:radial-gradient(circle, #FFE3C4 0 12%, #F2871C 26%, rgba(242,135,28,0) 68%)}
 
 
 /* Tabs mobil: kein Umriss-Ei, saubere grosse Tap-Ziele */
