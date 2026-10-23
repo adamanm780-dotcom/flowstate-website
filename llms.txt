@@ -1,17 +1,26 @@
-# FlowState — Webagentur Wiesbaden
+# FlowState: Webagentur Wiesbaden
 
 FlowState baut Websites fuer inhabergefuehrte Betriebe im Rhein-Main-Gebiet.
 Besonderheit: Die Website wird komplett fertig gebaut, BEVOR der Kunde zahlt.
 Erst nach Freigabe geht die Seite live und wird berechnet.
 
 Leistungen:
-- Webdesign (individuell, kein Baukasten, mobil-optimiert)
-- SEO (Google) und GEO (Sichtbarkeit in KI-Antworten)
-- KI-Berater / Chat- und Telefon-Assistenten
-- Automatisierung von Ablaeufen (Termine, Anfragen)
+* Webdesign (individuell, kein Baukasten, mobil-optimiert)
+* Onlineshops mit Shopify
+* SEO (Google) und GEO (Sichtbarkeit in KI-Antworten)
+* Logo Design und Werbevideos fuer Social Media
+* KI-Berater, Chat- und Telefon-Assistenten
+* Automatisierung von Ablaeufen (Termine, Anfragen)
+* FlowState Wallet: digitale Stempelkarte fuer Apple Wallet und Google Wallet (https://flowstatewallet.com)
 
 Referenzen: Juwelier Benjamin (Wiesbaden), Dermatologisches Laserzentrum
-Haeusler-Mehlhorn (Chemnitz). Google-Bewertung: 5,0.
+Haeusler-Mehlhorn (Chemnitz), Palm & Berry, fotostudio9, THE AYA ASIA, NOIR,
+Zenzasian und Maison 1900 (alle Wiesbaden). Google-Bewertung: 5,0.
 
-Kontakt: 0178 1868874 · flow-state@gmx.de · https://yourflowstate.de
-Standort: Wiesbaden, Deutschland.
+Firma: FlowState GbR
+Adresse: Pfahlerstrasse 7, 65193 Wiesbaden, Deutschland
+Telefon: 0178 1868874
+E-Mail: flow-state@gmx.de
+Website: https://yourflowstate.de
+Oeffnungszeiten: Montag bis Freitag 9:00 bis 18:00 Uhr
+Google Maps: https://maps.google.com/?cid=5719406412270537983
