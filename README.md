@@ -105,7 +105,7 @@ Einfach den ganzen Ordner auf einen statischen Host hochladen. Keine Build-Befeh
 - **Brand-Name:** Flow State
 - **Founder & Owner:** Benet Tilinski + Adrian Pötzinger
 - **Lead Developer:** Damian Braun
-- **Email:** flow-state@gmx.de
+- **Email:** info@flowstatehq.de
 - **Telefon:** +49 178 1868874
 - **Standort:** Deutschland
 
