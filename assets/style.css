@@ -985,6 +985,10 @@ html:not(.js) .faq details[open] .faq-chevron::before{
 .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
 .consent{display:flex; gap:.65rem; align-items:flex-start; font-size:.92rem; color:var(--ink-soft)}
 .consent input{width:18px; height:18px; flex:none; margin-top:.2rem; accent-color:var(--blue)}
+.form .btn[disabled]{opacity:.65; cursor:progress}
+.form-status{margin:0; font-size:.95rem; color:var(--ink-soft)}
+.form-status.is-error{color:var(--ink); background:var(--tint); border-radius:8px; padding:.8rem .95rem}
+.form-status a{color:var(--blue); font-weight:700}
 .contactcard{background:var(--white); border:1px solid var(--line); border-radius:14px; padding:1.8rem 1.6rem; display:grid; gap:1.6rem; align-content:start}
 .contactcard h3{font-size:1.15rem; margin-bottom:.7rem}
 .contactcard a{font-family:var(--f-display); font-weight:700; text-decoration:none; color:var(--blue)}

@@ -487,20 +487,86 @@ var solo = (function(){
 })();
 
 /* ---------------------------------------------------------------
-   14. Formular-Spamschutz
+   14. Formular: Spamschutz + Versand im Hintergrund
+   FormSubmit liefert beim klassischen Versand zeitweise Fehler 500/522
+   (Cloudflare-Seite statt Danke-Seite, Anfrage verloren; gemessen 17.11.2026).
+   Der AJAX-Weg desselben Dienstes stellt zu. Darum: fetch an /ajax/,
+   Wartehinweis, ein automatischer zweiter Versuch, sonst Hinweis mit
+   direktem Kontakt. Ohne JS bleibt der klassische Versand (action) aktiv.
    --------------------------------------------------------------- */
 (function(){
   var form = document.getElementById('kontaktformular');
   if(!form) return;
   var start = form.querySelector('[name="formStart"]');
   if(start) start.value = String(Date.now());
+  var btn = form.querySelector('[type="submit"]');
+  var status = document.getElementById('form-status');
+  var label = btn ? btn.textContent : '';
+  var ajaxUrl = form.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/');
+  var busy = false;
+
+  function say(html, isError){
+    if(!status) return;
+    status.hidden = false;
+    status.classList.toggle('is-error', !!isError);
+    status.innerHTML = html;
+  }
+
+  function send(data){
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 75000) : null;
+    return fetch(ajaxUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data),
+      signal: ctrl ? ctrl.signal : undefined
+    }).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        if(timer) clearTimeout(timer);
+        if(r.ok && (j.success === true || j.success === 'true')) return true;
+        throw new Error(j.message || ('HTTP ' + r.status));
+      });
+    }, function(err){
+      if(timer) clearTimeout(timer);
+      throw err;
+    });
+  }
+
   form.addEventListener('submit', function(e){
     var hp = form.querySelector('[name="company"]');
     if(hp && hp.value){ e.preventDefault(); return; }
     if(start){
       var elapsed = Date.now() - parseInt(start.value || '0', 10);
-      if(elapsed < 2500) e.preventDefault();
+      if(elapsed < 2500){ e.preventDefault(); return; }
     }
+    if(!window.fetch || !window.FormData) return; /* alter Browser: klassischer Versand */
+    e.preventDefault();
+    if(busy) return;
+    busy = true;
+
+    var data = {};
+    new FormData(form).forEach(function(v, k){
+      if(k !== 'company' && k !== 'formStart' && k !== '_next') data[k] = v;
+    });
+
+    if(btn){ btn.disabled = true; btn.textContent = 'Wird gesendet…'; }
+    say('Einen Moment bitte, Ihre Anfrage wird übertragen.');
+
+    send(data)
+      .catch(function(){
+        say('Noch einen kleinen Moment, wir versuchen es ein zweites Mal.');
+        return send(data);
+      })
+      .then(function(){
+        window.location.href = 'danke.html';
+      })
+      .catch(function(){
+        busy = false;
+        if(btn){ btn.disabled = false; btn.textContent = label; }
+        say('Das hat gerade leider nicht geklappt. Ihre Angaben sind noch da, senden Sie einfach noch einmal. ' +
+            'Oder direkt: <a href="mailto:info@flowstatehq.de">info@flowstatehq.de</a> oder ' +
+            '<a href="tel:+491781868874">0178 1868874</a>.', true);
+      });
   });
 })();
 
