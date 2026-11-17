@@ -487,12 +487,15 @@ var solo = (function(){
 })();
 
 /* ---------------------------------------------------------------
-   14. Formular: Spamschutz + Versand im Hintergrund
-   FormSubmit liefert beim klassischen Versand zeitweise Fehler 500/522
-   (Cloudflare-Seite statt Danke-Seite, Anfrage verloren; gemessen 17.11.2026).
-   Der AJAX-Weg desselben Dienstes stellt zu. Darum: fetch an /ajax/,
-   Wartehinweis, ein automatischer zweiter Versuch, sonst Hinweis mit
-   direktem Kontakt. Ohne JS bleibt der klassische Versand (action) aktiv.
+   14. Formular: Spamschutz + Versand im Hintergrund (FormSubmit-AJAX)
+   Gemessen 17.11.2026: Der klassische FormSubmit-Versand endete mit
+   500/522 auf einer Cloudflare-Seite, die Anfrage ging verloren. Ueber
+   /ajax/ gilt: Kommt eine klare Fehlerantwort (5xx), ist nichts angekommen.
+   Bleibt die Antwort aus (oft > 75 s), ist die Mail trotzdem zugestellt.
+   Darum: genau EIN Versuch (ein zweiter erzeugte Doppelte), keepalive,
+   Erfolg oder 20 s ohne Antwort -> Danke-Seite, klare Fehlerantwort ->
+   Hinweis mit direktem Kontakt, Eingaben bleiben stehen.
+   Ohne JS bleibt der klassische Versand (action) aktiv.
    --------------------------------------------------------------- */
 (function(){
   var form = document.getElementById('kontaktformular');
@@ -512,26 +515,6 @@ var solo = (function(){
     status.innerHTML = html;
   }
 
-  function send(data){
-    var ctrl = window.AbortController ? new AbortController() : null;
-    var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 75000) : null;
-    return fetch(ajaxUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(data),
-      signal: ctrl ? ctrl.signal : undefined
-    }).then(function(r){
-      return r.json().catch(function(){ return {}; }).then(function(j){
-        if(timer) clearTimeout(timer);
-        if(r.ok && (j.success === true || j.success === 'true')) return true;
-        throw new Error(j.message || ('HTTP ' + r.status));
-      });
-    }, function(err){
-      if(timer) clearTimeout(timer);
-      throw err;
-    });
-  }
-
   form.addEventListener('submit', function(e){
     var hp = form.querySelector('[name="company"]');
     if(hp && hp.value){ e.preventDefault(); return; }
@@ -548,25 +531,42 @@ var solo = (function(){
     new FormData(form).forEach(function(v, k){
       if(k !== 'company' && k !== 'formStart' && k !== '_next') data[k] = v;
     });
+    var body = JSON.stringify(data);
 
     if(btn){ btn.disabled = true; btn.textContent = 'Wird gesendet…'; }
     say('Einen Moment bitte, Ihre Anfrage wird übertragen.');
 
-    send(data)
-      .catch(function(){
-        say('Noch einen kleinen Moment, wir versuchen es ein zweites Mal.');
-        return send(data);
-      })
-      .then(function(){
-        window.location.href = 'danke.html';
-      })
-      .catch(function(){
-        busy = false;
-        if(btn){ btn.disabled = false; btn.textContent = label; }
-        say('Das hat gerade leider nicht geklappt. Ihre Angaben sind noch da, senden Sie einfach noch einmal. ' +
-            'Oder direkt: <a href="mailto:info@flowstatehq.de">info@flowstatehq.de</a> oder ' +
-            '<a href="tel:+491781868874">0178 1868874</a>.', true);
+    var done = false;
+    var slow = setTimeout(function(){ say('Einen Moment noch, das dauert gerade etwas länger.'); }, 6000);
+    var patience = setTimeout(finish, 20000);
+    function finish(){
+      if(done) return;
+      done = true;
+      clearTimeout(slow); clearTimeout(patience);
+      window.location.href = 'danke.html';
+    }
+    function fail(){
+      if(done) return;
+      done = true;
+      clearTimeout(slow); clearTimeout(patience);
+      busy = false;
+      if(btn){ btn.disabled = false; btn.textContent = label; }
+      say('Das hat gerade leider nicht geklappt. Ihre Angaben sind noch da, senden Sie einfach noch einmal. ' +
+          'Oder direkt: <a href="mailto:info@flowstatehq.de">info@flowstatehq.de</a> oder ' +
+          '<a href="tel:+491781868874">0178 1868874</a>.', true);
+    }
+
+    fetch(ajaxUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: body,
+      keepalive: body.length < 60000 /* laeuft weiter, wenn die Danke-Seite schon offen ist */
+    }).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        if(r.ok && (j.success === true || j.success === 'true')) finish();
+        else fail();
       });
+    }, fail);
   });
 })();
 
